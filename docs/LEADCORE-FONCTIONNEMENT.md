@@ -1,6 +1,12 @@
 # Leadcore — Fonctionnement complet
 
-Document de référence opérationnel. Version : septembre 2026.
+Document de référence opérationnel. Version : septembre 2026, révisée.
+
+> Révision de septembre 2026 : ticket plancher porté à 7 000 €, frais de setup
+> de 1 200 €, engagement initial de 3 mois, promesse de volume ramenée à 8–12
+> rendez-vous par mois, politique de no-show et suivi du devenir des rendez-vous
+> à J+30. Le détail et la justification de ces changements sont dans
+> [`MAJ-OFFRE-2026-09.md`](MAJ-OFFRE-2026-09.md).
 
 ---
 
@@ -15,7 +21,9 @@ Aider des entreprises B2B à alimenter leur pipeline commercial avec des prospec
 ### Cible
 
 - PME / entreprises à forte valeur client.
-- Ticket moyen idéal : au moins 3 000 €.
+- Ticket moyen minimum : **7 000 €**, ou un revenu récurrent de valeur
+  équivalente sur la durée de vie du client. En dessous, le client ne récupère
+  pas assez par rapport à ce qu'il dépense, et il ne renouvelle pas.
 - Entreprises disposant d'une offre claire, d'une capacité de vente et d'une capacité de livraison suffisante.
 - Priorité aux secteurs où un nouveau client a une valeur suffisamment élevée pour rendre l'acquisition outbound rentable.
 
@@ -42,19 +50,42 @@ Le produit vendu n'est pas simplement une liste de contacts ou des emails envoy�
 
 **Phase initiale / preuve :**
 
-- environ 500 € / mois de retainer ;
-- environ 200 € par rendez-vous qualifié qui se présente.
+- 1 200 € de frais de setup, facturés une fois au démarrage ;
+- 500 € / mois de retainer ;
+- 200 € par rendez-vous qualifié honoré ;
+- engagement initial de 3 mois, puis reconduction mensuelle.
 
-**Après obtention de preuves, résultats et cas clients :**
+**Après obtention de preuves, résultats et cas clients chiffrés :**
 
-- environ 1 000 € / mois de retainer ;
-- environ 300 € par rendez-vous qualifié qui se présente.
+- 1 500 € de frais de setup ;
+- 1 500 € / mois de retainer ;
+- 150 € par rendez-vous qualifié honoré.
 
-Ces montants constituent une base de travail et peuvent être adaptés au ticket client, au volume, au secteur et à la complexité de la campagne.
+Les frais de setup couvrent la période où rien ne sort encore : domaines, DNS,
+boîtes, warm-up, construction de la base et rédaction des séquences. Sans eux,
+le premier mois est déficitaire.
+
+L'engagement de 3 mois correspond à la durée technique minimale : 2 à 3
+semaines de warm-up, puis un cycle complet d'optimisation.
+
+Le déplacement progressif du poids vers le retainer est volontaire : en phase de
+preuve, l'essentiel de la recette est variable, ce qui rend un mauvais mois de
+délivrabilité difficile à absorber.
+
+Ces montants constituent une base de travail et peuvent être adaptés au volume, au secteur et à la complexité de la campagne.
 
 ### Objectif de livraison
 
-Ordre de grandeur visé : 15 à 20 leads / rendez-vous qualifiés par mois par client, lorsque le marché, l'offre et l'infrastructure le permettent.
+**Annoncé au client : 8 à 12 rendez-vous qualifiés par mois**, une fois
+l'infrastructure chaude.
+
+Objectif interne : 15 à 20 par mois lorsque le marché, l'offre et
+l'infrastructure le permettent. L'écart est volontaire. Sur-livrer fidélise,
+manquer une promesse annoncée coûte le client et le cas client.
+
+Volumes de production correspondants pour 12 rendez-vous honorés : environ
+1 900 contacts uniques en ICP, 7 600 emails, une dizaine de boîtes actives et
+environ 120 réponses à traiter dans le mois.
 
 ---
 
@@ -277,6 +308,13 @@ Exemple de segmentation :
 - niveau de priorité ;
 - angle de campagne.
 
+**Renouvellement des segments.** Un segment travaillé à ce rythme s'épuise en 4
+à 6 mois. Dès l'onboarding, un plan est écrit : segment 1 actif, segments 2 et 3
+identifiés, volume disponible estimé pour chacun. Un tableau de suivi par client
+tient le volume total, le volume déjà touché, le volume restant et le taux de
+réponse observé. Quand le volume restant passe sous deux mois de production, le
+segment suivant est préparé.
+
 ### Phase 3 — Infrastructure email
 
 L'infrastructure doit être séparée de l'identité commerciale principale lorsque nécessaire.
@@ -412,9 +450,24 @@ Exemple générique — un rendez-vous qualifié est un rendez-vous :
 - ayant accepté explicitement le rendez-vous ;
 - correspondant aux critères définis pendant l'onboarding.
 
-Un no-show doit être traité séparément selon les conditions commerciales.
+**Politique de no-show :**
+
+- Prospect absent : le rendez-vous est replanifié une fois, et n'est facturé que
+  s'il a effectivement lieu.
+- Annulation ou absence du côté du client : le rendez-vous est facturé à 50 %,
+  la prestation ayant été rendue.
+
+Cette politique est écrite au contrat. Le taux de présence dépend aussi du
+client, de son délai de réponse et de sa tenue d'agenda ; Leadcore ne porte pas
+seul un risque qu'il ne contrôle qu'en partie.
 
 > **Important :** ne jamais modifier rétroactivement la définition d'un lead pour améliorer artificiellement les KPIs.
+
+### Sujets ouverts
+
+Niche, conformité RGPD, rémunération des commerciaux et ouverture d'un second
+canal restent à trancher. Ils sont listés dans
+[`MAJ-OFFRE-2026-09.md`](MAJ-OFFRE-2026-09.md), section 5.
 
 ---
 
@@ -570,6 +623,11 @@ Déclencheur : quotidien / hebdomadaire.
 
 Calculer : prospects ajoutés, emails envoyés, délivrés, réponses, réponses positives, RDV, show rate, opportunités, deals, CA généré, coût d'acquisition, ROI lorsque les données sont disponibles.
 
+**Suivi à J+30.** Le client renvoie le statut de chaque rendez-vous un mois après
+qu'il a eu lieu : perdu, en cours, ou signé avec le montant. C'est une obligation
+contractuelle, pas une faveur. Sans cette donnée, le ROI n'est pas démontrable,
+les prix ne peuvent pas monter et aucun cas client chiffré n'existe.
+
 ---
 
 ## 10. KPIs à suivre
@@ -638,7 +696,11 @@ Calculer : prospects ajoutés, emails envoyés, délivrés, réponses, réponses
 
 ## 14. Onboarding client — checklist
 
-- [ ] Contrat signé
+- [ ] Contrat signé, durée initiale de 3 mois actée
+- [ ] Frais de setup facturés et encaissés avant le démarrage technique
+- [ ] Politique de no-show relue avec le client
+- [ ] Canal de retour à J+30 défini
+- [ ] Plan de renouvellement de segments écrit
 - [ ] Paiement / facturation configurés
 - [ ] ICP défini
 - [ ] Personas définis
@@ -692,6 +754,12 @@ Pour chaque client, calculer :
 Puis mesurer : marge par client, marge par rendez-vous, coût de delivery, temps humain par client, capacité maximale par opérateur.
 
 **Objectif :** construire un modèle dans lequel l'augmentation du nombre de clients n'entraîne pas une augmentation proportionnelle des coûts humains.
+
+**Repères actuels, par client et par mois, en phase de preuve à 12 rendez-vous
+honorés :** recette 2 900 €, coûts directs 520 à 1 200 €, marge brute 1 700 à
+2 380 €. Le facteur limitant n'est pas l'envoi mais le traitement des réponses :
+un opérateur suit 4 à 6 clients. Seuil de rentabilité de la structure : 6 à 8
+clients actifs.
 
 ---
 
@@ -761,6 +829,7 @@ DATA → ENRICHISSEMENT → SCORING → OUTREACH → RÉPONSES
 | 23 | CRM SOP |
 | 24 | Automation / n8n SOP |
 | 25 | Offboarding SOP |
+| 26 | Renouvellement de segments SOP |
 
 ---
 

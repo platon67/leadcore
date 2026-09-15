@@ -148,6 +148,10 @@ ul.crosses li::before{background:none;border:1.5px solid var(--mist-dim);border-
 .price .box.hot .amt{color:var(--emerald-hi)}
 .price .per{font-family:var(--body);font-size:30px;font-weight:500;color:var(--mist);letter-spacing:0}
 .price .desc{font-size:23px;color:var(--mist);margin:2px 0 0}
+.price.trio .box{padding:30px 28px 28px}
+.price.trio .amt{font-size:68px;white-space:nowrap}
+.price.trio .per{font-size:24px}
+.price.trio .desc{font-size:21px}
 
 .banner{margin-top:26px;border:1px solid var(--emerald-dim);border-radius:12px;
   background:linear-gradient(90deg,rgba(25,199,139,.16),rgba(25,199,139,.04));
@@ -337,7 +341,7 @@ ul.crosses li::before{background:none;border:1.5px solid var(--mist-dim);border-
             <div class="arr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></div>
             <div class="node end"><svg class="ic c-em sm" aria-hidden="true"><use href="#i-calendar-check"/></svg><span class="k">RÉSULTAT</span><b>RDV booké</b><p>Le créneau arrive dans votre agenda avec le contexte du prospect.</p></div>
           </div>
-          <p class="foot">Objectif de livraison : 15 à 20 rendez-vous qualifiés par mois, selon le marché et la capacité d’envoi.</p>
+          <p class="foot">Objectif de livraison : 8 à 12 rendez-vous qualifiés par mois une fois l’infrastructure chaude, selon le marché.</p>
         </div>
       </div>
       <div class="num"></div><div class="rail"><i></i></div>
@@ -506,7 +510,7 @@ ul.crosses li::before{background:none;border:1.5px solid var(--mist-dim);border-
               <li>Une demande de plaquette ou de tarifs sans intention d’achat.</li>
               <li>Un interlocuteur sans pouvoir de décision ni influence.</li>
               <li>Un « rappelez-moi dans six mois » transformé en rendez-vous.</li>
-              <li>Un no-show, tant que le rendez-vous n’a pas eu lieu.</li>
+              <li>Un no-show du prospect : il est replanifié une fois, et facturé seulement s’il a lieu.</li>
             </ul>
             <div class="card lift">
               <svg class="ic c-em " aria-hidden="true"><use href="#i-shield"/></svg><h3>Pourquoi c’est notre intérêt</h3>
@@ -561,7 +565,8 @@ ul.crosses li::before{background:none;border:1.5px solid var(--mist-dim);border-
                 <li><b>Un point hebdomadaire</b> : chiffres, décisions, tests en cours.</li>
                 <li><b>Le détail par segment</b> : quel marché répond, quel angle convertit.</li>
                 <li><b>Les rendez-vous</b> avec le contexte complet avant l’appel.</li>
-                <li><b>Les coûts</b> : coût par rendez-vous et par rendez-vous honoré.</li>
+                <li><b>Le suivi à J+30</b> : ce que chaque rendez-vous est devenu chez vous.</li>
+                <li><b>Les coûts</b> : coût par rendez-vous honoré, et coût par client signé.</li>
               </ul>
             </div>
           </div>
@@ -583,7 +588,7 @@ ul.crosses li::before{background:none;border:1.5px solid var(--mist-dim);border-
             <div class="card"><svg class="ic c-sky " aria-hidden="true"><use href="#i-briefcase"/></svg><h3>Conseil</h3><p>Expertise, accompagnement, transformation.</p></div>
             <div class="card"><svg class="ic c-sky " aria-hidden="true"><use href="#i-cpu"/></svg><h3>IT et tech</h3><p>Prestations techniques et projets complexes.</p></div>
             <div class="card"><svg class="ic c-violet " aria-hidden="true"><use href="#i-diamond"/></svg><h3>Services premium</h3><p>Vente consultative, cycle long, ticket élevé.</p></div>
-            <div class="card lift"><svg class="ic c-em " aria-hidden="true"><use href="#i-euro"/></svg><h3>Ticket moyen</h3><p style="color:var(--bone)">Au-delà de <b style="color:var(--emerald-hi)">3 000 €</b> par client, l’outbound devient rentable.</p></div>
+            <div class="card lift"><svg class="ic c-em " aria-hidden="true"><use href="#i-euro"/></svg><h3>Ticket moyen</h3><p style="color:var(--bone)">À partir de <b style="color:var(--emerald-hi)">7 000 €</b> par client, ou d’un récurrent équivalent.</p></div>
           </div>
         </div>
       </div>
@@ -599,7 +604,7 @@ ul.crosses li::before{background:none;border:1.5px solid var(--mist-dim);border-
           <h2>Ce n’est pas fait <span class="ghost">pour tout le monde.</span></h2>
           <div class="grid g2" style="margin-top:36px;gap:48px;align-items:start">
             <ul class="ticks crosses">
-              <li><b>Offre low-ticket.</b> En dessous de 3 000 €, le coût d’acquisition mange la marge.</li>
+              <li><b>Offre low-ticket.</b> En dessous de 7 000 € de valeur client, le coût d’acquisition mange la marge.</li>
               <li><b>Vente impulsive ou B2C.</b> L’outbound travaille des cycles de décision.</li>
               <li><b>Pas de capacité commerciale.</b> Sans agenda disponible, les leads se périment.</li>
               <li><b>Offre non définie.</b> Sans promesse claire, aucun angle ne tient.</li>
@@ -609,6 +614,7 @@ ul.crosses li::before{background:none;border:1.5px solid var(--mist-dim);border-
               <ul class="ticks">
                 <li>Un créneau hebdomadaire pour le point de campagne.</li>
                 <li>Un retour honnête sur la qualité des rendez-vous.</li>
+                <li>Le statut de chaque rendez-vous à J+30 : perdu, en cours, signé.</li>
                 <li>Un agenda réellement disponible.</li>
                 <li>La capacité de livrer les clients qu’on vous amène.</li>
               </ul>
@@ -627,12 +633,19 @@ ul.crosses li::before{background:none;border:1.5px solid var(--mist-dim);border-
         <div class="body">
           <p class="eyebrow">Une offre alignée sur le résultat</p>
           <h2>Un fixe réduit, <span class="ghost">le reste au rendez-vous honoré.</span></h2>
-          <div class="price" style="margin-top:38px">
+          <div class="price trio" style="margin-top:34px;grid-template-columns:repeat(3,1fr);gap:20px">
             <div class="box">
+              <span class="tag" style="font-family:var(--mono);font-size:15px;letter-spacing:.14em;text-transform:uppercase;color:var(--mist-dim)">Une fois</span>
+              <div class="amt">1 200 €<span class="per"> / setup</span></div>
+              <p class="desc">Domaines, DNS, boîtes, warm-up, ICP, base de données et séquences.</p>
+            </div>
+            <div class="box">
+              <span class="tag" style="font-family:var(--mono);font-size:15px;letter-spacing:.14em;text-transform:uppercase;color:var(--mist-dim)">Mensuel</span>
               <div class="amt">500 €<span class="per"> / mois</span></div>
-              <p class="desc">Setup, pilotage, infrastructure d’envoi, données, séquences et reporting.</p>
+              <p class="desc">Pilotage, infrastructure, données, optimisation et reporting.</p>
             </div>
             <div class="box hot">
+              <span class="tag" style="font-family:var(--mono);font-size:15px;letter-spacing:.14em;text-transform:uppercase;color:var(--emerald)">À la performance</span>
               <div class="amt">200 €<span class="per"> / RDV honoré</span></div>
               <p class="desc">Dans l’ICP, décisionnaire, intéressé, présent au rendez-vous.</p>
             </div>
@@ -641,7 +654,7 @@ ul.crosses li::before{background:none;border:1.5px solid var(--mist-dim);border-
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
             <span>Sans rendez-vous qualifiés, notre rémunération s’arrête au fixe.</span>
           </div>
-          <p class="foot">Objectif : 15 à 20 rendez-vous qualifiés par mois. Engagement mensuel, pas d’année ferme.</p>
+          <p class="foot">Engagement de 3 mois, le temps que l’infrastructure chauffe et qu’un cycle d’optimisation tourne. Ensuite, mensuel.</p>
         </div>
       </div>
       <div class="num"></div><div class="rail"><i></i></div>
