@@ -5,9 +5,16 @@
         "source": "github",
         "repo": "JuliusBrussee/caveman"
       }
+    },
+    "taste-skill": {
+      "source": {
+        "source": "github",
+        "repo": "leonxlnx/taste-skill"
+      }
     }
   },
   "enabledPlugins": {
-    "caveman@caveman": true
+    "caveman@caveman": true,
+    "taste-skill@taste-skill": true
   }
 }

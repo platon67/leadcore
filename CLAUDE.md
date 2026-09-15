@@ -28,7 +28,9 @@ Business documents, SOPs and client-facing material are written in French.
 ## Conventions
 
 - Reference documentation lives in `docs/`.
-- `.claude/settings.json` enables the `caveman` plugin repository-wide.
+- `.claude/settings.json` enables the `caveman` and `taste-skill` plugins
+  repository-wide. `taste-skill` carries the frontend design skills used for the
+  sales deck in `deck/`.
 - `.claude/skills/stop-slop/` holds the stop-slop skill (MIT, Hardik Pandya):
   removes AI writing patterns from prose. Use it on client-facing copy,
   sequences and deck text.
