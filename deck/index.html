@@ -1,153 +1,176 @@
 <title>L’acquisition B2B sans hasard</title>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Spectral:ital,wght@0,400;0,600;0,700;1,400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@600;700;800&family=JetBrains+Mono:wght@400;500&family=Schibsted+Grotesk:wght@400;500;600&display=swap">
 <style>
 :root{
-  --void:#070F0C;
-  --deep:#0A1511;
-  --panel:#0D1B16;
-  --panel-2:#112219;
-  --line:#1E332A;
-  --line-2:#2A4638;
-  --bone:#EAF2EC;
-  --bone-2:#A9BDB2;
-  --bone-3:#6F8579;
-  --phos:#3FE0A0;
-  --phos-dim:#1E9C6C;
-  --phos-deep:#0C3E2C;
-  --paper:#EFEDE4;
-  --paper-ink:#0D1B16;
-  --serif:"Spectral",Georgia,"Times New Roman",serif;
-  --sans:"Archivo","Helvetica Neue",Arial,sans-serif;
-  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Consolas,monospace;
+  --ink:#0E1815;
+  --ink-2:#132019;
+  --graphite:#1A2723;
+  --graphite-2:#21302B;
+  --line:#33453F;
+  --line-soft:#26352F;
+  --bone:#F2F8F5;
+  --mist:#A9BDB4;
+  --mist-dim:#82968D;
+  --emerald:#19C78B;
+  --emerald-hi:#5CEDBA;
+  --emerald-dim:#118A61;
+  --emerald-glow:rgba(25,199,139,.20);
+  --display:"Funnel Display","Helvetica Neue",Arial,sans-serif;
+  --body:"Schibsted Grotesk","Helvetica Neue",Arial,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,"SFMono-Regular",Consolas,monospace;
 }
 *{box-sizing:border-box}
 html,body{height:100%}
-body{margin:0;background:#050A08;color:var(--bone);font-family:var(--sans);overflow:hidden;-webkit-font-smoothing:antialiased}
+body{margin:0;background:var(--ink);color:var(--bone);font-family:var(--body);-webkit-font-smoothing:antialiased;overflow:hidden}
 
-.viewport{position:fixed;inset:0;display:grid;place-items:center;padding:0 16px;background:#050A08}
-.stage{width:1600px;height:900px;flex:none;position:relative;transform:scale(var(--scale,1));transform-origin:center center;background:var(--void)}
-.grain{position:absolute;inset:0;z-index:5;pointer-events:none;opacity:.055;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)'/%3E%3C/svg%3E")}
+.viewport{position:fixed;inset:0;display:grid;place-items:center;padding:0 16px;
+  background:
+    radial-gradient(1200px 700px at 18% 8%, rgba(25,199,139,.12), transparent 60%),
+    radial-gradient(900px 600px at 92% 96%, rgba(25,199,139,.08), transparent 65%),
+    var(--ink);}
+.stage{width:1600px;height:900px;flex:none;transform:scale(var(--scale,1));transform-origin:center center;position:relative}
 
-.slide{position:absolute;inset:0;background:var(--void);opacity:0;visibility:hidden;transition:opacity .22s linear;overflow:hidden}
+.slide{position:absolute;inset:0;
+  background:linear-gradient(140deg,#1A2A24 0%,#132019 48%,#0E1815 100%);
+  border:1px solid var(--line-soft);border-radius:4px;overflow:hidden;
+  opacity:0;visibility:hidden;transition:opacity .28s ease}
 .slide.is-active{opacity:1;visibility:visible}
 @media (prefers-reduced-motion:reduce){.slide{transition:none}}
-.slide.invert{background:var(--paper);color:var(--paper-ink)}
+.slide::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background-image:linear-gradient(to right, rgba(255,255,255,.03) 1px, transparent 1px),
+                   linear-gradient(to bottom, rgba(255,255,255,.03) 1px, transparent 1px);
+  background-size:80px 80px;
+  mask-image:radial-gradient(120% 100% at 50% 0%, #000 20%, transparent 78%);
+  -webkit-mask-image:radial-gradient(120% 100% at 50% 0%, #000 20%, transparent 78%)}
+.slide::after{content:"";position:absolute;left:-10%;right:-10%;bottom:-340px;height:620px;pointer-events:none;
+  background:radial-gradient(closest-side, var(--emerald-glow), transparent 72%)}
+.slide > *{position:relative;z-index:1}
 
-/* frame: left rail + content, asymmetric */
-.frame{position:absolute;inset:0;padding:52px 84px 60px 64px;display:grid;grid-template-columns:44px 1fr;gap:30px}
-.rail{position:relative;border-right:1px solid var(--line)}
-.slide.invert .rail{border-color:#D3D0C4}
-.rail span{position:absolute;top:112px;left:-4px;transform-origin:left top;transform:rotate(90deg) translateY(-14px);
-  font-family:var(--mono);font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--bone-3);white-space:nowrap}
-.slide.invert .rail span{color:#6E7168}
-.rail i{position:absolute;left:-1px;top:0;width:1px;height:96px;background:var(--phos)}
-.slide.invert .rail i{background:var(--phos-dim)}
-.col{display:flex;flex-direction:column;min-width:0}
+.frame{position:absolute;inset:0;padding:56px 80px 70px;display:flex;flex-direction:column}
 
-.head{display:flex;align-items:center;justify-content:space-between;gap:24px;padding-bottom:18px}
-.head img{width:142px;height:auto;display:block}
-.head .sec{font-family:var(--mono);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--bone-3)}
-.slide.invert .head .sec{color:#6E7168}
+.chrome{display:flex;align-items:center;justify-content:space-between;gap:24px;margin-bottom:26px}
+.chrome img{width:168px;height:auto;opacity:.95;display:block}
+.chrome .sec{font-family:var(--mono);font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:var(--mist-dim)}
+.num{position:absolute;left:80px;bottom:28px;font-family:var(--mono);font-size:15px;letter-spacing:.12em;color:var(--mist-dim);font-variant-numeric:tabular-nums;z-index:2}
+.rail{position:absolute;left:0;right:0;bottom:0;height:3px;background:rgba(255,255,255,.06);z-index:2}
+.rail i{display:block;height:100%;background:linear-gradient(90deg,var(--emerald-dim),var(--emerald));width:0}
 
-.body{flex:1;display:flex;flex-direction:column;justify-content:center;min-height:0;padding:10px 0 0}
-.foot{display:flex;justify-content:space-between;align-items:center;padding-top:16px;border-top:1px solid var(--line);
-  font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--bone-3)}
-.slide.invert .foot{border-color:#D3D0C4;color:#6E7168}
-.foot .n{font-variant-numeric:tabular-nums}
+.eyebrow{font-family:var(--mono);font-size:17px;letter-spacing:.2em;text-transform:uppercase;color:var(--emerald);
+  margin:0 0 18px;display:flex;align-items:center;gap:14px}
+.eyebrow::before{content:"";width:30px;height:1px;background:var(--emerald);opacity:.7;flex:none}
+h1{font-family:var(--display);font-weight:800;font-size:112px;line-height:.98;letter-spacing:-.025em;margin:0;text-wrap:balance}
+h2{font-family:var(--display);font-weight:700;font-size:76px;line-height:1.02;letter-spacing:-.022em;margin:0;text-wrap:balance}
+h2 .ghost{color:var(--emerald)}
+.lede{font-size:27px;line-height:1.5;color:var(--mist);max-width:52ch;margin:18px 0 0}
+.sub{font-size:21px;line-height:1.5;color:var(--mist);margin:0}
+.body{flex:1;display:flex;flex-direction:column;justify-content:center;min-height:0}
 
-/* type — serif display, sans body, mono data */
-.kick{font-family:var(--mono);font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--phos);margin:0 0 16px;display:flex;gap:12px;align-items:center}
-.kick::before{content:"";width:22px;height:1px;background:var(--phos)}
-.slide.invert .kick{color:var(--phos-dim)}
-.slide.invert .kick::before{background:var(--phos-dim)}
-
-h1{font-family:var(--serif);font-weight:700;font-size:92px;line-height:1.02;letter-spacing:-.022em;margin:0;text-wrap:balance}
-h2{font-family:var(--serif);font-weight:600;font-size:56px;line-height:1.1;letter-spacing:-.018em;margin:0;max-width:24ch;text-wrap:balance}
-h2 .em{color:var(--phos);text-shadow:0 0 26px rgba(63,224,160,.28)}
-.slide.invert h2 .em{color:var(--phos-dim);text-shadow:none}
-h3{font-family:var(--sans);font-weight:600;font-size:21px;line-height:1.25;margin:0;letter-spacing:-.005em}
-.lede{font-size:21px;line-height:1.55;color:var(--bone-2);max-width:56ch;margin:18px 0 0}
-.slide.invert .lede{color:#4B524A}
-.pull{font-family:var(--serif);font-style:italic;font-weight:400;font-size:32px;line-height:1.4;color:var(--bone);margin:0;max-width:36ch}
-
-/* surfaces — no border+shadow+fill trio */
 .grid{display:grid;gap:22px}
-.zig{display:grid;grid-template-columns:1.35fr 1fr;gap:26px;align-items:start}
-.stack{display:flex;flex-direction:column;gap:22px}
+.g2{grid-template-columns:repeat(2,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
 
-.block{background:var(--panel);padding:26px 28px;display:flex;flex-direction:column;gap:9px;border-left:1px solid var(--line-2)}
-.block p{margin:0;font-size:17px;line-height:1.5;color:var(--bone-2)}
-.block .lbl{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--bone-3)}
-.block.key{background:linear-gradient(180deg,#10261D,#0C1B15);border-left:2px solid var(--phos)}
-.block.key h3{color:var(--phos)}
-.block.quiet{background:none;border-left:1px solid var(--line);padding:6px 0 6px 22px}
-.slide.invert .block{background:#E4E1D6;border-left-color:#CFCCBF}
-.slide.invert .block p{color:#4B524A}
+.card{background:linear-gradient(180deg,var(--graphite),var(--ink-2));border:1px solid var(--line-soft);
+  border-radius:14px;padding:28px 30px;display:flex;flex-direction:column;gap:12px}
+.card h3{font-family:var(--display);font-weight:700;font-size:30px;line-height:1.14;margin:0;letter-spacing:-.015em}
+.card p{margin:0;font-size:21px;line-height:1.45;color:var(--mist)}
+.card.lift{border-color:var(--emerald-dim);box-shadow:0 0 0 1px rgba(25,199,139,.14),0 22px 60px -30px rgba(25,199,139,.55)}
+.card.lift h3{color:var(--emerald-hi)}
+.card .tag{font-family:var(--mono);font-size:14px;letter-spacing:.14em;text-transform:uppercase;color:var(--mist-dim)}
+.card.plain{border:0;background:none;padding:0}
 
-ul.l{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:12px}
-ul.l li{position:relative;padding-left:24px;font-size:18px;line-height:1.5;color:var(--bone-2)}
-ul.l li::before{content:"";position:absolute;left:0;top:.58em;width:10px;height:1px;background:var(--phos-dim)}
-ul.l li b{color:var(--bone);font-weight:600}
-ul.l.mute li::before{background:var(--bone-3)}
-.slide.invert ul.l li{color:#4B524A}
-.slide.invert ul.l li b{color:var(--paper-ink)}
+ul.ticks{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:13px}
+ul.ticks li{position:relative;padding-left:28px;font-size:21px;line-height:1.45;color:var(--mist)}
+ul.ticks li::before{content:"";position:absolute;left:0;top:.6em;width:10px;height:10px;border-radius:2px;background:var(--emerald);opacity:.9}
+ul.ticks li b{color:var(--bone);font-weight:600}
+ul.crosses li::before{background:none;border:1.5px solid var(--mist-dim);border-radius:50%;width:11px;height:11px;top:.55em}
 
-.rows{display:flex;flex-direction:column}
-.rows .row{display:grid;grid-template-columns:220px 1fr;gap:32px;padding:16px 0;border-bottom:1px solid var(--line)}
-.rows .row:first-child{border-top:1px solid var(--line)}
-.rows .row .k{font-family:var(--mono);font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--phos);padding-top:4px}
-.rows .row .v{font-size:18px;line-height:1.5;color:var(--bone-2)}
-.slide.invert .rows .row{border-color:#D3D0C4}
-.slide.invert .rows .row .k{color:var(--phos-dim)}
-.slide.invert .rows .row .v{color:#4B524A}
+.chip{background:var(--graphite);border:1px solid var(--line-soft);border-left:3px solid var(--emerald-dim);
+  border-radius:10px;padding:24px 26px;display:flex;flex-direction:column;gap:9px}
+.chip b{font-size:24px;font-weight:600;line-height:1.2}
+.chip span{font-size:19px;color:var(--mist-dim);line-height:1.4}
 
-.fig{width:100%;height:auto;display:block;color:var(--bone)}
-.slide.invert .fig{color:var(--paper-ink)}
-.note{font-family:var(--mono);font-size:13px;line-height:1.6;letter-spacing:.03em;color:var(--bone-3);margin:20px 0 0}
-.slide.invert .note{color:#6E7168}
+.step{display:flex;flex-direction:column;gap:16px;padding:34px 32px 36px;
+  background:linear-gradient(180deg,var(--graphite),var(--ink-2));border:1px solid var(--line-soft);border-radius:14px}
+.step .n{font-family:var(--mono);font-size:16px;letter-spacing:.18em;color:var(--emerald)}
+.step h3{font-family:var(--display);font-weight:700;font-size:34px;margin:0;letter-spacing:-.015em}
+.step p{margin:0;color:var(--mist);font-size:21px;line-height:1.45}
 
-.stat{display:flex;align-items:baseline;gap:12px}
-.stat .big{font-family:var(--serif);font-weight:700;font-size:62px;line-height:1;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
-.stat .u{font-size:20px;color:var(--bone-2);font-family:var(--mono);letter-spacing:.04em}
-.block.key .stat .big{color:var(--phos)}
-.block.key .stat .u{color:var(--phos)}
+.flow{display:flex;align-items:stretch;width:100%}
+.flow .node{flex:1;background:linear-gradient(180deg,var(--graphite),var(--ink-2));border:1px solid var(--line-soft);
+  border-radius:14px;padding:28px 26px;display:flex;flex-direction:column;gap:10px}
+.flow .node .k{font-family:var(--mono);font-size:14px;letter-spacing:.16em;color:var(--mist-dim)}
+.flow .node b{font-family:var(--display);font-size:29px;font-weight:700;line-height:1.1;letter-spacing:-.015em}
+.flow .node p{margin:0;font-size:19px;color:var(--mist);line-height:1.4}
+.flow .node.end{border-color:var(--emerald);background:linear-gradient(180deg,rgba(25,199,139,.18),rgba(25,199,139,.06))}
+.flow .node.end b{color:var(--emerald-hi)}
+.flow .arr{flex:none;width:50px;display:grid;place-items:center;color:var(--emerald-dim)}
+.flow .arr svg{width:26px;height:26px}
 
-.mark{display:inline-flex;align-items:center;gap:12px;border:1px solid var(--phos-dim);color:var(--bone);
-  padding:15px 22px;font-size:18px;line-height:1.35;background:rgba(63,224,160,.06)}
-.mark b{color:var(--phos);font-weight:600}
+.funnel{display:flex;flex-direction:column;gap:11px;width:100%}
+.funnel .lvl{display:flex;align-items:center;justify-content:space-between;gap:28px;white-space:nowrap;
+  border:1px solid var(--line-soft);border-radius:10px;background:var(--graphite);padding:18px 26px;align-self:center}
+.funnel .lvl b{font-size:23px;font-weight:600}
+.funnel .lvl span{font-family:var(--mono);font-size:15px;letter-spacing:.12em;text-transform:uppercase;color:var(--mist-dim)}
+.funnel .lvl.hot{border-color:var(--emerald);background:linear-gradient(90deg,rgba(25,199,139,.18),rgba(25,199,139,.05))}
+.funnel .lvl.hot span{color:var(--emerald-hi)}
+
+.price{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.price .box{border:1px solid var(--line-soft);border-radius:16px;padding:36px 36px 32px;
+  background:linear-gradient(180deg,var(--graphite),var(--ink-2));display:flex;flex-direction:column;gap:10px}
+.price .box.hot{border-color:var(--emerald);background:linear-gradient(180deg,rgba(25,199,139,.16),rgba(25,199,139,.04));
+  box-shadow:0 24px 70px -34px rgba(25,199,139,.75)}
+.price .amt{font-family:var(--display);font-weight:800;font-size:88px;line-height:1;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.price .box.hot .amt{color:var(--emerald-hi)}
+.price .per{font-family:var(--body);font-size:30px;font-weight:500;color:var(--mist);letter-spacing:0}
+.price .desc{font-size:21px;color:var(--mist);margin:2px 0 0}
+
+.banner{margin-top:26px;border:1px solid var(--emerald-dim);border-radius:12px;
+  background:linear-gradient(90deg,rgba(25,199,139,.16),rgba(25,199,139,.04));
+  padding:22px 28px;font-size:24px;line-height:1.4;display:flex;gap:16px;align-items:center}
+.banner svg{flex:none;width:26px;height:26px;color:var(--emerald)}
+
+.tl{display:grid;grid-template-columns:repeat(4,1fr);width:100%;border-top:1px solid var(--line)}
+.tl .t{padding:28px 28px 26px 0;position:relative}
+.tl .t::before{content:"";position:absolute;top:-7px;left:0;width:13px;height:13px;border-radius:50%;background:var(--emerald-dim)}
+.tl .t.now::before{background:var(--emerald);box-shadow:0 0 0 6px rgba(25,199,139,.18)}
+.tl .t .w{font-family:var(--mono);font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:var(--emerald);display:block;margin-bottom:12px}
+.tl .t h3{font-family:var(--display);font-weight:700;font-size:28px;margin:0 0 10px;letter-spacing:-.015em}
+.tl .t p{margin:0;font-size:19px;line-height:1.45;color:var(--mist)}
+
+.fig{width:100%;height:auto;display:block}
+.foot{margin-top:24px;font-size:17px;color:var(--mist-dim);font-family:var(--mono);letter-spacing:.03em;line-height:1.5}
 
 /* cover */
-.cover-wrap{position:absolute;inset:0;display:grid;grid-template-columns:1.25fr .75fr}
-.cover-l{padding:56px 48px 56px 88px;display:flex;flex-direction:column;justify-content:space-between}
-.cover-r{position:relative;border-left:1px solid var(--line);display:grid;place-items:center;padding:56px 60px;background:var(--deep)}
-.cover-r svg{width:100%;height:auto;color:var(--phos)}
-.cover .who{font-family:var(--sans);font-size:20px;font-weight:600}
-.cover .role{font-family:var(--mono);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--bone-3);margin-top:6px}
-.cover .sig{font-family:var(--mono);font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--phos)}
-
-/* section openers — deliberate inversion */
-.opener{display:grid;grid-template-columns:.9fr 1.1fr;gap:64px;align-items:center;height:100%}
-.opener .idxn{font-family:var(--mono);font-size:13px;letter-spacing:.26em;color:var(--phos-dim);margin-bottom:20px}
-.opener h2{font-size:58px;max-width:19ch}
+.cover{padding:0}
+.cover .inner{position:absolute;inset:0;padding:72px 80px;display:flex;flex-direction:column;justify-content:space-between}
+.cover img.logo{width:300px;height:auto;display:block}
+.cover h1 em{font-style:normal;color:var(--emerald)}
+.cover .meta{display:flex;align-items:flex-end;justify-content:space-between;gap:40px}
+.cover .who{border:1px solid var(--line);border-radius:12px;padding:22px 28px;background:rgba(26,39,35,.72);backdrop-filter:blur(6px)}
+.cover .who span{font-family:var(--mono);font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:var(--mist-dim);display:block;margin-bottom:8px}
+.cover .who b{font-size:26px;font-weight:600}
 
 /* controls */
 .ctl{position:fixed;right:18px;bottom:calc(18px + env(safe-area-inset-bottom,0px));display:flex;gap:8px;z-index:40}
-.ctl button,.menu-btn{width:42px;height:42px;border:1px solid #223A30;background-color:#0B1712;color:var(--bone);cursor:pointer;display:grid;place-items:center;font-family:var(--mono);font-size:13px;transition:background-color .2s ease,color .2s ease,transform .12s ease}
-.ctl button:hover,.menu-btn:hover{background-color:#12281F;color:var(--phos)}
+.ctl button,.menu-btn{width:44px;height:44px;border-radius:10px;border:1px solid var(--line);
+  background-color:rgba(19,32,25,.9);color:var(--bone);cursor:pointer;display:grid;place-items:center;
+  backdrop-filter:blur(8px);font-family:var(--mono);font-size:14px;transition:border-color .2s ease,color .2s ease,transform .12s ease}
+.ctl button:hover,.menu-btn:hover{border-color:var(--emerald-dim);color:var(--emerald-hi)}
 .ctl button:active,.menu-btn:active{transform:translateY(1px)}
-.ctl button:focus-visible,.menu-btn:focus-visible,.idx li button:focus-visible{outline:2px solid var(--phos);outline-offset:2px}
-.ctl svg{width:18px;height:18px}
+.ctl button:focus-visible,.menu-btn:focus-visible,.idx li button:focus-visible{outline:2px solid var(--emerald);outline-offset:2px}
+.ctl svg{width:19px;height:19px}
 .menu-btn{position:fixed;left:18px;bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:40}
-.idx{position:fixed;inset:0;z-index:60;background-color:rgba(7,15,12,.975);padding:48px 32px;overflow:auto}
-.idx h4{font-family:var(--mono);font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--phos);margin:0 0 20px;text-align:center}
-.idx ul{list-style:none;margin:0 auto;padding:0;max-width:900px;display:grid;grid-template-columns:repeat(2,1fr);gap:2px 28px}
-.idx li button{width:100%;text-align:left;background:none;border:0;border-bottom:1px solid var(--line);color:var(--bone);font-family:var(--sans);font-size:17px;padding:12px 4px;cursor:pointer;display:flex;gap:14px;align-items:baseline;transition:color .2s ease}
-.idx li button:hover{color:var(--phos)}
-.idx li button i{font-family:var(--mono);font-style:normal;font-size:12px;color:var(--bone-3)}
-.idx li button[aria-current="true"]{color:var(--phos)}
-@media (max-width:820px){.idx ul{grid-template-columns:1fr}}
+.idx{position:fixed;inset:0;z-index:60;background-color:rgba(9,17,14,.96);backdrop-filter:blur(10px);padding:48px 32px;overflow:auto}
+.idx h4{font-family:var(--mono);font-size:15px;letter-spacing:.2em;text-transform:uppercase;color:var(--emerald);margin:0 0 22px;text-align:center}
+.idx ul{list-style:none;margin:0 auto;padding:0;max-width:920px;display:grid;grid-template-columns:repeat(2,1fr);gap:4px 28px}
+.idx li button{width:100%;text-align:left;background:none;border:0;border-bottom:1px solid var(--line-soft);color:var(--bone);
+  font-family:var(--body);font-size:19px;padding:13px 4px;cursor:pointer;display:flex;gap:14px;align-items:baseline;transition:color .2s ease}
+.idx li button:hover{color:var(--emerald-hi)}
+.idx li button i{font-family:var(--mono);font-style:normal;font-size:14px;color:var(--mist-dim)}
+.idx li button[aria-current="true"]{color:var(--emerald)}
+@media (max-width:820px){.ctl button,.menu-btn{width:40px;height:40px}.idx ul{grid-template-columns:1fr}}
 </style>
 
 <div class="viewport" id="viewport">
@@ -155,587 +178,435 @@ ul.l.mute li::before{background:var(--bone-3)}
 
     <!-- 1 — COUVERTURE -->
     <section class="slide cover is-active" data-title="Couverture">
-      <div class="cover-wrap">
-        <div class="cover-l">
-          <img src="assets/leadcore-logo.png" alt="Leadcore" style="width:216px">
-          <div>
-            <h1>L’acquisition B2B,<br>sans hasard.</h1>
-            <p class="lede">Un moteur de rendez-vous qualifiés pour les entreprises B2B qui vendent une offre à forte valeur.</p>
-          </div>
-          <div>
-            <div class="who">Platon Bournassenko</div>
-            <div class="role">Fondateur — Leadcore</div>
-          </div>
+      <div class="inner">
+        <img class="logo" src="assets/leadcore-logo.png" alt="Leadcore">
+        <div>
+          <h1>L’acquisition B2B,<br><em>sans hasard.</em></h1>
+          <p class="lede">Un moteur de rendez-vous qualifiés pour les entreprises B2B qui vendent une offre à forte valeur.</p>
         </div>
-        <div class="cover-r">
-          <svg viewBox="0 0 380 520" fill="none" aria-hidden="true">
-            <g stroke="currentColor" stroke-width="1.2" opacity=".5">
-              <circle cx="30" cy="24" r="4"/><circle cx="92" cy="14" r="4"/><circle cx="154" cy="28" r="4"/><circle cx="216" cy="12" r="4"/><circle cx="278" cy="26" r="4"/><circle cx="340" cy="16" r="4"/>
-              <circle cx="16" cy="70" r="4"/><circle cx="78" cy="62" r="4"/><circle cx="140" cy="76" r="4"/><circle cx="202" cy="60" r="4"/><circle cx="264" cy="74" r="4"/><circle cx="326" cy="64" r="4"/>
-              <circle cx="46" cy="116" r="4"/><circle cx="108" cy="108" r="4"/><circle cx="170" cy="122" r="4"/><circle cx="232" cy="106" r="4"/><circle cx="294" cy="120" r="4"/><circle cx="356" cy="110" r="4"/>
-            </g>
-            <path d="M12 168 L166 320 L214 320 L368 168" stroke="currentColor" stroke-width="1.6"/>
-            <path d="M166 320 V372 M214 320 V372" stroke="currentColor" stroke-width="1.6"/>
-            <g stroke="currentColor" stroke-width="1" opacity=".38">
-              <path d="M58 186 L176 306"/><path d="M124 186 L192 250"/><path d="M322 186 L204 306"/><path d="M256 186 L196 250"/>
-            </g>
-            <rect x="130" y="392" width="120" height="82" stroke="currentColor" stroke-width="1.6"/>
-            <path d="M130 418 H250" stroke="currentColor" stroke-width="1.6"/>
-            <path d="M152 382 V402 M228 382 V402" stroke="currentColor" stroke-width="1.6"/>
-            <circle cx="190" cy="446" r="10" fill="currentColor"/>
-            <text x="190" y="504" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="13" letter-spacing="3" fill="currentColor" opacity=".75">RDV BOOKÉ</text>
-          </svg>
+        <div class="meta">
+          <div class="who"><span>Présenté par</span><b>Platon Bournassenko — Fondateur</b></div>
+          <div style="font-family:var(--mono);font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:var(--mist-dim)">Outbound piloté · RDV qualifiés</div>
         </div>
       </div>
-      <div class="foot" style="position:absolute;left:88px;right:84px;bottom:28px;border:0">
-        <span class="sig">Outbound piloté</span><span class="n"></span>
-      </div>
+      <div class="rail"><i></i></div>
     </section>
 
     <!-- 2 — LE FACTEUR LIMITANT -->
     <section class="slide" data-title="Le facteur limitant">
       <div class="frame">
-        <div class="rail"><i></i><span>Le constat</span></div>
-        <div class="col">
-          <div class="head"><img src="assets/leadcore-logo.png" alt="Leadcore"><div class="sec">01 · Constat</div></div>
-          <div class="body">
-            <p class="kick">Le vrai facteur limitant</p>
-            <h2>Ce n’est pas votre offre. <span class="em">C’est le pipeline.</span></h2>
-            <div class="zig" style="margin-top:34px">
-              <div class="stack">
-                <div class="block"><span class="lbl">Volume</span><h3>Trop peu de prospects touchés</h3><p>La prospection passe toujours après la livraison du mois.</p></div>
-                <div class="block"><span class="lbl">Qualité</span><h3>Des leads mal qualifiés</h3><p>Le tri se fait en rendez-vous, une fois l’heure déjà perdue.</p></div>
-              </div>
-              <div class="stack">
-                <div class="block"><span class="lbl">Décision</span><h3>Le décideur n’est pas dans la salle</h3><p>L’interlocuteur écoute, remonte l’info, et le dossier s’arrête là.</p></div>
-                <div class="block quiet"><p>Résultat : le mois se joue sur un seul rendez-vous, et le flux dépend du bouche-à-oreille.</p></div>
-              </div>
-            </div>
+        <div class="chrome"><img src="assets/leadcore-logo.png" alt="Leadcore"><div class="sec">01 — Le constat</div></div>
+        <div class="body">
+          <p class="eyebrow">Le vrai facteur limitant</p>
+          <h2>Ce n’est pas l’offre. <span class="ghost">C’est le pipeline.</span></h2>
+          <div class="grid g3" style="margin-top:38px">
+            <div class="chip"><b>Volume de prospection trop faible</b><span>La prospection passe après la livraison.</span></div>
+            <div class="chip"><b>Trop peu d’opportunités</b><span>Le mois se joue sur deux ou trois dossiers.</span></div>
+            <div class="chip"><b>Leads mal qualifiés</b><span>Le tri se fait en rendez-vous, trop tard.</span></div>
+            <div class="chip"><b>Décideur absent</b><span>L’interlocuteur écoute, puis le dossier s’arrête.</span></div>
+            <div class="chip"><b>Temps commercial gaspillé</b><span>Des heures de visio sans opportunité derrière.</span></div>
+            <div class="chip"><b>Flux dépendant du réseau</b><span>Bon mois, mauvais mois, aucun levier.</span></div>
           </div>
-          <div class="foot"><span>Leadcore</span><span class="n"></span></div>
         </div>
       </div>
+      <div class="num"></div><div class="rail"><i></i></div>
     </section>
 
     <!-- 3 — LE COÛT -->
     <section class="slide" data-title="Le coût du statu quo">
       <div class="frame">
-        <div class="rail"><i></i><span>Le constat</span></div>
-        <div class="col">
-          <div class="head"><img src="assets/leadcore-logo.png" alt="Leadcore"><div class="sec">01 · Constat</div></div>
-          <div class="body">
-            <p class="kick">Le coût du statu quo</p>
-            <h2>Chaque mois sans pipeline <span class="em">se paie trois fois.</span></h2>
-            <div class="zig" style="margin-top:30px;align-items:stretch">
-              <div class="block" style="justify-content:space-between">
-                <div>
-                  <span class="lbl">Commercial</span>
-                  <h3 style="margin:8px 0 12px">Opportunités perdues</h3>
-                  <ul class="l"><li>Le prospect signe ailleurs.</li><li>Son budget part pour l’année.</li><li>Le manque à gagner ne se rattrape pas.</li></ul>
-                </div>
-                <svg class="fig" viewBox="0 0 420 120" style="margin-top:22px" aria-hidden="true">
-                  <path d="M10 14 V104 H412" stroke="currentColor" stroke-width="1.2" opacity=".35" fill="none"/>
-                  <path d="M10 98 C90 98 80 34 160 34 C240 34 230 70 310 70 C360 70 380 54 410 44" stroke="var(--bone-3)" stroke-width="2" fill="none"/>
-                  <circle cx="160" cy="34" r="4" fill="var(--bone-3)"/><circle cx="310" cy="70" r="4" fill="var(--bone-3)"/>
-                  <text x="10" y="120" font-family="IBM Plex Mono, monospace" font-size="11" letter-spacing="2" fill="var(--bone-3)">CYCLE REDÉMARRÉ CHAQUE TRIMESTRE</text>
-                </svg>
-              </div>
-              <div class="stack">
-                <div class="block"><span class="lbl">Financier</span><h3>Croissance imprévisible</h3><p>Recrutements reportés, trésorerie sous tension, objectifs annuels manqués.</p></div>
-                <div class="block"><span class="lbl">Humain</span><h3>Équipe sous pression</h3><p>Démotivation progressive, moins de mordant en rendez-vous, turnover commercial.</p></div>
-              </div>
+        <div class="chrome"><img src="assets/leadcore-logo.png" alt="Leadcore"><div class="sec">01 — Le constat</div></div>
+        <div class="body">
+          <p class="eyebrow">Le coût du statu quo</p>
+          <h2>Chaque mois sans pipeline <span class="ghost">se paie trois fois.</span></h2>
+          <div class="grid g3" style="margin-top:38px">
+            <div class="card">
+              <span class="tag">01 · Commercial</span>
+              <h3>Opportunités perdues</h3>
+              <ul class="ticks"><li>Le prospect signe ailleurs.</li><li>Son budget part pour l’année.</li><li>Le manque à gagner ne se rattrape pas.</li></ul>
+            </div>
+            <div class="card">
+              <span class="tag">02 · Financier</span>
+              <h3>Croissance imprévisible</h3>
+              <ul class="ticks"><li>Recrutements reportés.</li><li>Trésorerie sous tension.</li><li>Objectifs annuels manqués.</li></ul>
+            </div>
+            <div class="card">
+              <span class="tag">03 · Humain</span>
+              <h3>Équipe sous pression</h3>
+              <ul class="ticks"><li>Démotivation progressive.</li><li>Moins de mordant en rendez-vous.</li><li>Turnover commercial.</li></ul>
             </div>
           </div>
-          <div class="foot"><span>Leadcore</span><span class="n"></span></div>
         </div>
       </div>
+      <div class="num"></div><div class="rail"><i></i></div>
     </section>
 
     <!-- 4 — LES OPTIONS -->
     <section class="slide" data-title="Les quatre options">
       <div class="frame">
-        <div class="rail"><i></i><span>Le constat</span></div>
-        <div class="col">
-          <div class="head"><img src="assets/leadcore-logo.png" alt="Leadcore"><div class="sec">01 · Constat</div></div>
-          <div class="body">
-            <p class="kick">Les options sur la table</p>
-            <h2>Quatre façons de remplir un pipeline. <span class="em">Une seule se pilote.</span></h2>
-            <div class="grid" style="grid-template-columns:repeat(3,1fr) 1.25fr;margin-top:32px;align-items:stretch">
-              <div class="block"><span class="lbl">Inbound</span><h3>Contenu et SEO</h3><p>Solide sur la durée. Six à douze mois avant un volume utile, et vous ne choisissez pas qui vous contacte.</p></div>
-              <div class="block"><span class="lbl">Réseau</span><h3>Recommandations</h3><p>La meilleure qualité. Le volume ne se commande pas et plafonne vite.</p></div>
-              <div class="block"><span class="lbl">Interne</span><h3>Recruter un SDR</h3><p>Coût fixe engagé avant le premier résultat, trois mois de montée en compétence, risque de départ.</p></div>
-              <div class="block key"><span class="lbl" style="color:var(--phos)">Leadcore</span><h3>Outbound piloté</h3><p style="color:var(--bone)">Vous choisissez la cible, le débit se règle, et l’essentiel du coût tombe au rendez-vous honoré.</p></div>
-            </div>
-            <p class="note">Les quatre sont complémentaires. L’outbound est le seul dont vous contrôlez à la fois le ciblage et le débit.</p>
+        <div class="chrome"><img src="assets/leadcore-logo.png" alt="Leadcore"><div class="sec">01 — Le constat</div></div>
+        <div class="body">
+          <p class="eyebrow">Les options sur la table</p>
+          <h2>Quatre façons de remplir un pipeline. <span class="ghost">Une seule se pilote.</span></h2>
+          <div class="grid g4" style="margin-top:38px">
+            <div class="card"><span class="tag">Inbound</span><h3>Contenu et SEO</h3><p>Six à douze mois avant un volume utile, et vous ne choisissez pas qui vous contacte.</p></div>
+            <div class="card"><span class="tag">Réseau</span><h3>Recommandations</h3><p>La meilleure qualité. Le volume ne se commande pas et plafonne vite.</p></div>
+            <div class="card"><span class="tag">Interne</span><h3>Recruter un SDR</h3><p>Coût fixe avant le premier résultat, trois mois de montée en compétence.</p></div>
+            <div class="card lift"><span class="tag">Leadcore</span><h3>Outbound piloté</h3><p>Vous choisissez la cible, le débit se règle, le coût tombe au rendez-vous honoré.</p></div>
           </div>
-          <div class="foot"><span>Leadcore</span><span class="n"></span></div>
         </div>
       </div>
+      <div class="num"></div><div class="rail"><i></i></div>
     </section>
 
-    <!-- 5 — OPENER : LA MÉTHODE (inversé) -->
-    <section class="slide invert" data-title="Partie 01 — La méthode">
-      <div class="frame">
-        <div class="rail"><i></i><span>Partie 01</span></div>
-        <div class="col">
-          <div class="head"><img src="assets/leadcore-logo-ink.png" alt="Leadcore"><div class="sec">Partie 01</div></div>
-          <div class="body">
-            <div class="opener">
-              <div>
-                <div class="idxn">PARTIE 01</div>
-                <h2>La méthode <span class="em">Leadcore</span></h2>
-                <p class="lede">Trois phases, du ciblage au rendez-vous. Rien d’improvisé, tout est mesuré.</p>
-              </div>
-              <svg class="fig" viewBox="0 0 640 300" aria-hidden="true">
-                <g font-family="IBM Plex Mono, monospace" font-size="14">
-                  <rect x="10" y="50" width="170" height="72" fill="none" stroke="currentColor" stroke-width="1.3"/>
-                  <rect x="235" y="50" width="170" height="72" fill="none" stroke="currentColor" stroke-width="1.3"/>
-                  <rect x="460" y="50" width="170" height="72" fill="none" stroke="var(--phos-dim)" stroke-width="2"/>
-                  <text x="95" y="92" text-anchor="middle" fill="currentColor" letter-spacing="2">SETUP</text>
-                  <text x="320" y="92" text-anchor="middle" fill="currentColor" letter-spacing="2">LANCEMENT</text>
-                  <text x="545" y="92" text-anchor="middle" fill="var(--phos-dim)" letter-spacing="2">RDV</text>
-                  <path d="M180 86 H230" stroke="currentColor" stroke-width="1.3"/><path d="M405 86 H455" stroke="currentColor" stroke-width="1.3"/>
-                  <path d="M223 80 L233 86 L223 92 Z" fill="currentColor"/><path d="M448 80 L458 86 L448 92 Z" fill="currentColor"/>
-                  <path d="M545 122 V196 H95 V128" stroke="var(--phos-dim)" stroke-width="1.3" stroke-dasharray="6 6" fill="none"/>
-                  <path d="M89 136 L95 124 L101 136 Z" fill="var(--phos-dim)"/>
-                  <text x="320" y="228" text-anchor="middle" fill="var(--phos-dim)" font-size="13" letter-spacing="2">OPTIMISATION HEBDOMADAIRE</text>
-                </g>
-              </svg>
-            </div>
-          </div>
-          <div class="foot"><span>Leadcore</span><span class="n"></span></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 6 — LE MOTEUR -->
+    <!-- 5 — LE MOTEUR -->
     <section class="slide" data-title="Le moteur d’acquisition">
       <div class="frame">
-        <div class="rail"><i></i><span>La méthode</span></div>
-        <div class="col">
-          <div class="head"><img src="assets/leadcore-logo.png" alt="Leadcore"><div class="sec">02 · Méthode</div></div>
-          <div class="body">
-            <p class="kick">Le moteur d’acquisition</p>
-            <h2>De la donnée brute <span class="em">au rendez-vous honoré.</span></h2>
-            <svg class="fig" viewBox="0 0 1400 290" style="margin-top:30px" aria-hidden="true">
-              <g font-family="Archivo, sans-serif">
-                <rect x="2" y="50" width="296" height="120" fill="#0D1B16" stroke="#243D32" stroke-width="1.2"/>
-                <rect x="368" y="50" width="296" height="120" fill="#0D1B16" stroke="#243D32" stroke-width="1.2"/>
-                <rect x="734" y="50" width="296" height="120" fill="#0D1B16" stroke="#243D32" stroke-width="1.2"/>
-                <rect x="1100" y="50" width="296" height="120" fill="#10261D" stroke="var(--phos)" stroke-width="1.8"/>
-                <g font-family="IBM Plex Mono, monospace" font-size="13" letter-spacing="2" fill="#6F8579">
-                  <text x="26" y="84">01</text><text x="392" y="84">02</text><text x="758" y="84">03</text>
-                  <text x="1124" y="84" fill="#3FE0A0">04</text>
-                </g>
-                <g font-family="Spectral, serif" font-size="27" font-weight="600" fill="#EAF2EC">
-                  <text x="26" y="122">ICP et données</text><text x="392" y="122">Approche</text><text x="758" y="122">Qualification</text>
-                  <text x="1124" y="122" fill="#3FE0A0">RDV honoré</text>
-                </g>
-                <g font-size="16" fill="#A9BDB2">
-                  <text x="26" y="150">Marché, taille, fonction, signaux.</text>
-                  <text x="392" y="150">Séquences courtes, angle par segment.</text>
-                  <text x="758" y="150">Besoin, décideur, timing vérifiés.</text>
-                  <text x="1124" y="150" fill="#8FD9BB">Créneau posé, contexte fourni.</text>
-                </g>
-                <g stroke="#3A5C4C" stroke-width="1.4" fill="none"><path d="M298 110 H362"/><path d="M664 110 H728"/><path d="M1030 110 H1094"/></g>
-                <g fill="#3A5C4C"><path d="M355 104 L365 110 L355 116 Z"/><path d="M721 104 L731 110 L721 116 Z"/><path d="M1087 104 L1097 110 L1087 116 Z"/></g>
-                <path d="M1248 170 V234 H150 V176" stroke="var(--phos-dim)" stroke-width="1.4" stroke-dasharray="7 7" fill="none"/>
-                <path d="M143 186 L150 170 L157 186 Z" fill="var(--phos-dim)"/>
-                <text x="700" y="266" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="14" letter-spacing="2" fill="var(--phos-dim)">VOS RETOURS DE RENDEZ-VOUS REDESCENDENT DANS LE CIBLAGE</text>
-              </g>
-            </svg>
-            <p class="note">Objectif de livraison : 15 à 20 rendez-vous qualifiés par mois, selon le marché et la capacité d’envoi.</p>
+        <div class="chrome"><img src="assets/leadcore-logo.png" alt="Leadcore"><div class="sec">02 — La méthode</div></div>
+        <div class="body">
+          <p class="eyebrow">Le moteur d’acquisition</p>
+          <h2>De la donnée brute <span class="ghost">au rendez-vous honoré.</span></h2>
+          <div class="flow" style="margin-top:44px">
+            <div class="node"><span class="k">ÉTAPE 1</span><b>ICP</b><p>Marché, taille, fonction, signaux. On écrit qui vaut le coup d’être contacté.</p></div>
+            <div class="arr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></div>
+            <div class="node"><span class="k">ÉTAPE 2</span><b>Approche</b><p>Séquences courtes, un angle par segment, personnalisation réelle.</p></div>
+            <div class="arr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></div>
+            <div class="node"><span class="k">ÉTAPE 3</span><b>Qualification</b><p>Chaque réponse est classée, le besoin et le décideur sont vérifiés.</p></div>
+            <div class="arr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></div>
+            <div class="node end"><span class="k">RÉSULTAT</span><b>RDV booké</b><p>Le créneau arrive dans votre agenda avec le contexte du prospect.</p></div>
           </div>
-          <div class="foot"><span>Leadcore</span><span class="n"></span></div>
+          <p class="foot">Objectif de livraison : 15 à 20 rendez-vous qualifiés par mois, selon le marché et la capacité d’envoi.</p>
         </div>
       </div>
+      <div class="num"></div><div class="rail"><i></i></div>
     </section>
 
-    <!-- 7 — LES TROIS PHASES -->
-    <section class="slide" data-title="Les trois phases">
+    <!-- 6 — LE PROTOCOLE -->
+    <section class="slide" data-title="Le protocole outbound">
       <div class="frame">
-        <div class="rail"><i></i><span>La méthode</span></div>
-        <div class="col">
-          <div class="head"><img src="assets/leadcore-logo.png" alt="Leadcore"><div class="sec">02 · Méthode</div></div>
-          <div class="body">
-            <p class="kick">Le protocole</p>
-            <h2>Trois phases, <span class="em">dans cet ordre.</span></h2>
-            <div class="rows" style="margin-top:34px">
-              <div class="row"><div class="k">Phase 01 · S1–S2</div><div class="v"><b style="color:var(--bone)">Le setup.</b> Cible, offre, angles, base de données, infrastructure d’envoi. Rien ne part avant que ce socle tienne.</div></div>
-              <div class="row"><div class="k">Phase 02 · S3–S4</div><div class="v"><b style="color:var(--bone)">Le lancement.</b> Séquences assistées par IA, montée en volume progressive, relances cadencées, réponses traitées au quotidien.</div></div>
-              <div class="row"><div class="k">Phase 03 · Continu</div><div class="v"><b style="color:var(--bone)">L’optimisation.</b> Segments arbitrés, angles renouvelés, délivrabilité surveillée, reporting transparent chaque semaine.</div></div>
-            </div>
-            <p class="pull" style="margin-top:44px">« La délivrabilité et la qualité de la donnée passent avant le volume d’emails envoyés. »</p>
+        <div class="chrome"><img src="assets/leadcore-logo.png" alt="Leadcore"><div class="sec">02 — La méthode</div></div>
+        <div class="body">
+          <p class="eyebrow">Un protocole outbound</p>
+          <h2>Trois phases, <span class="ghost">rien d’improvisé.</span></h2>
+          <div class="grid g3" style="margin-top:42px">
+            <div class="step"><span class="n">PHASE 01</span><h3>Le setup</h3><p>Cible, offre, angles, base de données, infrastructure d’envoi. Rien ne part avant que ce socle tienne.</p></div>
+            <div class="step"><span class="n">PHASE 02</span><h3>Le lancement</h3><p>Séquences assistées par IA, montée en volume progressive, relances cadencées, réponses traitées chaque jour.</p></div>
+            <div class="step"><span class="n">PHASE 03</span><h3>L’optimisation</h3><p>Filtres affinés, segments arbitrés, nouveaux angles testés chaque semaine, reporting transparent.</p></div>
           </div>
-          <div class="foot"><span>Leadcore</span><span class="n"></span></div>
+          <p class="foot">La délivrabilité et la qualité de la donnée passent avant le volume d’emails envoyés.</p>
         </div>
       </div>
+      <div class="num"></div><div class="rail"><i></i></div>
     </section>
 
-    <!-- 8 — PHASE 01 -->
+    <!-- 7 — PHASE 01 -->
     <section class="slide" data-title="Phase 01 — Le setup">
       <div class="frame">
-        <div class="rail"><i></i><span>Phase 01</span></div>
-        <div class="col">
-          <div class="head"><img src="assets/leadcore-logo.png" alt="Leadcore"><div class="sec">02 · Méthode · Phase 01</div></div>
-          <div class="body">
-            <p class="kick">Phase 01 — Le setup</p>
-            <h2>Votre domaine principal <span class="em">n’est jamais exposé.</span></h2>
-            <div class="grid" style="grid-template-columns:1.3fr .7fr;gap:46px;margin-top:26px;align-items:center">
-              <svg class="fig" viewBox="0 0 820 350" aria-hidden="true">
-                <g font-family="Archivo, sans-serif">
-                  <rect x="4" y="134" width="188" height="82" fill="none" stroke="#3A5C4C" stroke-width="1.3" stroke-dasharray="6 5"/>
-                  <text x="98" y="170" text-anchor="middle" font-size="16" font-weight="600" fill="#A9BDB2">votre-societe.com</text>
-                  <text x="98" y="194" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12" letter-spacing="2" fill="#6F8579">INTACT</text>
-
-                  <g fill="#0D1B16" stroke="#243D32" stroke-width="1.3">
-                    <rect x="266" y="20" width="232" height="76"/><rect x="266" y="136" width="232" height="76"/><rect x="266" y="252" width="232" height="76"/>
-                  </g>
-                  <g font-size="16" font-weight="600" fill="#EAF2EC">
-                    <text x="288" y="52">go-societe.com</text><text x="288" y="168">societe-team.com</text><text x="288" y="284">try-societe.com</text>
-                  </g>
-                  <g font-family="IBM Plex Mono, monospace" font-size="12" letter-spacing="1.5" fill="#3FE0A0">
-                    <text x="288" y="76">SPF · DKIM · DMARC</text><text x="288" y="192">SPF · DKIM · DMARC</text><text x="288" y="308">SPF · DKIM · DMARC</text>
-                  </g>
-                  <g stroke="#3A5C4C" stroke-width="1.3" fill="none">
-                    <path d="M192 175 H230 V58 H262"/><path d="M230 175 H262"/><path d="M230 175 V290 H262"/>
-                    <path d="M498 58 H556 V174 H600"/><path d="M498 174 H600"/><path d="M498 290 H556 V178"/>
-                  </g>
-                  <g fill="#3A5C4C"><path d="M255 52 L265 58 L255 64 Z"/><path d="M255 169 L265 175 L255 181 Z"/><path d="M255 284 L265 290 L255 296 Z"/><path d="M593 168 L603 174 L593 180 Z"/></g>
-                  <rect x="604" y="134" width="210" height="82" fill="#10261D" stroke="var(--phos)" stroke-width="1.8"/>
-                  <text x="709" y="170" text-anchor="middle" font-size="17" font-weight="600" fill="#3FE0A0">Boîte du prospect</text>
-                  <text x="709" y="194" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12" letter-spacing="2" fill="#8FD9BB">INBOX</text>
-                  <text x="410" y="344" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12" letter-spacing="2" fill="#6F8579">DOMAINES DÉDIÉS · BOÎTES SÉPARÉES · WARM-UP PROGRESSIF</text>
+        <div class="chrome"><img src="assets/leadcore-logo.png" alt="Leadcore"><div class="sec">02 — Phase 01</div></div>
+        <div class="body">
+          <p class="eyebrow">Phase 01 — Le setup</p>
+          <h2>Votre domaine principal <span class="ghost">n’est jamais exposé.</span></h2>
+          <div class="grid" style="grid-template-columns:1.25fr .75fr;gap:44px;margin-top:30px;align-items:center">
+            <svg class="fig" viewBox="0 0 820 350" aria-hidden="true">
+              <g font-family="Schibsted Grotesk, sans-serif">
+                <rect x="4" y="134" width="190" height="84" rx="10" fill="none" stroke="#3E5850" stroke-width="1.6" stroke-dasharray="7 6"/>
+                <text x="99" y="170" text-anchor="middle" font-size="19" font-weight="600" fill="#A9BDB4">votre-societe.com</text>
+                <text x="99" y="196" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="14" letter-spacing="1.5" fill="#82968D">INTACT</text>
+                <g fill="#1A2723" stroke="#33453F" stroke-width="1.6">
+                  <rect x="266" y="18" width="234" height="80" rx="10"/><rect x="266" y="134" width="234" height="80" rx="10"/><rect x="266" y="250" width="234" height="80" rx="10"/>
                 </g>
-              </svg>
-              <ul class="l">
-                <li><b>ICP écrit</b> : marché, taille, fonction, zone, signaux d’achat.</li>
-                <li><b>Exclusions</b> : concurrents, clients existants, secteurs interdits.</li>
-                <li><b>Base</b> : construction, dédoublonnage, enrichissement, vérification.</li>
-                <li><b>Infrastructure</b> : domaines dédiés, DNS, limites par boîte, rotation.</li>
-                <li><b>Warm-up</b> : volumes montés avant la première campagne.</li>
-              </ul>
-            </div>
+                <g font-size="19" font-weight="600" fill="#F2F8F5">
+                  <text x="290" y="52">go-societe.com</text><text x="290" y="168">societe-team.com</text><text x="290" y="284">try-societe.com</text>
+                </g>
+                <g font-family="JetBrains Mono, monospace" font-size="14" letter-spacing="1.2" fill="#19C78B">
+                  <text x="290" y="78">SPF · DKIM · DMARC</text><text x="290" y="194">SPF · DKIM · DMARC</text><text x="290" y="310">SPF · DKIM · DMARC</text>
+                </g>
+                <g stroke="#3E5850" stroke-width="1.6" fill="none">
+                  <path d="M194 176 H230 V58 H262"/><path d="M230 176 H262"/><path d="M230 176 V290 H262"/>
+                  <path d="M500 58 H556 V174 H600"/><path d="M500 174 H600"/><path d="M500 290 H556 V178"/>
+                </g>
+                <g fill="#3E5850"><path d="M255 52 L265 58 L255 64 Z"/><path d="M255 170 L265 176 L255 182 Z"/><path d="M255 284 L265 290 L255 296 Z"/><path d="M593 168 L603 174 L593 180 Z"/></g>
+                <rect x="604" y="134" width="212" height="84" rx="10" fill="rgba(25,199,139,.14)" stroke="#19C78B" stroke-width="2"/>
+                <text x="710" y="170" text-anchor="middle" font-size="20" font-weight="600" fill="#5CEDBA">Boîte du prospect</text>
+                <text x="710" y="196" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="14" letter-spacing="1.5" fill="#5CEDBA">INBOX</text>
+                <text x="410" y="346" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="14" letter-spacing="1.5" fill="#82968D">DOMAINES DÉDIÉS · BOÎTES SÉPARÉES · WARM-UP PROGRESSIF</text>
+              </g>
+            </svg>
+            <ul class="ticks">
+              <li><b>ICP écrit</b> : marché, taille, fonction, signaux d’achat.</li>
+              <li><b>Exclusions</b> : concurrents, clients existants, secteurs interdits.</li>
+              <li><b>Base</b> : dédoublonnage, enrichissement, vérification.</li>
+              <li><b>Infrastructure</b> : domaines dédiés, DNS, limites par boîte.</li>
+              <li><b>Warm-up</b> : volumes montés avant la première campagne.</li>
+            </ul>
           </div>
-          <div class="foot"><span>Leadcore</span><span class="n"></span></div>
         </div>
       </div>
+      <div class="num"></div><div class="rail"><i></i></div>
     </section>
 
-    <!-- 9 — PHASE 02 -->
+    <!-- 8 — PHASE 02 -->
     <section class="slide" data-title="Phase 02 — Le lancement">
       <div class="frame">
-        <div class="rail"><i></i><span>Phase 02</span></div>
-        <div class="col">
-          <div class="head"><img src="assets/leadcore-logo.png" alt="Leadcore"><div class="sec">02 · Méthode · Phase 02</div></div>
-          <div class="body">
-            <p class="kick">Phase 02 — Le lancement</p>
-            <h2>Des messages courts, <span class="em">arrêtés dès la réponse.</span></h2>
-            <svg class="fig" viewBox="0 0 1400 250" style="margin-top:26px" aria-hidden="true">
-              <g font-family="Archivo, sans-serif">
-                <path d="M30 118 H1260" stroke="#243D32" stroke-width="1.4"/>
-                <g stroke="#EAF2EC" stroke-width="1.5" fill="#0D1B16">
-                  <rect x="30" y="96" width="50" height="36"/><rect x="316" y="96" width="50" height="36"/>
-                  <rect x="602" y="96" width="50" height="36"/><rect x="888" y="96" width="50" height="36"/>
-                </g>
-                <g stroke="#EAF2EC" stroke-width="1.4" fill="none">
-                  <path d="M30 96 L55 117 L80 96"/><path d="M316 96 L341 117 L366 96"/>
-                  <path d="M602 96 L627 117 L652 96"/><path d="M888 96 L913 117 L938 96"/>
-                </g>
-                <g font-family="IBM Plex Mono, monospace" font-size="14" letter-spacing="2" fill="#6F8579">
-                  <text x="30" y="76">J+0</text><text x="316" y="76">J+3</text><text x="602" y="76">J+7</text><text x="888" y="76">J+12</text>
-                </g>
-                <g font-size="17" fill="#A9BDB2">
-                  <text x="30" y="166">Email initial</text><text x="316" y="166">Relance 1</text><text x="602" y="166">Relance 2</text><text x="888" y="166">Relance finale</text>
-                </g>
-                <path d="M938 116 H1156" stroke="var(--phos)" stroke-width="1.6" stroke-dasharray="7 6"/>
-                <path d="M1149 110 L1159 116 L1149 122 Z" fill="var(--phos)"/>
-                <rect x="1160" y="88" width="196" height="58" fill="#10261D" stroke="var(--phos)" stroke-width="1.8"/>
-                <text x="1258" y="124" text-anchor="middle" font-family="Spectral, serif" font-size="24" font-weight="600" fill="#3FE0A0">Réponse</text>
-                <text x="1258" y="172" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="13" letter-spacing="2" fill="#8FD9BB">SÉQUENCE STOPPÉE</text>
-                <text x="30" y="226" font-family="IBM Plex Mono, monospace" font-size="13" letter-spacing="2" fill="#6F8579">UN ANGLE PAR SEGMENT · PERSONNALISATION SUR CHAQUE ENVOI · OBJECTIF : LA CONVERSATION</text>
+        <div class="chrome"><img src="assets/leadcore-logo.png" alt="Leadcore"><div class="sec">02 — Phase 02</div></div>
+        <div class="body">
+          <p class="eyebrow">Phase 02 — Le lancement</p>
+          <h2>Des messages courts, <span class="ghost">arrêtés dès la réponse.</span></h2>
+          <svg class="fig" viewBox="0 0 1400 240" style="margin-top:34px" aria-hidden="true">
+            <g font-family="Schibsted Grotesk, sans-serif">
+              <path d="M30 116 H1240" stroke="#33453F" stroke-width="2"/>
+              <g stroke="#F2F8F5" stroke-width="2" fill="#1A2723">
+                <rect x="30" y="92" width="56" height="42" rx="5"/><rect x="316" y="92" width="56" height="42" rx="5"/>
+                <rect x="602" y="92" width="56" height="42" rx="5"/><rect x="888" y="92" width="56" height="42" rx="5"/>
               </g>
-            </svg>
-            <div class="grid" style="grid-template-columns:1.1fr .95fr .95fr;margin-top:18px;gap:24px">
-              <div class="block quiet"><h3>Réponses classées</h3><p>Intéressé, plus tard, objection, hors cible, désinscription. Aucune réponse ne reste sans traitement.</p></div>
-              <div class="block quiet"><h3>Positives sous 24 h</h3><p>Les réponses positives partent en qualification sous 24 heures ouvrées.</p></div>
-              <div class="block quiet"><h3>Volume progressif</h3><p>On protège la réputation d’envoi avant de pousser les compteurs.</p></div>
-            </div>
+              <g stroke="#F2F8F5" stroke-width="1.8" fill="none">
+                <path d="M30 92 L58 116 L86 92"/><path d="M316 92 L344 116 L372 92"/><path d="M602 92 L630 116 L658 92"/><path d="M888 92 L916 116 L944 92"/>
+              </g>
+              <g font-family="JetBrains Mono, monospace" font-size="18" letter-spacing="1.5" fill="#82968D">
+                <text x="30" y="68">J+0</text><text x="316" y="68">J+3</text><text x="602" y="68">J+7</text><text x="888" y="68">J+12</text>
+              </g>
+              <g font-size="21" fill="#A9BDB4">
+                <text x="30" y="170">Email initial</text><text x="316" y="170">Relance 1</text><text x="602" y="170">Relance 2</text><text x="888" y="170">Relance finale</text>
+              </g>
+              <path d="M944 114 H1136" stroke="#19C78B" stroke-width="2.4" stroke-dasharray="8 7"/>
+              <path d="M1129 107 L1141 114 L1129 121 Z" fill="#19C78B"/>
+              <rect x="1142" y="82" width="228" height="66" rx="12" fill="rgba(25,199,139,.16)" stroke="#19C78B" stroke-width="2"/>
+              <text x="1256" y="124" text-anchor="middle" font-family="Funnel Display, sans-serif" font-size="30" font-weight="700" fill="#5CEDBA">Réponse</text>
+              <text x="1256" y="176" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="17" letter-spacing="1.5" fill="#5CEDBA">SÉQUENCE STOPPÉE</text>
+              <text x="30" y="224" font-family="JetBrains Mono, monospace" font-size="16" letter-spacing="1.5" fill="#82968D">UN ANGLE PAR SEGMENT · OBJECTIF : LA CONVERSATION, PAS LA VENTE</text>
+            </g>
+          </svg>
+          <div class="grid g3" style="margin-top:22px">
+            <div class="card plain"><h3>Réponses classées</h3><p>Intéressé, plus tard, objection, hors cible, désinscription.</p></div>
+            <div class="card plain"><h3>Positives sous 24 h</h3><p>Les réponses positives partent en qualification sous 24 heures ouvrées.</p></div>
+            <div class="card plain"><h3>Volume progressif</h3><p>On protège la réputation d’envoi avant de pousser les compteurs.</p></div>
           </div>
-          <div class="foot"><span>Leadcore</span><span class="n"></span></div>
         </div>
       </div>
+      <div class="num"></div><div class="rail"><i></i></div>
     </section>
 
-    <!-- 10 — PHASE 03 -->
+    <!-- 9 — PHASE 03 -->
     <section class="slide" data-title="Phase 03 — L’optimisation">
       <div class="frame">
-        <div class="rail"><i></i><span>Phase 03</span></div>
-        <div class="col">
-          <div class="head"><img src="assets/leadcore-logo.png" alt="Leadcore"><div class="sec">02 · Méthode · Phase 03</div></div>
-          <div class="body">
-            <p class="kick">Phase 03 — L’optimisation</p>
-            <h2>Ce qui marche est élargi. <span class="em">Le reste est coupé.</span></h2>
-            <div class="rows" style="margin-top:32px">
-              <div class="row"><div class="k">Chaque jour</div><div class="v">Délivrabilité, taux de bounce, réputation des boîtes, réponses à traiter.</div></div>
-              <div class="row"><div class="k">Chaque semaine</div><div class="v">Lecture par segment et par angle. Segments faibles coupés, segments performants élargis, un nouvel angle mis en test.</div></div>
-              <div class="row"><div class="k">Chaque mois</div><div class="v">Bilan des rendez-vous et de leur qualité. Décision : élargir, affiner, ou ouvrir un nouveau segment.</div></div>
+        <div class="chrome"><img src="assets/leadcore-logo.png" alt="Leadcore"><div class="sec">02 — Phase 03</div></div>
+        <div class="body">
+          <p class="eyebrow">Phase 03 — L’optimisation</p>
+          <h2>Ce qui marche est élargi. <span class="ghost">Le reste est coupé.</span></h2>
+          <div class="grid g3" style="margin-top:38px">
+            <div class="card">
+              <span class="tag">Chaque jour</span><h3>Surveillance</h3>
+              <ul class="ticks"><li>Délivrabilité et bounces.</li><li>Réputation des boîtes.</li><li>Réponses à traiter.</li></ul>
             </div>
-            <p class="pull" style="margin-top:46px">« Un mauvais chiffre vous est présenté tel quel, avec le plan d’action qui va avec. »</p>
+            <div class="card">
+              <span class="tag">Chaque semaine</span><h3>Arbitrage</h3>
+              <ul class="ticks"><li>Résultats par segment et par angle.</li><li>Segments faibles coupés.</li><li>Un nouvel angle en test.</li></ul>
+            </div>
+            <div class="card">
+              <span class="tag">Chaque mois</span><h3>Cap</h3>
+              <ul class="ticks"><li>Bilan des rendez-vous.</li><li>Retours commerciaux intégrés.</li><li>Élargir, affiner ou ouvrir.</li></ul>
+            </div>
           </div>
-          <div class="foot"><span>Leadcore</span><span class="n"></span></div>
         </div>
       </div>
+      <div class="num"></div><div class="rail"><i></i></div>
     </section>
 
-    <!-- 11 — OPENER : LE RDV QUALIFIÉ (inversé) -->
-    <section class="slide invert" data-title="Partie 02 — Le RDV qualifié">
+    <!-- 10 — CRITÈRES -->
+    <section class="slide" data-title="Critères de qualification">
       <div class="frame">
-        <div class="rail"><i></i><span>Partie 02</span></div>
-        <div class="col">
-          <div class="head"><img src="assets/leadcore-logo-ink.png" alt="Leadcore"><div class="sec">Partie 02</div></div>
-          <div class="body">
-            <div class="opener">
-              <div>
-                <div class="idxn">PARTIE 02</div>
-                <h2>Ce qu’on appelle <span class="em">un rendez-vous qualifié</span></h2>
-                <p class="lede">La définition est écrite dans le contrat, avant la première campagne. Elle ne bouge jamais après coup.</p>
-              </div>
-              <svg class="fig" viewBox="0 0 680 300" aria-hidden="true">
-                <g stroke="currentColor" stroke-width="1.3" fill="none">
-                  <path d="M150 60 H180"/><path d="M150 120 H180"/><path d="M150 180 H180"/><path d="M150 240 H180"/>
-                </g>
-                <path d="M180 34 H256 C324 34 366 92 366 150 C366 208 324 266 256 266 H180 Z" stroke="var(--phos-dim)" stroke-width="1.8" fill="none"/>
-                <path d="M366 150 H486" stroke="var(--phos-dim)" stroke-width="1.8"/>
-                <path d="M478 143 L490 150 L478 157 Z" fill="var(--phos-dim)"/>
-                <g font-family="IBM Plex Mono, monospace" font-size="13" letter-spacing="2" fill="currentColor">
-                  <text x="0" y="55">ICP</text><text x="0" y="115">INTÉRÊT</text><text x="0" y="175">DÉCIDEUR</text><text x="0" y="235">PRÉSENCE</text>
-                </g>
-                <text x="262" y="157" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="14" letter-spacing="3" fill="var(--phos-dim)">ET</text>
-                <text x="530" y="144" text-anchor="middle" font-family="Spectral, serif" font-size="22" font-weight="600" fill="var(--phos-dim)">RDV</text>
-                <text x="530" y="172" text-anchor="middle" font-family="Spectral, serif" font-size="22" font-weight="600" fill="var(--phos-dim)">facturé</text>
-              </svg>
-            </div>
+        <div class="chrome"><img src="assets/leadcore-logo.png" alt="Leadcore"><div class="sec">03 — La qualification</div></div>
+        <div class="body">
+          <p class="eyebrow">Les critères de qualification</p>
+          <h2>Quatre conditions. <span class="ghost">Les quatre, ou rien.</span></h2>
+          <div class="grid g4" style="margin-top:40px">
+            <div class="card"><span class="tag">Condition 1</span><h3>ICP</h3><p>Marché, taille et besoin correspondent à ce qui a été défini avec vous.</p></div>
+            <div class="card"><span class="tag">Condition 2</span><h3>Intérêt réel</h3><p>Un besoin exprimé et un timing identifié. Pas une demande de documentation.</p></div>
+            <div class="card"><span class="tag">Condition 3</span><h3>Décideur</h3><p>La personne décide, ou pèse directement sur la décision.</p></div>
+            <div class="card lift"><span class="tag">Condition 4</span><h3>Présence</h3><p>Le critère qui compte : la personne est là au rendez-vous.</p></div>
           </div>
-          <div class="foot"><span>Leadcore</span><span class="n"></span></div>
+          <p class="foot">Cette définition est écrite dans le contrat et n’est jamais modifiée après coup.</p>
         </div>
       </div>
+      <div class="num"></div><div class="rail"><i></i></div>
     </section>
 
-    <!-- 12 — LES CRITÈRES -->
-    <section class="slide" data-title="Les quatre critères">
-      <div class="frame">
-        <div class="rail"><i></i><span>Qualification</span></div>
-        <div class="col">
-          <div class="head"><img src="assets/leadcore-logo.png" alt="Leadcore"><div class="sec">03 · Qualification</div></div>
-          <div class="body">
-            <p class="kick">Les critères de qualification</p>
-            <h2>Quatre conditions. <span class="em">Les quatre, ou rien.</span></h2>
-            <div class="grid" style="grid-template-columns:1fr 1fr 1fr 1.2fr;margin-top:34px;align-items:stretch">
-              <div class="block"><span class="lbl">Condition 1</span><h3>ICP</h3><p>Marché, taille et besoin correspondent à ce qui a été défini avec vous.</p></div>
-              <div class="block"><span class="lbl">Condition 2</span><h3>Intérêt réel</h3><p>Un besoin exprimé et un timing identifié. Pas une demande de documentation.</p></div>
-              <div class="block"><span class="lbl">Condition 3</span><h3>Décideur</h3><p>La personne décide, ou pèse directement sur la décision.</p></div>
-              <div class="block key"><span class="lbl" style="color:var(--phos)">Condition 4</span><h3>Présence</h3><p style="color:var(--bone)">Le critère qui compte : la personne est là au rendez-vous.</p></div>
-            </div>
-            <p class="note">Un rendez-vous contesté se traite en une ligne : vous le signalez, il sort de la facturation.</p>
-          </div>
-          <div class="foot"><span>Leadcore</span><span class="n"></span></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 13 — CE QU’ON NE FACTURE PAS -->
+    <!-- 11 — CE QU’ON NE FACTURE PAS -->
     <section class="slide" data-title="Ce qu’on ne facture jamais">
       <div class="frame">
-        <div class="rail"><i></i><span>Qualification</span></div>
-        <div class="col">
-          <div class="head"><img src="assets/leadcore-logo.png" alt="Leadcore"><div class="sec">03 · Qualification</div></div>
-          <div class="body">
-            <p class="kick">Transparence</p>
-            <h2>Ce qu’on ne vous <span class="em">facturera jamais.</span></h2>
-            <div class="zig" style="margin-top:32px;align-items:center">
-              <ul class="l mute">
-                <li>Un contact hors ICP, même s’il a répondu avec enthousiasme.</li>
-                <li>Une demande de plaquette ou de grille tarifaire sans intention d’achat.</li>
-                <li>Un interlocuteur sans pouvoir de décision ni influence réelle.</li>
-                <li>Un « rappelez-moi dans six mois » transformé en rendez-vous.</li>
-                <li>Un no-show, tant que le rendez-vous n’a pas réellement eu lieu.</li>
-              </ul>
-              <div class="block key">
-                <h3>Pourquoi c’est notre intérêt</h3>
-                <p style="color:var(--bone-2)">La part variable de notre rémunération dépend des rendez-vous honorés. Vous remplir l’agenda de contacts inutiles nous coûterait la mission.</p>
-              </div>
+        <div class="chrome"><img src="assets/leadcore-logo.png" alt="Leadcore"><div class="sec">03 — La qualification</div></div>
+        <div class="body">
+          <p class="eyebrow">Transparence</p>
+          <h2>Ce qu’on ne vous <span class="ghost">facturera jamais.</span></h2>
+          <div class="grid g2" style="margin-top:36px;gap:48px;align-items:center">
+            <ul class="ticks crosses">
+              <li>Un contact hors ICP, même s’il a répondu positivement.</li>
+              <li>Une demande de plaquette ou de tarifs sans intention d’achat.</li>
+              <li>Un interlocuteur sans pouvoir de décision ni influence.</li>
+              <li>Un « rappelez-moi dans six mois » transformé en rendez-vous.</li>
+              <li>Un no-show, tant que le rendez-vous n’a pas eu lieu.</li>
+            </ul>
+            <div class="card lift">
+              <h3>Pourquoi c’est notre intérêt</h3>
+              <p>La part variable de notre rémunération dépend des rendez-vous honorés. Vous remplir l’agenda de contacts inutiles nous coûterait la mission.</p>
             </div>
           </div>
-          <div class="foot"><span>Leadcore</span><span class="n"></span></div>
         </div>
       </div>
+      <div class="num"></div><div class="rail"><i></i></div>
     </section>
 
-    <!-- 14 — L’IA -->
+    <!-- 12 — IA -->
     <section class="slide" data-title="Le rôle de l’IA">
       <div class="frame">
-        <div class="rail"><i></i><span>La méthode</span></div>
-        <div class="col">
-          <div class="head"><img src="assets/leadcore-logo.png" alt="Leadcore"><div class="sec">02 · Méthode</div></div>
-          <div class="body">
-            <p class="kick">Le rôle de l’intelligence artificielle</p>
-            <h2>Elle prépare et trie. <span class="em">Un humain décide.</span></h2>
-            <div class="grid" style="grid-template-columns:1.25fr 1fr 1fr;margin-top:32px;align-items:stretch">
-              <div class="block"><span class="lbl">Recherche</span><h3>Couverture du marché</h3><p>Recherche et enrichissement automatisés : on couvre un marché entier là où une équipe traite quelques centaines de comptes.</p></div>
-              <div class="block"><span class="lbl">Rédaction</span><h3>Personnalisation réelle</h3><p>Chaque message s’appuie sur des éléments concrets du compte, pas sur une variable générique.</p></div>
-              <div class="block"><span class="lbl">Analyse</span><h3>Lecture des retours</h3><p>Classification des réponses, performance par segment, détection des angles qui fonctionnent.</p></div>
-            </div>
-            <div style="margin-top:32px"><span class="mark"><b>Contrôle humain.</b> Aucun rendez-vous ne vous est transmis sans validation d’un humain.</span></div>
+        <div class="chrome"><img src="assets/leadcore-logo.png" alt="Leadcore"><div class="sec">04 — La méthode</div></div>
+        <div class="body">
+          <p class="eyebrow">Comment l’intelligence artificielle change la donne</p>
+          <h2>Plus de volume, <span class="ghost">sans perte de pertinence.</span></h2>
+          <div class="grid g3" style="margin-top:40px">
+            <div class="card"><h3>Volume</h3><p>Recherche et enrichissement automatisés : on couvre un marché entier là où une équipe traite quelques centaines de comptes.</p></div>
+            <div class="card"><h3>Personnalisation</h3><p>Chaque message s’appuie sur des éléments réels du compte, pas sur une variable générique.</p></div>
+            <div class="card"><h3>Optimisation</h3><p>Classification des réponses, performance par segment, détection des angles qui fonctionnent.</p></div>
           </div>
-          <div class="foot"><span>Leadcore</span><span class="n"></span></div>
+          <div class="banner">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+            <span>L’IA prépare et trie. Un humain valide chaque qualification et chaque rendez-vous transmis.</span>
+          </div>
         </div>
       </div>
+      <div class="num"></div><div class="rail"><i></i></div>
     </section>
 
-    <!-- 15 — REPORTING -->
+    <!-- 13 — REPORTING -->
     <section class="slide" data-title="Le reporting">
       <div class="frame">
-        <div class="rail"><i></i><span>Pilotage</span></div>
-        <div class="col">
-          <div class="head"><img src="assets/leadcore-logo.png" alt="Leadcore"><div class="sec">04 · Pilotage</div></div>
-          <div class="body">
-            <p class="kick">Le reporting</p>
-            <h2>Chaque étape est mesurée, <span class="em">chaque semaine.</span></h2>
-            <div class="grid" style="grid-template-columns:1.05fr .95fr;gap:56px;margin-top:22px;align-items:center">
-              <svg class="fig" viewBox="0 0 660 400" aria-hidden="true">
-                <g font-family="Archivo, sans-serif">
-                  <path d="M20 20 H620 L524 108 H116 Z" fill="#0D1B16" stroke="#243D32" stroke-width="1.2"/>
-                  <path d="M116 118 H524 L472 200 H168 Z" fill="#0D1B16" stroke="#243D32" stroke-width="1.2"/>
-                  <path d="M168 210 H472 L428 288 H212 Z" fill="#0D1B16" stroke="#243D32" stroke-width="1.2"/>
-                  <path d="M212 298 H428 L392 376 H248 Z" fill="#10261D" stroke="var(--phos)" stroke-width="1.8"/>
-                  <g font-family="Spectral, serif" font-size="22" font-weight="600" fill="#EAF2EC" text-anchor="middle">
-                    <text x="320" y="72">Prospects contactés</text><text x="320" y="170">Réponses</text><text x="320" y="258">Rendez-vous bookés</text>
-                  </g>
-                  <text x="320" y="346" text-anchor="middle" font-family="Spectral, serif" font-size="22" font-weight="600" fill="#3FE0A0">Rendez-vous honorés</text>
-                  <g font-family="IBM Plex Mono, monospace" font-size="12" letter-spacing="1.5" fill="#6F8579" text-anchor="end">
-                    <text x="652" y="70">DÉLIVRABILITÉ</text><text x="652" y="168">TAUX DE RÉPONSE</text><text x="652" y="256">CONVERSION</text>
-                  </g>
-                  <text x="652" y="344" text-anchor="end" font-family="IBM Plex Mono, monospace" font-size="12" letter-spacing="1.5" fill="#3FE0A0">CE QU’ON FACTURE</text>
-                </g>
-              </svg>
-              <div>
-                <h3 style="font-size:24px;margin-bottom:20px">Ce que vous recevez</h3>
-                <ul class="l">
-                  <li><b>Un point hebdomadaire</b> : chiffres de la semaine, décisions prises, tests en cours.</li>
-                  <li><b>Le détail par segment</b> : quel marché répond, quel angle convertit.</li>
-                  <li><b>Les rendez-vous</b> avec le contexte complet avant chaque appel.</li>
-                  <li><b>Les coûts</b> : coût par rendez-vous et par rendez-vous honoré.</li>
-                </ul>
-              </div>
+        <div class="chrome"><img src="assets/leadcore-logo.png" alt="Leadcore"><div class="sec">04 — Le pilotage</div></div>
+        <div class="body">
+          <p class="eyebrow">Le reporting</p>
+          <h2>Chaque étape est mesurée, <span class="ghost">chaque semaine.</span></h2>
+          <div class="grid g2" style="margin-top:34px;gap:48px;align-items:center">
+            <div class="funnel">
+              <div class="lvl" style="width:100%"><b>Prospects contactés</b><span>Volume</span></div>
+              <div class="lvl" style="width:94%"><b>Emails délivrés</b><span>Délivrabilité</span></div>
+              <div class="lvl" style="width:87%"><b>Réponses</b><span>Taux de réponse</span></div>
+              <div class="lvl" style="width:80%"><b>Réponses positives</b><span>Intérêt</span></div>
+              <div class="lvl" style="width:73%"><b>RDV bookés</b><span>Conversion</span></div>
+              <div class="lvl hot" style="width:66%"><b>RDV honorés</b><span>Ce qu’on facture</span></div>
+            </div>
+            <div class="card">
+              <h3>Ce que vous recevez</h3>
+              <ul class="ticks">
+                <li><b>Un point hebdomadaire</b> : chiffres, décisions, tests en cours.</li>
+                <li><b>Le détail par segment</b> : quel marché répond, quel angle convertit.</li>
+                <li><b>Les rendez-vous</b> avec le contexte complet avant l’appel.</li>
+                <li><b>Les coûts</b> : coût par rendez-vous et par rendez-vous honoré.</li>
+              </ul>
             </div>
           </div>
-          <div class="foot"><span>Leadcore</span><span class="n"></span></div>
         </div>
       </div>
+      <div class="num"></div><div class="rail"><i></i></div>
     </section>
 
-    <!-- 16 — FIT -->
-    <section class="slide" data-title="Pour qui, et pour qui non">
+    <!-- 14 — POUR QUI -->
+    <section class="slide" data-title="Pour qui c’est conçu">
       <div class="frame">
-        <div class="rail"><i></i><span>Le fit</span></div>
-        <div class="col">
-          <div class="head"><img src="assets/leadcore-logo.png" alt="Leadcore"><div class="sec">05 · Le fit</div></div>
-          <div class="body">
-            <p class="kick">Le fit</p>
-            <h2>Ce n’est pas fait <span class="em">pour tout le monde.</span></h2>
-            <div class="grid g2" style="grid-template-columns:1fr 1fr;gap:56px;margin-top:28px;align-items:start">
-              <div>
-                <div class="rows" style="margin-bottom:24px">
-                  <div class="row"><div class="k">Fait pour</div><div class="v">SaaS B2B, agences, conseil, IT et tech, services premium en vente consultative.</div></div>
-                </div>
-                <div class="block key">
-                  <div class="stat"><span class="big">3 000 €</span><span class="u">ticket minimum</span></div>
-                  <p style="color:var(--bone-2)">En dessous, le coût d’acquisition mange la marge.</p>
-                </div>
-              </div>
-              <div>
-                <div class="rows" style="margin-bottom:22px">
-                  <div class="row"><div class="k" style="color:var(--bone-3)">Pas fait pour</div><div class="v">Offres low-ticket, vente impulsive ou B2C, équipes sans capacité commerciale, offres non définies.</div></div>
-                </div>
-                <ul class="l mute">
-                  <li>Sans agenda disponible, les leads se périment.</li>
-                  <li>Sans promesse claire, aucun angle de message ne tient.</li>
-                </ul>
-                <p class="note">Si le fit n’y est pas, on vous le dit au premier appel plutôt qu’au troisième mois.</p>
-              </div>
-            </div>
+        <div class="chrome"><img src="assets/leadcore-logo.png" alt="Leadcore"><div class="sec">05 — Le fit</div></div>
+        <div class="body">
+          <p class="eyebrow">Pour qui Leadcore est conçu</p>
+          <h2>Les offres B2B <span class="ghost">à forte valeur.</span></h2>
+          <div class="grid g3" style="margin-top:38px">
+            <div class="card"><h3>SaaS B2B</h3><p>Logiciels et plateformes en vente accompagnée.</p></div>
+            <div class="card"><h3>Agences</h3><p>Marketing, création, acquisition haut de gamme.</p></div>
+            <div class="card"><h3>Conseil</h3><p>Expertise, accompagnement, transformation.</p></div>
+            <div class="card"><h3>IT et tech</h3><p>Prestations techniques et projets complexes.</p></div>
+            <div class="card"><h3>Services premium</h3><p>Vente consultative, cycle long, ticket élevé.</p></div>
+            <div class="card lift"><h3>Ticket moyen</h3><p style="color:var(--bone)">Au-delà de <b style="color:var(--emerald-hi)">3 000 €</b> par client, l’outbound devient rentable.</p></div>
           </div>
-          <div class="foot"><span>Leadcore</span><span class="n"></span></div>
         </div>
       </div>
+      <div class="num"></div><div class="rail"><i></i></div>
     </section>
 
-    <!-- 17 — L’OFFRE -->
+    <!-- 15 — MOINS ADAPTÉ -->
+    <section class="slide" data-title="Ce qui n’est pas adapté">
+      <div class="frame">
+        <div class="chrome"><img src="assets/leadcore-logo.png" alt="Leadcore"><div class="sec">05 — Le fit</div></div>
+        <div class="body">
+          <p class="eyebrow">Soyons clairs</p>
+          <h2>Ce n’est pas fait <span class="ghost">pour tout le monde.</span></h2>
+          <div class="grid g2" style="margin-top:36px;gap:48px;align-items:start">
+            <ul class="ticks crosses">
+              <li><b>Offre low-ticket.</b> En dessous de 3 000 €, le coût d’acquisition mange la marge.</li>
+              <li><b>Vente impulsive ou B2C.</b> L’outbound travaille des cycles de décision.</li>
+              <li><b>Pas de capacité commerciale.</b> Sans agenda disponible, les leads se périment.</li>
+              <li><b>Offre non définie.</b> Sans promesse claire, aucun angle ne tient.</li>
+            </ul>
+            <div class="card lift">
+              <h3>Ce qu’on vous demande</h3>
+              <ul class="ticks">
+                <li>Un créneau hebdomadaire pour le point de campagne.</li>
+                <li>Un retour honnête sur la qualité des rendez-vous.</li>
+                <li>Un agenda réellement disponible.</li>
+                <li>La capacité de livrer les clients qu’on vous amène.</li>
+              </ul>
+            </div>
+          </div>
+          <p class="foot">Si le fit n’y est pas, on vous le dit au premier appel plutôt qu’au troisième mois.</p>
+        </div>
+      </div>
+      <div class="num"></div><div class="rail"><i></i></div>
+    </section>
+
+    <!-- 16 — L’OFFRE -->
     <section class="slide" data-title="L’offre">
       <div class="frame">
-        <div class="rail"><i></i><span>L’offre</span></div>
-        <div class="col">
-          <div class="head"><img src="assets/leadcore-logo.png" alt="Leadcore"><div class="sec">06 · L’offre</div></div>
-          <div class="body">
-            <p class="kick">Une offre alignée sur le résultat</p>
-            <h2>Un fixe réduit, <span class="em">le reste au rendez-vous honoré.</span></h2>
-            <div class="grid" style="grid-template-columns:1fr 1.15fr;gap:26px;margin-top:32px;align-items:stretch">
-              <div class="block" style="padding:32px 34px">
-                <span class="lbl">Retainer mensuel</span>
-                <div class="stat"><span class="big">500 €</span><span class="u">/ mois</span></div>
-                <p>Setup, pilotage, infrastructure d’envoi, données, séquences et reporting.</p>
-              </div>
-              <div class="block key" style="padding:32px 34px">
-                <span class="lbl" style="color:var(--phos)">Part variable</span>
-                <div class="stat"><span class="big">200 €</span><span class="u">/ RDV honoré</span></div>
-                <p style="color:var(--bone)">Dans l’ICP, décisionnaire, intéressé, présent au rendez-vous.</p>
-              </div>
+        <div class="chrome"><img src="assets/leadcore-logo.png" alt="Leadcore"><div class="sec">06 — L’offre</div></div>
+        <div class="body">
+          <p class="eyebrow">Une offre alignée sur le résultat</p>
+          <h2>Un fixe réduit, <span class="ghost">le reste au rendez-vous honoré.</span></h2>
+          <div class="price" style="margin-top:38px">
+            <div class="box">
+              <div class="amt">500 €<span class="per"> / mois</span></div>
+              <p class="desc">Setup, pilotage, infrastructure d’envoi, données, séquences et reporting.</p>
             </div>
-            <div class="rows" style="margin-top:32px">
-              <div class="row"><div class="k">Objectif</div><div class="v">15 à 20 rendez-vous qualifiés par mois, selon le marché et la capacité d’envoi.</div></div>
-              <div class="row"><div class="k">Engagement</div><div class="v">Mensuel. Pas d’année ferme, pas de frais de sortie.</div></div>
+            <div class="box hot">
+              <div class="amt">200 €<span class="per"> / RDV honoré</span></div>
+              <p class="desc">Dans l’ICP, décisionnaire, intéressé, présent au rendez-vous.</p>
             </div>
           </div>
-          <div class="foot"><span>Leadcore</span><span class="n"></span></div>
+          <div class="banner">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+            <span>Sans rendez-vous qualifiés, notre rémunération s’arrête au fixe.</span>
+          </div>
+          <p class="foot">Objectif : 15 à 20 rendez-vous qualifiés par mois. Engagement mensuel, pas d’année ferme.</p>
         </div>
       </div>
+      <div class="num"></div><div class="rail"><i></i></div>
     </section>
 
-    <!-- 18 — LES 30 PREMIERS JOURS -->
+    <!-- 17 — LES 30 PREMIERS JOURS -->
     <section class="slide" data-title="Les 30 premiers jours">
       <div class="frame">
-        <div class="rail"><i></i><span>Prochaine étape</span></div>
-        <div class="col">
-          <div class="head"><img src="assets/leadcore-logo.png" alt="Leadcore"><div class="sec">06 · Prochaine étape</div></div>
-          <div class="body">
-            <p class="kick">Les 30 premiers jours</p>
-            <h2>De la signature <span class="em">aux premiers rendez-vous.</span></h2>
-            <svg class="fig" viewBox="0 0 1400 250" style="margin-top:28px" aria-hidden="true">
-              <g font-family="Archivo, sans-serif">
-                <g stroke="#243D32" stroke-width="1.2"><path d="M0 196 H1400"/><path d="M350 36 V196"/><path d="M700 36 V196"/><path d="M1050 36 V196"/></g>
-                <g font-family="IBM Plex Mono, monospace" font-size="13" letter-spacing="2" fill="#6F8579">
-                  <text x="0" y="26">SEMAINE 1</text><text x="350" y="26">SEMAINE 2</text><text x="700" y="26">SEMAINE 3</text><text x="1050" y="26">SEMAINE 4</text>
-                </g>
-                <rect x="0" y="52" width="326" height="34" fill="#1B3328"/>
-                <text x="16" y="75" font-size="16" font-weight="600" fill="#EAF2EC">Cadrage, ICP, définition du RDV qualifié</text>
-                <rect x="176" y="96" width="496" height="34" fill="#16281F"/>
-                <text x="192" y="119" font-size="16" font-weight="600" fill="#C6D6CD">Domaines, DNS, boîtes, warm-up</text>
-                <rect x="552" y="140" width="456" height="34" fill="#16281F"/>
-                <text x="568" y="163" font-size="16" font-weight="600" fill="#C6D6CD">Listes, séquences, lancement progressif</text>
-                <rect x="986" y="52" width="400" height="34" fill="var(--phos)"/>
-                <text x="1002" y="75" font-size="16" font-weight="600" fill="#06130E">Premiers rendez-vous dans votre agenda</text>
-                <text x="0" y="234" font-family="IBM Plex Mono, monospace" font-size="13" letter-spacing="2" fill="#6F8579">LE WARM-UP CONDITIONNE TOUT LE RESTE : ON NE LANCE PAS AVANT QUE L’INFRASTRUCTURE SOIT PRÊTE</text>
-              </g>
-            </svg>
-            <div style="margin-top:30px"><span class="mark"><b>Prochaine étape.</b> On cadre votre ICP ensemble, et on vous dit franchement si le marché porte l’outbound.</span></div>
+        <div class="chrome"><img src="assets/leadcore-logo.png" alt="Leadcore"><div class="sec">06 — Prochaine étape</div></div>
+        <div class="body">
+          <p class="eyebrow">Les 30 premiers jours</p>
+          <h2>De la signature <span class="ghost">aux premiers rendez-vous.</span></h2>
+          <div class="tl" style="margin-top:48px">
+            <div class="t now"><span class="w">Semaine 1</span><h3>Cadrage</h3><p>Onboarding, ICP, angles, exclusions, définition contractuelle du rendez-vous qualifié.</p></div>
+            <div class="t"><span class="w">Semaine 2</span><h3>Infrastructure</h3><p>Domaines, boîtes, DNS, SPF, DKIM, DMARC. Warm-up lancé, premières listes vérifiées.</p></div>
+            <div class="t"><span class="w">Semaine 3</span><h3>Lancement</h3><p>Séquences validées, envoi progressif sur un premier segment, contrôle des retours.</p></div>
+            <div class="t"><span class="w">Semaine 4</span><h3>Premiers RDV</h3><p>Montée en volume, qualification des réponses, rendez-vous dans votre agenda.</p></div>
           </div>
-          <div class="foot"><span>Leadcore</span><span class="n"></span></div>
+          <div class="banner" style="margin-top:38px">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            <span><b>Prochaine étape :</b> on cadre votre ICP ensemble et on vous dit franchement si le marché porte l’outbound.</span>
+          </div>
         </div>
       </div>
+      <div class="num"></div><div class="rail"><i></i></div>
     </section>
 
-    <div class="grain"></div>
   </div>
 </div>
 
@@ -758,7 +629,7 @@ ul.l.mute li::before{background:var(--bone-3)}
   var i = 0;
 
   slides.forEach(function(s, n){
-    var num = s.querySelector('.foot .n');
+    var num = s.querySelector('.num');
     if (num) num.textContent = String(n + 1).padStart(2,'0') + ' / ' + String(slides.length).padStart(2,'0');
     var li = document.createElement('li');
     var b = document.createElement('button');
@@ -770,6 +641,10 @@ ul.l.mute li::before{background:var(--bone-3)}
   function go(n){
     i = Math.max(0, Math.min(slides.length - 1, n));
     slides.forEach(function(s, k){ s.classList.toggle('is-active', k === i); });
+    slides.forEach(function(s){
+      var bar = s.querySelector('.rail i');
+      if (bar) bar.style.width = ((i + 1) / slides.length * 100) + '%';
+    });
     Array.prototype.forEach.call(idxList.querySelectorAll('button'), function(b, k){
       b.setAttribute('aria-current', k === i ? 'true' : 'false');
     });
