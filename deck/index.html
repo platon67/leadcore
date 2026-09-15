@@ -3,19 +3,29 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@600;700;800&family=JetBrains+Mono:wght@400;500&family=Schibsted+Grotesk:wght@400;500;600&display=swap">
 <style>
 :root{
-  --ink:#0E1815;
-  --ink-2:#132019;
-  --graphite:#1A2723;
-  --graphite-2:#21302B;
-  --line:#33453F;
-  --line-soft:#26352F;
+  --ink:#090F0D;
+  --ink-2:#0E1714;
+  --graphite:#151F1C;
+  --graphite-2:#1B2723;
+  --line:#2C3C37;
+  --line-soft:#212E2A;
   --bone:#F2F8F5;
   --mist:#A9BDB4;
   --mist-dim:#82968D;
   --emerald:#19C78B;
   --emerald-hi:#5CEDBA;
   --emerald-dim:#118A61;
-  --emerald-glow:rgba(25,199,139,.20);
+  --emerald-glow:rgba(25,199,139,.18);
+  --sky:#45C4F0;
+  --sky-hi:#8FDDFA;
+  --sky-dim:#1B7CA3;
+  --violet:#9B84F5;
+  --violet-hi:#C3B4FF;
+  --violet-dim:#5C43A8;
+  --acc:#19C78B;
+  --acc-hi:#5CEDBA;
+  --acc-dim:#118A61;
+  --acc-rgb:25,199,139;
   --display:"Funnel Display","Helvetica Neue",Arial,sans-serif;
   --body:"Schibsted Grotesk","Helvetica Neue",Arial,sans-serif;
   --mono:"JetBrains Mono",ui-monospace,"SFMono-Regular",Consolas,monospace;
@@ -32,10 +42,12 @@ body{margin:0;background:var(--ink);color:var(--bone);font-family:var(--body);-w
 .stage{width:1600px;height:900px;flex:none;transform:scale(var(--scale,1));transform-origin:center center;position:relative}
 
 .slide{position:absolute;inset:0;
-  background:linear-gradient(140deg,#1A2A24 0%,#132019 48%,#0E1815 100%);
+  background:linear-gradient(140deg,#16211D 0%,#0E1714 48%,#090F0D 100%);
   border:1px solid var(--line-soft);border-radius:4px;overflow:hidden;
   opacity:0;visibility:hidden;transition:opacity .28s ease}
 .slide.is-active{opacity:1;visibility:visible}
+.slide.acc-sky{--acc:var(--sky);--acc-hi:var(--sky-hi);--acc-dim:var(--sky-dim);--acc-rgb:69,196,240}
+.slide.acc-violet{--acc:var(--violet);--acc-hi:var(--violet-hi);--acc-dim:var(--violet-dim);--acc-rgb:155,132,245}
 @media (prefers-reduced-motion:reduce){.slide{transition:none}}
 .slide::before{content:"";position:absolute;inset:0;pointer-events:none;
   background-image:linear-gradient(to right, rgba(255,255,255,.03) 1px, transparent 1px),
@@ -44,24 +56,24 @@ body{margin:0;background:var(--ink);color:var(--bone);font-family:var(--body);-w
   mask-image:radial-gradient(120% 100% at 50% 0%, #000 20%, transparent 78%);
   -webkit-mask-image:radial-gradient(120% 100% at 50% 0%, #000 20%, transparent 78%)}
 .slide::after{content:"";position:absolute;left:-10%;right:-10%;bottom:-340px;height:620px;pointer-events:none;
-  background:radial-gradient(closest-side, var(--emerald-glow), transparent 72%)}
+  background:radial-gradient(closest-side, rgba(var(--acc-rgb),.16), transparent 72%)}
 .slide > *{position:relative;z-index:1}
 
 .frame{position:absolute;inset:0;padding:56px 80px 70px;display:flex;flex-direction:column}
 
 .chrome{display:flex;align-items:center;justify-content:space-between;gap:24px;margin-bottom:26px}
 .chrome img{width:168px;height:auto;opacity:.95;display:block}
-.chrome .sec{font-family:var(--mono);font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:var(--mist-dim)}
+.chrome .sec{font-family:var(--mono);font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:var(--acc);opacity:.7}
 .num{position:absolute;left:80px;bottom:28px;font-family:var(--mono);font-size:15px;letter-spacing:.12em;color:var(--mist-dim);font-variant-numeric:tabular-nums;z-index:2}
 .rail{position:absolute;left:0;right:0;bottom:0;height:3px;background:rgba(255,255,255,.06);z-index:2}
-.rail i{display:block;height:100%;background:linear-gradient(90deg,var(--emerald-dim),var(--emerald));width:0}
+.rail i{display:block;height:100%;background:linear-gradient(90deg,var(--acc-dim),var(--acc));width:0}
 
-.eyebrow{font-family:var(--mono);font-size:17px;letter-spacing:.2em;text-transform:uppercase;color:var(--emerald);
+.eyebrow{font-family:var(--mono);font-size:17px;letter-spacing:.2em;text-transform:uppercase;color:var(--acc);
   margin:0 0 18px;display:flex;align-items:center;gap:14px}
-.eyebrow::before{content:"";width:30px;height:1px;background:var(--emerald);opacity:.7;flex:none}
+.eyebrow::before{content:"";width:30px;height:1px;background:var(--acc);opacity:.75;flex:none}
 h1{font-family:var(--display);font-weight:800;font-size:112px;line-height:.98;letter-spacing:-.025em;margin:0;text-wrap:balance}
 h2{font-family:var(--display);font-weight:700;font-size:76px;line-height:1.02;letter-spacing:-.022em;margin:0;text-wrap:balance}
-h2 .ghost{color:var(--emerald)}
+h2 .ghost{color:var(--acc)}
 .lede{font-size:27px;line-height:1.5;color:var(--mist);max-width:52ch;margin:18px 0 0}
 .sub{font-size:21px;line-height:1.5;color:var(--mist);margin:0}
 .body{flex:1;display:flex;flex-direction:column;justify-content:center;min-height:0}
@@ -75,25 +87,25 @@ h2 .ghost{color:var(--emerald)}
   border-radius:14px;padding:28px 30px;display:flex;flex-direction:column;gap:12px}
 .card h3{font-family:var(--display);font-weight:700;font-size:30px;line-height:1.14;margin:0;letter-spacing:-.015em}
 .card p{margin:0;font-size:21px;line-height:1.45;color:var(--mist)}
-.card.lift{border-color:var(--emerald-dim);box-shadow:0 0 0 1px rgba(25,199,139,.14),0 22px 60px -30px rgba(25,199,139,.55)}
-.card.lift h3{color:var(--emerald-hi)}
-.card .tag{font-family:var(--mono);font-size:14px;letter-spacing:.14em;text-transform:uppercase;color:var(--mist-dim)}
+.card.lift{border-color:var(--acc-dim);box-shadow:0 0 0 1px rgba(var(--acc-rgb),.16),0 22px 60px -30px rgba(var(--acc-rgb),.6)}
+.card.lift h3{color:var(--acc-hi)}
+.card .tag{font-family:var(--mono);font-size:14px;letter-spacing:.14em;text-transform:uppercase;color:var(--acc);opacity:.85}
 .card.plain{border:0;background:none;padding:0}
 
 ul.ticks{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:13px}
 ul.ticks li{position:relative;padding-left:28px;font-size:21px;line-height:1.45;color:var(--mist)}
-ul.ticks li::before{content:"";position:absolute;left:0;top:.6em;width:10px;height:10px;border-radius:2px;background:var(--emerald);opacity:.9}
+ul.ticks li::before{content:"";position:absolute;left:0;top:.6em;width:10px;height:10px;border-radius:2px;background:var(--acc);opacity:.9}
 ul.ticks li b{color:var(--bone);font-weight:600}
 ul.crosses li::before{background:none;border:1.5px solid var(--mist-dim);border-radius:50%;width:11px;height:11px;top:.55em}
 
-.chip{background:var(--graphite);border:1px solid var(--line-soft);border-left:3px solid var(--emerald-dim);
+.chip{background:var(--graphite);border:1px solid var(--line-soft);border-left:3px solid var(--acc-dim);
   border-radius:10px;padding:24px 26px;display:flex;flex-direction:column;gap:9px}
 .chip b{font-size:24px;font-weight:600;line-height:1.2}
 .chip span{font-size:19px;color:var(--mist-dim);line-height:1.4}
 
 .step{display:flex;flex-direction:column;gap:16px;padding:34px 32px 36px;
   background:linear-gradient(180deg,var(--graphite),var(--ink-2));border:1px solid var(--line-soft);border-radius:14px}
-.step .n{font-family:var(--mono);font-size:16px;letter-spacing:.18em;color:var(--emerald)}
+.step .n{font-family:var(--mono);font-size:16px;letter-spacing:.18em;color:var(--acc)}
 .step h3{font-family:var(--display);font-weight:700;font-size:34px;margin:0;letter-spacing:-.015em}
 .step p{margin:0;color:var(--mist);font-size:21px;line-height:1.45}
 
@@ -105,14 +117,14 @@ ul.crosses li::before{background:none;border:1.5px solid var(--mist-dim);border-
 .flow .node p{margin:0;font-size:19px;color:var(--mist);line-height:1.4}
 .flow .node.end{border-color:var(--emerald);background:linear-gradient(180deg,rgba(25,199,139,.18),rgba(25,199,139,.06))}
 .flow .node.end b{color:var(--emerald-hi)}
-.flow .arr{flex:none;width:50px;display:grid;place-items:center;color:var(--emerald-dim)}
+.flow .arr{flex:none;width:50px;display:grid;place-items:center;color:var(--acc-dim)}
 .flow .arr svg{width:26px;height:26px}
 
 .funnel{display:flex;flex-direction:column;gap:11px;width:100%}
 .funnel .lvl{display:flex;align-items:center;justify-content:space-between;gap:28px;white-space:nowrap;
   border:1px solid var(--line-soft);border-radius:10px;background:var(--graphite);padding:18px 26px;align-self:center}
 .funnel .lvl b{font-size:23px;font-weight:600}
-.funnel .lvl span{font-family:var(--mono);font-size:15px;letter-spacing:.12em;text-transform:uppercase;color:var(--mist-dim)}
+.funnel .lvl span{font-family:var(--mono);font-size:15px;letter-spacing:.12em;text-transform:uppercase;color:var(--sky)}
 .funnel .lvl.hot{border-color:var(--emerald);background:linear-gradient(90deg,rgba(25,199,139,.18),rgba(25,199,139,.05))}
 .funnel .lvl.hot span{color:var(--emerald-hi)}
 
@@ -133,9 +145,9 @@ ul.crosses li::before{background:none;border:1.5px solid var(--mist-dim);border-
 
 .tl{display:grid;grid-template-columns:repeat(4,1fr);width:100%;border-top:1px solid var(--line)}
 .tl .t{padding:28px 28px 26px 0;position:relative}
-.tl .t::before{content:"";position:absolute;top:-7px;left:0;width:13px;height:13px;border-radius:50%;background:var(--emerald-dim)}
+.tl .t::before{content:"";position:absolute;top:-7px;left:0;width:13px;height:13px;border-radius:50%;background:var(--acc-dim)}
 .tl .t.now::before{background:var(--emerald);box-shadow:0 0 0 6px rgba(25,199,139,.18)}
-.tl .t .w{font-family:var(--mono);font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:var(--emerald);display:block;margin-bottom:12px}
+.tl .t .w{font-family:var(--mono);font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:var(--acc);display:block;margin-bottom:12px}
 .tl .t h3{font-family:var(--display);font-weight:700;font-size:28px;margin:0 0 10px;letter-spacing:-.015em}
 .tl .t p{margin:0;font-size:19px;line-height:1.45;color:var(--mist)}
 
@@ -193,7 +205,7 @@ ul.crosses li::before{background:none;border:1.5px solid var(--mist-dim);border-
     </section>
 
     <!-- 2 — LE FACTEUR LIMITANT -->
-    <section class="slide" data-title="Le facteur limitant">
+    <section class="slide acc-sky" data-title="Le facteur limitant">
       <div class="frame">
         <div class="chrome"><img src="assets/leadcore-logo.png" alt="Leadcore"><div class="sec">01 — Le constat</div></div>
         <div class="body">
@@ -213,7 +225,7 @@ ul.crosses li::before{background:none;border:1.5px solid var(--mist-dim);border-
     </section>
 
     <!-- 3 — LE COÛT -->
-    <section class="slide" data-title="Le coût du statu quo">
+    <section class="slide acc-sky" data-title="Le coût du statu quo">
       <div class="frame">
         <div class="chrome"><img src="assets/leadcore-logo.png" alt="Leadcore"><div class="sec">01 — Le constat</div></div>
         <div class="body">
@@ -242,7 +254,7 @@ ul.crosses li::before{background:none;border:1.5px solid var(--mist-dim);border-
     </section>
 
     <!-- 4 — LES OPTIONS -->
-    <section class="slide" data-title="Les quatre options">
+    <section class="slide acc-sky" data-title="Les quatre options">
       <div class="frame">
         <div class="chrome"><img src="assets/leadcore-logo.png" alt="Leadcore"><div class="sec">01 — Le constat</div></div>
         <div class="body">
@@ -300,7 +312,7 @@ ul.crosses li::before{background:none;border:1.5px solid var(--mist-dim);border-
     </section>
 
     <!-- 7 — PHASE 01 -->
-    <section class="slide" data-title="Phase 01 — Le setup">
+    <section class="slide acc-sky" data-title="Phase 01 — Le setup">
       <div class="frame">
         <div class="chrome"><img src="assets/leadcore-logo.png" alt="Leadcore"><div class="sec">02 — Phase 01</div></div>
         <div class="body">
@@ -309,16 +321,16 @@ ul.crosses li::before{background:none;border:1.5px solid var(--mist-dim);border-
           <div class="grid" style="grid-template-columns:1.25fr .75fr;gap:44px;margin-top:30px;align-items:center">
             <svg class="fig" viewBox="0 0 820 350" aria-hidden="true">
               <g font-family="Schibsted Grotesk, sans-serif">
-                <rect x="4" y="134" width="190" height="84" rx="10" fill="none" stroke="#3E5850" stroke-width="1.6" stroke-dasharray="7 6"/>
+                <rect x="4" y="134" width="190" height="84" rx="10" fill="none" stroke="#44605A" stroke-width="1.6" stroke-dasharray="7 6"/>
                 <text x="99" y="170" text-anchor="middle" font-size="19" font-weight="600" fill="#A9BDB4">votre-societe.com</text>
                 <text x="99" y="196" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="14" letter-spacing="1.5" fill="#82968D">INTACT</text>
-                <g fill="#1A2723" stroke="#33453F" stroke-width="1.6">
+                <g fill="#151F1C" stroke="#2A5468" stroke-width="1.6">
                   <rect x="266" y="18" width="234" height="80" rx="10"/><rect x="266" y="134" width="234" height="80" rx="10"/><rect x="266" y="250" width="234" height="80" rx="10"/>
                 </g>
                 <g font-size="19" font-weight="600" fill="#F2F8F5">
                   <text x="290" y="52">go-societe.com</text><text x="290" y="168">societe-team.com</text><text x="290" y="284">try-societe.com</text>
                 </g>
-                <g font-family="JetBrains Mono, monospace" font-size="14" letter-spacing="1.2" fill="#19C78B">
+                <g font-family="JetBrains Mono, monospace" font-size="14" letter-spacing="1.2" fill="#45C4F0">
                   <text x="290" y="78">SPF · DKIM · DMARC</text><text x="290" y="194">SPF · DKIM · DMARC</text><text x="290" y="310">SPF · DKIM · DMARC</text>
                 </g>
                 <g stroke="#3E5850" stroke-width="1.6" fill="none">
@@ -346,7 +358,7 @@ ul.crosses li::before{background:none;border:1.5px solid var(--mist-dim);border-
     </section>
 
     <!-- 8 — PHASE 02 -->
-    <section class="slide" data-title="Phase 02 — Le lancement">
+    <section class="slide acc-sky" data-title="Phase 02 — Le lancement">
       <div class="frame">
         <div class="chrome"><img src="assets/leadcore-logo.png" alt="Leadcore"><div class="sec">02 — Phase 02</div></div>
         <div class="body">
@@ -355,14 +367,14 @@ ul.crosses li::before{background:none;border:1.5px solid var(--mist-dim);border-
           <svg class="fig" viewBox="0 0 1400 240" style="margin-top:34px" aria-hidden="true">
             <g font-family="Schibsted Grotesk, sans-serif">
               <path d="M30 116 H1240" stroke="#33453F" stroke-width="2"/>
-              <g stroke="#F2F8F5" stroke-width="2" fill="#1A2723">
+              <g stroke="#8FDDFA" stroke-width="2" fill="#151F1C">
                 <rect x="30" y="92" width="56" height="42" rx="5"/><rect x="316" y="92" width="56" height="42" rx="5"/>
                 <rect x="602" y="92" width="56" height="42" rx="5"/><rect x="888" y="92" width="56" height="42" rx="5"/>
               </g>
-              <g stroke="#F2F8F5" stroke-width="1.8" fill="none">
+              <g stroke="#8FDDFA" stroke-width="1.8" fill="none">
                 <path d="M30 92 L58 116 L86 92"/><path d="M316 92 L344 116 L372 92"/><path d="M602 92 L630 116 L658 92"/><path d="M888 92 L916 116 L944 92"/>
               </g>
-              <g font-family="JetBrains Mono, monospace" font-size="18" letter-spacing="1.5" fill="#82968D">
+              <g font-family="JetBrains Mono, monospace" font-size="18" letter-spacing="1.5" fill="#45C4F0">
                 <text x="30" y="68">J+0</text><text x="316" y="68">J+3</text><text x="602" y="68">J+7</text><text x="888" y="68">J+12</text>
               </g>
               <g font-size="21" fill="#A9BDB4">
@@ -387,7 +399,7 @@ ul.crosses li::before{background:none;border:1.5px solid var(--mist-dim);border-
     </section>
 
     <!-- 9 — PHASE 03 -->
-    <section class="slide" data-title="Phase 03 — L’optimisation">
+    <section class="slide acc-sky" data-title="Phase 03 — L’optimisation">
       <div class="frame">
         <div class="chrome"><img src="assets/leadcore-logo.png" alt="Leadcore"><div class="sec">02 — Phase 03</div></div>
         <div class="body">
@@ -413,7 +425,7 @@ ul.crosses li::before{background:none;border:1.5px solid var(--mist-dim);border-
     </section>
 
     <!-- 10 — CRITÈRES -->
-    <section class="slide" data-title="Critères de qualification">
+    <section class="slide acc-violet" data-title="Critères de qualification">
       <div class="frame">
         <div class="chrome"><img src="assets/leadcore-logo.png" alt="Leadcore"><div class="sec">03 — La qualification</div></div>
         <div class="body">
@@ -432,7 +444,7 @@ ul.crosses li::before{background:none;border:1.5px solid var(--mist-dim);border-
     </section>
 
     <!-- 11 — CE QU’ON NE FACTURE PAS -->
-    <section class="slide" data-title="Ce qu’on ne facture jamais">
+    <section class="slide acc-violet" data-title="Ce qu’on ne facture jamais">
       <div class="frame">
         <div class="chrome"><img src="assets/leadcore-logo.png" alt="Leadcore"><div class="sec">03 — La qualification</div></div>
         <div class="body">
@@ -457,7 +469,7 @@ ul.crosses li::before{background:none;border:1.5px solid var(--mist-dim);border-
     </section>
 
     <!-- 12 — IA -->
-    <section class="slide" data-title="Le rôle de l’IA">
+    <section class="slide acc-violet" data-title="Le rôle de l’IA">
       <div class="frame">
         <div class="chrome"><img src="assets/leadcore-logo.png" alt="Leadcore"><div class="sec">04 — La méthode</div></div>
         <div class="body">
@@ -478,7 +490,7 @@ ul.crosses li::before{background:none;border:1.5px solid var(--mist-dim);border-
     </section>
 
     <!-- 13 — REPORTING -->
-    <section class="slide" data-title="Le reporting">
+    <section class="slide acc-sky" data-title="Le reporting">
       <div class="frame">
         <div class="chrome"><img src="assets/leadcore-logo.png" alt="Leadcore"><div class="sec">04 — Le pilotage</div></div>
         <div class="body">
@@ -529,7 +541,7 @@ ul.crosses li::before{background:none;border:1.5px solid var(--mist-dim);border-
     </section>
 
     <!-- 15 — MOINS ADAPTÉ -->
-    <section class="slide" data-title="Ce qui n’est pas adapté">
+    <section class="slide acc-violet" data-title="Ce qui n’est pas adapté">
       <div class="frame">
         <div class="chrome"><img src="assets/leadcore-logo.png" alt="Leadcore"><div class="sec">05 — Le fit</div></div>
         <div class="body">
