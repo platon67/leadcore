@@ -3,12 +3,12 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@600;700;800&family=JetBrains+Mono:wght@400;500&family=Schibsted+Grotesk:wght@400;500;600&display=swap">
 <style>
 :root{
-  --ink:#090F0D;
-  --ink-2:#0E1714;
-  --graphite:#151F1C;
-  --graphite-2:#1B2723;
-  --line:#2C3C37;
-  --line-soft:#212E2A;
+  --ink:#050908;
+  --ink-2:#0A110F;
+  --graphite:#111A17;
+  --graphite-2:#16211D;
+  --line:#26332F;
+  --line-soft:#1C2724;
   --bone:#F2F8F5;
   --mist:#A9BDB4;
   --mist-dim:#82968D;
@@ -22,6 +22,8 @@
   --violet:#9B84F5;
   --violet-hi:#C3B4FF;
   --violet-dim:#5C43A8;
+  --amber:#E0A75A;
+  --amber-dim:#8A6427;
   --acc:#19C78B;
   --acc-hi:#5CEDBA;
   --acc-dim:#118A61;
@@ -42,7 +44,7 @@ body{margin:0;background:var(--ink);color:var(--bone);font-family:var(--body);-w
 .stage{width:1600px;height:900px;flex:none;transform:scale(var(--scale,1));transform-origin:center center;position:relative}
 
 .slide{position:absolute;inset:0;
-  background:linear-gradient(140deg,#16211D 0%,#0E1714 48%,#090F0D 100%);
+  background:linear-gradient(140deg,#101A16 0%,#0A110F 48%,#050908 100%);
   border:1px solid var(--line-soft);border-radius:4px;overflow:hidden;
   opacity:0;visibility:hidden;transition:opacity .28s ease}
 .slide.is-active{opacity:1;visibility:visible}
@@ -63,7 +65,7 @@ body{margin:0;background:var(--ink);color:var(--bone);font-family:var(--body);-w
 
 .chrome{display:flex;align-items:center;justify-content:space-between;gap:24px;margin-bottom:26px}
 .chrome img{width:168px;height:auto;opacity:.95;display:block}
-.chrome .sec{font-family:var(--mono);font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:var(--acc);opacity:.7}
+.chrome .sec{font-family:var(--mono);font-size:16px;letter-spacing:.16em;text-transform:uppercase;color:var(--mist-dim)}
 .num{position:absolute;left:80px;bottom:28px;font-family:var(--mono);font-size:15px;letter-spacing:.12em;color:var(--mist-dim);font-variant-numeric:tabular-nums;z-index:2}
 .rail{position:absolute;left:0;right:0;bottom:0;height:3px;background:rgba(255,255,255,.06);z-index:2}
 .rail i{display:block;height:100%;background:linear-gradient(90deg,var(--acc-dim),var(--acc));width:0}
@@ -75,8 +77,16 @@ h1{font-family:var(--display);font-weight:800;font-size:112px;line-height:.98;le
 h2{font-family:var(--display);font-weight:700;font-size:76px;line-height:1.02;letter-spacing:-.022em;margin:0;text-wrap:balance}
 h2 .ghost{color:var(--acc)}
 .lede{font-size:27px;line-height:1.5;color:var(--mist);max-width:52ch;margin:18px 0 0}
-.sub{font-size:21px;line-height:1.5;color:var(--mist);margin:0}
+.sub{font-size:23px;line-height:1.5;color:var(--mist);margin:0}
 .body{flex:1;display:flex;flex-direction:column;justify-content:center;min-height:0}
+
+.ic{width:40px;height:40px;display:block;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.ic.sm{width:32px;height:32px}
+.c-em{color:var(--emerald)}
+.c-sky{color:var(--sky)}
+.c-violet{color:var(--violet)}
+.c-amber{color:var(--amber)}
+.chip .ic{margin-bottom:2px}
 
 .grid{display:grid;gap:22px}
 .g2{grid-template-columns:repeat(2,1fr)}
@@ -86,35 +96,36 @@ h2 .ghost{color:var(--acc)}
 .card{background:linear-gradient(180deg,var(--graphite),var(--ink-2));border:1px solid var(--line-soft);
   border-radius:14px;padding:28px 30px;display:flex;flex-direction:column;gap:12px}
 .card h3{font-family:var(--display);font-weight:700;font-size:30px;line-height:1.14;margin:0;letter-spacing:-.015em}
-.card p{margin:0;font-size:21px;line-height:1.45;color:var(--mist)}
+.card p{margin:0;font-size:23px;line-height:1.45;color:var(--mist)}
 .card.lift{border-color:var(--acc-dim);box-shadow:0 0 0 1px rgba(var(--acc-rgb),.16),0 22px 60px -30px rgba(var(--acc-rgb),.6)}
 .card.lift h3{color:var(--acc-hi)}
-.card .tag{font-family:var(--mono);font-size:14px;letter-spacing:.14em;text-transform:uppercase;color:var(--acc);opacity:.85}
+.card .tag{font-family:var(--mono);font-size:15px;letter-spacing:.14em;text-transform:uppercase;color:var(--mist-dim)}
 .card.plain{border:0;background:none;padding:0}
 
 ul.ticks{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:13px}
-ul.ticks li{position:relative;padding-left:28px;font-size:21px;line-height:1.45;color:var(--mist)}
+ul.ticks li{position:relative;padding-left:30px;font-size:23px;line-height:1.45;color:var(--mist)}
 ul.ticks li::before{content:"";position:absolute;left:0;top:.6em;width:10px;height:10px;border-radius:2px;background:var(--acc);opacity:.9}
 ul.ticks li b{color:var(--bone);font-weight:600}
 ul.crosses li::before{background:none;border:1.5px solid var(--mist-dim);border-radius:50%;width:11px;height:11px;top:.55em}
 
 .chip{background:var(--graphite);border:1px solid var(--line-soft);border-left:3px solid var(--acc-dim);
   border-radius:10px;padding:24px 26px;display:flex;flex-direction:column;gap:9px}
+.chip.warn{border-left-color:var(--amber-dim)}
 .chip b{font-size:24px;font-weight:600;line-height:1.2}
-.chip span{font-size:19px;color:var(--mist-dim);line-height:1.4}
+.chip span{font-size:21px;color:var(--mist);line-height:1.4}
 
 .step{display:flex;flex-direction:column;gap:16px;padding:34px 32px 36px;
   background:linear-gradient(180deg,var(--graphite),var(--ink-2));border:1px solid var(--line-soft);border-radius:14px}
 .step .n{font-family:var(--mono);font-size:16px;letter-spacing:.18em;color:var(--acc)}
 .step h3{font-family:var(--display);font-weight:700;font-size:34px;margin:0;letter-spacing:-.015em}
-.step p{margin:0;color:var(--mist);font-size:21px;line-height:1.45}
+.step p{margin:0;color:var(--mist);font-size:23px;line-height:1.45}
 
 .flow{display:flex;align-items:stretch;width:100%}
 .flow .node{flex:1;background:linear-gradient(180deg,var(--graphite),var(--ink-2));border:1px solid var(--line-soft);
   border-radius:14px;padding:28px 26px;display:flex;flex-direction:column;gap:10px}
-.flow .node .k{font-family:var(--mono);font-size:14px;letter-spacing:.16em;color:var(--mist-dim)}
+.flow .node .k{font-family:var(--mono);font-size:15px;letter-spacing:.16em;color:var(--mist-dim)}
 .flow .node b{font-family:var(--display);font-size:29px;font-weight:700;line-height:1.1;letter-spacing:-.015em}
-.flow .node p{margin:0;font-size:19px;color:var(--mist);line-height:1.4}
+.flow .node p{margin:0;font-size:21px;color:var(--mist);line-height:1.45}
 .flow .node.end{border-color:var(--emerald);background:linear-gradient(180deg,rgba(25,199,139,.18),rgba(25,199,139,.06))}
 .flow .node.end b{color:var(--emerald-hi)}
 .flow .arr{flex:none;width:50px;display:grid;place-items:center;color:var(--acc-dim)}
@@ -124,7 +135,7 @@ ul.crosses li::before{background:none;border:1.5px solid var(--mist-dim);border-
 .funnel .lvl{display:flex;align-items:center;justify-content:space-between;gap:28px;white-space:nowrap;
   border:1px solid var(--line-soft);border-radius:10px;background:var(--graphite);padding:18px 26px;align-self:center}
 .funnel .lvl b{font-size:23px;font-weight:600}
-.funnel .lvl span{font-family:var(--mono);font-size:15px;letter-spacing:.12em;text-transform:uppercase;color:var(--sky)}
+.funnel .lvl span{font-family:var(--mono);font-size:16px;letter-spacing:.12em;text-transform:uppercase;color:var(--sky)}
 .funnel .lvl.hot{border-color:var(--emerald);background:linear-gradient(90deg,rgba(25,199,139,.18),rgba(25,199,139,.05))}
 .funnel .lvl.hot span{color:var(--emerald-hi)}
 
@@ -136,7 +147,7 @@ ul.crosses li::before{background:none;border:1.5px solid var(--mist-dim);border-
 .price .amt{font-family:var(--display);font-weight:800;font-size:88px;line-height:1;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
 .price .box.hot .amt{color:var(--emerald-hi)}
 .price .per{font-family:var(--body);font-size:30px;font-weight:500;color:var(--mist);letter-spacing:0}
-.price .desc{font-size:21px;color:var(--mist);margin:2px 0 0}
+.price .desc{font-size:23px;color:var(--mist);margin:2px 0 0}
 
 .banner{margin-top:26px;border:1px solid var(--emerald-dim);border-radius:12px;
   background:linear-gradient(90deg,rgba(25,199,139,.16),rgba(25,199,139,.04));
@@ -149,10 +160,10 @@ ul.crosses li::before{background:none;border:1.5px solid var(--mist-dim);border-
 .tl .t.now::before{background:var(--emerald);box-shadow:0 0 0 6px rgba(25,199,139,.18)}
 .tl .t .w{font-family:var(--mono);font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:var(--acc);display:block;margin-bottom:12px}
 .tl .t h3{font-family:var(--display);font-weight:700;font-size:28px;margin:0 0 10px;letter-spacing:-.015em}
-.tl .t p{margin:0;font-size:19px;line-height:1.45;color:var(--mist)}
+.tl .t p{margin:0;font-size:21px;line-height:1.45;color:var(--mist)}
 
 .fig{width:100%;height:auto;display:block}
-.foot{margin-top:24px;font-size:17px;color:var(--mist-dim);font-family:var(--mono);letter-spacing:.03em;line-height:1.5}
+.foot{margin-top:24px;font-size:18px;color:var(--mist-dim);font-family:var(--mono);letter-spacing:.03em;line-height:1.5}
 
 /* cover */
 .cover{padding:0}
@@ -187,6 +198,45 @@ ul.crosses li::before{background:none;border:1.5px solid var(--mist-dim);border-
 
 <div class="viewport" id="viewport">
   <div class="stage" id="stage">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="i-gauge" viewBox="0 0 24 24"><path d="M3.5 18a9 9 0 1 1 17 0"/><path d="M12 18l-4-5"/><circle cx="12" cy="18" r="1.4"/></symbol>
+<symbol id="i-funnel" viewBox="0 0 24 24"><path d="M3 4h18l-7 8v8l-4-2v-6z"/></symbol>
+<symbol id="i-filter-x" viewBox="0 0 24 24"><path d="M3 4h14l-6 7v7l-3-1.6V11z"/><path d="M16 15l5 5M21 15l-5 5"/></symbol>
+<symbol id="i-user-off" viewBox="0 0 24 24"><circle cx="10" cy="7.5" r="3.5"/><path d="M3.5 20c0-3.6 2.9-6 6.5-6 1 0 2 .2 2.8.6"/><path d="M16 15.5l5 5M21 15.5l-5 5"/></symbol>
+<symbol id="i-hourglass" viewBox="0 0 24 24"><path d="M6 3h12M6 21h12"/><path d="M7 3c0 4 5 5.2 5 9s-5 5-5 9"/><path d="M17 3c0 4-5 5.2-5 9s5 5 5 9"/></symbol>
+<symbol id="i-wave" viewBox="0 0 24 24"><path d="M2 15c2.5 0 3-7 5.5-7S10 17 12.5 17 15 7 17.5 7 20 13 22 13"/></symbol>
+<symbol id="i-euro" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5a4.5 4.5 0 0 0-6.6 2H14M8.9 13.5H14M8.6 11.8a4.5 4.5 0 0 0 6.9 3.8"/></symbol>
+<symbol id="i-chart-down" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 9l4 4 3-3 5 6"/><path d="M19 12v4h-4"/></symbol>
+<symbol id="i-team" viewBox="0 0 24 24"><circle cx="8.5" cy="8" r="3"/><circle cx="17" cy="9.5" r="2.3"/><path d="M3 19c0-3 2.4-5 5.5-5s5.5 2 5.5 5"/><path d="M15.5 14.5c2.8 0 4.5 1.8 4.5 4.5"/></symbol>
+<symbol id="i-doc" viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/><path d="M9 12h6M9 16h6"/></symbol>
+<symbol id="i-network" viewBox="0 0 24 24"><circle cx="12" cy="5" r="2.4"/><circle cx="5" cy="18" r="2.4"/><circle cx="19" cy="18" r="2.4"/><path d="M10.6 7L6.5 15.8M13.4 7l4.1 8.8M7.4 18h9.2"/></symbol>
+<symbol id="i-user-plus" viewBox="0 0 24 24"><circle cx="9.5" cy="8" r="3.4"/><path d="M3 20c0-3.6 2.9-6 6.5-6s6.5 2.4 6.5 6"/><path d="M18.5 6v6M15.5 9h6"/></symbol>
+<symbol id="i-engine" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.2 5.2l2.1 2.1M16.7 16.7l2.1 2.1M18.8 5.2l-2.1 2.1M7.3 16.7l-2.1 2.1"/></symbol>
+<symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1" fill="currentColor" stroke="none"/></symbol>
+<symbol id="i-mail" viewBox="0 0 24 24"><rect x="2.5" y="5" width="19" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></symbol>
+<symbol id="i-sieve" viewBox="0 0 24 24"><path d="M4 5h16l-6 7v6l-4 2v-8z"/><path d="M14.5 17.5l2 2 4-4.5"/></symbol>
+<symbol id="i-calendar-check" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/><path d="M8.5 15.5l2.5 2.5 4.5-5"/></symbol>
+<symbol id="i-wrench" viewBox="0 0 24 24"><path d="M15.5 3.5a5 5 0 0 0-5.6 7.2L3 17.6 6.4 21l6.9-6.9a5 5 0 0 0 6.4-6.5l-3 3-2.8-2.8z"/></symbol>
+<symbol id="i-launch" viewBox="0 0 24 24"><path d="M4 13l7-9 7 9-7 3z"/><path d="M8 17c0 2 1.6 4 4 4s4-2 4-4"/></symbol>
+<symbol id="i-loop" viewBox="0 0 24 24"><path d="M4 12a8 8 0 0 1 13.7-5.6L20 8"/><path d="M20 4v4.5h-4.5"/><path d="M20 12a8 8 0 0 1-13.7 5.6L4 16"/><path d="M4 20v-4.5h4.5"/></symbol>
+<symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s3.6-6 10-6 10 6 10 6-3.6 6-10 6-10-6-10-6z"/><circle cx="12" cy="12" r="2.6"/></symbol>
+<symbol id="i-scale" viewBox="0 0 24 24"><path d="M12 4v16M7 20h10"/><path d="M4 9h16"/><path d="M4 9l-2.5 5a3 3 0 0 0 5 0z"/><path d="M20 9l2.5 5a3 3 0 0 1-5 0z"/></symbol>
+<symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5.5-5.5 2 2-5.5z"/></symbol>
+<symbol id="i-building" viewBox="0 0 24 24"><path d="M4 21V5l8-2v18"/><path d="M12 10h8v11"/><path d="M7 8h2M7 12h2M7 16h2M15 14h2M15 18h2"/><path d="M2.5 21h19"/></symbol>
+<symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3l2.2 5.8L20 11l-5.8 2.2L12 19l-2.2-5.8L4 11l5.8-2.2z"/></symbol>
+<symbol id="i-key" viewBox="0 0 24 24"><circle cx="8" cy="9" r="4.5"/><path d="M11.2 12.2L20 21M17 18l2-2M14.5 15.5l2-2"/></symbol>
+<symbol id="i-layers" viewBox="0 0 24 24"><path d="M12 3l9 4.5-9 4.5-9-4.5z"/><path d="M3 12.5l9 4.5 9-4.5"/><path d="M3 17l9 4.5 9-4.5"/></symbol>
+<symbol id="i-pen" viewBox="0 0 24 24"><path d="M15.5 4.5l4 4L8 20H4v-4z"/><path d="M13.5 6.5l4 4"/></symbol>
+<symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 3v18h18"/><rect x="7" y="11" width="3" height="6"/><rect x="12.5" y="7" width="3" height="10"/><rect x="18" y="13" width="3" height="4"/></symbol>
+<symbol id="i-window" viewBox="0 0 24 24"><rect x="2.5" y="4" width="19" height="16" rx="2"/><path d="M2.5 9h19M6 6.5h.01M9 6.5h.01"/></symbol>
+<symbol id="i-megaphone" viewBox="0 0 24 24"><path d="M4 10v4h3l9 5V5L7 10z"/><path d="M19 9.5a3.5 3.5 0 0 1 0 5"/><path d="M7 14v5h3"/></symbol>
+<symbol id="i-briefcase" viewBox="0 0 24 24"><rect x="2.5" y="7" width="19" height="13" rx="2"/><path d="M9 7V5h6v2M2.5 12.5h19"/></symbol>
+<symbol id="i-cpu" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="1.5"/><rect x="10" y="10" width="4" height="4"/><path d="M9 3v3M15 3v3M9 18v3M15 18v3M3 9h3M3 15h3M18 9h3M18 15h3"/></symbol>
+<symbol id="i-diamond" viewBox="0 0 24 24"><path d="M6 3h12l4 6-10 12L2 9z"/><path d="M2 9h20M9 3L6.5 9 12 21M15 3l2.5 6L12 21"/></symbol>
+<symbol id="i-list-check" viewBox="0 0 24 24"><path d="M9 6h12M9 12h12M9 18h12"/><path d="M3 5.5l1.4 1.4L6.6 4.6M3 11.5l1.4 1.4 2.2-2.3M3 17.5l1.4 1.4 2.2-2.3"/></symbol>
+<symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9.5C7.5 20 4 17 4 12V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></symbol>
+</defs></svg>
+
 
     <!-- 1 — COUVERTURE -->
     <section class="slide cover is-active" data-title="Couverture">
@@ -205,19 +255,19 @@ ul.crosses li::before{background:none;border:1.5px solid var(--mist-dim);border-
     </section>
 
     <!-- 2 — LE FACTEUR LIMITANT -->
-    <section class="slide acc-sky" data-title="Le facteur limitant">
+    <section class="slide" data-title="Le facteur limitant">
       <div class="frame">
         <div class="chrome"><img src="assets/leadcore-logo.png" alt="Leadcore"><div class="sec">01 — Le constat</div></div>
         <div class="body">
           <p class="eyebrow">Le vrai facteur limitant</p>
           <h2>Ce n’est pas l’offre. <span class="ghost">C’est le pipeline.</span></h2>
           <div class="grid g3" style="margin-top:38px">
-            <div class="chip"><b>Volume de prospection trop faible</b><span>La prospection passe après la livraison.</span></div>
-            <div class="chip"><b>Trop peu d’opportunités</b><span>Le mois se joue sur deux ou trois dossiers.</span></div>
-            <div class="chip"><b>Leads mal qualifiés</b><span>Le tri se fait en rendez-vous, trop tard.</span></div>
-            <div class="chip"><b>Décideur absent</b><span>L’interlocuteur écoute, puis le dossier s’arrête.</span></div>
-            <div class="chip"><b>Temps commercial gaspillé</b><span>Des heures de visio sans opportunité derrière.</span></div>
-            <div class="chip"><b>Flux dépendant du réseau</b><span>Bon mois, mauvais mois, aucun levier.</span></div>
+            <div class="chip warn"><svg class="ic c-amber " aria-hidden="true"><use href="#i-gauge"/></svg><b>Volume de prospection trop faible</b><span>La prospection passe après la livraison.</span></div>
+            <div class="chip warn"><svg class="ic c-amber " aria-hidden="true"><use href="#i-funnel"/></svg><b>Trop peu d’opportunités</b><span>Le mois se joue sur deux ou trois dossiers.</span></div>
+            <div class="chip warn"><svg class="ic c-amber " aria-hidden="true"><use href="#i-filter-x"/></svg><b>Leads mal qualifiés</b><span>Le tri se fait en rendez-vous, trop tard.</span></div>
+            <div class="chip warn"><svg class="ic c-amber " aria-hidden="true"><use href="#i-user-off"/></svg><b>Décideur absent</b><span>L’interlocuteur écoute, puis le dossier s’arrête.</span></div>
+            <div class="chip warn"><svg class="ic c-amber " aria-hidden="true"><use href="#i-hourglass"/></svg><b>Temps commercial gaspillé</b><span>Des heures de visio sans opportunité derrière.</span></div>
+            <div class="chip warn"><svg class="ic c-amber " aria-hidden="true"><use href="#i-wave"/></svg><b>Flux dépendant du réseau</b><span>Bon mois, mauvais mois, aucun levier.</span></div>
           </div>
         </div>
       </div>
@@ -225,7 +275,7 @@ ul.crosses li::before{background:none;border:1.5px solid var(--mist-dim);border-
     </section>
 
     <!-- 3 — LE COÛT -->
-    <section class="slide acc-sky" data-title="Le coût du statu quo">
+    <section class="slide" data-title="Le coût du statu quo">
       <div class="frame">
         <div class="chrome"><img src="assets/leadcore-logo.png" alt="Leadcore"><div class="sec">01 — Le constat</div></div>
         <div class="body">
@@ -233,17 +283,17 @@ ul.crosses li::before{background:none;border:1.5px solid var(--mist-dim);border-
           <h2>Chaque mois sans pipeline <span class="ghost">se paie trois fois.</span></h2>
           <div class="grid g3" style="margin-top:38px">
             <div class="card">
-              <span class="tag">01 · Commercial</span>
+              <svg class="ic c-amber " aria-hidden="true"><use href="#i-euro"/></svg><span class="tag">01 · Commercial</span>
               <h3>Opportunités perdues</h3>
               <ul class="ticks"><li>Le prospect signe ailleurs.</li><li>Son budget part pour l’année.</li><li>Le manque à gagner ne se rattrape pas.</li></ul>
             </div>
             <div class="card">
-              <span class="tag">02 · Financier</span>
+              <svg class="ic c-amber " aria-hidden="true"><use href="#i-chart-down"/></svg><span class="tag">02 · Financier</span>
               <h3>Croissance imprévisible</h3>
               <ul class="ticks"><li>Recrutements reportés.</li><li>Trésorerie sous tension.</li><li>Objectifs annuels manqués.</li></ul>
             </div>
             <div class="card">
-              <span class="tag">03 · Humain</span>
+              <svg class="ic c-amber " aria-hidden="true"><use href="#i-team"/></svg><span class="tag">03 · Humain</span>
               <h3>Équipe sous pression</h3>
               <ul class="ticks"><li>Démotivation progressive.</li><li>Moins de mordant en rendez-vous.</li><li>Turnover commercial.</li></ul>
             </div>
@@ -254,17 +304,17 @@ ul.crosses li::before{background:none;border:1.5px solid var(--mist-dim);border-
     </section>
 
     <!-- 4 — LES OPTIONS -->
-    <section class="slide acc-sky" data-title="Les quatre options">
+    <section class="slide" data-title="Les quatre options">
       <div class="frame">
         <div class="chrome"><img src="assets/leadcore-logo.png" alt="Leadcore"><div class="sec">01 — Le constat</div></div>
         <div class="body">
           <p class="eyebrow">Les options sur la table</p>
           <h2>Quatre façons de remplir un pipeline. <span class="ghost">Une seule se pilote.</span></h2>
           <div class="grid g4" style="margin-top:38px">
-            <div class="card"><span class="tag">Inbound</span><h3>Contenu et SEO</h3><p>Six à douze mois avant un volume utile, et vous ne choisissez pas qui vous contacte.</p></div>
-            <div class="card"><span class="tag">Réseau</span><h3>Recommandations</h3><p>La meilleure qualité. Le volume ne se commande pas et plafonne vite.</p></div>
-            <div class="card"><span class="tag">Interne</span><h3>Recruter un SDR</h3><p>Coût fixe avant le premier résultat, trois mois de montée en compétence.</p></div>
-            <div class="card lift"><span class="tag">Leadcore</span><h3>Outbound piloté</h3><p>Vous choisissez la cible, le débit se règle, le coût tombe au rendez-vous honoré.</p></div>
+            <div class="card"><svg class="ic c-sky " aria-hidden="true"><use href="#i-doc"/></svg><span class="tag">Inbound</span><h3>Contenu et SEO</h3><p>Six à douze mois avant un volume utile, et vous ne choisissez pas qui vous contacte.</p></div>
+            <div class="card"><svg class="ic c-sky " aria-hidden="true"><use href="#i-network"/></svg><span class="tag">Réseau</span><h3>Recommandations</h3><p>La meilleure qualité. Le volume ne se commande pas et plafonne vite.</p></div>
+            <div class="card"><svg class="ic c-sky " aria-hidden="true"><use href="#i-user-plus"/></svg><span class="tag">Interne</span><h3>Recruter un SDR</h3><p>Coût fixe avant le premier résultat, trois mois de montée en compétence.</p></div>
+            <div class="card lift"><svg class="ic c-em " aria-hidden="true"><use href="#i-engine"/></svg><span class="tag">Leadcore</span><h3>Outbound piloté</h3><p>Vous choisissez la cible, le débit se règle, le coût tombe au rendez-vous honoré.</p></div>
           </div>
         </div>
       </div>
@@ -279,13 +329,13 @@ ul.crosses li::before{background:none;border:1.5px solid var(--mist-dim);border-
           <p class="eyebrow">Le moteur d’acquisition</p>
           <h2>De la donnée brute <span class="ghost">au rendez-vous honoré.</span></h2>
           <div class="flow" style="margin-top:44px">
-            <div class="node"><span class="k">ÉTAPE 1</span><b>ICP</b><p>Marché, taille, fonction, signaux. On écrit qui vaut le coup d’être contacté.</p></div>
+            <div class="node"><svg class="ic c-sky sm" aria-hidden="true"><use href="#i-target"/></svg><span class="k">ÉTAPE 1</span><b>ICP</b><p>Marché, taille, fonction, signaux. On écrit qui vaut le coup d’être contacté.</p></div>
             <div class="arr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></div>
-            <div class="node"><span class="k">ÉTAPE 2</span><b>Approche</b><p>Séquences courtes, un angle par segment, personnalisation réelle.</p></div>
+            <div class="node"><svg class="ic c-sky sm" aria-hidden="true"><use href="#i-mail"/></svg><span class="k">ÉTAPE 2</span><b>Approche</b><p>Séquences courtes, un angle par segment, personnalisation réelle.</p></div>
             <div class="arr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></div>
-            <div class="node"><span class="k">ÉTAPE 3</span><b>Qualification</b><p>Chaque réponse est classée, le besoin et le décideur sont vérifiés.</p></div>
+            <div class="node"><svg class="ic c-violet sm" aria-hidden="true"><use href="#i-sieve"/></svg><span class="k">ÉTAPE 3</span><b>Qualification</b><p>Chaque réponse est classée, le besoin et le décideur sont vérifiés.</p></div>
             <div class="arr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></div>
-            <div class="node end"><span class="k">RÉSULTAT</span><b>RDV booké</b><p>Le créneau arrive dans votre agenda avec le contexte du prospect.</p></div>
+            <div class="node end"><svg class="ic c-em sm" aria-hidden="true"><use href="#i-calendar-check"/></svg><span class="k">RÉSULTAT</span><b>RDV booké</b><p>Le créneau arrive dans votre agenda avec le contexte du prospect.</p></div>
           </div>
           <p class="foot">Objectif de livraison : 15 à 20 rendez-vous qualifiés par mois, selon le marché et la capacité d’envoi.</p>
         </div>
@@ -301,9 +351,9 @@ ul.crosses li::before{background:none;border:1.5px solid var(--mist-dim);border-
           <p class="eyebrow">Un protocole outbound</p>
           <h2>Trois phases, <span class="ghost">rien d’improvisé.</span></h2>
           <div class="grid g3" style="margin-top:42px">
-            <div class="step"><span class="n">PHASE 01</span><h3>Le setup</h3><p>Cible, offre, angles, base de données, infrastructure d’envoi. Rien ne part avant que ce socle tienne.</p></div>
-            <div class="step"><span class="n">PHASE 02</span><h3>Le lancement</h3><p>Séquences assistées par IA, montée en volume progressive, relances cadencées, réponses traitées chaque jour.</p></div>
-            <div class="step"><span class="n">PHASE 03</span><h3>L’optimisation</h3><p>Filtres affinés, segments arbitrés, nouveaux angles testés chaque semaine, reporting transparent.</p></div>
+            <div class="step"><svg class="ic c-sky " aria-hidden="true"><use href="#i-wrench"/></svg><span class="n">PHASE 01</span><h3>Le setup</h3><p>Cible, offre, angles, base de données, infrastructure d’envoi. Rien ne part avant que ce socle tienne.</p></div>
+            <div class="step"><svg class="ic c-violet " aria-hidden="true"><use href="#i-launch"/></svg><span class="n">PHASE 02</span><h3>Le lancement</h3><p>Séquences assistées par IA, montée en volume progressive, relances cadencées, réponses traitées chaque jour.</p></div>
+            <div class="step"><svg class="ic c-em " aria-hidden="true"><use href="#i-loop"/></svg><span class="n">PHASE 03</span><h3>L’optimisation</h3><p>Filtres affinés, segments arbitrés, nouveaux angles testés chaque semaine, reporting transparent.</p></div>
           </div>
           <p class="foot">La délivrabilité et la qualité de la donnée passent avant le volume d’emails envoyés.</p>
         </div>
@@ -312,7 +362,7 @@ ul.crosses li::before{background:none;border:1.5px solid var(--mist-dim);border-
     </section>
 
     <!-- 7 — PHASE 01 -->
-    <section class="slide acc-sky" data-title="Phase 01 — Le setup">
+    <section class="slide" data-title="Phase 01 — Le setup">
       <div class="frame">
         <div class="chrome"><img src="assets/leadcore-logo.png" alt="Leadcore"><div class="sec">02 — Phase 01</div></div>
         <div class="body">
@@ -358,7 +408,7 @@ ul.crosses li::before{background:none;border:1.5px solid var(--mist-dim);border-
     </section>
 
     <!-- 8 — PHASE 02 -->
-    <section class="slide acc-sky" data-title="Phase 02 — Le lancement">
+    <section class="slide" data-title="Phase 02 — Le lancement">
       <div class="frame">
         <div class="chrome"><img src="assets/leadcore-logo.png" alt="Leadcore"><div class="sec">02 — Phase 02</div></div>
         <div class="body">
@@ -399,7 +449,7 @@ ul.crosses li::before{background:none;border:1.5px solid var(--mist-dim);border-
     </section>
 
     <!-- 9 — PHASE 03 -->
-    <section class="slide acc-sky" data-title="Phase 03 — L’optimisation">
+    <section class="slide" data-title="Phase 03 — L’optimisation">
       <div class="frame">
         <div class="chrome"><img src="assets/leadcore-logo.png" alt="Leadcore"><div class="sec">02 — Phase 03</div></div>
         <div class="body">
@@ -407,15 +457,15 @@ ul.crosses li::before{background:none;border:1.5px solid var(--mist-dim);border-
           <h2>Ce qui marche est élargi. <span class="ghost">Le reste est coupé.</span></h2>
           <div class="grid g3" style="margin-top:38px">
             <div class="card">
-              <span class="tag">Chaque jour</span><h3>Surveillance</h3>
+              <svg class="ic c-sky " aria-hidden="true"><use href="#i-eye"/></svg><span class="tag">Chaque jour</span><h3>Surveillance</h3>
               <ul class="ticks"><li>Délivrabilité et bounces.</li><li>Réputation des boîtes.</li><li>Réponses à traiter.</li></ul>
             </div>
             <div class="card">
-              <span class="tag">Chaque semaine</span><h3>Arbitrage</h3>
+              <svg class="ic c-violet " aria-hidden="true"><use href="#i-scale"/></svg><span class="tag">Chaque semaine</span><h3>Arbitrage</h3>
               <ul class="ticks"><li>Résultats par segment et par angle.</li><li>Segments faibles coupés.</li><li>Un nouvel angle en test.</li></ul>
             </div>
             <div class="card">
-              <span class="tag">Chaque mois</span><h3>Cap</h3>
+              <svg class="ic c-em " aria-hidden="true"><use href="#i-compass"/></svg><span class="tag">Chaque mois</span><h3>Cap</h3>
               <ul class="ticks"><li>Bilan des rendez-vous.</li><li>Retours commerciaux intégrés.</li><li>Élargir, affiner ou ouvrir.</li></ul>
             </div>
           </div>
@@ -425,17 +475,17 @@ ul.crosses li::before{background:none;border:1.5px solid var(--mist-dim);border-
     </section>
 
     <!-- 10 — CRITÈRES -->
-    <section class="slide acc-violet" data-title="Critères de qualification">
+    <section class="slide" data-title="Critères de qualification">
       <div class="frame">
         <div class="chrome"><img src="assets/leadcore-logo.png" alt="Leadcore"><div class="sec">03 — La qualification</div></div>
         <div class="body">
           <p class="eyebrow">Les critères de qualification</p>
           <h2>Quatre conditions. <span class="ghost">Les quatre, ou rien.</span></h2>
           <div class="grid g4" style="margin-top:40px">
-            <div class="card"><span class="tag">Condition 1</span><h3>ICP</h3><p>Marché, taille et besoin correspondent à ce qui a été défini avec vous.</p></div>
-            <div class="card"><span class="tag">Condition 2</span><h3>Intérêt réel</h3><p>Un besoin exprimé et un timing identifié. Pas une demande de documentation.</p></div>
-            <div class="card"><span class="tag">Condition 3</span><h3>Décideur</h3><p>La personne décide, ou pèse directement sur la décision.</p></div>
-            <div class="card lift"><span class="tag">Condition 4</span><h3>Présence</h3><p>Le critère qui compte : la personne est là au rendez-vous.</p></div>
+            <div class="card"><svg class="ic c-sky " aria-hidden="true"><use href="#i-building"/></svg><span class="tag">Condition 1</span><h3>ICP</h3><p>Marché, taille et besoin correspondent à ce qui a été défini avec vous.</p></div>
+            <div class="card"><svg class="ic c-violet " aria-hidden="true"><use href="#i-spark"/></svg><span class="tag">Condition 2</span><h3>Intérêt réel</h3><p>Un besoin exprimé et un timing identifié. Pas une demande de documentation.</p></div>
+            <div class="card"><svg class="ic c-violet " aria-hidden="true"><use href="#i-key"/></svg><span class="tag">Condition 3</span><h3>Décideur</h3><p>La personne décide, ou pèse directement sur la décision.</p></div>
+            <div class="card lift"><svg class="ic c-em " aria-hidden="true"><use href="#i-calendar-check"/></svg><span class="tag">Condition 4</span><h3>Présence</h3><p>Le critère qui compte : la personne est là au rendez-vous.</p></div>
           </div>
           <p class="foot">Cette définition est écrite dans le contrat et n’est jamais modifiée après coup.</p>
         </div>
@@ -444,7 +494,7 @@ ul.crosses li::before{background:none;border:1.5px solid var(--mist-dim);border-
     </section>
 
     <!-- 11 — CE QU’ON NE FACTURE PAS -->
-    <section class="slide acc-violet" data-title="Ce qu’on ne facture jamais">
+    <section class="slide" data-title="Ce qu’on ne facture jamais">
       <div class="frame">
         <div class="chrome"><img src="assets/leadcore-logo.png" alt="Leadcore"><div class="sec">03 — La qualification</div></div>
         <div class="body">
@@ -459,7 +509,7 @@ ul.crosses li::before{background:none;border:1.5px solid var(--mist-dim);border-
               <li>Un no-show, tant que le rendez-vous n’a pas eu lieu.</li>
             </ul>
             <div class="card lift">
-              <h3>Pourquoi c’est notre intérêt</h3>
+              <svg class="ic c-em " aria-hidden="true"><use href="#i-shield"/></svg><h3>Pourquoi c’est notre intérêt</h3>
               <p>La part variable de notre rémunération dépend des rendez-vous honorés. Vous remplir l’agenda de contacts inutiles nous coûterait la mission.</p>
             </div>
           </div>
@@ -469,16 +519,16 @@ ul.crosses li::before{background:none;border:1.5px solid var(--mist-dim);border-
     </section>
 
     <!-- 12 — IA -->
-    <section class="slide acc-violet" data-title="Le rôle de l’IA">
+    <section class="slide" data-title="Le rôle de l’IA">
       <div class="frame">
         <div class="chrome"><img src="assets/leadcore-logo.png" alt="Leadcore"><div class="sec">04 — La méthode</div></div>
         <div class="body">
           <p class="eyebrow">Comment l’intelligence artificielle change la donne</p>
           <h2>Plus de volume, <span class="ghost">sans perte de pertinence.</span></h2>
           <div class="grid g3" style="margin-top:40px">
-            <div class="card"><h3>Volume</h3><p>Recherche et enrichissement automatisés : on couvre un marché entier là où une équipe traite quelques centaines de comptes.</p></div>
-            <div class="card"><h3>Personnalisation</h3><p>Chaque message s’appuie sur des éléments réels du compte, pas sur une variable générique.</p></div>
-            <div class="card"><h3>Optimisation</h3><p>Classification des réponses, performance par segment, détection des angles qui fonctionnent.</p></div>
+            <div class="card"><svg class="ic c-violet " aria-hidden="true"><use href="#i-layers"/></svg><h3>Volume</h3><p>Recherche et enrichissement automatisés : on couvre un marché entier là où une équipe traite quelques centaines de comptes.</p></div>
+            <div class="card"><svg class="ic c-violet " aria-hidden="true"><use href="#i-pen"/></svg><h3>Personnalisation</h3><p>Chaque message s’appuie sur des éléments réels du compte, pas sur une variable générique.</p></div>
+            <div class="card"><svg class="ic c-violet " aria-hidden="true"><use href="#i-chart"/></svg><h3>Optimisation</h3><p>Classification des réponses, performance par segment, détection des angles qui fonctionnent.</p></div>
           </div>
           <div class="banner">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
@@ -490,7 +540,7 @@ ul.crosses li::before{background:none;border:1.5px solid var(--mist-dim);border-
     </section>
 
     <!-- 13 — REPORTING -->
-    <section class="slide acc-sky" data-title="Le reporting">
+    <section class="slide" data-title="Le reporting">
       <div class="frame">
         <div class="chrome"><img src="assets/leadcore-logo.png" alt="Leadcore"><div class="sec">04 — Le pilotage</div></div>
         <div class="body">
@@ -506,7 +556,7 @@ ul.crosses li::before{background:none;border:1.5px solid var(--mist-dim);border-
               <div class="lvl hot" style="width:66%"><b>RDV honorés</b><span>Ce qu’on facture</span></div>
             </div>
             <div class="card">
-              <h3>Ce que vous recevez</h3>
+              <svg class="ic c-sky " aria-hidden="true"><use href="#i-chart"/></svg><h3>Ce que vous recevez</h3>
               <ul class="ticks">
                 <li><b>Un point hebdomadaire</b> : chiffres, décisions, tests en cours.</li>
                 <li><b>Le détail par segment</b> : quel marché répond, quel angle convertit.</li>
@@ -528,12 +578,12 @@ ul.crosses li::before{background:none;border:1.5px solid var(--mist-dim);border-
           <p class="eyebrow">Pour qui Leadcore est conçu</p>
           <h2>Les offres B2B <span class="ghost">à forte valeur.</span></h2>
           <div class="grid g3" style="margin-top:38px">
-            <div class="card"><h3>SaaS B2B</h3><p>Logiciels et plateformes en vente accompagnée.</p></div>
-            <div class="card"><h3>Agences</h3><p>Marketing, création, acquisition haut de gamme.</p></div>
-            <div class="card"><h3>Conseil</h3><p>Expertise, accompagnement, transformation.</p></div>
-            <div class="card"><h3>IT et tech</h3><p>Prestations techniques et projets complexes.</p></div>
-            <div class="card"><h3>Services premium</h3><p>Vente consultative, cycle long, ticket élevé.</p></div>
-            <div class="card lift"><h3>Ticket moyen</h3><p style="color:var(--bone)">Au-delà de <b style="color:var(--emerald-hi)">3 000 €</b> par client, l’outbound devient rentable.</p></div>
+            <div class="card"><svg class="ic c-sky " aria-hidden="true"><use href="#i-window"/></svg><h3>SaaS B2B</h3><p>Logiciels et plateformes en vente accompagnée.</p></div>
+            <div class="card"><svg class="ic c-sky " aria-hidden="true"><use href="#i-megaphone"/></svg><h3>Agences</h3><p>Marketing, création, acquisition haut de gamme.</p></div>
+            <div class="card"><svg class="ic c-sky " aria-hidden="true"><use href="#i-briefcase"/></svg><h3>Conseil</h3><p>Expertise, accompagnement, transformation.</p></div>
+            <div class="card"><svg class="ic c-sky " aria-hidden="true"><use href="#i-cpu"/></svg><h3>IT et tech</h3><p>Prestations techniques et projets complexes.</p></div>
+            <div class="card"><svg class="ic c-violet " aria-hidden="true"><use href="#i-diamond"/></svg><h3>Services premium</h3><p>Vente consultative, cycle long, ticket élevé.</p></div>
+            <div class="card lift"><svg class="ic c-em " aria-hidden="true"><use href="#i-euro"/></svg><h3>Ticket moyen</h3><p style="color:var(--bone)">Au-delà de <b style="color:var(--emerald-hi)">3 000 €</b> par client, l’outbound devient rentable.</p></div>
           </div>
         </div>
       </div>
@@ -541,7 +591,7 @@ ul.crosses li::before{background:none;border:1.5px solid var(--mist-dim);border-
     </section>
 
     <!-- 15 — MOINS ADAPTÉ -->
-    <section class="slide acc-violet" data-title="Ce qui n’est pas adapté">
+    <section class="slide" data-title="Ce qui n’est pas adapté">
       <div class="frame">
         <div class="chrome"><img src="assets/leadcore-logo.png" alt="Leadcore"><div class="sec">05 — Le fit</div></div>
         <div class="body">
@@ -555,7 +605,7 @@ ul.crosses li::before{background:none;border:1.5px solid var(--mist-dim);border-
               <li><b>Offre non définie.</b> Sans promesse claire, aucun angle ne tient.</li>
             </ul>
             <div class="card lift">
-              <h3>Ce qu’on vous demande</h3>
+              <svg class="ic c-em " aria-hidden="true"><use href="#i-list-check"/></svg><h3>Ce qu’on vous demande</h3>
               <ul class="ticks">
                 <li>Un créneau hebdomadaire pour le point de campagne.</li>
                 <li>Un retour honnête sur la qualité des rendez-vous.</li>
