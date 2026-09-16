@@ -43,9 +43,12 @@ Business documents, SOPs and client-facing material are written in French.
   It has two jobs, inform the prospects reached by outbound and let them book a
   call. The booking provider and the contact address live in
   `site/assets/config.js`. See `site/README.md`.
-- `.claude/settings.json` enables the `caveman` and `taste-skill` plugins
-  repository-wide. `taste-skill` carries the frontend design skills used for the
-  sales deck in `deck/`.
+- `.claude/settings.json` enables the `caveman`, `taste-skill` and
+  `ui-ux-pro-max` plugins repository-wide. `taste-skill` carries the frontend
+  design skills used for the sales deck in `deck/`. `ui-ux-pro-max`
+  (nextlevelbuilder, MIT) adds seven design skills and a searchable local
+  database of styles, palettes, font pairings and UX rules; its search script
+  needs Python 3. Use it for work on `site/` and `deck/`.
 - `.claude/skills/stop-slop/` holds the stop-slop skill (MIT, Hardik Pandya):
   removes AI writing patterns from prose. Use it on client-facing copy,
   sequences and deck text.
