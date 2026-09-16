@@ -152,6 +152,30 @@ deux ferait chercher à Vercel `site/site/`.
 Pas de build, pas de dépendance, pas de `package.json` : Vercel recopie le
 contenu de `site/` tel quel.
 
+### Cache des assets : le piège à connaître
+
+`index.html` est servi frais à chaque visite, mais les assets l'étaient avec
+`max-age=3600`. Un visiteur qui avait chargé la page avant une mise en ligne
+recevait donc le **nouveau HTML avec l'ancien `styles.css`**, pendant une heure :
+le balisage référençait des classes que la feuille de style ne connaissait pas
+encore, et la page s'affichait à moitié nue. C'est arrivé.
+
+Les fontes n'ont jamais eu ce problème : leur nom de fichier porte une empreinte
+de contenu, donc une nouvelle version est une nouvelle URL. `styles.css`,
+`main.js`, `fonts.css` et `config.js` n'en ont pas, faute de build.
+
+Deux garde-fous sont donc en place :
+
+1. `/assets/(.*)` est passé à `max-age=0, must-revalidate` : le navigateur
+   redemande le fichier à chaque visite et reçoit un 304 de quelques centaines
+   d'octets s'il n'a pas changé. `/assets/fonts/(.*)` garde son cache d'un an,
+   puisque ces noms sont empreintés.
+2. Les quatre fichiers sont appelés avec `?v=20260916` dans les trois pages.
+   Ce jeton n'a servi qu'à vider les caches déjà pollués avant le correctif
+   d'en-tête. Avec la revalidation systématique il ne sert plus à rien, mais il
+   ne coûte rien non plus. **Si vous ajoutez un asset sans empreinte, vérifiez
+   qu'il tombe bien sous `/assets/(.*)` et pas sous `/assets/fonts/(.*)`.**
+
 Une fois le dépôt connecté, chaque push sur la branche de production déclenche
 un déploiement, et chaque push sur une autre branche une préproduction.
 
