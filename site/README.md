@@ -71,8 +71,42 @@ python3 -m http.server 8000 --directory site
 - [ ] Ajouter une image Open Graph au format 1200 × 630 si le partage sur
       LinkedIn compte
 
-## Déploiement
+## Déploiement sur Vercel
 
-N’importe quel hébergement statique convient : Netlify, Vercel, Cloudflare
-Pages, GitHub Pages, ou un simple dossier servi par Nginx. Le répertoire à
-publier est `site/`.
+`vercel.json` est déjà écrit : en-têtes de cache (un an sur les fontes, dont le
+nom porte une empreinte de contenu) et en-têtes de sécurité. Pas de build, pas
+de dépendance, Vercel sert les fichiers tels quels.
+
+Réglages du projet :
+
+| Réglage | Valeur |
+|---|---|
+| Framework Preset | Other |
+| Root Directory | `site` |
+| Build Command | vide |
+| Output Directory | vide |
+| Production Branch | la branche qui contient `site/` |
+
+**Le Root Directory `site` n’est pas optionnel.** Sans lui, Vercel sert la
+racine du dépôt et le site renvoie une 404.
+
+Deux façons de créer le projet :
+
+1. Dans le tableau de bord Vercel, *Add New → Project*, importer
+   `platon67/leadcore`, puis appliquer le tableau ci-dessus.
+2. En ligne de commande, depuis la racine du dépôt :
+
+   ```bash
+   npx vercel link
+   npx vercel --cwd site          # préproduction
+   npx vercel --cwd site --prod   # production
+   ```
+
+Une fois le dépôt connecté, chaque push sur la branche de production déclenche
+un déploiement, et chaque push sur une autre branche une préproduction.
+
+### Autres hébergeurs
+
+Netlify, Cloudflare Pages, GitHub Pages ou un dossier servi par Nginx
+conviennent aussi. Le répertoire à publier est `site/`. Les en-têtes de
+`vercel.json` sont propres à Vercel et devront être retranscrits.
