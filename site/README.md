@@ -71,6 +71,30 @@ python3 -m http.server 8000 --directory site
 - [ ] Ajouter une image Open Graph au format 1200 × 630 si le partage sur
       LinkedIn compte
 
+## État actuel
+
+Le site est déployé. Il n’est **pas** accessible au public, et c’est voulu.
+
+| | |
+|---|---|
+| Projet Vercel | `leadcore`, équipe `platon67's projects` |
+| Branche de production | `claude/gifted-hawking-wkdls6` |
+| Adresse | `leadcore-rho.vercel.app` |
+| Vercel Authentication | **activée** (`all_except_custom_domains`) |
+
+Deux choses à faire avant d’ouvrir le site à vos prospects, dans cet ordre :
+
+1. **Créer l’adresse de contact.** `contact@leadcore.fr` n’existe pas encore.
+   C’est la seule action possible pour un visiteur : sans elle, la page se
+   termine sur un lien mort. L’adresse se change à un seul endroit,
+   `assets/config.js`.
+2. **Couper Vercel Authentication**, dans *Settings → Deployment Protection*.
+   Tant qu’elle est active, un visiteur tombe sur un écran de connexion Vercel.
+   Elle ne s’applique pas aux domaines personnalisés : brancher `leadcore.fr`
+   ouvre le site de toute façon.
+
+Restent ensuite les deux pages légales, en gabarit et en `noindex`.
+
 ## Déploiement sur Vercel
 
 La configuration vit dans le [`vercel.json`](../vercel.json) à la racine du
