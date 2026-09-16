@@ -39,6 +39,10 @@ Business documents, SOPs and client-facing material are written in French.
 ## Conventions
 
 - Reference documentation lives in `docs/`.
+- `site/` holds the public marketing site: static HTML and CSS, no build step.
+  It has two jobs, inform the prospects reached by outbound and let them book a
+  call. The booking provider and the contact address live in
+  `site/assets/config.js`. See `site/README.md`.
 - `.claude/settings.json` enables the `caveman` and `taste-skill` plugins
   repository-wide. `taste-skill` carries the frontend design skills used for the
   sales deck in `deck/`.
