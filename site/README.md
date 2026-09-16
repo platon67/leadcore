@@ -73,34 +73,17 @@ python3 -m http.server 8000 --directory site
 
 ## Déploiement sur Vercel
 
-`vercel.json` est déjà écrit : en-têtes de cache (un an sur les fontes, dont le
-nom porte une empreinte de contenu) et en-têtes de sécurité. Pas de build, pas
-de dépendance, Vercel sert les fichiers tels quels.
+La configuration vit dans le [`vercel.json`](../vercel.json) à la racine du
+dépôt, pas ici. Il porte `outputDirectory: "site"`, les en-têtes de cache (un an
+sur les fontes, dont le nom de fichier contient une empreinte de contenu) et les
+en-têtes de sécurité.
 
-Réglages du projet :
+Rien à régler dans le tableau de bord Vercel. En particulier, **laissez Root
+Directory vide** : c’est `outputDirectory` qui désigne `site/`. Renseigner les
+deux ferait chercher à Vercel `site/site/`.
 
-| Réglage | Valeur |
-|---|---|
-| Framework Preset | Other |
-| Root Directory | `site` |
-| Build Command | vide |
-| Output Directory | vide |
-| Production Branch | la branche qui contient `site/` |
-
-**Le Root Directory `site` n’est pas optionnel.** Sans lui, Vercel sert la
-racine du dépôt et le site renvoie une 404.
-
-Deux façons de créer le projet :
-
-1. Dans le tableau de bord Vercel, *Add New → Project*, importer
-   `platon67/leadcore`, puis appliquer le tableau ci-dessus.
-2. En ligne de commande, depuis la racine du dépôt :
-
-   ```bash
-   npx vercel link
-   npx vercel --cwd site          # préproduction
-   npx vercel --cwd site --prod   # production
-   ```
+Pas de build, pas de dépendance, pas de `package.json` : Vercel recopie le
+contenu de `site/` tel quel.
 
 Une fois le dépôt connecté, chaque push sur la branche de production déclenche
 un déploiement, et chaque push sur une autre branche une préproduction.
