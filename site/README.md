@@ -8,8 +8,47 @@ dépendance à installer. Deux fonctions, dans cet ordre :
 2. **Faire prendre un rendez-vous.**
 
 Le contenu vient de [`docs/LEADCORE-FONCTIONNEMENT.md`](../docs/LEADCORE-FONCTIONNEMENT.md)
-et de [`docs/MAJ-OFFRE-2026-09.md`](../docs/MAJ-OFFRE-2026-09.md). Le système
-visuel est celui du deck (`deck/index.html`) : mêmes couleurs, mêmes fontes.
+et de [`docs/MAJ-OFFRE-2026-09.md`](../docs/MAJ-OFFRE-2026-09.md). Les couleurs
+sont celles du deck (`deck/index.html`), aux valeurs exactes ; les fontes et le
+mouvement sont propres au site.
+
+## Système visuel
+
+Registre : un terminal de salle de marché. Le site montre la production réelle
+d'une campagne comme un carnet d'ordres montre un marché — chiffres alignés,
+libellés en mono, un seul accent lumineux sur du presque noir.
+
+**Typographie.** Geist en variable porte toute la structure : un seul fichier
+pour les graisses 400 à 800, la hiérarchie se fait à la graisse et à l'approche
+plutôt qu'en empilant des familles. Geist Mono pour les libellés techniques et
+les chiffres. Instrument Serif en italique **uniquement** sur les mots mis en
+exergue dans les titres (`<span class="ex">`) : c'est le seul contraste de
+famille du site, et il perd son effet dès qu'on s'en sert ailleurs. Une page en
+français ne télécharge que les trois fichiers `latin`, soit 73 Ko, contre 94 Ko
+avant la refonte.
+
+**Mouvement.** Aucune bibliothèque : ni GSAP, ni Lenis, ni Framer Motion. Le
+défilement reste natif, jamais détourné. Trois règles tenues partout :
+
+1. On n'anime que `transform`, `opacity` et `clip-path`, donc le compositeur
+   travaille seul. Jamais une largeur ni une position.
+2. Un seul écouteur de défilement et un seul de pointeur pour toute la page,
+   tous deux cadencés par `requestAnimationFrame`.
+3. Ce qui boucle ne tourne qu'à l'écran. Les éléments porteurs de `data-live`
+   reçoivent la classe `.live` d'un `IntersectionObserver` ; hors du champ la
+   feuille de style met la boucle en pause au lieu de la supprimer, pour
+   qu'elle reprenne où elle s'était arrêtée.
+
+La jauge de progression, le remplissage du rail de la méthode et la dérive des
+halos passent par `animation-timeline` quand le navigateur sait faire : la
+progression est alors calculée par le compositeur, sans une ligne de
+JavaScript. Firefox retombe sur un `IntersectionObserver` et une transition.
+
+`prefers-reduced-motion: reduce` coupe tout : rien ne bouge, rien ne reste
+caché, les chiffres s'affichent à leur valeur finale.
+
+Mesuré sous Chromium avec le processeur bridé à un quart de sa vitesse :
+LCP 1,2 s, CLS 0, 57 images par seconde en défilement continu.
 
 ## Fichiers
 
@@ -20,9 +59,13 @@ site/
 ├── confidentialite.html    gabarit à compléter
 └── assets/
     ├── styles.css          feuille de style unique
+    ├── fonts.css           @font-face, sous-ensembles latin et latin-ext
     ├── config.js           ← le seul fichier à modifier au quotidien
-    ├── main.js             menu, apparitions, montage du calendrier
-    └── leadcore-logo*.png
+    ├── main.js             en-tête, apparitions, compteurs, calendrier
+    ├── fonts/              Geist, Geist Mono, Instrument Serif (OFL 1.1)
+    ├── og-leadcore.png     image de partage, 1200 × 630
+    ├── icon-180.png        icône d'écran d'accueil
+    └── leadcore-logo*.png  version web ; l’original pleine définition vit dans deck/assets/
 ```
 
 ## Brancher le calendrier
