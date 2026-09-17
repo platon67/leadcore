@@ -12,23 +12,56 @@ et de [`docs/MAJ-OFFRE-2026-09.md`](../docs/MAJ-OFFRE-2026-09.md). Les couleurs
 sont celles du deck (`deck/index.html`), aux valeurs exactes ; les fontes et le
 mouvement sont propres au site.
 
+## Les quatre pages
+
+Le site tenait sur une page unique de 11 600 px. Il est désormais en quatre
+pages, plus les deux pages légales.
+
+| Page | Ce qu'elle porte | Hauteur |
+|---|---|---|
+| `index.html` | héros, panneau de résultats, les quatre gains, trois cartes vers le détail, le fondateur, la prise de rendez-vous | 4 500 px |
+| `methode.html` | la cible et les exclusions, l'approche et la qualification, le délai réel, la protection du domaine | 6 800 px |
+| `collaboration.html` | les trente premiers jours, le rythme, ce qui déclenche la facture, la sortie | 6 000 px |
+| `tarifs.html` | les trois lignes, le calcul sur un trimestre, à qui on dit non | 5 000 px |
+
+L'accueil a perdu **61 %** de sa hauteur et **67 %** de ses mots. Il ne garde que
+ce qui décide d'un premier contact ; le reste est à un clic, et les trois cartes
+d'orientation annoncent ce qu'on y trouve.
+
+La séquence d'ouverture ne vit que sur l'accueil. Une entrée directe sur une page
+interne ne la joue pas, et la classe `has-intro` empêche la montée de page de se
+superposer à la cascade du héros.
+
+### À garder synchronisé entre les six pages
+
+Il n'y a pas de build : l'en-tête, le pied de page et le bloc `<head>` sont donc
+**recopiés dans chaque fichier**. Une modification de la navigation, du pied ou
+du jeton `?v=` doit être reportée dans les six. C'est le prix du « pas de build »,
+assumé : six fichiers restent relisibles, un générateur serait une dépendance de
+plus à faire tourner avant chaque mise en ligne.
+
 ## Le discours
 
 La page est construite sur ce que le client **gagne**, pas sur la façon dont on
 produit. Chaque cadre désamorce au passage une objection, sans jamais la nommer :
 
-| Cadre | Ce qu'il vend | L'objection qu'il tue |
+| Page · cadre | Ce qu'il vend | L'objection qu'il tue |
 |---|---|---|
-| Héros | leurs commerciaux closent au lieu de prospecter | — |
-| 01 · Ce que vous y gagnez | agenda prévisible, risque borné, zéro embauche, réponse datée | « un commercial me coûterait moins cher » |
-| 02 · Le temps rendu | ce qui part de chez eux | « je vais devoir tout piloter » · « vous allez démarcher mes clients » |
-| 03 · Le délai, en clair | les vrais chiffres de production | « on va me promettre la lune » · « pourquoi si long » |
-| 04 · Votre réputation | domaine principal hors circuit | « ça va cramer ma délivrabilité » |
-| 05 · Ce qui déclenche la facture | les quatre conditions, ou rien | « je vais payer des rendez-vous bidons » |
-| 06 · L'addition | un seul client signé couvre le trimestre | « quel retour, vraiment » · « je serai enfermé » |
-| 07 · Pour qui, et pour qui pas | on refuse des missions | « ils prennent tout le monde » |
-| 08 · Les trente premiers jours | le temps que ça leur coûte, semaine par semaine | « combien de temps avant de voir quelque chose » |
-| Qui vous parle | un opérateur, quatre à six clients | « je serai un numéro dans une agence » |
+| Accueil · héros | leurs commerciaux closent au lieu de prospecter | — |
+| Accueil · panneau de résultats | une trajectoire chiffrée sur 90 jours | « ça marche, sur le papier » |
+| Accueil · ce que vous y gagnez | agenda prévisible, risque borné, zéro embauche, réponse datée | « un commercial me coûterait moins cher » |
+| Méthode · la cible | la liste d'exclusion part au contrat | « vous allez démarcher mes clients » |
+| Méthode · l'approche | un humain lit les 120 réponses | « c'est du spam automatisé » |
+| Méthode · le délai | les vrais chiffres de production | « on va me promettre la lune » |
+| Méthode · votre réputation | domaine principal hors circuit | « ça va cramer ma délivrabilité » |
+| Collaboration · trente jours | le temps que ça leur coûte, semaine par semaine | « combien de temps avant de voir quelque chose » |
+| Collaboration · le rythme | trente minutes par semaine, et J+30 | « je vais devoir tout piloter » |
+| Collaboration · la facture | les quatre conditions, ou rien | « je vais payer des rendez-vous bidons » |
+| Collaboration · la sortie | la base et les domaines vous restent | « je serai pris en otage » |
+| Tarifs · les trois lignes | un seul client signé couvre le trimestre | « quel retour, vraiment » |
+| Tarifs · le calcul | 8 700 € sur un trimestre, seuil à deux signatures | « je n'arrive pas à chiffrer » |
+| Tarifs · pour qui | on refuse des missions | « ils prennent tout le monde » |
+| Accueil · qui vous parle | un opérateur, quatre à six clients | « je serai un numéro dans une agence » |
 
 Aucune section ne s'intitule « objections » et aucune ne pose de question
 rhétorique : l'objection est traitée dans le corps du texte, avant que le
@@ -139,7 +172,10 @@ LCP 1,2 s, CLS 0, 57 images par seconde en défilement continu.
 
 ```
 site/
-├── index.html              page unique
+├── index.html              accueil
+├── methode.html            comment on trouve vos leads
+├── collaboration.html      ce qui se passe si on signe
+├── tarifs.html             ce que ça coûte, et à qui
 ├── mentions-legales.html   gabarit à compléter
 ├── confidentialite.html    gabarit à compléter
 └── assets/
@@ -185,6 +221,15 @@ python3 -m http.server 8000 --directory site
 ```
 
 ## Avant la mise en ligne
+
+- [ ] **Remplacer les chiffres du panneau de résultats de l'accueil.** Ils sont
+      **inventés**. Ils sont cohérents entre eux et avec le modèle (34 rendez-vous
+      sur 90 jours ≈ 11 par mois, 9 500 € de dépense sur le trimestre, 39 000 €
+      signés soit 4,1 fois la dépense, premier rendez-vous à 22 jours donc en
+      semaine 4), mais **aucun client ne se cache derrière**. Le bloc est étiqueté
+      « Exemple » pour ne pas se lire comme un cas client, et le HTML porte un
+      encadré d'avertissement autour. Remplaçables par les chiffres d'un vrai
+      client, avec son accord écrit, ou à retirer.
 
 - [ ] Renseigner `provider` et `url` dans `assets/config.js`
 - [ ] Vérifier l’adresse email de contact

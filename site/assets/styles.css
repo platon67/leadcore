@@ -132,6 +132,10 @@ body::after{
 
 img{max-width:100%;height:auto;display:block}
 a{color:inherit}
+/* `.fiche` et `.stats` sont des <figure>, et un figure porte 1em 40px de marge
+   par défaut : sans ce rappel le bloc perd 80 px de largeur, ce qui ne se voit
+   qu'au moment où sa colonne devient étroite. */
+figure,figcaption,blockquote{margin:0}
 ::selection{background:rgba(var(--accent-rgb),.28);color:var(--fg)}
 
 .wrap{width:100%;max-width:var(--maxw);margin:0 auto;padding-left:var(--pad);padding-right:var(--pad)}
@@ -1147,3 +1151,225 @@ ul.crosses li::before{background:none;border:1.5px solid var(--fg-dim);border-ra
 
 /* La section de réservation portait un halo émeraude pensé pour le sombre. */
 .book.t-jour::before,.book.t-craie::before{display:none}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   25. EN-TÊTE DES PAGES INTÉRIEURES
+   Le héros pleine hauteur est réservé à l'accueil. Les pages Méthode,
+   Collaboration et Tarifs ouvrent sur un bandeau compact : libellé, titre,
+   chapeau, et le halo de marque en fond.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.phead{
+  position:relative;isolation:isolate;overflow:clip;
+  padding:calc(var(--header-h) + clamp(44px,5.6vw,78px)) 0 clamp(36px,4.4vw,58px);
+}
+.phead .wrap{position:relative;z-index:1}
+.phead h1{font-size:clamp(34px,5vw,62px);line-height:1.03;letter-spacing:-.04em;max-width:22ch}
+.phead h1 .ex{font-size:1.06em}
+.phead .lede{max-width:58ch;margin-top:20px}
+.phead-bg{position:absolute;inset:0;z-index:-1;pointer-events:none;overflow:clip}
+.phead-bg span{position:absolute;border-radius:50%;filter:blur(8px)}
+.phead-bg .a{inset:-40% 44% auto -12%;height:520px;
+  background:radial-gradient(closest-side,rgba(var(--accent-rgb),.16),transparent 72%)}
+.phead-bg .b{inset:auto -14% -60% 38%;width:620px;height:400px;
+  background:radial-gradient(closest-side,rgba(var(--accent-rgb),.09),transparent 70%)}
+
+/* fil d'Ariane discret, juste au-dessus du titre */
+.crumb{
+  display:inline-flex;align-items:center;gap:9px;margin-bottom:18px;
+  font-family:var(--label);font-size:12.5px;font-weight:550;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--fg-dim);text-decoration:none;
+}
+.crumb:hover{color:var(--accent)}
+.crumb svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   26. PANNEAU DE RÉSULTATS
+   ───────────────────────────────────────────────────────────────────────────
+   Le compagnon du héros d'accueil. Les chiffres viennent du HTML, donc ils
+   s'affichent sans JavaScript ; le script ne fait que les faire monter et
+   dresser les barres à l'apparition.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.stats{
+  border:1px solid var(--rule);border-radius:var(--radius);overflow:hidden;
+  background:linear-gradient(168deg,var(--surface-3),var(--surface) 64%);
+  box-shadow:0 40px 90px -50px rgba(0,0,0,.9);
+}
+.stats-hd{
+  display:flex;align-items:center;gap:10px;padding:14px 18px;
+  border-bottom:1px solid var(--rule-soft);background:rgba(var(--bg-rgb),.45);
+  font-family:var(--label);font-size:12px;font-weight:600;letter-spacing:.11em;text-transform:uppercase;
+}
+.stats-hd .lbl{color:var(--accent);white-space:nowrap}
+.stats-hd .tag{
+  margin-left:auto;color:var(--fg-dim);border:1px solid var(--rule);border-radius:5px;
+  padding:3px 8px;font-size:11px;font-weight:550;letter-spacing:.1em;white-space:nowrap;
+}
+
+/* la ligne de tête : le chiffre qui porte tout le panneau */
+.stats-lead{padding:clamp(20px,2.6vw,28px) clamp(20px,2.6vw,28px) 0}
+.stats-lead .v{
+  display:flex;align-items:baseline;gap:.1em;font-weight:800;
+  font-size:clamp(44px,5.4vw,66px);line-height:1;letter-spacing:-.05em;
+  color:var(--accent-hi);font-variant-numeric:tabular-nums;
+}
+.stats-lead .v small{font-size:.36em;font-weight:550;letter-spacing:-.02em;color:var(--fg-soft)}
+.stats-lead .l{display:block;margin-top:10px;font-size:15.5px;line-height:1.45;color:var(--fg-soft)}
+
+/* histogramme : douze semaines, une barre par semaine */
+.spark{
+  display:flex;align-items:flex-end;gap:clamp(3px,.6vw,6px);
+  height:74px;margin:22px clamp(20px,2.6vw,28px) 0;
+}
+.spark i{
+  flex:1;border-radius:3px 3px 1px 1px;transform-origin:bottom;
+  background:linear-gradient(180deg,var(--accent),rgba(var(--accent-rgb),.32));
+  height:var(--h);transform:scaleY(.04);
+  transition:transform .8s cubic-bezier(.22,1.1,.36,1);
+  transition-delay:calc(var(--i) * 55ms);
+}
+.stats.in .spark i{transform:scaleY(1)}
+.spark i:last-child{background:linear-gradient(180deg,var(--accent-hi),rgba(var(--accent-hi-rgb),.4))}
+.spark-ax{
+  display:flex;justify-content:space-between;
+  margin:9px clamp(20px,2.6vw,28px) 0;
+  font-family:var(--label);font-size:11px;font-weight:550;letter-spacing:.07em;
+  text-transform:uppercase;color:var(--fg-dim);
+}
+
+/* les trois chiffres secondaires */
+.stats-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
+  margin-top:clamp(20px,2.6vw,26px);background:var(--rule-soft);
+  border-top:1px solid var(--rule-soft);
+}
+.stats-grid>div{background:var(--surface);padding:16px clamp(12px,1.6vw,18px)}
+.stats-grid .v{
+  display:block;font-weight:750;font-size:clamp(19px,2.2vw,25px);line-height:1;
+  letter-spacing:-.04em;font-variant-numeric:tabular-nums;
+}
+.stats-grid .l{display:block;margin-top:8px;font-size:13px;line-height:1.35;color:var(--fg-dim)}
+.stats-ft{
+  padding:14px clamp(20px,2.6vw,28px);border-top:1px solid var(--rule-soft);
+  font-size:13.5px;line-height:1.5;color:var(--fg-dim);
+}
+.stats-ft b{color:var(--fg-soft);font-weight:550}
+
+@media (max-width:1120px){.stats{max-width:560px}}
+@media (max-width:440px){
+  /* même traitement que .fiche-hd : le libellé reste d'un tenant, c'est
+     l'étiquette « Exemple » qui passe à la ligne. */
+  .stats-hd{flex-wrap:wrap;row-gap:8px}
+  .stats-grid{grid-template-columns:1fr;gap:1px}
+  .spark{height:58px}
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   27. CARTES D'ORIENTATION
+   Sur l'accueil, trois cartes qui renvoient vers les pages de détail. Elles
+   remplacent les six sections que l'accueil portait avant.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.pages{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,1.6vw,20px)}
+.pages>*{min-width:0}
+.pagecard{
+  position:relative;isolation:isolate;display:flex;flex-direction:column;
+  border:1px solid var(--rule-soft);border-radius:var(--radius);
+  background:linear-gradient(172deg,var(--surface-2),var(--surface) 78%);
+  padding:clamp(24px,3vw,32px);text-decoration:none;color:inherit;
+  transition:transform .35s var(--ease-out),border-color var(--t-mid) ease;
+}
+.pagecard:hover{transform:translateY(-3px);border-color:var(--accent-dim)}
+.pagecard .n{
+  font-family:var(--label);font-size:12px;font-weight:600;letter-spacing:.11em;
+  text-transform:uppercase;color:var(--accent);display:block;margin-bottom:16px;
+}
+.pagecard h3{margin-bottom:12px}
+.pagecard p{color:var(--fg-soft);font-size:15.5px;line-height:1.5;margin:0 0 22px}
+.pagecard .go{
+  margin-top:auto;display:inline-flex;align-items:center;gap:9px;
+  font-size:15px;font-weight:550;color:var(--accent-hi);
+}
+.pagecard .go svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;
+  stroke-linecap:round;stroke-linejoin:round;transition:transform var(--t-mid) var(--ease-out)}
+.pagecard:hover .go svg{transform:translateX(4px)}
+/* liseré au pointeur, comme sur .card */
+.pagecard::before{
+  content:"";position:absolute;inset:0;border-radius:inherit;padding:1px;pointer-events:none;opacity:0;
+  background:radial-gradient(240px circle at var(--mx,50%) var(--my,50%),rgba(var(--accent-hi-rgb),.5),transparent 66%);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  mask-composite:exclude;transition:opacity .35s ease;
+}
+.pagecard.lit::before{opacity:1}
+
+@media (max-width:900px){.pages{grid-template-columns:1fr}}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   28. PAGE SUIVANTE
+   Au bas de chaque page intérieure, le pas suivant du parcours de lecture.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.pager{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(14px,1.6vw,20px);
+  border-top:1px solid var(--rule-soft);padding-top:clamp(30px,4vw,44px);
+  margin-top:clamp(40px,5vw,64px);
+}
+.pager>*{min-width:0}
+.pager a{
+  display:block;text-decoration:none;color:inherit;border:1px solid var(--rule-soft);
+  border-radius:var(--radius);padding:clamp(20px,2.4vw,26px);
+  transition:transform .3s var(--ease-out),border-color var(--t-mid) ease;
+}
+.pager a:hover{transform:translateY(-2px);border-color:var(--accent-dim)}
+.pager .k{
+  font-family:var(--label);font-size:11.5px;font-weight:600;letter-spacing:.11em;
+  text-transform:uppercase;color:var(--fg-dim);display:block;margin-bottom:10px;
+}
+.pager b{display:block;font-size:19px;font-weight:650;letter-spacing:-.022em}
+.pager .next{text-align:right}
+@media (max-width:760px){.pager{grid-template-columns:1fr}.pager .next{text-align:left}}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   29. MOUVEMENT LIÉ AU DÉFILEMENT
+   ───────────────────────────────────────────────────────────────────────────
+   Les chapeaux de section se lèvent au rythme du défilement quand le
+   navigateur sait cadencer une animation sur la position de l'élément. C'est
+   le compositeur qui calcule la progression : aucun écouteur, aucun rAF.
+   Firefox n'a pas animation-timeline et garde l'apparition par
+   IntersectionObserver, déjà en place.
+
+   La page entière monte une fois au chargement, ce qui donne une continuité
+   entre l'accueil et les pages de détail au lieu d'un saut sec.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@supports (animation-timeline:view()){
+  @media (prefers-reduced-motion:no-preference){
+    .js .sec-head,.js .phead .wrap{
+      animation:headRise linear both;
+      animation-timeline:view(block);
+      animation-range:entry 4% entry 46%;
+    }
+    /* déjà porté par l'IntersectionObserver : on évite le doublon */
+    .js .sec-head.rv{opacity:1;transform:none;transition:none}
+  }
+}
+@keyframes headRise{
+  from{opacity:0;transform:translate3d(0,26px,0)}
+  to{opacity:1;transform:none}
+}
+
+/* montée de page au chargement, une seule fois */
+.js main{animation:pageIn .5s var(--ease-out) both}
+@keyframes pageIn{from{opacity:0;transform:translate3d(0,10px,0)}to{opacity:1;transform:none}}
+/* `has-intro` et `js` sont tous deux sur documentElement : sélecteur composé,
+   pas descendant. L'accueil a son ouverture et sa cascade de héros, donc pas
+   de montée de page en plus. */
+.js.has-intro main,.js.intro-on main{animation:none}
+
+@media (prefers-reduced-motion:reduce){
+  .js main{animation:none}
+  .spark i{transform:scaleY(1)!important;transition:none}
+  .pagecard,.pager a{transition:none}
+}
