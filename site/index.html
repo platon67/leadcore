@@ -16,20 +16,27 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="#050908">
+<meta name="theme-color" content="#0C1413">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23050908'/%3E%3Cpath d='M10 8v13h9' stroke='%2319C78B' stroke-width='3.2' fill='none' stroke-linecap='square'/%3E%3C/svg%3E">
 <link rel="apple-touch-icon" href="assets/icon-180.png">
-<script>document.documentElement.className+=" js has-intro"</script>
+<script>document.documentElement.className+=" js p-home has-intro"</script>
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/geist-latin-19f9c925.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/instrument-serif-latin-5a51946d.woff2" crossorigin>
-<link rel="stylesheet" href="assets/fonts.css?v=20260917b">
-<link rel="stylesheet" href="assets/styles.css?v=20260917b">
+<link rel="stylesheet" href="assets/fonts.css?v=20260917d">
+<link rel="stylesheet" href="assets/styles.css?v=20260917d">
 </head>
 <body>
 <a class="skip" href="#main">Aller au contenu</a>
+
+<!-- Le fond (section 24 de la feuille)&nbsp;: la signature lumineuse propre à la
+     page, puis le calque de plan et sa jauge. Les deux sont fixés au cadre,
+     purement décoratifs, et la forme de la signature est décidée par la
+     classe de page posée sur <html>. -->
+<div class="sig" aria-hidden="true"><span class="s1"></span><span class="s2"></span><span class="s3"></span></div>
+<div class="plan" aria-hidden="true"><i><b></b></i></div>
 <!-- ══════════ OUVERTURE ══════════
      Séquence d'ouverture, jouée une fois par session. Le balisage est inerte
-     tant que main.js ne pose pas la classe .go : sans JavaScript, sous
+     tant que main.js ne pose pas la classe .go&nbsp;: sans JavaScript, sous
      prefers-reduced-motion ou en arrivant sur une ancre, le bloc reste
      display:none et la page s'affiche directement. -->
 <div class="intro" id="intro" role="presentation" aria-hidden="true">
@@ -65,12 +72,7 @@
 
 <!-- ══════════════════════════ HÉROS · nuit ══════════════════════════ -->
 <section class="hero">
-  <div class="hero-bg" aria-hidden="true">
-    <span class="glow g1"></span>
-    <span class="glow g2"></span>
-    <span class="glow g3"></span>
-    <span class="scan"></span>
-  </div>
+  <span class="scan" aria-hidden="true"></span>
 
   <div class="wrap hero-grid">
     <div class="hero-copy">
@@ -80,7 +82,7 @@
         <span class="ln"><span>plus. Ils</span></span>
         <span class="ln"><span class="ex">closent.</span></span>
       </h1>
-      <p class="lede">On remplit leur agenda de rendez-vous qualifiés : dans votre cible, avec un décisionnaire, sur un besoin qu’il a lui-même formulé. Vous ne payez que ceux qui ont lieu.</p>
+      <p class="lede">On remplit leur agenda de rendez-vous qualifiés&nbsp;: dans votre cible, avec un décisionnaire, sur un besoin qu’il a lui-même formulé. Vous ne payez que ceux qui ont lieu.</p>
       <div class="cta">
         <a class="btn btn-pri" href="#rendez-vous">Prendre un créneau de 30 minutes
           <svg class="ar" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
@@ -157,46 +159,46 @@
   </div>
 </div>
 
-<!-- ══════════════════════════ CE QUE VOUS Y GAGNEZ · nuit ══════════════════════════ -->
-<section class="sec" id="gains" style="padding-top:clamp(56px,7vw,88px)">
+<!-- ══════════════════════════ BANDEAU DE COTATION ══════════════════════════ -->
+<section class="sec plate" id="gains" data-plate="01" style="padding-top:clamp(52px,6.4vw,82px)">
   <div class="wrap">
     <div class="sec-head rv">
       <p class="eyebrow">Ce que vous y gagnez</p>
       <h2>Quatre choses que vous n’avez pas <span class="ex">en recrutant un commercial.</span></h2>
     </div>
 
-    <div class="keys rv">
-      <div class="key">
-        <span class="k">Un agenda prévisible</span>
-        <span class="v">8<small>&nbsp;à&nbsp;</small>12<small>&nbsp;RDV / mois</small></span>
+    <div class="band">
+      <div class="band-c rv" style="--i:0">
+        <span class="k">Agenda prévisible</span>
+        <span class="v">8<small>&nbsp;à&nbsp;</small>12<small>&nbsp;/ mois</small></span>
         <p>Vous planifiez vos semaines sur un volume connu, pas sur l’espoir qu’un prospect rappelle.</p>
       </div>
-      <div class="key">
-        <span class="k">Un risque borné</span>
-        <span class="v"><span data-count>200</span><small>&nbsp;€ / RDV honoré</small></span>
-        <p>L’essentiel de notre rémunération dépend de rendez-vous qui ont eu lieu. Si rien n’a lieu, elle s’arrête aux 500 €.</p>
+      <div class="band-c rv" style="--i:1">
+        <span class="k">Risque borné</span>
+        <span class="v"><span data-count>200</span><small>&nbsp;€ / RDV</small></span>
+        <p>L’essentiel de notre rémunération dépend de rendez-vous qui ont eu lieu. Sinon elle s’arrête aux 500 €.</p>
       </div>
-      <div class="key">
+      <div class="band-c rv" style="--i:2">
         <span class="k">Aucun recrutement</span>
         <span class="v">0<small>&nbsp;embauche</small></span>
         <p>Personne à sourcer, former, équiper, manager, ni à remplacer six mois plus tard.</p>
       </div>
-      <div class="key">
-        <span class="k">Une réponse datée</span>
+      <div class="band-c rv" style="--i:3">
+        <span class="k">Réponse datée</span>
         <span class="v">90<small>&nbsp;jours</small></span>
-        <p>Au bout du trimestre vous savez si votre marché répond. Et la base et les domaines vous restent.</p>
+        <p>Au bout du trimestre vous savez. Et la base et les domaines vous restent.</p>
       </div>
     </div>
 
-    <div class="banner rv">
+    <div class="banner rv" style="margin-top:clamp(30px,4vw,46px)">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
-      <span>Ce qu’on vous demande en échange : <b>trente minutes par semaine</b> pour le point de campagne, et un agenda ouvert sous 48 heures. Rien d’autre.</span>
+      <span>Ce qu’on vous demande en échange&nbsp;: <b>trente minutes par semaine</b> pour le point de campagne, et un agenda ouvert sous 48 heures. Rien d’autre.</span>
     </div>
   </div>
 </section>
 
-<!-- ══════════════════════════ TROIS PAGES · jour ══════════════════════════ -->
-<section class="sec t-jour" id="detail">
+<!-- ══════════════════════════ TROIS PAGES ══════════════════════════ -->
+<section class="sec" id="detail" data-plate="02">
   <div class="wrap">
     <div class="sec-head rv">
       <p class="eyebrow">Le détail, sans survol</p>
@@ -233,22 +235,22 @@
   </div>
 </section>
 
-<!-- ══════════════════════════ QUI VOUS PARLE · graphite ══════════════════════════ -->
-<section class="sec t-graphite" id="equipe">
+<!-- ══════════════════════════ QUI VOUS PARLE ══════════════════════════ -->
+<section class="sec raise" id="equipe" data-plate="03">
   <div class="wrap">
     <div class="card founder rv">
       <div class="ini" aria-hidden="true">PB</div>
       <div>
         <span class="tag">Qui vous parle</span>
         <h3>Platon Bournassenko, fondateur</h3>
-        <p style="margin-top:12px">Je cadre la cible avec vous, j’écris les séquences, et je vous appelle quand un segment cesse de répondre au lieu d’attendre le point mensuel. Un opérateur suit quatre à six campagnes : vous n’aurez pas d’interlocuteur qui change tous les deux mois.</p>
+        <p style="margin-top:12px">Je cadre la cible avec vous, j’écris les séquences, et je vous appelle quand un segment cesse de répondre au lieu d’attendre le point mensuel. Un opérateur suit quatre à six campagnes&nbsp;: vous n’aurez pas d’interlocuteur qui change tous les deux mois.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══════════════════════════ RENDEZ-VOUS · craie ══════════════════════════ -->
-<section class="book t-craie" id="rendez-vous">
+<!-- ══════════════════════════ RENDEZ-VOUS ══════════════════════════ -->
+<section class="book plate" id="rendez-vous">
   <div class="wrap">
     <div class="sec-head rv">
       <p class="eyebrow">Prendre un créneau</p>
@@ -264,13 +266,13 @@
           <li>Le nombre de rendez-vous que vos commerciaux peuvent absorber par mois.</li>
           <li>Ce que vous avez déjà tenté en prospection, et pourquoi ça s’est arrêté.</li>
         </ul>
-        <p class="note" style="margin-top:26px">Pas de présentation de quarante slides.<br>Vous repartez avec une réponse : oui, non, ou pas maintenant.</p>
+        <p class="note" style="margin-top:26px">Pas de présentation de quarante slides.<br>Vous repartez avec une réponse&nbsp;: oui, non, ou pas maintenant.</p>
       </div>
 
       <div class="slot rv" id="booking-slot" style="--i:1">
         <div class="ph">
           <span class="tag">Calendrier</span>
-          <p>Le calendrier en ligne n’est pas encore branché. Écrivez-nous une ligne avec votre secteur et votre ticket moyen : vous recevez trois créneaux dans la journée.</p>
+          <p>Le calendrier en ligne n’est pas encore branché. Écrivez-nous une ligne avec votre secteur et votre ticket moyen&nbsp;: vous recevez trois créneaux dans la journée.</p>
           <a class="btn btn-pri" href="mailto:contact@leadcore.fr" data-contact-email>
             <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="5" width="19" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
             Demander un créneau
@@ -307,7 +309,7 @@
   </div>
 </footer>
 
-<script src="assets/config.js?v=20260917b"></script>
-<script src="assets/main.js?v=20260917b"></script>
+<script src="assets/config.js?v=20260917d"></script>
+<script src="assets/main.js?v=20260917d"></script>
 </body>
 </html>

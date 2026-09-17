@@ -23,6 +23,12 @@
   /* ---- couleurs : identiques au deck, ne pas dériver ---- */
   --ink:#050908;
   --ink-2:#0A110F;
+  /* Le sol du site, et les deux valeurs de relief autour de lui. Le sol est
+     relevé au-dessus du noir pour qu'une section puisse s'enfoncer : voir la
+     section 24. Écart mesuré : 19 / 8 / 30 sur 255. */
+  --ground:#0C1413;
+  --sunk:#040807;
+  --lifted:#141F1C;
   --graphite:#111A17;
   --graphite-2:#16211D;
   --line:#26332F;
@@ -33,6 +39,10 @@
   --emerald:#19C78B;
   --emerald-hi:#5CEDBA;
   --emerald-dim:#0F7A56;
+  /* Le plus sombre des émeraudes qui reste lisible en petit corps. #0F7A56 ne
+     donne que 3,5:1 sur le sol, sous le seuil AA : il convient aux traits et
+     aux points, pas au texte. Celui-ci mesure 5,6:1. */
+  --emerald-lo:#14A071;
   /* Aplat du bouton principal. L'émeraude de la charte sert aux traits et aux
      libellés, où il n'occupe que quelques pixels ; étalé sur un bouton entier
      il vire au fluo. Ce ton descend d'un cran en clarté et en saturation.
@@ -73,8 +83,8 @@
      héros. Les autres thèmes sont en section 24.
      Les triplets -rgb existent parce qu'une couleur derrière var() ne peut pas
      servir d'argument à rgba() : il faut les composantes séparées. */
-  --bg:var(--ink);
-  --bg-rgb:5,9,8;
+  --bg:var(--ground);
+  --bg-rgb:12,20,19;
   --surface:var(--ink-2);          /* cellules, panneaux, encarts */
   --surface-2:var(--graphite);     /* haut des cartes en dégradé */
   --surface-3:var(--graphite-2);
@@ -86,7 +96,8 @@
   --accent-rgb:25,199,139;
   --accent-hi:var(--emerald-hi);
   --accent-hi-rgb:92,237,186;
-  --accent-dim:var(--emerald-dim); /* traits et points discrets */
+  --accent-dim:var(--emerald-dim); /* traits et points discrets, jamais du texte */
+  --accent-lo:var(--emerald-lo);   /* texte accentué en petit corps */
   --rule:var(--line);
   --rule-soft:var(--line-soft);
   --btn-bg:var(--emerald-btn);
@@ -789,8 +800,11 @@ ul.crosses li::before{background:none;border:1.5px solid var(--fg-dim);border-ra
       transition:none;
     }
     /* dérive des halos, cadencée par le défilement : rien ne tourne à l'arrêt */
-    .hero-bg .g1{animation:drift1 linear both;animation-timeline:scroll(root block);animation-range:0 110vh}
-    .hero-bg .g2{animation:drift2 linear both;animation-timeline:scroll(root block);animation-range:0 110vh}
+    /* la lumière de fond dérive à un cinquième du défilement : la page glisse
+       devant une source lointaine au lieu de l'emporter avec elle */
+    .sig .s1{animation:drift1 linear both;animation-timeline:scroll(root block)}
+    .sig .s2{animation:drift2 linear both;animation-timeline:scroll(root block)}
+    .plan b{animation:fillY linear both;animation-timeline:scroll(root block)}
   }
 }
 @supports (animation-timeline:view()){
@@ -804,8 +818,9 @@ ul.crosses li::before{background:none;border:1.5px solid var(--fg-dim);border-ra
   }
 }
 @keyframes fillX{from{transform:scaleX(0)}to{transform:scaleX(1)}}
-@keyframes drift1{to{transform:translate3d(4%,16%,0) scale(1.14)}}
-@keyframes drift2{to{transform:translate3d(-5%,-11%,0) scale(1.08)}}
+@keyframes fillY{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+@keyframes drift1{to{transform:translate3d(-3%,-14%,0) scale(1.1)}}
+@keyframes drift2{to{transform:translate3d(4%,10%,0) scale(1.06)}}
 
 /* ---- menu mobile : les liens arrivent en cascade ---- */
 @media (max-width:860px){
@@ -830,6 +845,7 @@ ul.crosses li::before{background:none;border:1.5px solid var(--fg-dim);border-ra
   .hero .scan{display:none}
   .infra .rail .pkt{opacity:0}
   .lvl .bar,.pipe-fill,.cond::before{transform:none;transition:none}
+  .plan b{display:none}
   .btn,.card::before,.card::after,.checks li,.checks li .bx,.checks li .bx svg{transition:none}
   .checks li .bx svg{stroke-dashoffset:0}
   .checks li{color:var(--fg)}
@@ -949,7 +965,10 @@ ul.crosses li::before{background:none;border:1.5px solid var(--fg-dim);border-ra
 .intro-on,.intro-on body{overflow:hidden}
 
 .js .intro.go{
-  display:block;position:fixed;inset:0;z-index:300;background:var(--ink);
+  /* Le voile prend la couleur du sol, pas le noir de la charte : depuis que le
+     sol est relevé (section 24), un voile plus sombre laisserait voir un saut
+     de ton au moment où il s'effface. */
+  display:block;position:fixed;inset:0;z-index:300;background:var(--bg);
   --mh:clamp(58px,8.4vw,104px);          /* hauteur de la marque */
   --gap:calc(var(--mh) * .252);           /* gouttière du logo d'origine */
   --shift:calc(var(--mh) * 1.94);         /* (largeur du mot + gouttière) / 2 */
@@ -1043,120 +1062,175 @@ ul.crosses li::before{background:none;border:1.5px solid var(--fg-dim);border-ra
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   24. HABILLAGES DE CADRE
+   24. LE FOND
    ───────────────────────────────────────────────────────────────────────────
-   Chaque grande section porte un habillage, et n'en change rien d'autre que
-   les jetons sémantiques de la section 0. Aucun composant n'est dupliqué.
+   Un seul sol pour tout le site. Il n'y a plus d'alternance de cadres clairs
+   et sombres : empiler des blocs de teintes contraires découpe la page en
+   tranches et se lit comme un gabarit, pas comme un lieu.
 
-   Le héros, la bande défilante, l'en-tête et le pied de page vivent hors des
-   sections : ils héritent du thème « nuit » de :root et ne bougent jamais.
-   L'en-tête reste sombre et translucide au-dessus des cadres clairs, ce qui
-   garde un point d'ancrage de marque pendant tout le défilement.
+   Le sol n'est pas au noir. Un fond déjà posé sur le plancher ne peut plus
+   s'enfoncer : c'est ce qui rendait le relief invisible à la version
+   précédente — une plaque encastrée dans du #050908 ne descendait que de cinq
+   niveaux sur 255. Le sol est donc relevé à #0C1413, ce qui laisse dix niveaux
+   de marge vers le bas et dix vers le haut. Mesuré sur le rendu : sol 19,
+   plaque 8, pont 30.
 
-   Quatre habillages, un par famille de fond : nuit (#050908), jour (#F2F8F5),
-   craie (#E9F5F0) et graphite (#111A17). Un cinquième, un émeraude plein en
-   fond, a été retiré : l'aplat saturé sur toute la hauteur d'un cadre écrasait
-   la composition au lieu de la porter. L'émeraude reste un accent.
+   Quatre couches, et le relief plutôt que la teinte :
 
-   Contrastes mesurés sur chaque surface de chaque thème, texte courant et
-   libellés compris. Le plus serré est de 4,62:1, au-dessus du seuil AA de
-   4,5:1. L'émeraude vif tombe à 2,04:1 sur fond clair : sur les thèmes clairs
-   il ne sert donc jamais au texte, seulement aux aplats, et l'accent textuel
-   descend à #0F7A56 ou #0C6B4A.
+   1. LE SOL          un champ continu avec une dérive tonale verticale, fixé
+                      au cadre : une lumière d'ambiance, pas un décor qui
+                      défile.
+   2. LA SIGNATURE    la lumière propre à chaque page. Elle ne change pas
+                      seulement de place d'une page à l'autre, elle change de
+                      forme : dôme à l'accueil, biseau sur la méthode, strates
+                      sur la collaboration, voûte serrée sur les tarifs. Elle
+                      dérive à un cinquième de la vitesse du défilement.
+   3. LE PLAN         les deux bords du conteneur tracés sur toute la hauteur,
+                      avec un repère à chaque début de section et une jauge qui
+                      se remplit sur le filet de gauche. Un dessin d'exécution
+                      qui mesure la page : le geste technique du système, pas
+                      un ornement.
+   4. LE GRAIN        inchangé, 2,4 %.
+
+   Le rythme est une affaire d'ombre : il reste lisible si l'on retire toute
+   couleur.
    ═══════════════════════════════════════════════════════════════════════════ */
 
-/* ---- JOUR · blanc clinique, encre, émeraude profond ---- */
-.t-jour{
-  --bg:var(--bone);          --bg-rgb:242,248,245;
-  --surface:#FFFFFF;         --surface-2:#FFFFFF;    --surface-3:#F6FAF8;
-  --fg:var(--ink);           --fg-rgb:5,9,8;
-  --fg-soft:#3B4A45;         --fg-dim:#5D6E68;
-  --accent:#0F7A56;          --accent-rgb:15,122,86;
-  --accent-hi:#0B5E42;       --accent-hi-rgb:11,94,66;
-  --accent-dim:#A9D6C4;
-  --rule:#C9DCD4;            --rule-soft:#E0EBE6;
-  --btn-bg:var(--ink);       --btn-bg-hi:#101C18;    --btn-fg:var(--bone);
+/* ---- 1. le sol ---- */
+body{background:var(--bg)}
+body::before{
+  content:"";position:fixed;inset:0;z-index:-3;pointer-events:none;
+  background:
+    linear-gradient(180deg,rgba(242,248,245,.045),transparent 42%),
+    radial-gradient(160% 96% at 50% 112%,rgba(0,0,0,.62),transparent 62%);
 }
 
-/* ---- CRAIE · blanc teinté, pour ne pas répéter le même blanc ---- */
-.t-craie{
-  --bg:#E9F5F0;              --bg-rgb:233,245,240;
-  --surface:#FFFFFF;         --surface-2:#FFFFFF;    --surface-3:#F3FAF7;
-  --fg:var(--ink);           --fg-rgb:5,9,8;
-  --fg-soft:#36463F;         --fg-dim:#57685F;
-  --accent:#0C6B4A;          --accent-rgb:12,107,74;
-  --accent-hi:#084E36;       --accent-hi-rgb:8,78,54;
-  --accent-dim:#9CCDB8;
-  --rule:#BBD8CB;            --rule-soft:#D5E8DE;
-  --btn-bg:var(--ink);       --btn-bg-hi:#101C18;    --btn-fg:var(--bone);
+/* ---- 2. la signature lumineuse ----
+   Une nappe par page, hors cadre, plus une contre-lumière. La dérive est
+   cadencée par le défilement (section 21) : rien ne tourne à l'arrêt. */
+.sig{position:fixed;inset:0;z-index:-2;pointer-events:none;overflow:clip}
+.sig span{
+  position:absolute;display:block;
+  background:radial-gradient(closest-side,rgba(25,199,139,var(--i,.2)),transparent 70%);
+  border-radius:50%;transform:translate3d(0,0,0);
+}
+.sig .s2{--i:.09;background:radial-gradient(closest-side,rgba(92,237,186,var(--i)),transparent 72%)}
+/* La troisième nappe n'existe que sur les pages qui lui donnent une forme. Le
+   balisage est le même partout, c'est la feuille qui décide. */
+.sig .s3{display:none}
+.p-methode .sig .s3,.p-collab .sig .s3{display:block}
+/* Sans classe de page (mentions légales, confidentialité) : la lumière de
+   l'accueil, en retrait. Une page sans signature se lit comme une page vide. */
+.sig .s1{inset:-40vh -20vw auto auto;width:88vw;height:104vh;--i:.15}
+.sig .s2{inset:auto auto -34vh -20vw;width:70vw;height:66vh}
+
+/* accueil — LE DÔME : une seule source haute et large, la plus ouverte du
+   site, plus une contre-lumière basse à gauche qui tient le pied de page. */
+.p-home    .sig .s1{inset:-40vh -20vw auto auto;width:88vw;height:104vh;--i:.23}
+.p-home    .sig .s2{inset:auto auto -34vh -20vw;width:70vw;height:66vh}
+
+/* méthode — LE BISEAU : la lumière entre par la gauche à mi-hauteur et une
+   lame traverse la page en diagonale, dans l'axe du rail de filtrage. */
+.p-methode .sig .s1{inset:2vh auto auto -34vw;width:76vw;height:96vh;--i:.2}
+.p-methode .sig .s2{inset:auto -22vw 2vh auto;width:58vw;height:60vh;--i:.08}
+.p-methode .sig .s3{
+  inset:-20vh -60vw auto -60vw;height:150vh;border-radius:0;
+  background:linear-gradient(104deg,transparent 38%,rgba(25,199,139,.075) 50%,transparent 62%);
 }
 
-/* ---- GRAPHITE · nuit plus haute, pour séparer deux cadres sombres ---- */
-.t-graphite{
-  --bg:var(--graphite);      --bg-rgb:17,26,23;
-  --surface:#0C1310;         --surface-2:#18231F;    --surface-3:#1D2A25;
-  --rule:#2C3A35;            --rule-soft:#212D29;
+/* collaboration — LES STRATES : deux nappes très plates et très larges, comme
+   des couches de temps empilées. La page se lit de haut en bas. */
+.p-collab  .sig .s1{inset:auto auto -30vh -14vw;width:128vw;height:60vh;--i:.19}
+.p-collab  .sig .s2{inset:8vh -30vw auto auto;width:112vw;height:44vh;--i:.075}
+.p-collab  .sig .s3{
+  inset:44vh 0 auto 0;height:34vh;border-radius:0;
+  background:linear-gradient(180deg,transparent,rgba(25,199,139,.055),transparent);
 }
 
-/* ---- ajustements propres aux cadres clairs ---- */
-/* Les cartes des thèmes sombres portent un dégradé et une ombre portée ; en
-   clair c'est un liseré net et une ombre douce qui font le relief. */
-.t-jour .card,.t-craie .card,
-.t-jour .price .box,.t-craie .price .box{
-  background:var(--surface);
-  border-color:var(--rule);
-  box-shadow:0 1px 2px rgba(5,9,8,.04),0 12px 32px -22px rgba(5,9,8,.22);
-}
-.t-jour .card.accent,.t-craie .card.accent{
-  background:linear-gradient(172deg,rgba(var(--accent-rgb),.09),rgba(var(--accent-rgb),.02) 72%);
-  border-color:rgba(var(--accent-rgb),.32);
-}
-.t-jour .price .box.hot,.t-craie .price .box.hot{
-  background:linear-gradient(172deg,rgba(var(--accent-rgb),.1),rgba(var(--accent-rgb),.02) 76%);
-  border-color:var(--accent);
-  box-shadow:0 18px 44px -28px rgba(var(--accent-rgb),.5);
-}
-/* le liseré au pointeur doit s'assombrir, pas s'éclaircir */
-.t-jour .card::before,.t-craie .card::before{
-  background:radial-gradient(260px circle at var(--mx,50%) var(--my,50%),rgba(var(--accent-rgb),.5),transparent 66%);
-}
-.t-jour .card::after,.t-craie .card::after{
-  background:radial-gradient(420px circle at var(--mx,50%) var(--my,50%),rgba(var(--accent-rgb),.07),transparent 62%);
-}
-/* le reflet du bouton principal est clair sur fond sombre : inversé ici */
-.t-jour .btn-pri::before,.t-craie .btn-pri::before{
-  background:radial-gradient(120px circle at var(--mx,50%) var(--my,50%),rgba(var(--fg-rgb),.22),transparent 62%);
-}
-.t-jour .btn-gho,.t-craie .btn-gho{background:transparent}
-/* L'encart calendrier est un verre translucide posé sur le halo du cadre
-   sombre. Sur fond clair le halo est coupé et le verre se confondait avec son
-   propre fond : il redevient une carte opaque. */
-.t-jour .slot,.t-craie .slot{
-  background:var(--surface);backdrop-filter:none;-webkit-backdrop-filter:none;
-  border-color:var(--rule);
-  box-shadow:0 1px 2px rgba(5,9,8,.04),0 12px 32px -22px rgba(5,9,8,.22);
-}
-.t-jour .btn-gho:hover,.t-craie .btn-gho:hover{
-  background:rgba(var(--accent-rgb),.06);border-color:var(--accent);color:var(--accent-hi);
-}
+/* tarifs — LA VOÛTE : une source haute et resserrée, centrée sur le tableau,
+   plus un quadrillage de registre très faible. Du papier comptable. */
+.p-tarifs  .sig .s1{inset:-46vh 50% auto auto;margin-right:-34vw;width:70vw;height:88vh;--i:.21}
+.p-tarifs  .sig .s2{inset:auto -26vw -24vh auto;width:52vw;height:56vh}
 
-/* ---- le fond de chaque cadre ---- */
-.sec.t-jour,.sec.t-craie,.sec.t-graphite,
-.book.t-jour,.book.t-craie,.book.t-graphite{
-  background:var(--bg);color:var(--fg);
+/* ---- 3. le calque de plan ---- */
+.plan{
+  position:fixed;inset:0;z-index:-1;pointer-events:none;
+  display:flex;justify-content:center;
 }
-/* Le changement de couleur sépare déjà les cadres : le filet ne sert plus
-   qu'entre deux cadres de même habillage. */
-.sec+.sec{border-top-color:var(--rule-soft)}
+.plan i{
+  position:relative;display:block;width:100%;max-width:var(--maxw);
+  padding:0 var(--pad);box-sizing:border-box;
+}
+/* les deux filets, posés exactement sur les bords du conteneur */
+.plan i::before,.plan i::after{
+  content:"";position:absolute;top:0;bottom:0;width:1px;
+  background:linear-gradient(180deg,transparent,rgba(242,248,245,.085) 10%,rgba(242,248,245,.085) 90%,transparent);
+}
+.plan i::before{left:var(--pad)}
+.plan i::after{right:var(--pad)}
+/* la jauge : le filet de gauche se remplit d'émeraude à mesure qu'on descend.
+   Le fond mesure la page, ce qui est exactement ce que vend Leadcore. */
+.plan b{
+  position:absolute;top:0;bottom:0;left:var(--pad);width:1px;
+  transform-origin:0 0;transform:scaleY(0);
+  background:linear-gradient(180deg,transparent,rgba(25,199,139,.5) 10%,rgba(25,199,139,.5) 90%,transparent);
+}
+/* quadrillage de registre, page des tarifs seulement */
+.p-tarifs .plan i{
+  background:
+    repeating-linear-gradient(180deg,rgba(242,248,245,.019) 0 1px,transparent 1px 104px);
+}
+@media (max-width:860px){.plan{display:none}}
 
-/* La section de réservation portait un halo émeraude pensé pour le sombre. */
-.book.t-jour::before,.book.t-craie::before{display:none}
+/* repère de section sur le filet de gauche, et numéro de planche dans la marge.
+   Le calcul reprend l'alignement du conteneur : bord gauche du contenu =
+   moitié de la gouttière centrale, plus le padding. Sans ce max() le repère
+   décroche du filet dès que la fenêtre dépasse la largeur maximale. */
+.sec,.book{position:relative;--gut:calc(max(0px,(100% - var(--maxw))/2) + var(--pad))}
+.sec::before,.book::before{
+  content:"";position:absolute;top:-4px;left:var(--gut);width:7px;height:7px;
+  border-radius:1px;background:var(--accent);margin-left:-3px;
+}
+.sec[data-plate]::after{
+  content:attr(data-plate);position:absolute;top:-9px;left:var(--gut);margin-left:16px;
+  font-family:var(--mono);font-size:10.5px;font-weight:500;letter-spacing:.14em;
+  color:var(--fg-dim);opacity:.85;
+}
+@media (max-width:860px){.sec::before,.book::before,.sec[data-plate]::after{display:none}}
+
+/* ---- relief des sections ----
+   Deux ponctuations par page, jamais plus : une plaque encastrée là où vivent
+   les chiffres, un pont soulevé là où on parle à quelqu'un. Le reste est à
+   plat sur le sol. */
+/* encastrée : le sol s'enfonce de dix niveaux, avec une lumière rasante sur
+   l'arête haute et une ombre franche sur l'arête basse. */
+.sec.plate,.book.plate{
+  background:linear-gradient(180deg,var(--sunk),#060B0A 46%,var(--sunk));
+  box-shadow:
+    inset 0 1px 0 rgba(242,248,245,.075),
+    inset 0 14px 28px -18px rgba(0,0,0,.9),
+    inset 0 -1px 0 rgba(0,0,0,.6);
+}
+/* soulevée : la section se détache du sol, un seul usage par page */
+.sec.raise{
+  background:linear-gradient(180deg,var(--lifted),#101917);
+  border-top:1px solid rgba(242,248,245,.1);
+  box-shadow:0 -26px 54px -34px rgba(0,0,0,.95),0 1px 0 rgba(0,0,0,.55);
+}
+/* le filet entre deux sections à plat ne sert plus : le relief le remplace */
+.sec+.sec{border-top:0}
+.sec.plate+.sec:not(.plate):not(.raise),
+.sec.raise+.sec:not(.plate):not(.raise){border-top:1px solid var(--rule-soft)}
+
+/* La signature et le plan remplacent les halos locaux d'avant. */
+.hero-bg,.book::after{display:none}
 
 /* ═══════════════════════════════════════════════════════════════════════════
    25. EN-TÊTE DES PAGES INTÉRIEURES
    Le héros pleine hauteur est réservé à l'accueil. Les pages Méthode,
    Collaboration et Tarifs ouvrent sur un bandeau compact : libellé, titre,
-   chapeau, et le halo de marque en fond.
+   chapeau, et l'index des trois pages. Le halo local a disparu avec la
+   refonte du fond — la signature de la page (section 24) le remplace.
    ═══════════════════════════════════════════════════════════════════════════ */
 
 .phead{
@@ -1167,12 +1241,29 @@ ul.crosses li::before{background:none;border:1.5px solid var(--fg-dim);border-ra
 .phead h1{font-size:clamp(34px,5vw,62px);line-height:1.03;letter-spacing:-.04em;max-width:22ch}
 .phead h1 .ex{font-size:1.06em}
 .phead .lede{max-width:58ch;margin-top:20px}
-.phead-bg{position:absolute;inset:0;z-index:-1;pointer-events:none;overflow:clip}
-.phead-bg span{position:absolute;border-radius:50%;filter:blur(8px)}
-.phead-bg .a{inset:-40% 44% auto -12%;height:520px;
-  background:radial-gradient(closest-side,rgba(var(--accent-rgb),.16),transparent 72%)}
-.phead-bg .b{inset:auto -14% -60% 38%;width:620px;height:400px;
-  background:radial-gradient(closest-side,rgba(var(--accent-rgb),.09),transparent 70%)}
+/* Index des trois pages de détail. Elles se lisent dans l'ordre, et sans ce
+   repère chacune a l'air isolée. Il ferme aussi le bandeau d'un trait réglé. */
+.pnav{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  margin-top:clamp(30px,4vw,48px);border-top:1px solid var(--rule);
+}
+.pnav>*{min-width:0}
+.pnav a{
+  display:grid;grid-template-columns:auto 1fr;gap:11px;align-items:baseline;
+  padding:15px 18px 15px 0;text-decoration:none;color:var(--fg-dim);
+  font-family:var(--label);font-size:14px;line-height:1.35;
+  border-bottom:1px solid transparent;
+  transition:color var(--t-fast) linear,border-color var(--t-fast) linear;
+}
+.pnav a+a{padding-left:18px;border-left:1px solid var(--rule-soft)}
+.pnav a b{font-family:var(--mono);font-size:11px;font-weight:500;color:var(--accent-lo)}
+.pnav a:hover,.pnav a:focus-visible{color:var(--fg)}
+.pnav a[aria-current]{color:var(--fg);border-bottom-color:var(--accent)}
+.pnav a[aria-current] b{color:var(--accent)}
+@media (max-width:760px){
+  .pnav{grid-template-columns:1fr}
+  .pnav a+a{padding-left:0;border-left:0;border-top:1px solid var(--rule-soft)}
+}
 
 /* fil d'Ariane discret, juste au-dessus du titre */
 .crumb{
@@ -1353,6 +1444,9 @@ ul.crosses li::before{background:none;border:1.5px solid var(--fg-dim);border-ra
     }
     /* déjà porté par l'IntersectionObserver : on évite le doublon */
     .js .sec-head.rv{opacity:1;transform:none;transition:none}
+    /* Un chapeau tenu en position sticky a une progression de view() figée : il
+       resterait bloqué à mi-apparition. Il garde donc l'apparition simple. */
+    .js .stick-2 .hold .sec-head{animation:none}
   }
 }
 @keyframes headRise{
@@ -1372,4 +1466,416 @@ ul.crosses li::before{background:none;border:1.5px solid var(--fg-dim);border-ra
   .js main{animation:none}
   .spark i{transform:scaleY(1)!important;transition:none}
   .pagecard,.pager a{transition:none}
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   30. COMPOSITIONS PROPRES À CHAQUE PAGE
+   ───────────────────────────────────────────────────────────────────────────
+   Chaque page a sa propre structure, pour qu'aucune ne se lise comme un
+   morceau détaché d'une autre :
+
+   Méthode        une épine dorsale verticale, avec une indentation qui
+                  progresse à chaque étape. Le regard descend et avance.
+   Collaboration  une frise chronologique : la semaine à gauche en grand, le
+                  contenu à droite. L'axe du temps porte la page.
+   Tarifs         un grand livre : lignes réglées, chiffres alignés à droite,
+                  trait de total. La page se lit comme une addition.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ---- ÉPINE DORSALE (méthode) ---- */
+.spine{position:relative;--gut:clamp(30px,5.4vw,70px);padding-left:var(--gut)}
+.spine::before{
+  content:"";position:absolute;left:calc(var(--gut) / 2.4);top:10px;bottom:10px;width:1px;
+  background:var(--rule);
+}
+/* le rail se remplit au défilement */
+.spine-fill{
+  position:absolute;left:calc(var(--gut) / 2.4);top:10px;bottom:10px;width:1px;
+  transform-origin:top;transform:scaleY(0);
+  background:linear-gradient(180deg,var(--accent-dim),var(--accent) 60%,var(--accent-hi));
+  box-shadow:0 0 12px rgba(var(--accent-rgb),.45);
+  transition:transform 1.3s var(--ease-out);
+}
+.spine.in .spine-fill{transform:scaleY(1)}
+
+.node{position:relative;padding-bottom:clamp(34px,4.6vw,62px)}
+.node:last-child{padding-bottom:0}
+.node::before{
+  content:"";position:absolute;top:9px;left:calc(-1 * var(--gut) + var(--gut) / 2.4 - 5px);
+  width:11px;height:11px;border-radius:50%;
+  background:var(--bg);border:1.5px solid var(--accent-dim);
+  transition:background .45s var(--ease-out),box-shadow .45s var(--ease-out);
+}
+.node.in::before{background:var(--accent)}
+.node:last-child.in::before{box-shadow:0 0 0 5px rgba(var(--accent-rgb),.16)}
+/* L'indentation progresse : on avance en descendant. nth-of-type et non
+   nth-child, parce que le rail .spine-fill est le premier enfant de .spine et
+   décalait le compte d'un cran — la dernière étape revenait à zéro. */
+.node:nth-of-type(2){margin-left:clamp(0px,1.8vw,32px)}
+.node:nth-of-type(3){margin-left:clamp(0px,3.6vw,64px)}
+.node:nth-of-type(4){margin-left:clamp(0px,5.4vw,96px)}
+.node:nth-of-type(5){margin-left:clamp(0px,7.2vw,128px)}
+.node .k{
+  font-family:var(--label);font-size:12px;font-weight:600;letter-spacing:.11em;
+  text-transform:uppercase;color:var(--accent);display:block;margin-bottom:12px;
+}
+.node h3{margin-bottom:12px;font-size:clamp(21px,2.5vw,29px)}
+.node p{color:var(--fg-soft);font-size:16.5px;line-height:1.55;max-width:58ch;margin:0}
+.node p+p{margin-top:12px}
+@media (max-width:680px){
+  .spine{--gut:26px}
+  .node[class]{margin-left:0}
+}
+
+/* ---- FRISE CHRONOLOGIQUE (collaboration) ---- */
+.chrono{position:relative}
+/* Trois colonnes : la semaine, ce qui se passe, et ce que ça vous coûte. La
+   troisième existe parce que sans elle la rangée laissait 250 px de vide à
+   droite, et parce que le coût en temps mérite d'être lu en colonne. */
+.chrono-row{
+  display:grid;grid-template-columns:clamp(88px,12vw,152px) minmax(0,1fr) clamp(152px,17vw,210px);
+  gap:clamp(20px,3.2vw,44px);align-items:start;
+  padding:clamp(26px,3.4vw,46px) 0;border-top:1px solid var(--rule-soft);
+}
+.chrono-row>*{min-width:0}
+.chrono-row:first-child{border-top:0;padding-top:0}
+.chrono-row:last-child{padding-bottom:0}
+.chrono-w{position:relative;padding-left:clamp(18px,2.4vw,30px)}
+.chrono-w::before{
+  content:"";position:absolute;left:0;top:.42em;width:9px;height:9px;border-radius:50%;
+  background:var(--bg);border:1.5px solid var(--accent-dim);
+}
+/* l'axe du temps, qui relie les repères */
+.chrono-w::after{
+  content:"";position:absolute;left:4px;top:calc(.42em + 11px);height:calc(100% + clamp(52px,6.8vw,92px));width:1px;
+  background:var(--rule);
+}
+.chrono-row:last-child .chrono-w::after{display:none}
+.chrono-row.now .chrono-w::before{background:var(--accent);box-shadow:0 0 0 5px rgba(var(--accent-rgb),.15)}
+.chrono-w .n{
+  display:block;font-weight:800;font-size:clamp(26px,3.4vw,42px);line-height:1;
+  letter-spacing:-.05em;font-variant-numeric:tabular-nums;
+}
+.chrono-w .u{
+  display:block;margin-top:8px;font-family:var(--label);font-size:11.5px;font-weight:600;
+  letter-spacing:.13em;text-transform:uppercase;color:var(--fg-dim);
+}
+.chrono-b h3{margin-bottom:10px;font-size:clamp(20px,2.3vw,26px)}
+.chrono-b p{color:var(--fg-soft);font-size:16.5px;line-height:1.55;max-width:60ch;margin:0}
+.chrono-y{display:grid;gap:11px;justify-items:end;text-align:right}
+.chrono-y .u{
+  font-family:var(--label);font-size:11px;font-weight:600;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--fg-dim);
+}
+.chrono-y .you,.chrono-b .you{
+  display:inline-flex;align-items:center;gap:9px;
+  border:1px solid var(--accent-dim);border-radius:999px;padding:7px 15px;
+  font-family:var(--label);font-size:12px;font-weight:600;letter-spacing:.07em;
+  color:var(--accent-hi);background:rgba(var(--accent-rgb),.07);
+}
+.chrono-b .you{margin-top:16px}
+@media (max-width:1000px){
+  .chrono-row{grid-template-columns:clamp(82px,11vw,132px) minmax(0,1fr)}
+  .chrono-y{grid-column:2;justify-items:start;text-align:left;margin-top:4px}
+}
+@media (max-width:680px){
+  .chrono-row{grid-template-columns:1fr;gap:16px}
+  .chrono-y{grid-column:1}
+  .chrono-w::after{display:none}
+}
+
+/* ---- GRAND LIVRE (tarifs) ---- */
+.ledger{border-top:1px solid var(--rule)}
+.led{
+  display:grid;grid-template-columns:1fr auto;gap:clamp(18px,3vw,44px);align-items:baseline;
+  padding:clamp(20px,2.6vw,30px) 0;border-bottom:1px solid var(--rule-soft);
+}
+.led>*{min-width:0}
+.led .t{font-size:17.5px;font-weight:600;letter-spacing:-.018em}
+.led .d{display:block;margin-top:8px;font-size:15px;line-height:1.5;color:var(--fg-soft);max-width:62ch;font-weight:400;letter-spacing:0}
+.led .f{
+  text-align:right;white-space:nowrap;font-weight:750;
+  font-size:clamp(23px,3vw,36px);line-height:1;letter-spacing:-.045em;
+  font-variant-numeric:tabular-nums;
+}
+.led .f small{display:block;margin-top:9px;font-size:12.5px;font-weight:550;letter-spacing:.07em;
+  text-transform:uppercase;color:var(--fg-dim);font-family:var(--label)}
+.led.hot .f{color:var(--accent-hi)}
+.led.total{
+  border-bottom:0;border-top:2px solid var(--accent-dim);margin-top:4px;
+  padding-top:clamp(22px,2.8vw,32px);
+}
+.led.total .t{font-size:19px}
+.led.total .f{font-size:clamp(28px,3.8vw,46px);color:var(--accent-hi)}
+@media (max-width:560px){
+  .led{grid-template-columns:1fr;gap:14px}
+  .led .f{text-align:left}
+  .led .f small{margin-top:6px}
+}
+
+/* ---- ÉNONCÉ FIXE (méthode) ----
+   La phrase reste à l'écran pendant que la colonne de filtrage défile à côté.
+   C'est ce qui empêche la page de se lire comme une suite de blocs : une seule
+   idée tenue, et la démonstration qui passe devant. */
+.stick-2{
+  display:grid;grid-template-columns:minmax(0,.84fr) minmax(0,1.16fr);
+  gap:clamp(28px,5vw,80px);align-items:start;
+}
+.stick-2>.hold{position:sticky;top:calc(var(--header-h) + clamp(24px,4vw,56px))}
+.stick-2 .hold .lede{margin-bottom:0}
+/* La colonne tenue fait 440 px de large sur un grand écran : le titre de
+   section y entre en quatre lignes, donc il descend d'un cran. Mesuré, pas
+   estimé. */
+.stick-2 .hold h2{font-size:clamp(25px,2.9vw,38px)}
+.stick-2 .hold .lede{font-size:16.5px}
+
+/* Sommaire de la colonne, tenu avec l'énoncé : il dit où on en est dans les
+   cinq filtres, et il occupe la hauteur que la phrase seule laissait vide. */
+.legend{
+  list-style:none;margin:clamp(26px,3.4vw,40px) 0 0;display:grid;gap:11px;
+  border-top:1px solid var(--rule-soft);padding:clamp(20px,2.6vw,26px) 0 0;
+}
+.legend li{display:grid;grid-template-columns:22px 1fr;gap:10px;align-items:baseline}
+.legend b{font-family:var(--mono);font-size:11px;font-weight:500;color:var(--accent-lo)}
+.legend a{
+  text-decoration:none;color:var(--fg-dim);font-family:var(--label);font-size:14px;
+  transition:color var(--t-fast) linear;
+}
+.legend a:hover,.legend a:focus-visible{color:var(--fg)}
+@media (max-width:900px){.legend{display:none}}
+@media (max-width:900px){
+  .stick-2{grid-template-columns:1fr;gap:clamp(24px,4vw,38px)}
+  .stick-2>.hold{position:static}
+}
+
+/* ---- BALANCE DES CHARGES (collaboration) ----
+   Deux colonnes face à face, séparées par un filet. Celle de gauche est courte
+   parce que votre part l'est : l'asymétrie est l'argument, pas un accident de
+   mise en page. */
+.duo{display:grid;grid-template-columns:1fr 1px 1fr;gap:0;border-top:1px solid var(--rule)}
+.duo>*{min-width:0}
+.duo .rail{background:linear-gradient(180deg,var(--rule),transparent)}
+.duo .col{padding:clamp(24px,3.2vw,40px) 0}
+.duo .col.b{padding-left:clamp(22px,3.4vw,46px)}
+.duo .col.a{padding-right:clamp(22px,3.4vw,46px)}
+.duo .who{
+  display:flex;align-items:baseline;justify-content:space-between;gap:14px;
+  padding-bottom:clamp(16px,2vw,22px);margin-bottom:clamp(16px,2vw,22px);
+  border-bottom:1px solid var(--rule-soft);
+}
+.duo .who span{
+  font-family:var(--label);font-size:11.5px;font-weight:600;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--fg-dim);
+}
+.duo .col.a .who span{color:var(--accent)}
+.duo .who b{
+  font-weight:750;font-size:clamp(19px,2.3vw,26px);letter-spacing:-.035em;
+  font-variant-numeric:tabular-nums;white-space:nowrap;
+}
+.duo ul{list-style:none;margin:0;padding:0;display:grid;gap:clamp(12px,1.6vw,18px)}
+.duo li{position:relative;padding-left:20px;font-size:16px;line-height:1.5;color:var(--fg-soft)}
+.duo li::before{
+  content:"";position:absolute;left:0;top:.62em;width:7px;height:1px;background:var(--fg-dim);
+}
+.duo .col.a li::before{background:var(--accent);height:2px;top:.58em}
+.duo li b{color:var(--fg);font-weight:600}
+.duo .note{margin:clamp(18px,2.4vw,26px) 0 0;font-size:14.5px;line-height:1.5;color:var(--fg-dim)}
+@media (max-width:760px){
+  .duo{grid-template-columns:1fr}
+  .duo .rail{height:1px;background:var(--rule-soft)}
+  .duo .col.a,.duo .col.b{padding-left:0;padding-right:0}
+}
+
+/* ---- COMPARAISON (tarifs) ----
+   Deux barres à la même échelle. Le gris est l'autre option, l'émeraude la
+   nôtre. La longueur fait l'argument ; le chiffre le confirme. */
+.vs{display:grid;gap:clamp(20px,2.6vw,30px)}
+.vs .r{display:grid;gap:11px}
+.vs .hd{display:flex;align-items:baseline;justify-content:space-between;gap:18px}
+.vs .hd b{font-weight:600;font-size:16.5px;letter-spacing:-.015em}
+.vs .hd .a{
+  font-weight:800;font-size:clamp(21px,2.6vw,31px);line-height:1;letter-spacing:-.045em;
+  font-variant-numeric:tabular-nums;white-space:nowrap;
+}
+.vs .t{position:relative;height:9px;border-radius:2px;background:rgba(var(--fg-rgb),.06);overflow:hidden}
+.vs .t i{
+  position:absolute;inset:0;border-radius:2px;transform-origin:left;transform:scaleX(0);
+  background:linear-gradient(90deg,#3E4C47,#697C74);
+  transition:transform 1.05s var(--ease-out) calc(var(--i,0) * 130ms);
+}
+.vs .r.in .t i{transform:scaleX(var(--w,1))}
+.vs .r.us .t i{background:linear-gradient(90deg,var(--accent-dim),var(--accent) 70%,var(--accent-hi))}
+.vs .r.us .hd .a{color:var(--accent-hi)}
+.vs .n{margin:0;font-size:14.5px;line-height:1.5;color:var(--fg-dim);max-width:64ch}
+.vs .n b{color:var(--fg-soft);font-weight:600}
+
+/* ---- BANDE DE CHIFFRES (accueil) ----
+   Les quatre gains sur une seule ligne réglée, comme un bandeau de cotation.
+   Le chiffre survolé ou traversé par le défilement se détache. */
+.band{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--rule)}
+.band>*{min-width:0}
+.band-c{
+  position:relative;padding:clamp(24px,3vw,36px) clamp(16px,2vw,26px) clamp(24px,3vw,34px) 0;
+  border-bottom:1px solid var(--rule-soft);
+}
+.band-c+.band-c{padding-left:clamp(16px,2vw,26px);border-left:1px solid var(--rule-soft)}
+.band-c .k{
+  font-family:var(--label);font-size:11.5px;font-weight:600;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--accent);display:block;margin-bottom:14px;
+}
+.band-c .v{
+  display:flex;align-items:baseline;gap:.1em;font-weight:800;
+  font-size:clamp(30px,3.7vw,46px);line-height:1;letter-spacing:-.05em;
+  font-variant-numeric:tabular-nums;
+}
+.band-c .v small{font-size:.4em;font-weight:550;letter-spacing:-.02em;color:var(--fg-soft)}
+.band-c p{margin:14px 0 0;font-size:14.5px;line-height:1.45;color:var(--fg-dim)}
+/* le trait de tête s'allume quand la cellule apparaît */
+.band-c::before{
+  content:"";position:absolute;top:-1px;left:0;right:0;height:1px;background:var(--accent);
+  transform:scaleX(0);transform-origin:left;transition:transform .7s var(--ease-out);
+  transition-delay:calc(var(--i,0) * 90ms);
+}
+.band-c.in::before{transform:none}
+@media (max-width:900px){
+  .band{grid-template-columns:repeat(2,1fr)}
+  .band-c:nth-child(odd)+.band-c{border-left:1px solid var(--rule-soft)}
+}
+@media (max-width:520px){
+  .band{grid-template-columns:1fr}
+  .band-c,.band-c+.band-c{padding-left:0;border-left:0}
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   31. DÉFILEMENT PROPRE À CHAQUE PAGE
+   ───────────────────────────────────────────────────────────────────────────
+   Le mouvement lié au défilement est cadencé par le compositeur
+   (animation-timeline), donc sans écouteur, sans rAF et sans bibliothèque. Ce
+   que Firefox ne sait pas encore cadencer reste couvert par
+   l'IntersectionObserver déjà en place : la page est complète dans les deux
+   cas, seule la finesse du cadencement change.
+
+   Un principe, tenu partout : deux vitesses dans un même bloc. L'élément de
+   repère (un numéro de semaine, un montant, un intitulé) avance plus lentement
+   que le texte qu'il accompagne. C'est ce décalage qui donne la profondeur —
+   pas une translation forte, qui se remarque et fatigue.
+
+   Rien ne bouge en dehors de transform et opacity, donc rien ne provoque de
+   recalcul de mise en page pendant le défilement.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@supports (animation-timeline:view()){
+  @media (prefers-reduced-motion:no-preference){
+
+    /* ---- méthode : la colonne de filtrage ----
+       Chaque étape se lève depuis sa droite, l'indentation la portant déjà vers
+       l'intérieur. Le repère du rail grossit une fois l'étape en place. */
+    .js .node{
+      animation:nodeIn linear both;
+      animation-timeline:view(block);
+      animation-range:entry 6% entry 58%;
+    }
+    .js .node::before{
+      animation:dotPop linear both;
+      animation-timeline:view(block);
+      animation-range:entry 22% entry 70%;
+    }
+    /* le rail se remplit à la position du défilement, et non d'un bloc à
+       l'apparition : la progression du regard et celle du trait sont la même */
+    .js .spine-fill{
+      animation:fillY linear both;
+      animation-timeline:view(block);
+      animation-range:cover 6% cover 74%;
+      transition:none;
+    }
+
+    /* ---- collaboration : l'axe du temps ----
+       Le numéro de semaine dérive à vitesse réduite, le bloc de droite arrive
+       au rythme normal. Deux vitesses, un seul défilement. */
+    .js .chrono-w{
+      animation:slowRise linear both;
+      animation-timeline:view(block);
+      animation-range:entry 0% cover 34%;
+    }
+    .js .chrono-b{
+      animation:rowIn linear both;
+      animation-timeline:view(block);
+      animation-range:entry 8% entry 62%;
+    }
+    /* les deux colonnes face à face entrent en sens inverse */
+    .js .duo .col.a{animation:fromLeft linear both;animation-timeline:view(block);animation-range:entry 4% entry 52%}
+    .js .duo .col.b{animation:fromRight linear both;animation-timeline:view(block);animation-range:entry 4% entry 56%}
+
+    /* ---- tarifs : le grand livre s'écrit ----
+       Chaque ligne se découvre de gauche à droite, comme une écriture portée
+       au registre. clip-path est composité, donc gratuit. */
+    .js .led{
+      animation:writeIn linear both;
+      animation-timeline:view(block);
+      animation-range:entry 4% entry 54%;
+    }
+    .js .led .f{
+      animation:slowRise linear both;
+      animation-timeline:view(block);
+      animation-range:entry 0% cover 30%;
+    }
+
+    /* ---- partout : le chapeau de section et la bande de chiffres ---- */
+    .js .band-c{
+      animation:rowIn linear both;
+      animation-timeline:view(block);
+      animation-range:entry 10% entry 64%;
+    }
+  }
+}
+
+@keyframes nodeIn{
+  from{opacity:0;transform:translate3d(22px,16px,0)}
+  to{opacity:1;transform:none}
+}
+@keyframes dotPop{
+  from{transform:scale(.4)}
+  60%{transform:scale(1)}
+  to{transform:scale(1)}
+}
+@keyframes rowIn{
+  from{opacity:0;transform:translate3d(0,22px,0)}
+  to{opacity:1;transform:none}
+}
+@keyframes slowRise{
+  from{opacity:.3;transform:translate3d(0,26px,0)}
+  40%{opacity:1}
+  to{opacity:1;transform:translate3d(0,-10px,0)}
+}
+@keyframes fromLeft{
+  from{opacity:0;transform:translate3d(-16px,10px,0)}
+  to{opacity:1;transform:none}
+}
+@keyframes fromRight{
+  from{opacity:0;transform:translate3d(16px,10px,0)}
+  to{opacity:1;transform:none}
+}
+@keyframes writeIn{
+  from{opacity:0;clip-path:inset(0 100% 0 0)}
+  to{opacity:1;clip-path:inset(0 0 0 0)}
+}
+
+/* Les mêmes blocs sans animation-timeline : l'IntersectionObserver pose .in et
+   une transition joue le même geste, en moins finement cadencé. */
+@supports not (animation-timeline:view()){
+  .js .node,.js .chrono-b,.js .led,.js .duo .col{
+    opacity:0;transform:translate3d(0,22px,0);
+    transition:opacity .66s var(--ease-out),transform .66s var(--ease-out);
+  }
+  .js .node.in,.js .chrono-b.in,.js .led.in,.js .duo .col.in{opacity:1;transform:none}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .spine-fill{transition:none;transform:scaleY(1)}
+  .node,.node::before,.chrono-w,.chrono-b,.duo .col,.led,.led .f,.band-c{
+    animation:none!important;opacity:1!important;transform:none!important;
+    clip-path:none!important;transition:none!important;
+  }
+  .vs .t i{transition:none}
+  .vs .r .t i{transform:scaleX(var(--w,1))}
 }

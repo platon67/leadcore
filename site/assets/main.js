@@ -82,6 +82,9 @@
   var hdr = doc.querySelector(".hdr");
   var nav = doc.getElementById("nav");
   var prog = doc.querySelector(".prog");
+  /* jauge du calque de fond : même progression, tracée sur le filet de gauche.
+     Masquée sous prefers-reduced-motion, donc inutile de la piloter. */
+  var planFill = calm ? null : doc.querySelector(".plan b");
 
   /* La jauge de progression est calculée par le compositeur quand le navigateur
      sait faire (animation-timeline), et seulement sinon par ce script. */
@@ -112,9 +115,11 @@
       }
       if (down || up) lastY = y;
 
-      if (prog && !progByCss) {
+      if (!progByCss && (prog || planFill)) {
         var span = doc.documentElement.scrollHeight - window.innerHeight;
-        prog.style.transform = "scaleX(" + (span > 0 ? Math.min(1, y / span) : 0) + ")";
+        var p = span > 0 ? Math.min(1, y / span) : 0;
+        if (prog) prog.style.transform = "scaleX(" + p + ")";
+        if (planFill) planFill.style.transform = "scaleY(" + p + ")";
       }
     };
 
@@ -153,8 +158,14 @@
 
   /* ─────────── 4. apparition au défilement ───────────
      Le décalage entre éléments voisins vient de --i, posé dans le HTML : la
-     cascade est donc une affaire de CSS, le script ne fait que dire « visible ». */
-  var reveals = doc.querySelectorAll(".rv, .pipe");
+     cascade est donc une affaire de CSS, le script ne fait que dire « visible ».
+
+     Les compositions de page (section 30) sont observées elles aussi : sur les
+     navigateurs qui savent cadencer une animation sur le défilement, .in ne
+     sert qu'aux barres et aux traits ; sur les autres, c'est ce qui rend les
+     blocs visibles. */
+  var reveals = doc.querySelectorAll(
+    ".rv, .pipe, .node, .chrono-b, .led, .duo .col, .vs .r, .band-c, .spine");
 
   if (calm || !hasIO) {
     Array.prototype.forEach.call(reveals, function (el) { el.classList.add("in"); });
