@@ -3,8 +3,9 @@
 ## `leadcore-ouverture-1080p.mp4`
 
 L'habillage d'ouverture du site, rendu en fichier : 1920 × 1080, 60 i/s,
-3,67 s, H.264, 177 Ko. Fond `#050908`, donc il se pose sans raccord sur
-n'importe quel support à la charte.
+3,67 s, H.264, 206 Ko. Fond `#0C1413` — le sol du site depuis la refonte du
+fond (section 24 de `site/assets/styles.css`) — donc il se pose sans raccord
+sur une page du site comme sur n'importe quel support à la charte.
 
 Séquence, en quatre temps :
 
@@ -27,7 +28,8 @@ de la marque, remontée à 190 px : à 104 px elle serait perdue sur un cadre 10
 
 Conséquence utile : **la vidéo ne peut pas diverger du site**. Retoucher la
 chorégraphie dans `styles.css` et relancer le rendu suffit à regénérer un film
-à jour.
+à jour. Une seule valeur est à reporter à la main, le fond : il est déclaré
+dans `film.html` et dans le `fade` de ffmpeg, et doit valoir `--ground`.
 
 ### Regénérer
 
@@ -36,7 +38,7 @@ python3 -m http.server 8391 --directory site      # le site sert la feuille de s
 python3 -m http.server 8392 --directory <scratch> # la page de rendu
 node film-shoot.js                                 # 220 images en 1080p
 ffmpeg -framerate 60 -i film/f%04d.png \
-  -vf "fade=t=out:st=3.17:d=0.5:color=0x050908,format=yuv420p" \
+  -vf "fade=t=out:st=3.17:d=0.5:color=0x0C1413,format=yuv420p" \
   -c:v libx264 -profile:v high -preset slow -crf 17 -movflags +faststart \
   leadcore-ouverture-1080p.mp4
 ```

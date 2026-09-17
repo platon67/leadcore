@@ -49,6 +49,17 @@ Business documents, SOPs and client-facing material are written in French.
   (nextlevelbuilder, MIT) adds seven design skills and a searchable local
   database of styles, palettes, font pairings and UX rules; its search script
   needs Python 3. Use it for work on `site/` and `deck/`.
-- `.claude/skills/stop-slop/` holds the stop-slop skill (MIT, Hardik Pandya):
-  removes AI writing patterns from prose. Use it on client-facing copy,
-  sequences and deck text.
+- `.claude/skills/` holds eight vendored skills, each with its source and
+  licence recorded. Use them on `site/` and `deck/`:
+  - `stop-slop` (MIT, Hardik Pandya) — removes AI writing patterns from prose.
+    Use it on client-facing copy, sequences and deck text.
+  - `anti-ui-slop` (MIT, UIZZE) — the markers of interface built without
+    intent. Note its rule against inventing metrics: the home page's
+    performance panel breaks it **knowingly**, on the owner's instruction, and
+    `site/README.md` carries replacing those figures as its first pre-launch
+    item.
+  - `scroll-experience`, `fixing-motion-performance`, `high-end-visual-design`,
+    `design-spells` — from `sickn33/agentic-awesome-skills`, see
+    `.claude/skills/AGENTIC-AWESOME-SKILLS.md`.
+  - `interaction-design` (from `wshobson/agents`) and `premium-frontend-ui`
+    (from `github/awesome-copilot`).

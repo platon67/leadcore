@@ -17,12 +17,12 @@ mouvement sont propres au site.
 Le site tenait sur une page unique de 11 600 px. Il est désormais en quatre
 pages, plus les deux pages légales.
 
-| Page | Ce qu'elle porte | Hauteur |
-|---|---|---|
-| `index.html` | héros, panneau de résultats, les quatre gains, trois cartes vers le détail, le fondateur, la prise de rendez-vous | 4 500 px |
-| `methode.html` | la cible et les exclusions, l'approche et la qualification, le délai réel, la protection du domaine | 6 800 px |
-| `collaboration.html` | les trente premiers jours, le rythme, ce qui déclenche la facture, la sortie | 6 000 px |
-| `tarifs.html` | les trois lignes, le calcul sur un trimestre, à qui on dit non | 5 000 px |
+| Page | Ce qu'elle porte | Composition | Hauteur |
+|---|---|---|---|
+| `index.html` | héros, panneau de résultats, les quatre gains, trois cartes vers le détail, le fondateur, la prise de rendez-vous | bande de chiffres réglée | 4 460 px |
+| `methode.html` | cinq filtres entre une base et un créneau, les chiffres de volume, la fiche livrée, la protection du domaine | énoncé tenu + colonne de filtrage | 7 060 px |
+| `collaboration.html` | les trente premiers jours, le partage des charges, ce qui déclenche la facture, la sortie | frise + balance | 6 635 px |
+| `tarifs.html` | l'addition d'un trimestre, la comparaison avec un recrutement, à qui on dit non, la durée | grand livre + comparaison | 6 658 px |
 
 L'accueil a perdu **61 %** de sa hauteur et **67 %** de ses mots. Il ne garde que
 ce qui décide d'un premier contact ; le reste est à un clic, et les trois cartes
@@ -78,38 +78,71 @@ Registre : un terminal de salle de marché. Le site montre la production réelle
 d'une campagne comme un carnet d'ordres montre un marché — chiffres alignés,
 libellés en mono, un seul accent lumineux sur du presque noir.
 
-**Habillages de cadre.** Les composants ne nomment jamais une couleur de marque :
-ils passent par une couche de jetons sémantiques (`--bg`, `--fg`, `--fg-soft`,
-`--accent`, `--rule`, `--btn-bg`…) définie en section 0 de `styles.css`. Un cadre
-change d'habillage en redéfinissant ces jetons, et **rien d'autre ne bouge** :
-aucun composant n'est dupliqué, aucune règle n'est écrite deux fois.
+**Le fond.** Un seul sol continu pour tout le site. Une version précédente
+alternait des cadres clairs et sombres par jetons de thème (`t-jour`,
+`t-craie`, `t-graphite`) : empiler des blocs de teintes contraires découpait la
+page en tranches et se lisait comme un gabarit, pas comme un lieu. Le système a
+été retiré en entier.
 
-| Habillage | Fond | Texte | Accent | Cadres |
-|---|---|---|---|---|
-| nuit (défaut) | `#050908` | bone | `#19C78B` | héros, 01, 04, 07, pied |
-| `t-jour` | `#F2F8F5` | encre | `#0F7A56` | 02, 08 |
-| `t-craie` | `#E9F5F0` | encre | `#0C6B4A` | 05, prise de rendez-vous |
-| `t-graphite` | `#111A17` | bone | `#19C78B` | 03, 06, fondateur |
+Ce qui le remplace, en section 24 de `styles.css`, tient en quatre couches
+fixées au cadre, donc lues comme une lumière d'ambiance et non comme un décor
+qui défile :
 
-L'alternance des fonds donne : sombre, sombre, clair, graphite, sombre, clair,
-graphite, sombre, clair, graphite, clair, sombre. Le graphite existe pour
-séparer deux cadres sombres sans repasser au blanc.
+| Couche | Ce qu'elle fait |
+|---|---|
+| **le sol** | un champ continu à `#0C1413`, avec une dérive tonale verticale |
+| **la signature** | la lumière propre à la page — elle change de **forme**, pas seulement de place |
+| **le plan** | les deux bords du conteneur tracés sur toute la hauteur, un repère à chaque section, et une jauge qui se remplit au défilement |
+| **le grain** | inchangé, 2,4 % |
 
-Un cinquième habillage, un émeraude plein en fond, a existé sur les cadres 03 et
-prise de rendez-vous. Il a été retiré : l'aplat saturé sur toute la hauteur
-d'un cadre écrasait la composition au lieu de la porter. L'émeraude reste un
-accent, jamais un fond.
+**Le sol n'est pas au noir, et c'est le point à ne pas défaire.** Un fond déjà
+posé sur le plancher ne peut plus s'enfoncer : une plaque encastrée dans du
+`#050908` ne descend que de cinq niveaux sur 255, ce qui est invisible. Le sol
+est donc relevé à `#0C1413` pour laisser dix niveaux de marge de chaque côté.
+Relevé sur le rendu : **sol 12, plaque 4, pont 19**.
 
-L'en-tête, la bande défilante, le héros et le pied vivent hors des sections :
-ils héritent du thème nuit et ne bougent jamais. L'en-tête reste sombre et
-translucide au-dessus des cadres clairs, ce qui garde un point d'ancrage de
-marque pendant tout le défilement.
+Le rythme d'une page est donc une affaire d'ombre, et il reste lisible si l'on
+retire toute couleur. Deux ponctuations par page, jamais plus :
 
-**Contraste.** Un audit parcourt chaque nœud de texte de la page, aplatit les
+| Classe | Effet | Ce qu'on y met |
+|---|---|---|
+| (aucune) | à plat sur le sol | le corps de la page |
+| `.plate` | encastrée, arête haute éclairée | là où vivent les chiffres |
+| `.raise` | soulevée, ombre portée vers le haut | là où on parle à quelqu'un |
+
+La signature par page : dôme haut-droite sur l'accueil, biseau de flanc avec une
+lame diagonale sur la méthode, strates horizontales sur la collaboration, voûte
+haute resserrée plus un quadrillage de registre sur les tarifs. Une page sans
+classe `p-*` (les deux pages légales) retombe sur la lumière de l'accueil en
+retrait.
+
+**Compositions par page.** Chaque page a sa propre structure, en section 30, pour
+qu'aucune ne se lise comme un morceau détaché d'une autre :
+
+- **Méthode** — `.stick-2` tient l'énoncé et le sommaire en position fixe à
+  gauche pendant que `.spine` fait défiler cinq filtres à droite, avec une
+  indentation qui progresse et un rail qui se remplit. Le tri se voit avant
+  d'être lu.
+- **Collaboration** — `.chrono` en trois colonnes : la semaine, ce qui se passe,
+  ce que ça vous coûte. Puis `.duo`, deux colonnes face à face dont
+  l'asymétrie **est** l'argument : trois lignes de votre côté, sept du nôtre.
+- **Tarifs** — `.ledger` à lignes réglées, montants alignés à droite et trait de
+  total : la page se lit comme une addition. Puis `.vs`, deux barres à la même
+  échelle face à un recrutement de SDR junior.
+
+Les bandeaux d'ouverture se ferment sur `.pnav`, l'index des trois pages : elles
+se lisent dans l'ordre et sans ce repère chacune a l'air isolée.
+
+L'en-tête, la bande défilante, le héros et le pied vivent hors des sections.
+
+**Contraste.** Un audit parcourt chaque nœud de texte des six pages, aplatit les
 fonds semi-opaques sur leurs parents et compare au seuil WCAG AA correspondant à
-la taille et à la graisse. Résultat : aucun texte sous le seuil, le plus serré
-étant à 4,62:1. L'émeraude de la charte tombe à 2,04:1 sur fond clair, il ne
-sert donc **jamais** au texte sur les thèmes clairs, seulement aux aplats.
+la taille et à la graisse. Résultat : aucun texte sous le seuil.
+
+Deux émeraudes ne sont **pas** interchangeables et la distinction est dans les
+jetons : `--accent-dim` (`#0F7A56`) ne donne que 3,5:1 sur le sol, il convient
+aux traits et aux points mais **jamais au texte**. Pour du texte accentué en
+petit corps il existe `--accent-lo` (`#14A071`), à 5,6:1.
 
 **Typographie.** Geist en variable porte toute la structure : un seul fichier
 pour les graisses 400 à 800, la hiérarchie se fait à la graisse et à l'approche
@@ -119,6 +152,14 @@ exergue dans les titres (`<span class="ex">`) : c'est le seul contraste de
 famille du site, et il perd son effet dès qu'on s'en sert ailleurs. Une page en
 français ne télécharge que les trois fichiers `latin`, soit 73 Ko, contre 94 Ko
 avant la refonte.
+
+**Ponctuation haute.** Le français demande une espace insécable devant `:`, `;`,
+`!`, `?` et à l'intérieur des guillemets. Sans elle, « ce qu'ils sont devenus :
+perdu » rejette les deux-points en début de ligne, et ça se voit. Les six pages
+utilisent `&nbsp;` et non l'espace fine U+202F : l'insécable ordinaire est
+présente dans toutes les fontes, la fine ne l'est pas, et un glyphe manquant
+coûte plus cher qu'une espace un peu large. **À reporter sur tout texte
+ajouté.**
 
 **Ouverture.** Une séquence d'ouverture joue au premier chargement : six points
 jaillissent, la marque éclôt du point d'impact, le mot se révèle par balayage,
@@ -157,16 +198,29 @@ défilement reste natif, jamais détourné. Trois règles tenues partout :
    feuille de style met la boucle en pause au lieu de la supprimer, pour
    qu'elle reprenne où elle s'était arrêtée.
 
-La jauge de progression, le remplissage du rail de la méthode et la dérive des
-halos passent par `animation-timeline` quand le navigateur sait faire : la
-progression est alors calculée par le compositeur, sans une ligne de
-JavaScript. Firefox retombe sur un `IntersectionObserver` et une transition.
+La jauge de progression, la jauge du calque de fond, le remplissage du rail de
+la méthode, la dérive de la signature lumineuse et toutes les apparitions
+propres aux pages (section 31) passent par `animation-timeline` quand le
+navigateur sait faire : la progression est alors calculée par le compositeur,
+sans une ligne de JavaScript. Firefox retombe sur un `IntersectionObserver` et
+une transition, et la page est complète dans les deux cas — seule la finesse du
+cadencement change.
+
+Un quatrième principe, tenu sur les trois pages de détail : **deux vitesses dans
+un même bloc**. L'élément de repère — un numéro de semaine, un montant, un
+intitulé — avance plus lentement que le texte qu'il accompagne. C'est ce
+décalage qui donne la profondeur, pas une translation forte, qui se remarque et
+fatigue.
 
 `prefers-reduced-motion: reduce` coupe tout : rien ne bouge, rien ne reste
 caché, les chiffres s'affichent à leur valeur finale.
 
 Mesuré sous Chromium avec le processeur bridé à un quart de sa vitesse :
-LCP 1,2 s, CLS 0, 57 images par seconde en défilement continu.
+LCP 1,16 s, CLS 0, 59 images par seconde en défilement continu. Au repos en
+haut de page, aucune animation ne tourne hors celles cadencées par le
+défilement (qui ne consomment rien quand la page ne bouge pas) et les deux
+témoins vivants voulus sur l'accueil, le point qui pulse et la bande
+défilante.
 
 ## Fichiers
 
@@ -230,6 +284,12 @@ python3 -m http.server 8000 --directory site
       « Exemple » pour ne pas se lire comme un cas client, et le HTML porte un
       encadré d'avertissement autour. Remplaçables par les chiffres d'un vrai
       client, avec son accord écrit, ou à retirer.
+
+      C'est un écart assumé, pas un oubli : la skill `anti-ui-slop` interdit
+      explicitement d'inventer des métriques pour qu'une mise en page ait l'air
+      complète. Le panneau existe sur demande du propriétaire du site, en
+      attendant de vrais chiffres, et c'est pour cette raison qu'il est le
+      premier point de cette liste.
 
 - [ ] Renseigner `provider` et `url` dans `assets/config.js`
 - [ ] Vérifier l’adresse email de contact
