@@ -12,11 +12,63 @@ et de [`docs/MAJ-OFFRE-2026-09.md`](../docs/MAJ-OFFRE-2026-09.md). Les couleurs
 sont celles du deck (`deck/index.html`), aux valeurs exactes ; les fontes et le
 mouvement sont propres au site.
 
+## Le discours
+
+La page est construite sur ce que le client **gagne**, pas sur la façon dont on
+produit. Chaque cadre désamorce au passage une objection, sans jamais la nommer :
+
+| Cadre | Ce qu'il vend | L'objection qu'il tue |
+|---|---|---|
+| Héros | leurs commerciaux closent au lieu de prospecter | — |
+| 01 · Ce que vous y gagnez | agenda prévisible, risque borné, zéro embauche, réponse datée | « un commercial me coûterait moins cher » |
+| 02 · Le temps rendu | ce qui part de chez eux | « je vais devoir tout piloter » · « vous allez démarcher mes clients » |
+| 03 · Le délai, en clair | les vrais chiffres de production | « on va me promettre la lune » · « pourquoi si long » |
+| 04 · Votre réputation | domaine principal hors circuit | « ça va cramer ma délivrabilité » |
+| 05 · Ce qui déclenche la facture | les quatre conditions, ou rien | « je vais payer des rendez-vous bidons » |
+| 06 · L'addition | un seul client signé couvre le trimestre | « quel retour, vraiment » · « je serai enfermé » |
+| 07 · Pour qui, et pour qui pas | on refuse des missions | « ils prennent tout le monde » |
+| 08 · Les trente premiers jours | le temps que ça leur coûte, semaine par semaine | « combien de temps avant de voir quelque chose » |
+| Qui vous parle | un opérateur, quatre à six clients | « je serai un numéro dans une agence » |
+
+Aucune section ne s'intitule « objections » et aucune ne pose de question
+rhétorique : l'objection est traitée dans le corps du texte, avant que le
+lecteur ne la formule.
+
+Les chiffres contractuels ne bougent jamais sans passer par
+[`docs/MAJ-OFFRE-2026-09.md`](../docs/MAJ-OFFRE-2026-09.md). La promesse reste
+à 8-12 rendez-vous par mois ; les 15 à 20 de l'objectif interne ne figurent
+nulle part sur le site.
+
 ## Système visuel
 
 Registre : un terminal de salle de marché. Le site montre la production réelle
 d'une campagne comme un carnet d'ordres montre un marché — chiffres alignés,
 libellés en mono, un seul accent lumineux sur du presque noir.
+
+**Habillages de cadre.** Les composants ne nomment jamais une couleur de marque :
+ils passent par une couche de jetons sémantiques (`--bg`, `--fg`, `--fg-soft`,
+`--accent`, `--rule`, `--btn-bg`…) définie en section 0 de `styles.css`. Un cadre
+change d'habillage en redéfinissant ces jetons, et **rien d'autre ne bouge** :
+aucun composant n'est dupliqué, aucune règle n'est écrite deux fois.
+
+| Habillage | Fond | Texte | Accent | Cadres |
+|---|---|---|---|---|
+| nuit (défaut) | `#050908` | bone | `#19C78B` | héros, 01, 04, 07, pied |
+| `t-jour` | `#F2F8F5` | encre | `#0F7A56` | 02, 08 |
+| `t-craie` | `#E9F5F0` | encre | `#0C6B4A` | 05 |
+| `t-vert` | `#0A5D42` | bone | `#5CEDBA` | 03, prise de rendez-vous |
+| `t-graphite` | `#111A17` | bone | `#19C78B` | 06, fondateur |
+
+L'en-tête, la bande défilante, le héros et le pied vivent hors des sections :
+ils héritent du thème nuit et ne bougent jamais. L'en-tête reste sombre et
+translucide au-dessus des cadres clairs, ce qui garde un point d'ancrage de
+marque pendant tout le défilement.
+
+**Contraste.** Un audit parcourt chaque nœud de texte de la page, aplatit les
+fonds semi-opaques sur leurs parents et compare au seuil WCAG AA correspondant à
+la taille et à la graisse. Résultat : aucun texte sous le seuil, le plus serré
+étant à 4,62:1. L'émeraude de la charte tombe à 2,04:1 sur fond clair, il ne
+sert donc **jamais** au texte sur les thèmes clairs, seulement aux aplats.
 
 **Typographie.** Geist en variable porte toute la structure : un seul fichier
 pour les graisses 400 à 800, la hiérarchie se fait à la graisse et à l'approche
