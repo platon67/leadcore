@@ -55,9 +55,17 @@ aucun composant n'est dupliqué, aucune règle n'est écrite deux fois.
 |---|---|---|---|---|
 | nuit (défaut) | `#050908` | bone | `#19C78B` | héros, 01, 04, 07, pied |
 | `t-jour` | `#F2F8F5` | encre | `#0F7A56` | 02, 08 |
-| `t-craie` | `#E9F5F0` | encre | `#0C6B4A` | 05 |
-| `t-vert` | `#0A5D42` | bone | `#5CEDBA` | 03, prise de rendez-vous |
-| `t-graphite` | `#111A17` | bone | `#19C78B` | 06, fondateur |
+| `t-craie` | `#E9F5F0` | encre | `#0C6B4A` | 05, prise de rendez-vous |
+| `t-graphite` | `#111A17` | bone | `#19C78B` | 03, 06, fondateur |
+
+L'alternance des fonds donne : sombre, sombre, clair, graphite, sombre, clair,
+graphite, sombre, clair, graphite, clair, sombre. Le graphite existe pour
+séparer deux cadres sombres sans repasser au blanc.
+
+Un cinquième habillage, un émeraude plein en fond, a existé sur les cadres 03 et
+prise de rendez-vous. Il a été retiré : l'aplat saturé sur toute la hauteur
+d'un cadre écrasait la composition au lieu de la porter. L'émeraude reste un
+accent, jamais un fond.
 
 L'en-tête, la bande défilante, le héros et le pied vivent hors des sections :
 ils héritent du thème nuit et ne bougent jamais. L'en-tête reste sombre et

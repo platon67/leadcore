@@ -1049,6 +1049,11 @@ ul.crosses li::before{background:none;border:1.5px solid var(--fg-dim);border-ra
    L'en-tête reste sombre et translucide au-dessus des cadres clairs, ce qui
    garde un point d'ancrage de marque pendant tout le défilement.
 
+   Quatre habillages, un par famille de fond : nuit (#050908), jour (#F2F8F5),
+   craie (#E9F5F0) et graphite (#111A17). Un cinquième, un émeraude plein en
+   fond, a été retiré : l'aplat saturé sur toute la hauteur d'un cadre écrasait
+   la composition au lieu de la porter. L'émeraude reste un accent.
+
    Contrastes mesurés sur chaque surface de chaque thème, texte courant et
    libellés compris. Le plus serré est de 4,62:1, au-dessus du seuil AA de
    4,5:1. L'émeraude vif tombe à 2,04:1 sur fond clair : sur les thèmes clairs
@@ -1080,19 +1085,6 @@ ul.crosses li::before{background:none;border:1.5px solid var(--fg-dim);border-ra
   --accent-dim:#9CCDB8;
   --rule:#BBD8CB;            --rule-soft:#D5E8DE;
   --btn-bg:var(--ink);       --btn-bg-hi:#101C18;    --btn-fg:var(--bone);
-}
-
-/* ---- VERT · émeraude profond, texte bone, bouton inversé ---- */
-.t-vert{
-  --bg:#0A5D42;              --bg-rgb:10,93,66;
-  --surface:#084C37;         --surface-2:#0C6A4B;    --surface-3:#0A5D42;
-  --fg:var(--bone);          --fg-rgb:242,248,245;
-  --fg-soft:#C9E8DC;         --fg-dim:#BCE0CF;
-  --accent:var(--emerald-hi);--accent-rgb:92,237,186;
-  --accent-hi:#9DF6D5;       --accent-hi-rgb:157,246,213;
-  --accent-dim:#1E8F68;
-  --rule:#1B7A59;            --rule-soft:#13694B;
-  --btn-bg:var(--bone);      --btn-bg-hi:#FFFFFF;    --btn-fg:#053526;
 }
 
 /* ---- GRAPHITE · nuit plus haute, pour séparer deux cadres sombres ---- */
@@ -1132,29 +1124,21 @@ ul.crosses li::before{background:none;border:1.5px solid var(--fg-dim);border-ra
   background:radial-gradient(120px circle at var(--mx,50%) var(--my,50%),rgba(var(--fg-rgb),.22),transparent 62%);
 }
 .t-jour .btn-gho,.t-craie .btn-gho{background:transparent}
+/* L'encart calendrier est un verre translucide posé sur le halo du cadre
+   sombre. Sur fond clair le halo est coupé et le verre se confondait avec son
+   propre fond : il redevient une carte opaque. */
+.t-jour .slot,.t-craie .slot{
+  background:var(--surface);backdrop-filter:none;-webkit-backdrop-filter:none;
+  border-color:var(--rule);
+  box-shadow:0 1px 2px rgba(5,9,8,.04),0 12px 32px -22px rgba(5,9,8,.22);
+}
 .t-jour .btn-gho:hover,.t-craie .btn-gho:hover{
   background:rgba(var(--accent-rgb),.06);border-color:var(--accent);color:var(--accent-hi);
 }
 
-/* ---- ajustements propres au cadre vert ---- */
-.t-vert .card{
-  background:linear-gradient(172deg,var(--surface-2),var(--surface) 78%);
-  border-color:var(--rule);
-}
-.t-vert .card.accent{
-  background:linear-gradient(172deg,rgba(var(--fg-rgb),.12),rgba(var(--fg-rgb),.03) 72%);
-  border-color:rgba(var(--fg-rgb),.3);
-}
-.t-vert .btn-pri:hover{box-shadow:0 10px 34px -16px rgba(var(--fg-rgb),.45)}
-.t-vert .btn-pri::before{
-  background:radial-gradient(120px circle at var(--mx,50%) var(--my,50%),rgba(var(--bg-rgb),.2),transparent 62%);
-}
-.t-vert .btn-gho{border-color:rgba(var(--fg-rgb),.35)}
-.t-vert .btn-gho:hover{background:rgba(var(--fg-rgb),.1);border-color:var(--fg);color:var(--fg)}
-
 /* ---- le fond de chaque cadre ---- */
-.sec.t-jour,.sec.t-craie,.sec.t-vert,.sec.t-graphite,
-.book.t-jour,.book.t-craie,.book.t-vert,.book.t-graphite{
+.sec.t-jour,.sec.t-craie,.sec.t-graphite,
+.book.t-jour,.book.t-craie,.book.t-graphite{
   background:var(--bg);color:var(--fg);
 }
 /* Le changement de couleur sépare déjà les cadres : le filet ne sert plus
@@ -1162,4 +1146,4 @@ ul.crosses li::before{background:none;border:1.5px solid var(--fg-dim);border-ra
 .sec+.sec{border-top-color:var(--rule-soft)}
 
 /* La section de réservation portait un halo émeraude pensé pour le sombre. */
-.book.t-vert::before,.book.t-jour::before,.book.t-craie::before{display:none}
+.book.t-jour::before,.book.t-craie::before{display:none}
