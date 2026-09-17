@@ -27,6 +27,31 @@ famille du site, et il perd son effet dès qu'on s'en sert ailleurs. Une page en
 français ne télécharge que les trois fichiers `latin`, soit 73 Ko, contre 94 Ko
 avant la refonte.
 
+**Ouverture.** Une séquence d'ouverture joue au premier chargement : six points
+jaillissent, la marque éclôt du point d'impact, le mot se révèle par balayage,
+puis le verrou glisse vers l'en-tête. Le balisage est dans `index.html` (logo
+vectorisé, inliné), la chorégraphie en section 23 de `styles.css`.
+
+Elle ne se joue **que** quand elle a du sens, et main.js vérifie les quatre cas
+avant de poser la classe `.go` :
+
+| Cas | Ouverture |
+|---|---|
+| Première visite de la session | oui, 2,4 s |
+| Deuxième visite (même session) | non, `sessionStorage` |
+| Arrivée sur une ancre (`/#tarifs`) | non, le visiteur vise une section |
+| `prefers-reduced-motion: reduce` | non, et verrouillé aussi en CSS |
+| Sans JavaScript | non, le bloc reste `display:none` |
+| Retour arrière navigateur | non |
+
+Le premier geste — clic, touche, molette, doigt — la passe immédiatement, et le
+bloc est retiré du DOM à la fin : aucune couche fixe ne subsiste au-dessus de la
+page. Mesuré : LCP 192 ms et CLS 0 avec l'ouverture active, parce que la page est
+peinte derrière l'habillage. Le coût réel est perceptuel, pas métrique : 2,4 s
+avant de voir le contenu, une fois par session.
+
+Le même habillage existe en fichier vidéo, voir [`brand/`](../brand/README.md).
+
 **Mouvement.** Aucune bibliothèque : ni GSAP, ni Lenis, ni Framer Motion. Le
 défilement reste natif, jamais détourné. Trois règles tenues partout :
 

@@ -24,12 +24,58 @@
   var fine = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
   var hasIO = "IntersectionObserver" in window;
 
-  /* ─────────── 1. entrée du héros ───────────
-     La classe déclenche la cascade décrite dans la feuille de style. Le contenu
-     est déjà peint : rien ne masque la page, il n'y a donc pas d'écran d'attente
-     et le Largest Contentful Paint n'est pas repoussé. */
+  /* ─────────── 1. séquence d'ouverture ───────────
+     Elle ne se joue que quand elle a du sens :
+       - jamais sous prefers-reduced-motion ;
+       - une seule fois par session, pour ne pas punir la navigation ;
+       - jamais sur une ancre profonde, un visiteur qui vise #tarifs ne doit
+         pas attendre ;
+       - jamais si la page est restaurée depuis le cache de navigation.
+     Elle se coupe au premier geste, et se retire du DOM à la fin : aucune
+     couche fixe ne reste au-dessus de la page.
+
+     Coût assumé : l'ouverture couvre le héros pendant 2,4 s, donc elle
+     repousse d'autant le Largest Contentful Paint de la première visite. */
+  var intro = doc.getElementById("intro");
+  var INTRO_MS = 2600;
+  var seen = false;
+  try { seen = sessionStorage.getItem("lc-intro") === "1"; } catch (e) {}
+
+  var playIntro = intro && !calm && !seen &&
+    !window.location.hash &&
+    !(window.performance && performance.getEntriesByType &&
+      (performance.getEntriesByType("navigation")[0] || {}).type === "back_forward");
+
   var hero = doc.querySelector(".hero");
-  if (hero && !calm) hero.classList.add("boot");
+
+  var endIntro = function () {
+    if (!intro) return;
+    var el = intro;
+    intro = null;
+    el.parentNode && el.parentNode.removeChild(el);
+    doc.documentElement.classList.remove("intro-on");
+    if (hero && !calm) hero.classList.add("boot");
+  };
+
+  if (playIntro) {
+    try { sessionStorage.setItem("lc-intro", "1"); } catch (e) {}
+    doc.documentElement.classList.add("intro-on");
+    intro.classList.add("go");
+
+    var timer = setTimeout(endIntro, INTRO_MS);
+    var skip = function () {
+      clearTimeout(timer);
+      endIntro();
+    };
+    /* le premier geste passe l'ouverture */
+    ["pointerdown", "keydown", "wheel", "touchstart"].forEach(function (ev) {
+      doc.addEventListener(ev, skip, { once: true, passive: true });
+    });
+  } else {
+    if (intro && intro.parentNode) intro.parentNode.removeChild(intro);
+    intro = null;
+    if (hero && !calm) hero.classList.add("boot");
+  }
 
   /* ─────────── 2. en-tête ───────────
      Se masque quand on descend, revient au premier geste vers le haut. */
