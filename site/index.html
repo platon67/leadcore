@@ -22,18 +22,16 @@
 <script>document.documentElement.className+=" js p-home has-intro"</script>
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/geist-latin-19f9c925.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/instrument-serif-latin-5a51946d.woff2" crossorigin>
-<link rel="stylesheet" href="assets/fonts.css?v=20260917d">
-<link rel="stylesheet" href="assets/styles.css?v=20260917d">
+<link rel="stylesheet" href="assets/fonts.css?v=20260918a">
+<link rel="stylesheet" href="assets/styles.css?v=20260918a">
 </head>
 <body>
 <a class="skip" href="#main">Aller au contenu</a>
 
 <!-- Le fond (section 24 de la feuille)&nbsp;: la signature lumineuse propre à la
-     page, puis le calque de plan et sa jauge. Les deux sont fixés au cadre,
-     purement décoratifs, et la forme de la signature est décidée par la
+     page. Fixée au cadre, purement décorative, et sa forme est décidée par la
      classe de page posée sur <html>. -->
 <div class="sig" aria-hidden="true"><span class="s1"></span><span class="s2"></span><span class="s3"></span></div>
-<div class="plan" aria-hidden="true"><i><b></b></i></div>
 <!-- ══════════ OUVERTURE ══════════
      Séquence d'ouverture, jouée une fois par session. Le balisage est inerte
      tant que main.js ne pose pas la classe .go&nbsp;: sans JavaScript, sous
@@ -82,7 +80,7 @@
         <span class="ln"><span>plus. Ils</span></span>
         <span class="ln"><span class="ex">closent.</span></span>
       </h1>
-      <p class="lede">On remplit leur agenda de rendez-vous qualifiés&nbsp;: dans votre cible, avec un décisionnaire, sur un besoin qu’il a lui-même formulé. Vous ne payez que ceux qui ont lieu.</p>
+      <p class="lede">On remplit leur agenda de rendez-vous qualifiés&nbsp;: dans votre cible, avec un décisionnaire, sur un besoin qu’il a lui-même formulé. <b>Email et LinkedIn en parallèle</b>, chaque réponse lue par un humain, et <b>vous ne payez que les rendez-vous qui ont lieu</b>.</p>
       <div class="cta">
         <a class="btn btn-pri" href="#rendez-vous">Prendre un créneau de 30 minutes
           <svg class="ar" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
@@ -140,6 +138,7 @@
       <span class="tape-item" style="color:var(--accent)">Production mensuelle par client</span>
       <span class="tape-item"><b>1 900</b> contacts ICP</span>
       <span class="tape-item"><b>7 600</b> emails</span>
+      <span class="tape-item"><b>2 200</b> touches LinkedIn</span>
       <span class="tape-item"><b>10</b> boîtes d’envoi</span>
       <span class="tape-item"><b>120</b> réponses traitées</span>
       <span class="tape-item"><b>29</b> réponses positives</span>
@@ -150,6 +149,7 @@
       <span class="tape-item" style="color:var(--accent)">Production mensuelle par client</span>
       <span class="tape-item"><b>1 900</b> contacts ICP</span>
       <span class="tape-item"><b>7 600</b> emails</span>
+      <span class="tape-item"><b>2 200</b> touches LinkedIn</span>
       <span class="tape-item"><b>10</b> boîtes d’envoi</span>
       <span class="tape-item"><b>120</b> réponses traitées</span>
       <span class="tape-item"><b>29</b> réponses positives</span>
@@ -160,7 +160,7 @@
 </div>
 
 <!-- ══════════════════════════ BANDEAU DE COTATION ══════════════════════════ -->
-<section class="sec plate" id="gains" data-plate="01" style="padding-top:clamp(52px,6.4vw,82px)">
+<section class="sec plate" id="gains" style="padding-top:clamp(52px,6.4vw,82px)">
   <div class="wrap">
     <div class="sec-head rv">
       <p class="eyebrow">Ce que vous y gagnez</p>
@@ -168,22 +168,22 @@
     </div>
 
     <div class="band">
-      <div class="band-c rv" style="--i:0">
+      <div class="band-c pad rv" style="--i:0">
         <span class="k">Agenda prévisible</span>
         <span class="v">8<small>&nbsp;à&nbsp;</small>12<small>&nbsp;/ mois</small></span>
         <p>Vous planifiez vos semaines sur un volume connu, pas sur l’espoir qu’un prospect rappelle.</p>
       </div>
-      <div class="band-c rv" style="--i:1">
+      <div class="band-c pad rv" style="--i:1">
         <span class="k">Risque borné</span>
         <span class="v"><span data-count>200</span><small>&nbsp;€ / RDV</small></span>
         <p>L’essentiel de notre rémunération dépend de rendez-vous qui ont eu lieu. Sinon elle s’arrête aux 500 €.</p>
       </div>
-      <div class="band-c rv" style="--i:2">
+      <div class="band-c pad rv" style="--i:2">
         <span class="k">Aucun recrutement</span>
         <span class="v">0<small>&nbsp;embauche</small></span>
         <p>Personne à sourcer, former, équiper, manager, ni à remplacer six mois plus tard.</p>
       </div>
-      <div class="band-c rv" style="--i:3">
+      <div class="band-c pad rv" style="--i:3">
         <span class="k">Réponse datée</span>
         <span class="v">90<small>&nbsp;jours</small></span>
         <p>Au bout du trimestre vous savez. Et la base et les domaines vous restent.</p>
@@ -198,36 +198,36 @@
 </section>
 
 <!-- ══════════════════════════ TROIS PAGES ══════════════════════════ -->
-<section class="sec" id="detail" data-plate="02">
+<section class="sec" id="detail">
   <div class="wrap">
     <div class="sec-head rv">
-      <p class="eyebrow">Le détail, sans survol</p>
-      <h2>Tout est écrit. <span class="ex">Trois pages, dix minutes.</span></h2>
-      <p class="lede">On préfère que vous arriviez à l’appel en ayant déjà tout lu.</p>
+      <p class="eyebrow">Les trois questions</p>
+      <h2>Comment, ce que ça vous prend, <span class="ex">et combien.</span></h2>
+      <p class="lede">La réponse courte est sur cette carte. Le détail est derrière, en trois pages et dix minutes.</p>
     </div>
 
     <div class="pages">
       <a class="pagecard rv" style="--i:0" href="methode.html">
-        <span class="n">01 · La méthode</span>
-        <h3>Comment on trouve vos leads</h3>
-        <p>La cible et vos exclusions, les séquences, la qualification à la main, les vrais chiffres de production, et pourquoi votre domaine n’est jamais exposé.</p>
-        <span class="go">Lire la méthode
+        <span class="n">01 · Comment</span>
+        <h3>Deux canaux, six filtres, un tri à la main</h3>
+        <p><b>1 900 contacts</b> dans votre cible chaque mois. Email et LinkedIn partent en parallèle sur les mêmes prospects. Un humain lit les <b>120 réponses</b> du mois. Il en sort <b>12 rendez-vous honorés</b>.</p>
+        <span class="go">Voir le schéma complet
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </span>
       </a>
       <a class="pagecard rv" style="--i:1" href="collaboration.html">
-        <span class="n">02 · La collaboration</span>
-        <h3>Ce qui se passe si on signe</h3>
-        <p>Les trente premiers jours semaine par semaine, le rythme ensuite, ce qui déclenche la facture, et comment on se sépare si ça ne marche pas.</p>
-        <span class="go">Voir le déroulé
+        <span class="n">02 · Ce que ça vous prend</span>
+        <h3>Trois heures et demie, puis 30 min par semaine</h3>
+        <p>Deux heures de cadrage en semaine 1, une relecture en semaine 3, puis un point hebdomadaire. <b>Rien d’autre ne remonte chez vous</b>, ni en tâche, ni en décision.</p>
+        <span class="go">Voir les quatre semaines
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </span>
       </a>
       <a class="pagecard rv" style="--i:2" href="tarifs.html">
-        <span class="n">03 · Les tarifs</span>
-        <h3>Ce que ça coûte, et à qui</h3>
-        <p>Trois lignes, le calcul du retour, la durée d’engagement, et les quatre cas où on refuse la mission.</p>
-        <span class="go">Voir les tarifs
+        <span class="n">03 · Combien</span>
+        <h3>1 200 € + 500 € / mois + 200 € / RDV honoré</h3>
+        <p>Soit <b>290 € le rendez-vous qualifié, tout compris</b>. Si votre marché ne répond pas du tout, vous aurez dépensé 2 700 € sur le trimestre&nbsp;: c’est votre perte maximale.</p>
+        <span class="go">Voir l’addition d’un trimestre
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </span>
       </a>
@@ -236,7 +236,7 @@
 </section>
 
 <!-- ══════════════════════════ QUI VOUS PARLE ══════════════════════════ -->
-<section class="sec raise" id="equipe" data-plate="03">
+<section class="sec raise" id="equipe">
   <div class="wrap">
     <div class="card founder rv">
       <div class="ini" aria-hidden="true">PB</div>
@@ -309,7 +309,7 @@
   </div>
 </footer>
 
-<script src="assets/config.js?v=20260917d"></script>
-<script src="assets/main.js?v=20260917d"></script>
+<script src="assets/config.js?v=20260918a"></script>
+<script src="assets/main.js?v=20260918a"></script>
 </body>
 </html>

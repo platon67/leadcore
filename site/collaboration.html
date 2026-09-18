@@ -22,18 +22,16 @@
 <script>document.documentElement.className+=" js p-collab "</script>
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/geist-latin-19f9c925.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/instrument-serif-latin-5a51946d.woff2" crossorigin>
-<link rel="stylesheet" href="assets/fonts.css?v=20260917d">
-<link rel="stylesheet" href="assets/styles.css?v=20260917d">
+<link rel="stylesheet" href="assets/fonts.css?v=20260918a">
+<link rel="stylesheet" href="assets/styles.css?v=20260918a">
 </head>
 <body>
 <a class="skip" href="#main">Aller au contenu</a>
 
 <!-- Le fond (section 24 de la feuille)&nbsp;: la signature lumineuse propre à la
-     page, puis le calque de plan et sa jauge. Les deux sont fixés au cadre,
-     purement décoratifs, et la forme de la signature est décidée par la
+     page. Fixée au cadre, purement décorative, et sa forme est décidée par la
      classe de page posée sur <html>. -->
 <div class="sig" aria-hidden="true"><span class="s1"></span><span class="s2"></span><span class="s3"></span></div>
-<div class="plan" aria-hidden="true"><i><b></b></i></div>
 
 <header class="hdr">
   <div class="wrap">
@@ -70,15 +68,62 @@
   </div>
 </section>
 
-<!-- ══════════════════════════ 01 · L'AXE DU TEMPS ══════════════════════════
-     Une frise&nbsp;: la semaine à gauche en grand, ce qui se passe à droite. Le
-     numéro dérive plus lentement que le texte, ce qui donne la profondeur. -->
-<section class="sec" id="demarrage" data-plate="01">
+<!-- ══════════════════════════ LE RÉSUMÉ · plaque encastrée ══════════════════════════
+     Le premier mois sur une seule ligne horizontale. L'axe se remplit au
+     défilement et les quatre arrêts se lèvent l'un après l'autre&nbsp;: on voit le
+     mois entier avant d'en lire une phrase. -->
+<section class="sec plate tldr" id="resume">
   <div class="wrap">
     <div class="sec-head rv">
-      <p class="eyebrow">01 · Les trente premiers jours</p>
-      <h2>De la signature <span class="ex">au premier créneau.</span></h2>
-      <p class="lede">Semaine par semaine, et le temps que ça vous prend à chaque étape. Le total de votre côté sur le premier mois&nbsp;: trois heures et demie.</p>
+      <p class="eyebrow">En quinze secondes</p>
+      <h2>Quatre semaines, <span class="ex">trois heures et demie de votre temps.</span></h2>
+    </div>
+
+    <div class="schema">
+      <div class="railh">
+        <span class="railh-fill" aria-hidden="true"></span>
+        <div class="railh-row">
+          <div class="stop">
+            <span class="w">Semaine 1</span>
+            <h3>Cadrage</h3>
+            <p>On écrit ensemble la définition du rendez-vous qualifié. C’est elle qui décidera de chaque facture.</p>
+            <span class="you">2 h de votre temps</span>
+          </div>
+          <div class="stop">
+            <span class="w">Semaine 2</span>
+            <h3>Infrastructure</h3>
+            <p>Domaines, DNS, boîtes, comptes LinkedIn, warm-up. Premières listes construites et vérifiées.</p>
+            <span class="you">Rien de votre côté</span>
+          </div>
+          <div class="stop">
+            <span class="w">Semaine 3</span>
+            <h3>Lancement</h3>
+            <p>Vous relisez les séquences email et LinkedIn, puis l’envoi démarre à volume réduit.</p>
+            <span class="you">30 min de relecture</span>
+          </div>
+          <div class="stop now">
+            <span class="w">Semaine 4</span>
+            <h3>Premiers créneaux</h3>
+            <p>Le volume monte, les réponses sont qualifiées, les créneaux partent dans les agendas.</p>
+            <span class="you">30 min / semaine</span>
+          </div>
+        </div>
+      </div>
+
+      <p class="legende">Ensuite, le rythme ne change plus&nbsp;: <b>un point de trente minutes par semaine</b>, un rapport par mois, et votre retour à J+30 sur ce que chaque rendez-vous est devenu. <b>Rien d’autre ne remonte chez vous</b>, ni en tâche, ni en décision à prendre.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════ 01 · LE DÉTAIL DES QUATRE SEMAINES ══════════════════════════
+     Le résumé a donné la forme. Ici on dit ce qui se passe vraiment dans
+     chaque semaine, et surtout ce qu'on attend de vous. -->
+<section class="sec" id="demarrage">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <p class="eyebrow">01 · Le détail</p>
+      <h2>Ce qu’il y a <span class="ex">derrière chaque semaine.</span></h2>
+      <p class="lede">La colonne de droite est la seule qui vous concerne. Le reste se passe sans vous.</p>
     </div>
 
     <div class="chrono">
@@ -86,7 +131,10 @@
         <div class="chrono-w"><span class="n">S1</span><span class="u">Cadrage</span></div>
         <div class="chrono-b">
           <h3>On écrit ensemble ce qu’est un bon rendez-vous</h3>
-          <p>Cible, angles, exclusions, et la définition contractuelle du rendez-vous qualifié, avec vos mots et vos critères. C’est cette phrase qui décidera de chaque facture pendant trois mois, donc c’est vous qui la tranchez.</p>
+          <div class="pad lite">
+            <p>Deux heures en visio, en une ou deux fois. On y traite&nbsp;: le marché et la taille où vous gagnez déjà, les fonctions qui décident, vos exclusions nominatives, les angles à tester, et la <b>définition contractuelle du rendez-vous qualifié</b> — avec vos mots et vos critères.</p>
+            <p>C’est cette phrase qui décidera de chaque facture pendant trois mois. C’est vous qui la tranchez, et on ne la retouche pas ensuite.</p>
+          </div>
         </div>
         <div class="chrono-y"><span class="u">Votre part</span><span class="you">Deux heures</span></div>
       </div>
@@ -94,8 +142,11 @@
       <div class="chrono-row">
         <div class="chrono-w"><span class="n">S2</span><span class="u">Infrastructure</span></div>
         <div class="chrono-b">
-          <h3>On achète et on configure les domaines d’envoi</h3>
-          <p>DNS, SPF, DKIM, DMARC, boîtes, warm-up lancé. Premières listes construites et vérifiées adresse par adresse. Votre domaine d’entreprise reste hors du circuit.</p>
+          <h3>On monte les deux canaux</h3>
+          <div class="pad lite">
+            <p>Côté email&nbsp;: achat des domaines, DNS, SPF, DKIM, DMARC, création des boîtes, warm-up lancé. Côté LinkedIn&nbsp;: on prépare nos comptes dédiés et on les chauffe au même rythme.</p>
+            <p>En parallèle, les premières listes sont construites et vérifiées adresse par adresse. Votre domaine d’entreprise et les profils de vos commerciaux restent hors du circuit.</p>
+          </div>
         </div>
         <div class="chrono-y"><span class="u">Votre part</span><span class="you">Rien</span></div>
       </div>
@@ -103,8 +154,11 @@
       <div class="chrono-row">
         <div class="chrono-w"><span class="n">S3</span><span class="u">Lancement</span></div>
         <div class="chrono-b">
-          <h3>Vous relisez les séquences avant qu’elles partent</h3>
-          <p>Rien n’est envoyé en votre nom sans que vous l’ayez lu. L’envoi démarre sur un premier segment, à volume réduit, et on regarde ce qui revient.</p>
+          <h3>Vous relisez avant que ça parte en votre nom</h3>
+          <div class="pad lite">
+            <p>On vous envoie les quatre emails et les trois touches LinkedIn tels qu’ils partiront. <b>Rien n’est envoyé sans que vous l’ayez lu</b>, et vous pouvez couper une phrase, un angle ou un segment entier.</p>
+            <p>L’envoi démarre ensuite sur un premier segment, à volume réduit, et on regarde ce qui revient avant de monter.</p>
+          </div>
         </div>
         <div class="chrono-y"><span class="u">Votre part</span><span class="you">Une relecture, 30 min</span></div>
       </div>
@@ -113,7 +167,10 @@
         <div class="chrono-w"><span class="n">S4</span><span class="u">Premiers créneaux</span></div>
         <div class="chrono-b">
           <h3>Vos commerciaux reprennent la main</h3>
-          <p>Le volume monte, les réponses sont qualifiées, les créneaux partent dans les agendas avec le contexte. À partir d’ici votre part du travail est d’honorer les rendez-vous et de nous dire ce qu’ils valent.</p>
+          <div class="pad lite">
+            <p>Le volume monte par paliers, les réponses des deux canaux sont qualifiées à la main, et les créneaux partent dans les agendas avec le contexte et le canal d’origine.</p>
+            <p>À partir d’ici votre part du travail est d’honorer les rendez-vous, de répondre sous 48 heures quand on vous demande un arbitrage, et de nous dire à J+30 ce que chacun est devenu.</p>
+          </div>
         </div>
         <div class="chrono-y"><span class="u">Votre part</span><span class="you">30 min / semaine</span></div>
       </div>
@@ -121,14 +178,12 @@
   </div>
 </section>
 
-<!-- ══════════════════════════ 02 · LA BALANCE · plaque encastrée ══════════════════════════
-     Deux colonnes face à face. Celle de gauche est courte parce que votre part
-     l'est&nbsp;: l'asymétrie est l'argument. -->
-<section class="sec plate" id="charge" data-plate="02">
+<!-- ══════════════════════════ 02 · LA BALANCE · plaque encastrée ══════════════════════════ -->
+<section class="sec plate" id="charge">
   <div class="wrap">
     <div class="sec-head rv">
       <p class="eyebrow">02 · Qui porte quoi</p>
-      <h2>Trente minutes par semaine <span class="ex">de votre côté.</span></h2>
+      <h2>Trois lignes de votre côté. <span class="ex">Dix du nôtre.</span></h2>
       <p class="lede">La crainte la plus courante, c’est de prendre un prestataire et d’hériter d’un projet à piloter. Voilà le partage, en clair.</p>
     </div>
 
@@ -149,12 +204,15 @@
         <div class="who"><span>La nôtre</span><b>Le reste</b></div>
         <ul>
           <li>Acheter, configurer et surveiller les domaines et les boîtes d’envoi.</li>
+          <li>Tenir les comptes LinkedIn dédiés, leur rythme de connexion et leur santé.</li>
           <li>Construire et renouveler la base chaque mois, vérifier chaque adresse.</li>
-          <li>Écrire les angles, tester, garder ce qui répond, jeter le reste.</li>
+          <li>Écrire les angles des deux canaux, tester, garder ce qui répond, jeter le reste.</li>
           <li>Lire les cent vingt réponses du mois et écarter ce qui n’est pas qualifié.</li>
+          <li>Croiser les deux canaux pour qu’un prospect qui a répondu ne reçoive plus rien.</li>
           <li>Obtenir le créneau, le poser dans l’agenda, relancer les absents.</li>
           <li>Surveiller la délivrabilité au quotidien et couper ce qui se dégrade.</li>
           <li>Tenir le rapport mensuel&nbsp;: envois, réponses, bookés, honorés, facturés.</li>
+          <li>Refuser une mission de plus quand la file est pleine, pour ne pas dégrader la vôtre.</li>
         </ul>
         <p class="note">Aucune de ces lignes ne remonte chez vous, ni en tâche, ni en décision à prendre.</p>
       </div>
@@ -163,7 +221,7 @@
 </section>
 
 <!-- ══════════════════════════ 03 · CE QUI DÉCLENCHE LA FACTURE ══════════════════════════ -->
-<section class="sec" id="facturation" data-plate="03">
+<section class="sec" id="facturation">
   <div class="wrap">
     <div class="sec-head rv">
       <p class="eyebrow">03 · Ce qui déclenche la facture</p>
@@ -216,10 +274,8 @@
   </div>
 </section>
 
-<!-- ══════════════════════════ 04 · LA SORTIE · pont soulevé ══════════════════════════
-     L'objection finale, et la seule section de la page en relief&nbsp;: c'est ce
-     qu'on veut que le prospect retienne en quittant la page. -->
-<section class="sec raise" id="sortie" data-plate="04">
+<!-- ══════════════════════════ 04 · LA SORTIE · pont soulevé ══════════════════════════ -->
+<section class="sec raise" id="sortie">
   <div class="wrap">
     <div class="sec-head rv">
       <p class="eyebrow">04 · Si ça ne marche pas</p>
@@ -234,8 +290,8 @@
         <ul class="ticks" style="margin-top:18px">
           <li><b>La base de contacts</b> construite et vérifiée pendant la mission, exportée au format de votre choix.</li>
           <li><b>Les domaines d’envoi</b>, achetés pour vous et transférés sur votre compte.</li>
-          <li><b>Les séquences</b>, avec les angles qui ont marché et ceux qui n’ont rien donné.</li>
-          <li><b>L’historique</b> des rendez-vous et de leur statut à J+30.</li>
+          <li><b>Les séquences</b> des deux canaux, avec les angles qui ont marché et ceux qui n’ont rien donné.</li>
+          <li><b>L’historique</b> des rendez-vous, leur canal d’origine et leur statut à J+30.</li>
         </ul>
         <p style="margin-top:18px">C’est fixé au contrat avant le démarrage, pas négocié au moment du départ.</p>
       </div>
@@ -297,7 +353,7 @@
   </div>
 </footer>
 
-<script src="assets/config.js?v=20260917d"></script>
-<script src="assets/main.js?v=20260917d"></script>
+<script src="assets/config.js?v=20260918a"></script>
+<script src="assets/main.js?v=20260918a"></script>
 </body>
 </html>

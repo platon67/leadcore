@@ -82,9 +82,6 @@
   var hdr = doc.querySelector(".hdr");
   var nav = doc.getElementById("nav");
   var prog = doc.querySelector(".prog");
-  /* jauge du calque de fond : même progression, tracée sur le filet de gauche.
-     Masquée sous prefers-reduced-motion, donc inutile de la piloter. */
-  var planFill = calm ? null : doc.querySelector(".plan b");
 
   /* La jauge de progression est calculée par le compositeur quand le navigateur
      sait faire (animation-timeline), et seulement sinon par ce script. */
@@ -115,11 +112,9 @@
       }
       if (down || up) lastY = y;
 
-      if (!progByCss && (prog || planFill)) {
+      if (prog && !progByCss) {
         var span = doc.documentElement.scrollHeight - window.innerHeight;
-        var p = span > 0 ? Math.min(1, y / span) : 0;
-        if (prog) prog.style.transform = "scaleX(" + p + ")";
-        if (planFill) planFill.style.transform = "scaleY(" + p + ")";
+        prog.style.transform = "scaleX(" + (span > 0 ? Math.min(1, y / span) : 0) + ")";
       }
     };
 
@@ -165,7 +160,8 @@
      sert qu'aux barres et aux traits ; sur les autres, c'est ce qui rend les
      blocs visibles. */
   var reveals = doc.querySelectorAll(
-    ".rv, .pipe, .node, .chrono-b, .led, .duo .col, .vs .r, .band-c, .spine");
+    ".rv, .pipe, .node, .chrono-b, .led, .duo .col, .vs .r, .band-c, .spine, " +
+    ".flow, .railh, .stop, .pcell");
 
   if (calm || !hasIO) {
     Array.prototype.forEach.call(reveals, function (el) { el.classList.add("in"); });

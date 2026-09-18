@@ -22,18 +22,16 @@
 <script>document.documentElement.className+=" js p-tarifs "</script>
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/geist-latin-19f9c925.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/instrument-serif-latin-5a51946d.woff2" crossorigin>
-<link rel="stylesheet" href="assets/fonts.css?v=20260917d">
-<link rel="stylesheet" href="assets/styles.css?v=20260917d">
+<link rel="stylesheet" href="assets/fonts.css?v=20260918a">
+<link rel="stylesheet" href="assets/styles.css?v=20260918a">
 </head>
 <body>
 <a class="skip" href="#main">Aller au contenu</a>
 
 <!-- Le fond (section 24 de la feuille)&nbsp;: la signature lumineuse propre à la
-     page, puis le calque de plan et sa jauge. Les deux sont fixés au cadre,
-     purement décoratifs, et la forme de la signature est décidée par la
+     page. Fixée au cadre, purement décorative, et sa forme est décidée par la
      classe de page posée sur <html>. -->
 <div class="sig" aria-hidden="true"><span class="s1"></span><span class="s2"></span><span class="s3"></span></div>
-<div class="plan" aria-hidden="true"><i><b></b></i></div>
 
 <header class="hdr">
   <div class="wrap">
@@ -60,8 +58,8 @@
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>Accueil
     </a>
     <p class="eyebrow">Les tarifs</p>
-    <h1>Ce que ça coûte, <span class="ex">et à qui.</span></h1>
-    <p class="lede">Trois lignes, le détail complet d’un trimestre, la comparaison avec un recrutement, et les cas où on préfère vous dire non.</p>
+    <h1>1 200 €, 500 € par mois, <span class="ex">200 € par rendez-vous.</span></h1>
+    <p class="lede">Les trois lignes, ce que ça fait sur un trimestre, la comparaison avec un recrutement, et les cas où on préfère vous dire non.</p>
     <nav class="pnav" aria-label="Les trois pages de détail">
       <a href="methode.html"><b>01</b>Comment on trouve vos leads</a>
       <a href="collaboration.html"><b>02</b>Ce qui se passe si on signe</a>
@@ -70,83 +68,113 @@
   </div>
 </section>
 
-<!-- ══════════════════════════ 01 · LE GRAND LIVRE ══════════════════════════
-     Lignes réglées, montants alignés à droite, trait de total. La page se lit
-     comme une addition, et chaque ligne s'écrit de gauche à droite au
-     défilement. -->
-<section class="sec" id="lignes" data-plate="01">
+<!-- ══════════════════════════ LES TROIS LIGNES · plaque encastrée ══════════════════════════
+     C'est la première chose qu'on cherche sur une page de tarifs. Elle ne se
+     mérite pas&nbsp;: trois montants, une phrase chacun, avant tout le reste. -->
+<section class="sec plate tldr" id="lignes">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <p class="eyebrow">Les trois lignes</p>
+      <h2>Tout est là. <span class="ex">Il n’y a rien en bas de page.</span></h2>
+    </div>
+
+    <div class="schema">
+      <div class="price3">
+        <div class="pcell pad">
+          <span class="k">Une fois, au démarrage</span>
+          <span class="amt">1 200 <small>€</small></span>
+          <h3>Setup</h3>
+          <p>Domaines, DNS, boîtes d’envoi, comptes LinkedIn, warm-up, définition de la cible, construction de la base et rédaction des séquences. Facturé avant que la première campagne parte.</p>
+        </div>
+        <div class="pcell pad">
+          <span class="k">Chaque mois</span>
+          <span class="amt">500 <small>€ / mois</small></span>
+          <h3>Infrastructure et pilotage</h3>
+          <p>Domaines, boîtes et comptes LinkedIn maintenus, données et enrichissement, renouvellement de la base, arbitrage hebdomadaire des segments, reporting mensuel.</p>
+        </div>
+        <div class="pcell pad hot">
+          <span class="k">À la performance</span>
+          <span class="amt">200 <small>€ / RDV honoré</small></span>
+          <h3>Rendez-vous qualifiés</h3>
+          <p>Dans votre cible, décisionnaire, besoin exprimé, <b>et présent au rendez-vous</b>. Les quatre, ou la ligne ne s’écrit pas. On replanifie un absent une fois, et on ne le facture que s’il vient.</p>
+        </div>
+      </div>
+
+      <div class="pad hot keynum rv" style="margin-top:clamp(16px,2vw,24px)">
+        <div class="big">290 <small>€</small></div>
+        <div>
+          <p class="say">C’est ce que vous coûte <b>un rendez-vous qualifié et honoré, tout compris</b> — setup et infrastructure inclus, sur un trimestre à dix rendez-vous par mois.</p>
+          <p class="fine">À 7 000 € de valeur client, il vous en faut <b>deux signés sur trente</b> pour être au-dessus&nbsp;: un taux de signature de 7 %. Et si votre marché ne répond pas du tout, vous aurez dépensé 2 700 € sur le trimestre — c’est votre perte maximale, connue à la signature.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════ 01 · L'ADDITION ══════════════════════════ -->
+<section class="sec" id="addition">
   <div class="wrap">
     <div class="sec-head rv">
       <p class="eyebrow">01 · L’addition</p>
-      <h2>Trois lignes, <span class="ex">et rien en bas de page.</span></h2>
-      <p class="lede">Pas de palier caché, pas de pourcentage sur votre chiffre d’affaires, pas de frais de sortie. Le détail d’un trimestre, à l’hypothèse basse de dix rendez-vous honorés par mois.</p>
+      <h2>Ce que ça fait <span class="ex">sur un trimestre.</span></h2>
+      <p class="lede">Hypothèse basse&nbsp;: dix rendez-vous honorés par mois, le bas de la fourchette annoncée. Pas de palier caché, pas de pourcentage sur votre chiffre d’affaires, pas de frais de sortie.</p>
     </div>
 
     <div class="ledger">
       <div class="led">
         <div class="t">Setup, une seule fois
-          <span class="d">Domaines, DNS, boîtes, warm-up, définition de la cible, construction de la base et rédaction des séquences. Facturé au démarrage, avant que la première campagne parte.</span>
+          <span class="d">Les deux canaux montés, la base construite, les séquences écrites.</span>
         </div>
         <div class="f">1 200 €<small>au démarrage</small></div>
       </div>
-
       <div class="led">
-        <div class="t">Retainer mensuel
-          <span class="d">Pilotage, infrastructure d’envoi, données et enrichissement, arbitrage hebdomadaire des segments, reporting. Trois mois à 500 €.</span>
+        <div class="t">Infrastructure et pilotage
+          <span class="d">Trois mois à 500 €.</span>
         </div>
         <div class="f">1 500 €<small>500 € × 3 mois</small></div>
       </div>
-
       <div class="led hot">
         <div class="t">Rendez-vous honorés
-          <span class="d">Dans votre cible, décisionnaire, besoin exprimé, présent au rendez-vous. Les quatre, ou la ligne ne s’écrit pas. Trente rendez-vous sur le trimestre à l’hypothèse basse.</span>
+          <span class="d">Trente sur le trimestre à l’hypothèse basse. Cette ligne est la seule qui bouge, et elle ne bouge que si on livre.</span>
         </div>
         <div class="f">6 000 €<small>200 € × 30 RDV</small></div>
       </div>
-
       <div class="led total">
         <div class="t">Dépense totale sur le trimestre
-          <span class="d">Setup compris. C’est le montant maximum de l’hypothèse&nbsp;: sans rendez-vous qualifié, notre rémunération s’arrête à 2 700 €.</span>
+          <span class="d">Setup compris. C’est le montant de l’hypothèse, pas un plafond contractuel&nbsp;: plus de rendez-vous honorés, plus de variable — et plus de pipeline.</span>
         </div>
         <div class="f">8 700 €<small>trois mois</small></div>
       </div>
     </div>
-
-    <div class="banner rv">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>
-      <span>À 7 000 € de valeur client, <b>deux signatures sur trente rendez-vous</b> rapportent 14 000 € pour 8 700 € dépensés. Un taux de signature de 7 % sur des rendez-vous qualifiés et présents est une hypothèse prudente. Les vingt-huit autres rendez-vous sont pour vous.</span>
-    </div>
   </div>
 </section>
 
-<!-- ══════════════════════════ 02 · LA COMPARAISON · plaque encastrée ══════════════════════════
-     Deux barres à la même échelle. La longueur fait l'argument, le chiffre le
-     confirme. C'est l'objection «&nbsp;je préfère recruter&nbsp;» traitée de face. -->
-<section class="sec plate" id="comparaison" data-plate="02">
+<!-- ══════════════════════════ 02 · FACE À UN RECRUTEMENT · plaque encastrée ══════════════════════════ -->
+<section class="sec plate" id="comparaison">
   <div class="wrap">
     <div class="sec-head rv">
       <p class="eyebrow">02 · Face à un recrutement</p>
       <h2>Le même trimestre, <span class="ex">avec un commercial junior.</span></h2>
-      <p class="lede">La comparaison honnête, à l’échelle. Un SDR junior en France coûte 32 000 € brut annuels, soit environ 3 700 € par mois chargés — et il ne produit rien avant d’être formé.</p>
+      <p class="lede">La comparaison honnête, à l’échelle. Un SDR junior coûte environ 32 000 € brut annuels, soit 3 700 € par mois chargés — et il ne produit rien avant d’être formé.</p>
     </div>
 
     <div class="vs">
       <div class="r them" style="--w:1;--i:0">
         <div class="hd"><b>Recruter un SDR junior</b><span class="a">11 100 €</span></div>
         <div class="t"><i></i></div>
-        <p class="n">Trois mois de salaire chargé, hors recrutement, hors licences d’outil et hors base de données à acheter. <b>Rendez-vous produits sur la période&nbsp;: le premier mois passe en formation, le deuxième en montée en compétence.</b></p>
+        <p class="n">Trois mois de salaire chargé, hors recrutement, hors licences d’outil et hors base de données à acheter. <b>Le premier mois passe en formation, le deuxième en montée en compétence.</b></p>
       </div>
 
       <div class="r us" style="--w:.7838;--i:1">
         <div class="hd"><b>Le même trimestre avec Leadcore</b><span class="a">8 700 €</span></div>
         <div class="t"><i></i></div>
-        <p class="n">Setup, retainer et trente rendez-vous honorés compris. <b>Pas de recrutement à mener, pas de licence, pas de base à acheter, et rien à payer sur les rendez-vous qui n’ont pas lieu.</b></p>
+        <p class="n">Setup, infrastructure et trente rendez-vous honorés compris. <b>Pas de recrutement à mener, pas de licence, pas de base à acheter, et rien à payer sur les rendez-vous qui n’ont pas lieu.</b></p>
       </div>
 
       <div class="r us" style="--w:.2432;--i:2">
         <div class="hd"><b>Si votre marché ne répond pas du tout</b><span class="a">2 700 €</span></div>
         <div class="t"><i></i></div>
-        <p class="n">Setup et trois mois de retainer, sans un seul rendez-vous facturé. <b>C’est votre perte maximale, et elle est connue à la signature.</b> Un salaire, lui, tombe tous les mois quel que soit le résultat.</p>
+        <p class="n">Setup et trois mois d’infrastructure, sans un seul rendez-vous facturé. <b>Votre perte maximale.</b> Un salaire, lui, tombe tous les mois quel que soit le résultat.</p>
       </div>
     </div>
 
@@ -158,7 +186,7 @@
 </section>
 
 <!-- ══════════════════════════ 03 · POUR QUI, ET POUR QUI PAS · pont soulevé ══════════════════════════ -->
-<section class="sec raise" id="fit" data-plate="03">
+<section class="sec raise" id="fit">
   <div class="wrap">
     <div class="sec-head rv">
       <p class="eyebrow">03 · Pour qui, et pour qui pas</p>
@@ -192,8 +220,8 @@
   </div>
 </section>
 
-<!-- ══════════════════════════ 04 · L'ENGAGEMENT ══════════════════════════ -->
-<section class="sec" id="engagement" data-plate="04">
+<!-- ══════════════════════════ 04 · LA DURÉE ══════════════════════════ -->
+<section class="sec" id="engagement">
   <div class="wrap">
     <div class="sec-head rv">
       <p class="eyebrow">04 · La durée</p>
@@ -278,7 +306,7 @@
   </div>
 </footer>
 
-<script src="assets/config.js?v=20260917d"></script>
-<script src="assets/main.js?v=20260917d"></script>
+<script src="assets/config.js?v=20260918a"></script>
+<script src="assets/main.js?v=20260918a"></script>
 </body>
 </html>
