@@ -55,15 +55,19 @@ produit. Chaque cadre désamorce au passage une objection, sans jamais la nommer
 | Accueil · les trois questions | comment, ce que ça prend, combien — avec les montants | « je n'ai pas le temps de lire trois pages » |
 | Accueil · qui vous parle | un opérateur, quatre à six clients | « je serai un numéro dans une agence » |
 | Méthode · le résumé | deux canaux qui convergent, l'entonnoir chiffré | « je ne comprends pas ce que vous faites » |
+| Méthode · chapô | chaque réponse est lue avant d'arriver chez vous | « c'est du spam automatisé » |
 | Méthode · filtre 2 | la liste d'exclusion part au contrat | « vous allez démarcher mes clients » |
 | Méthode · filtre 4 | LinkedIn en parallèle, et la fragilité d'un canal unique | « et si vos domaines sautent » |
 | Méthode · filtre 5 | un humain lit les 120 réponses | « c'est du spam automatisé » |
 | Méthode · ce qui porte votre nom | domaine et comptes hors circuit | « ça va cramer ma délivrabilité » |
 | Collaboration · la frise | quatre semaines, trois heures et demie | « combien de temps avant de voir quelque chose » |
 | Collaboration · la balance | trois lignes chez vous, dix chez nous | « je vais devoir tout piloter » |
+| Collaboration · le cinquième mois | le segment s'épuise, le plan de renouvellement est écrit en semaine 1 | « vos 1 900 contacts, vous les tenez combien de temps » |
 | Collaboration · la facture | les quatre conditions, ou rien | « je vais payer des rendez-vous bidons » |
 | Collaboration · la sortie | la base et les domaines vous restent | « je serai pris en otage » |
 | Tarifs · les trois lignes | 1 200 € / 500 € / 200 €, visibles d'emblée | « le vrai prix est caché en bas » |
+| Tarifs · sous la carte setup | un prestataire qui ne facture pas le setup le bâcle | « pourquoi payer avant d'avoir quelque chose » |
+| Tarifs · la durée | trois mois, sinon on vous vend une réponse que l'infra ne peut pas produire | « vous vous protégez, pas moi » |
 | Tarifs · le ratio | deux signés sur trente, 7 % — et les vingt-huit qui restent | « je n'arrive pas à chiffrer » |
 | Tarifs · face à un recrutement | 8 700 € contre 11 100 €, et 2 700 € de perte maximale | « je préfère recruter » |
 | Tarifs · pour qui | on refuse des missions | « ils prennent tout le monde » |
