@@ -1240,11 +1240,12 @@ body::before{
 .crumb svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   26. PANNEAU DE RÉSULTATS
+   26. LA COQUE DU PANNEAU DU HÉROS
    ───────────────────────────────────────────────────────────────────────────
-   Le compagnon du héros d'accueil. Les chiffres viennent du HTML, donc ils
-   s'affichent sans JavaScript ; le script ne fait que les faire monter et
-   dresser les barres à l'apparition.
+   Cadre, dégradé, ombre et en-tête du panneau posé à droite du titre d'accueil.
+   Son contenu est en section 36 : elle a porté une trajectoire chiffrée, elle
+   porte maintenant le prix. La coque est restée parce qu'elle marche ; c'est le
+   contenu qui avait un problème.
    ═══════════════════════════════════════════════════════════════════════════ */
 
 .stats{
@@ -1263,49 +1264,6 @@ body::before{
   padding:3px 8px;font-size:11px;font-weight:550;letter-spacing:.1em;white-space:nowrap;
 }
 
-/* la ligne de tête : le chiffre qui porte tout le panneau */
-.stats-lead{padding:clamp(20px,2.6vw,28px) clamp(20px,2.6vw,28px) 0}
-.stats-lead .v{
-  display:flex;align-items:baseline;gap:.1em;font-weight:800;
-  font-size:clamp(44px,5.4vw,66px);line-height:1;letter-spacing:-.05em;
-  color:var(--accent-hi);font-variant-numeric:tabular-nums;
-}
-.stats-lead .v small{font-size:.36em;font-weight:550;letter-spacing:-.02em;color:var(--fg-soft)}
-.stats-lead .l{display:block;margin-top:10px;font-size:15.5px;line-height:1.45;color:var(--fg-soft)}
-
-/* histogramme : douze semaines, une barre par semaine */
-.spark{
-  display:flex;align-items:flex-end;gap:clamp(3px,.6vw,6px);
-  height:74px;margin:22px clamp(20px,2.6vw,28px) 0;
-}
-.spark i{
-  flex:1;border-radius:3px 3px 1px 1px;transform-origin:bottom;
-  background:linear-gradient(180deg,var(--accent),rgba(var(--accent-rgb),.32));
-  height:var(--h);transform:scaleY(.04);
-  transition:transform .8s cubic-bezier(.22,1.1,.36,1);
-  transition-delay:calc(var(--i) * 55ms);
-}
-.stats.in .spark i{transform:scaleY(1)}
-.spark i:last-child{background:linear-gradient(180deg,var(--accent-hi),rgba(var(--accent-hi-rgb),.4))}
-.spark-ax{
-  display:flex;justify-content:space-between;
-  margin:9px clamp(20px,2.6vw,28px) 0;
-  font-family:var(--label);font-size:11px;font-weight:550;letter-spacing:.07em;
-  text-transform:uppercase;color:var(--fg-dim);
-}
-
-/* les trois chiffres secondaires */
-.stats-grid{
-  display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
-  margin-top:clamp(20px,2.6vw,26px);background:var(--rule-soft);
-  border-top:1px solid var(--rule-soft);
-}
-.stats-grid>div{background:var(--surface);padding:16px clamp(12px,1.6vw,18px)}
-.stats-grid .v{
-  display:block;font-weight:750;font-size:clamp(19px,2.2vw,25px);line-height:1;
-  letter-spacing:-.04em;font-variant-numeric:tabular-nums;
-}
-.stats-grid .l{display:block;margin-top:8px;font-size:13px;line-height:1.35;color:var(--fg-dim)}
 .stats-ft{
   padding:14px clamp(20px,2.6vw,28px);border-top:1px solid var(--rule-soft);
   font-size:13.5px;line-height:1.5;color:var(--fg-dim);
@@ -1315,10 +1273,8 @@ body::before{
 @media (max-width:1120px){.stats{max-width:560px}}
 @media (max-width:440px){
   /* même traitement que .fiche-hd : le libellé reste d'un tenant, c'est
-     l'étiquette « Exemple » qui passe à la ligne. */
+     l'étiquette qui passe à la ligne. */
   .stats-hd{flex-wrap:wrap;row-gap:8px}
-  .stats-grid{grid-template-columns:1fr;gap:1px}
-  .spark{height:58px}
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
@@ -1429,7 +1385,6 @@ body::before{
 
 @media (prefers-reduced-motion:reduce){
   .js main{animation:none}
-  .spark i{transform:scaleY(1)!important;transition:none}
   .pagecard,.pager a{transition:none}
 }
 
@@ -2453,4 +2408,65 @@ body::before{
   }
   .stop .ring{display:none}
   .railh.in .stop.now::before{animation:none}
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   36. LE PANNEAU DE PRIX (héros de l'accueil)
+   ───────────────────────────────────────────────────────────────────────────
+   Il occupe la place la plus visible du site, à droite du titre. Elle était
+   tenue par une trajectoire chiffrée étiquetée « Exemple » — donc inventée, et
+   un dirigeant qui lit « Exemple » décote tout le reste de la page. Le prix
+   prend sa place : c'est la première chose qu'on cherche, et la seule que le
+   visiteur ne peut obtenir nulle part ailleurs en quinze secondes.
+
+   Il réutilise la coque de la section 26 (cadre, dégradé, ombre, en-tête).
+   Trois lignes, une perte maximale, un ratio. Rien de plus : au-delà, il cesse
+   d'être lisible d'un coup d'œil, ce qui est son seul travail.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ---- les trois lignes ----
+   Colonne de montants à largeur fixe, et non `auto` : chaque ligne est sa
+   propre grille, donc trois colonnes `auto` se dimensionnent chacune sur son
+   propre contenu et les montants ne se terminent pas au même fer. La largeur
+   couvre « 1 200 € » au corps maximal. */
+.trio{padding:clamp(6px,1vw,10px) 0;--wa:clamp(88px,9.8vw,140px)}
+.tr{
+  display:grid;grid-template-columns:var(--wa) minmax(0,1fr);
+  gap:clamp(14px,1.8vw,22px);align-items:baseline;
+  padding:clamp(11px,1.4vw,15px) clamp(20px,2.6vw,28px);
+}
+.tr+.tr{border-top:1px solid var(--rule-soft)}
+/* justify-self et non text-align : l'élément ne s'étire pas dans une colonne
+   auto, donc aligner le texte dans sa boîte ne déplace rien. C'est la boîte
+   qu'il faut pousser à droite pour que les trois montants se terminent au
+   même fer. */
+.tr .a{
+  font-weight:800;font-size:clamp(28px,3.4vw,40px);line-height:1;letter-spacing:-.05em;
+  font-variant-numeric:tabular-nums;justify-self:end;white-space:nowrap;
+}
+.tr .l{font-size:15px;line-height:1.35;color:var(--fg-soft)}
+.tr .l b{color:var(--fg);font-weight:600}
+/* la ligne à la performance : la seule qui bouge, donc la seule accentuée */
+.tr.hot .a{color:var(--accent-hi)}
+
+/* ---- la perte maximale ----
+   L'argument du panneau. Un dirigeant décide sur ce qu'il risque, pas sur ce
+   qu'on lui promet, et c'est le seul chiffre du site qui borne son risque. */
+.tmax{
+  padding:clamp(16px,2vw,22px) clamp(20px,2.6vw,28px);
+  border-top:1px solid var(--rule);
+  background:linear-gradient(180deg,rgba(var(--accent-rgb),.085),rgba(var(--accent-rgb),.025));
+  display:grid;grid-template-columns:clamp(88px,9.8vw,140px) minmax(0,1fr);
+  gap:clamp(14px,1.8vw,20px);align-items:start;
+}
+.tmax .a{
+  font-weight:800;font-size:clamp(28px,3.4vw,40px);line-height:1;letter-spacing:-.05em;
+  font-variant-numeric:tabular-nums;color:var(--accent-hi);white-space:nowrap;justify-self:end;
+}
+.tmax p{margin:0;font-size:14.5px;line-height:1.45;color:var(--fg-soft)}
+.tmax p b{color:var(--fg);font-weight:600}
+
+@media (max-width:440px){
+  .tr,.tmax{grid-template-columns:1fr;gap:7px}
+  .tr .a,.tmax .a{justify-self:start}
 }

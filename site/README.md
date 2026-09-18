@@ -19,7 +19,7 @@ pages, plus les deux pages légales.
 
 | Page | Ce qu'elle porte | Composition | Hauteur |
 |---|---|---|---|
-| `index.html` | héros, panneau de résultats, les quatre gains, trois cartes vers le détail, le fondateur, la prise de rendez-vous | bande de chiffres en cartes | 4 500 px |
+| `index.html` | héros et grille tarifaire, les quatre gains, le défilé, le fondateur, trois cartes vers le détail, la prise de rendez-vous | panneau de prix + défilé illustré | 5 920 px |
 | `methode.html` | schéma des deux canaux, entonnoir chiffré, six filtres, la fiche livrée, ce qui porte votre nom | schéma animé + énoncé tenu + colonne de filtrage | 8 240 px |
 | `collaboration.html` | la frise des quatre semaines, le détail semaine par semaine, la balance des charges, la facture, la sortie | frise horizontale animée + balance | 7 765 px |
 | `tarifs.html` | les trois montants, le chiffre à retenir, l'addition d'un trimestre, face à un recrutement, à qui on dit non | trois cartes + grand livre + comparaison | 7 190 px |
@@ -49,7 +49,8 @@ produit. Chaque cadre désamorce au passage une objection, sans jamais la nommer
 | Page · cadre | Ce qu'il vend | L'objection qu'il tue |
 |---|---|---|
 | Accueil · héros | leurs commerciaux closent au lieu de prospecter | — |
-| Accueil · panneau de résultats | une trajectoire chiffrée sur 90 jours | « ça marche, sur le papier » |
+| Accueil · panneau de prix | 1 200 / 500 / 200, et 2 700 € de perte maximale | « combien, et qu'est-ce que je risque » |
+| Accueil · bandeau de sélection | on refuse sous 7 000 € de valeur client | « ils prennent tout le monde » |
 | Accueil · ce que vous y gagnez | agenda prévisible, risque borné, zéro embauche, réponse datée | « un commercial me coûterait moins cher » |
 | Accueil · les trois questions | comment, ce que ça prend, combien — avec les montants | « je n'ai pas le temps de lire trois pages » |
 | Accueil · qui vous parle | un opérateur, quatre à six clients | « je serai un numéro dans une agence » |
@@ -162,6 +163,21 @@ lame diagonale sur la méthode, strates horizontales sur la collaboration, voût
 haute resserrée plus un quadrillage de registre sur les tarifs. Une page sans
 classe `p-*` (les deux pages légales) retombe sur la lumière de l'accueil en
 retrait.
+
+**Le premier écran porte le prix.** L'emplacement le plus visible du site, à
+droite du titre d'accueil, a porté une trajectoire chiffrée étiquetée
+« Exemple ». Deux raisons de l'avoir remplacée par la grille tarifaire :
+
+- un dirigeant qui lit « Exemple » comprend « inventé » et **décote tout le
+  reste de la page**, y compris les chiffres qui sont vrais ;
+- mesuré sur la version précédente, le prix n'apparaissait qu'à **3 432 px**,
+  soit 59 % de la page. Un lecteur de quatre-vingt-dix secondes descend de
+  2 500 à 3 500 px : il sortait sans connaître le prix.
+
+Le panneau tient en trois lignes, une perte maximale et un ratio. **Ne rien y
+ajouter** : au-delà il cesse d'être lisible d'un coup d'œil, ce qui est son seul
+travail. Positions actuelles : 1 200 € à 228 px, 2 700 € à 455 px, le bandeau de
+sélection à 1 519 px, le fondateur à 3 029 px.
 
 **Le cadre, et pourquoi il est partout.** Le site était presque entièrement fait
 de texte posé sur le fond. Un bloc de prose sur du vide n'offre aucune prise :
@@ -429,20 +445,18 @@ python3 -m http.server 8000 --directory site
 
 ## Avant la mise en ligne
 
-- [ ] **Remplacer les chiffres du panneau de résultats de l'accueil.** Ils sont
-      **inventés**. Ils sont cohérents entre eux et avec le modèle (34 rendez-vous
-      sur 90 jours ≈ 11 par mois, 9 500 € de dépense sur le trimestre, 39 000 €
-      signés soit 4,1 fois la dépense, premier rendez-vous à 22 jours donc en
-      semaine 4), mais **aucun client ne se cache derrière**. Le bloc est étiqueté
-      « Exemple » pour ne pas se lire comme un cas client, et le HTML porte un
-      encadré d'avertissement autour. Remplaçables par les chiffres d'un vrai
-      client, avec son accord écrit, ou à retirer.
+- [x] ~~Remplacer les chiffres inventés du panneau de l'accueil.~~ **Réglé.**
+      Le panneau portait une trajectoire chiffrée (34 rendez-vous, 168 k€ de
+      pipeline, 39 k€ signés, 9 500 € de dépense) cohérente avec le modèle mais
+      sans aucun client derrière, étiquetée « Exemple ». Il a été remplacé par
+      la grille tarifaire, qui est vraie. **Plus aucun chiffre de performance
+      inventé ne figure sur le site.**
 
-      C'est un écart assumé, pas un oubli : la skill `anti-ui-slop` interdit
-      explicitement d'inventer des métriques pour qu'une mise en page ait l'air
-      complète. Le panneau existe sur demande du propriétaire du site, en
-      attendant de vrais chiffres, et c'est pour cette raison qu'il est le
-      premier point de cette liste.
+      Ce qui reste chiffré est soit contractuel (1 200 €, 500 €, 200 €, 7 000 €,
+      3 mois), soit issu du modèle de volumes de `MAJ-OFFRE-2026-09.md` (1 900
+      contacts, 120 réponses, 12 rendez-vous). La seule mention « Exemple » qui
+      subsiste est la fiche de rendez-vous de la page Méthode : elle illustre un
+      format de livrable, pas un résultat.
 
 - [ ] **Confirmer les chiffres et les règles LinkedIn** affichés sur le site
       (2 200 touches par mois, un rendez-vous honoré sur quatre, vingt

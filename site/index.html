@@ -89,43 +89,39 @@
       </div>
     </div>
 
-    <!-- ╔══════════════════════════════════════════════════════════════╗
-         ║  CHIFFRES PROVISOIRES — À REMPLACER AVANT LA MISE EN LIGNE   ║
-         ║  Inventés, cohérents entre eux mais sans client derrière.      ║
-         ║  Voir la liste d'avant-lancement dans site/README.md.        ║
-         ╚══════════════════════════════════════════════════════════════╝ -->
+    <!-- Le panneau le plus visible du site porte le prix. Il a porté une
+         trajectoire chiffrée étiquetée «&nbsp;Exemple&nbsp;», donc inventée&nbsp;: un
+         dirigeant qui lit «&nbsp;Exemple&nbsp;» décote tout le reste de la page, et le
+         prix, lui, n'est obtenable nulle part ailleurs en quinze secondes.
+         Mise en forme en section 36 de la feuille de style. -->
     <figure class="stats rv">
-      <figcaption class="stats-hd" data-live>
-        <span class="dot" aria-hidden="true"></span>
-        <span class="lbl">Trajectoire sur 90 jours</span>
-        <span class="tag">Exemple</span>
+      <figcaption class="stats-hd">
+        <span class="lbl">Ce que ça coûte</span>
+        <span class="tag">Grille actuelle</span>
       </figcaption>
 
-      <div class="stats-lead">
-        <span class="v">+<span data-count>34</span><small>&nbsp;rendez-vous</small></span>
-        <span class="l">qualifiés et honorés, du premier envoi à la fin du trimestre.</span>
+      <div class="trio">
+        <div class="tr">
+          <span class="a">1 200 €</span>
+          <span class="l">de <b>setup</b>, une seule fois au démarrage</span>
+        </div>
+        <div class="tr">
+          <span class="a">500 €</span>
+          <span class="l">par mois, <b>infrastructure et pilotage</b></span>
+        </div>
+        <div class="tr hot">
+          <span class="a">200 €</span>
+          <span class="l">par <b>rendez-vous honoré</b>, et seulement s’il a lieu</span>
+        </div>
       </div>
 
-      <div class="spark" role="img" aria-label="Rendez-vous honorés par semaine, de 1 la première semaine à 5 la douzième"><i style="--h:6%;--i:0"></i><i style="--h:9%;--i:1"></i><i style="--h:7%;--i:2"></i><i style="--h:14%;--i:3"></i><i style="--h:19%;--i:4"></i><i style="--h:26%;--i:5"></i><i style="--h:31%;--i:6"></i><i style="--h:38%;--i:7"></i><i style="--h:47%;--i:8"></i><i style="--h:58%;--i:9"></i><i style="--h:71%;--i:10"></i><i style="--h:100%;--i:11"></i></div>
-      <div class="spark-ax"><span>Semaine 1</span><span>Semaine 12</span></div>
-
-      <div class="stats-grid">
-        <div>
-          <span class="v">+<span data-count>168</span>&nbsp;k€</span>
-          <span class="l">de pipeline ouvert</span>
-        </div>
-        <div>
-          <span class="v">+<span data-count>39</span>&nbsp;k€</span>
-          <span class="l">signés sur le trimestre</span>
-        </div>
-        <div>
-          <span class="v"><span data-count>22</span>&nbsp;j</span>
-          <span class="l">avant le 1<sup>er</sup> rendez-vous</span>
-        </div>
+      <div class="tmax">
+        <span class="a">2 700 €</span>
+        <p>C’est tout ce que vous aurez dépensé sur le trimestre <b>si votre marché ne répond pas du tout</b>. Votre perte maximale, connue à la signature.</p>
       </div>
 
       <div class="stats-ft">
-        Sur <b>9 500 €</b> de prestation pour le trimestre, setup compris. Soit <b>4,1 fois la dépense</b> en chiffre signé.
+        Et dans l’autre sens&nbsp;: <b>deux rendez-vous signés sur trente</b> remboursent le trimestre entier.
       </div>
     </figure>
   </div>
@@ -175,8 +171,8 @@
       </div>
       <div class="band-c pad rv" style="--i:1">
         <span class="k"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.2 6.6a6.6 6.6 0 100 10.8M4.8 10.2h8.4M4.8 13.8h8.4"/></svg>Risque borné</span>
-        <span class="v"><span data-count>200</span><small>&nbsp;€ / RDV</small></span>
-        <p>L’essentiel de notre rémunération dépend de rendez-vous qui ont eu lieu. Sinon elle s’arrête aux 500 €.</p>
+        <span class="v"><span data-count>500</span><small>&nbsp;€ / mois</small></span>
+        <p>Ce qu’un mois sans résultat vous coûte. L’essentiel de notre rémunération dépend de rendez-vous qui ont réellement eu lieu.</p>
       </div>
       <div class="band-c pad rv" style="--i:2">
         <span class="k"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9.2" cy="8.2" r="3.2"/><path d="M3.4 19.4a5.8 5.8 0 0111.6 0"/><path d="M16.4 5.4a3.2 3.2 0 010 5.6M17.6 13.8a5.8 5.8 0 013 5.6"/></svg>Aucun recrutement</span>
@@ -192,7 +188,15 @@
 
     <div class="banner rv" style="margin-top:clamp(30px,4vw,46px)">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
-      <span>Ce qu’on vous demande en échange&nbsp;: <b>trente minutes par semaine</b> pour le point de campagne, et un agenda ouvert sous 48 heures. Rien d’autre.</span>
+      <span>Ce qu’on vous demande en échange&nbsp;: <b>trois heures et demie le premier mois</b>, puis trente minutes par semaine et un agenda ouvert sous 48 heures. Rien d’autre.</span>
+    </div>
+
+    <!-- La sélection à l'entrée. C'est le signal de crédibilité le plus fort
+         du site&nbsp;: il vivait en bas de la page Tarifs, où un dirigeant qui
+         donne quatre-vingt-dix secondes ne descend jamais. -->
+    <div class="banner rv" style="margin-top:clamp(12px,1.6vw,18px)">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M6 18L18 6"/></svg>
+      <span><b>On refuse les missions sous 7 000 € de valeur client.</b> En dessous, l’outbound vous coûte plus qu’il ne rapporte&nbsp;: vous ne renouvelez pas, et on perd notre temps tous les deux. On vous le dit pendant l’appel, pas au troisième mois.</span>
     </div>
   </div>
 </section>
@@ -271,6 +275,20 @@
   </div>
 </section>
 
+<!-- ══════════════════════════ QUI VOUS PARLE ══════════════════════════ -->
+<section class="sec raise" id="equipe">
+  <div class="wrap">
+    <div class="card founder rv">
+      <div class="ini" aria-hidden="true">PB</div>
+      <div>
+        <span class="tag">Qui vous parle</span>
+        <h3>Platon Bournassenko, fondateur</h3>
+        <p style="margin-top:12px">Je cadre la cible avec vous, j’écris les séquences, et je vous appelle quand un segment cesse de répondre au lieu d’attendre le point mensuel. Un opérateur suit quatre à six campagnes&nbsp;: vous n’aurez pas d’interlocuteur qui change tous les deux mois.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ══════════════════════════ TROIS PAGES ══════════════════════════ -->
 <section class="sec" id="detail">
   <div class="wrap">
@@ -305,20 +323,6 @@
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </span>
       </a>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════════════════ QUI VOUS PARLE ══════════════════════════ -->
-<section class="sec raise" id="equipe">
-  <div class="wrap">
-    <div class="card founder rv">
-      <div class="ini" aria-hidden="true">PB</div>
-      <div>
-        <span class="tag">Qui vous parle</span>
-        <h3>Platon Bournassenko, fondateur</h3>
-        <p style="margin-top:12px">Je cadre la cible avec vous, j’écris les séquences, et je vous appelle quand un segment cesse de répondre au lieu d’attendre le point mensuel. Un opérateur suit quatre à six campagnes&nbsp;: vous n’aurez pas d’interlocuteur qui change tous les deux mois.</p>
-      </div>
     </div>
   </div>
 </section>
