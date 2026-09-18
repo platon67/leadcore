@@ -19,12 +19,13 @@ pages, plus les deux pages légales.
 
 | Page | Ce qu'elle porte | Composition | Hauteur |
 |---|---|---|---|
-| `index.html` | héros, panneau de résultats, les quatre gains, trois cartes vers le détail, le fondateur, la prise de rendez-vous | bande de chiffres réglée | 4 460 px |
-| `methode.html` | cinq filtres entre une base et un créneau, les chiffres de volume, la fiche livrée, la protection du domaine | énoncé tenu + colonne de filtrage | 7 060 px |
-| `collaboration.html` | les trente premiers jours, le partage des charges, ce qui déclenche la facture, la sortie | frise + balance | 6 635 px |
-| `tarifs.html` | l'addition d'un trimestre, la comparaison avec un recrutement, à qui on dit non, la durée | grand livre + comparaison | 6 658 px |
+| `index.html` | héros, panneau de résultats, les quatre gains, trois cartes vers le détail, le fondateur, la prise de rendez-vous | bande de chiffres en cartes | 4 500 px |
+| `methode.html` | schéma des deux canaux, entonnoir chiffré, six filtres, la fiche livrée, ce qui porte votre nom | schéma animé + énoncé tenu + colonne de filtrage | 8 240 px |
+| `collaboration.html` | la frise des quatre semaines, le détail semaine par semaine, la balance des charges, la facture, la sortie | frise horizontale animée + balance | 7 765 px |
+| `tarifs.html` | les trois montants, le chiffre à retenir, l'addition d'un trimestre, face à un recrutement, à qui on dit non | trois cartes + grand livre + comparaison | 7 190 px |
 
-L'accueil a perdu **61 %** de sa hauteur et **67 %** de ses mots. Il ne garde que
+L'accueil a perdu **61 %** de sa hauteur et **67 %** de ses mots par rapport à
+la page unique d'origine. Il ne garde que
 ce qui décide d'un premier contact ; le reste est à un clic, et les trois cartes
 d'orientation annoncent ce qu'on y trouve.
 
@@ -50,18 +51,30 @@ produit. Chaque cadre désamorce au passage une objection, sans jamais la nommer
 | Accueil · héros | leurs commerciaux closent au lieu de prospecter | — |
 | Accueil · panneau de résultats | une trajectoire chiffrée sur 90 jours | « ça marche, sur le papier » |
 | Accueil · ce que vous y gagnez | agenda prévisible, risque borné, zéro embauche, réponse datée | « un commercial me coûterait moins cher » |
-| Méthode · la cible | la liste d'exclusion part au contrat | « vous allez démarcher mes clients » |
-| Méthode · l'approche | un humain lit les 120 réponses | « c'est du spam automatisé » |
-| Méthode · le délai | les vrais chiffres de production | « on va me promettre la lune » |
-| Méthode · votre réputation | domaine principal hors circuit | « ça va cramer ma délivrabilité » |
-| Collaboration · trente jours | le temps que ça leur coûte, semaine par semaine | « combien de temps avant de voir quelque chose » |
-| Collaboration · le rythme | trente minutes par semaine, et J+30 | « je vais devoir tout piloter » |
+| Accueil · les trois questions | comment, ce que ça prend, combien — avec les montants | « je n'ai pas le temps de lire trois pages » |
+| Accueil · qui vous parle | un opérateur, quatre à six clients | « je serai un numéro dans une agence » |
+| Méthode · le résumé | deux canaux qui convergent, l'entonnoir chiffré | « je ne comprends pas ce que vous faites » |
+| Méthode · filtre 2 | la liste d'exclusion part au contrat | « vous allez démarcher mes clients » |
+| Méthode · filtre 4 | LinkedIn en parallèle, et la fragilité d'un canal unique | « et si vos domaines sautent » |
+| Méthode · filtre 5 | un humain lit les 120 réponses | « c'est du spam automatisé » |
+| Méthode · ce qui porte votre nom | domaine et comptes hors circuit | « ça va cramer ma délivrabilité » |
+| Collaboration · la frise | quatre semaines, trois heures et demie | « combien de temps avant de voir quelque chose » |
+| Collaboration · la balance | trois lignes chez vous, dix chez nous | « je vais devoir tout piloter » |
 | Collaboration · la facture | les quatre conditions, ou rien | « je vais payer des rendez-vous bidons » |
 | Collaboration · la sortie | la base et les domaines vous restent | « je serai pris en otage » |
-| Tarifs · les trois lignes | un seul client signé couvre le trimestre | « quel retour, vraiment » |
-| Tarifs · le calcul | 8 700 € sur un trimestre, seuil à deux signatures | « je n'arrive pas à chiffrer » |
+| Tarifs · les trois lignes | 1 200 € / 500 € / 200 €, visibles d'emblée | « le vrai prix est caché en bas » |
+| Tarifs · le chiffre à retenir | 290 € le rendez-vous, deux signés sur trente | « je n'arrive pas à chiffrer » |
+| Tarifs · face à un recrutement | 8 700 € contre 11 100 €, et 2 700 € de perte maximale | « je préfère recruter » |
 | Tarifs · pour qui | on refuse des missions | « ils prennent tout le monde » |
-| Accueil · qui vous parle | un opérateur, quatre à six clients | « je serai un numéro dans une agence » |
+
+**Le chiffre à retenir, et ce qu'il ne dit pas.** La formulation naturelle —
+« rentable à partir d'un rendez-vous signé par trimestre » — **n'est pas vraie**
+à 7 000 € de valeur client : une signature rapporte 7 000 € pour 8 700 €
+dépensés, soit 80 % du trimestre. Elle ne devient vraie qu'au-dessus de
+8 700 € de valeur client. Le bloc dit donc trois choses exactes à la place : le
+coût unitaire tout compris (290 €), le ratio qui rend le trimestre rentable
+(deux signés sur trente, 7 %) et la perte maximale (2 700 €). **Ne pas
+remplacer ces trois chiffres par la formule courte** sans refaire le calcul.
 
 Aucune section ne s'intitule « objections » et aucune ne pose de question
 rhétorique : l'objection est traitée dans le corps du texte, avant que le
@@ -71,6 +84,27 @@ Les chiffres contractuels ne bougent jamais sans passer par
 [`docs/MAJ-OFFRE-2026-09.md`](../docs/MAJ-OFFRE-2026-09.md). La promesse reste
 à 8-12 rendez-vous par mois ; les 15 à 20 de l'objectif interne ne figurent
 nulle part sur le site.
+
+### Écart connu avec les documents de fonctionnement : LinkedIn
+
+Le site présente **LinkedIn comme un canal actif**, lancé en parallèle de
+l'email sur les mêmes contacts. Les documents ne disent pas encore ça :
+
+- [`docs/LEADCORE-FONCTIONNEMENT.md`](../docs/LEADCORE-FONCTIONNEMENT.md) ne
+  cite LinkedIn que comme **source de données** pour le scraping et
+  l'enrichissement.
+- [`docs/MAJ-OFFRE-2026-09.md`](../docs/MAJ-OFFRE-2026-09.md) section 5 classe
+  encore « Canal 2 — LinkedIn en complément de l'email, et à partir de quel
+  client » parmi les **sujets à trancher**.
+
+Le site a été écrit sur l'instruction du propriétaire, qui a confirmé que le
+canal tourne. **Les deux documents restent à mettre à jour**, et tant que ce
+n'est pas fait c'est le site qui est en avance sur le référentiel, pas
+l'inverse. Les volumes affichés (7 600 emails, 2 200 touches LinkedIn, un
+rendez-vous honoré sur quatre venu de LinkedIn) et les règles annoncées
+(comptes dédiés, vingt connexions par jour, aucun message de vente en demande
+de connexion) sont à confirmer contre la production réelle avant la mise en
+ligne.
 
 ## Système visuel
 
@@ -92,8 +126,12 @@ qui défile :
 |---|---|
 | **le sol** | un champ continu à `#0C1413`, avec une dérive tonale verticale |
 | **la signature** | la lumière propre à la page — elle change de **forme**, pas seulement de place |
-| **le plan** | les deux bords du conteneur tracés sur toute la hauteur, un repère à chaque section, et une jauge qui se remplit au défilement |
 | **le grain** | inchangé, 2,4 % |
+
+Une troisième couche a existé, un « calque de plan » qui traçait les deux bords
+du conteneur sur toute la hauteur. Elle a été retirée : posés dans les marges,
+ces filets fermaient la page au lieu de l'ouvrir, et la marge sert mieux à
+élargir le contenu.
 
 **Le sol n'est pas au noir, et c'est le point à ne pas défaire.** Un fond déjà
 posé sur le plancher ne peut plus s'enfoncer : une plaque encastrée dans du
@@ -115,6 +153,31 @@ lame diagonale sur la méthode, strates horizontales sur la collaboration, voût
 haute resserrée plus un quadrillage de registre sur les tarifs. Une page sans
 classe `p-*` (les deux pages légales) retombe sur la lumière de l'accueil en
 retrait.
+
+**Le cadre, et pourquoi il est partout.** Le site était presque entièrement fait
+de texte posé sur le fond. Un bloc de prose sur du vide n'offre aucune prise :
+le regard glisse et ne s'arrête nulle part, ce qui est exactement le contraire
+de ce dont a besoin un dirigeant qui parcourt. Le jeton `.pad` donne une surface
+et une arête, en deux poids seulement — plein pour ce qui porte l'information,
+filet seul (`.pad.lite`) pour ce qui l'accompagne. Trois poids donneraient une
+page en damier.
+
+**Chaque page répond d'abord en image.** Les trois pages de détail ouvrent sur
+un résumé encastré (`.sec.plate.tldr`) placé avant le premier paragraphe :
+
+| Page | Le résumé | Ce qui s'anime |
+|---|---|---|
+| Méthode | `.flow`, les deux canaux qui partent ensemble et convergent, puis l'entonnoir chiffré | les connecteurs se tracent au `clip-path`, les touches apparaissent une à une |
+| Collaboration | `.railh`, les quatre semaines sur une ligne horizontale | l'axe se remplit, les quatre cartes se lèvent en séquence |
+| Tarifs | `.price3` puis `.keynum` | les trois cartes et le grand chiffre se lèvent |
+
+Le connecteur de `.flow` est un SVG étiré par `preserveAspectRatio="none"`,
+donc il suit la largeur de sa cellule sans recalcul. Il est **dessiné pour une
+lecture de gauche à droite** : tourné de 90° il ne veut plus rien dire, et en
+colonne (≤ 860 px) il est remplacé par un simple trait vertical.
+
+Sur la frise, le repère est au **bord gauche** de chaque arrêt et non au centre :
+un point centré désigne une carte, un point au bord désigne un début.
 
 **Compositions par page.** Chaque page a sa propre structure, en section 30, pour
 qu'aucune ne se lise comme un morceau détaché d'une autre :
@@ -290,6 +353,13 @@ python3 -m http.server 8000 --directory site
       complète. Le panneau existe sur demande du propriétaire du site, en
       attendant de vrais chiffres, et c'est pour cette raison qu'il est le
       premier point de cette liste.
+
+- [ ] **Confirmer les chiffres et les règles LinkedIn** affichés sur le site
+      (2 200 touches par mois, un rendez-vous honoré sur quatre, vingt
+      connexions par jour et par compte), puis mettre à jour
+      `docs/LEADCORE-FONCTIONNEMENT.md` et la section 5 de
+      `docs/MAJ-OFFRE-2026-09.md`, qui classent encore le second canal parmi
+      les sujets ouverts. Voir « Écart connu » plus haut.
 
 - [ ] Renseigner `provider` et `url` dans `assets/config.js`
 - [ ] Vérifier l’adresse email de contact
