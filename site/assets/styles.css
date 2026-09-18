@@ -512,6 +512,7 @@ section[id],main>span[id]{scroll-margin-top:calc(var(--header-h) + 20px)}
   font-variant-numeric:tabular-nums;min-width:clamp(84px,9.5vw,118px);flex:none}
 .lvl .l{font-size:15.5px;line-height:1.4;flex:1;color:var(--fg-soft)}
 .lvl .l b{color:var(--fg);font-weight:500}
+.lvl .r .ico{width:14px;height:14px;color:var(--accent);margin-right:7px;vertical-align:-2px}
 .lvl .r{font-family:var(--label);font-size:12px;font-weight:550;letter-spacing:.1em;text-transform:uppercase;
   color:var(--fg-dim);text-align:right;flex:none;white-space:nowrap}
 .lvl.w1{width:100%}.lvl.w2{width:94%}.lvl.w3{width:88%}.lvl.w4{width:82%}.lvl.w5{width:76%}
@@ -904,7 +905,8 @@ ul.crosses li::before{background:none;border:1.5px solid var(--fg-dim);border-ra
   .lvl{flex-wrap:wrap;gap:4px 18px;width:100%!important}
   .lvl .v{min-width:0;width:100%}
   .lvl .l{flex:1 1 auto;min-width:58%}
-  .lvl .r{text-align:left;white-space:normal}
+  .lvl .r .ico{width:14px;height:14px;color:var(--accent);margin-right:7px;vertical-align:-2px}
+.lvl .r{text-align:left;white-space:normal}
   .infra .row{grid-template-columns:1fr}
   .keys,.conds,.steps{grid-template-columns:1fr}
   .steps{gap:26px}
@@ -1519,6 +1521,7 @@ body::before{
   display:block;font-weight:800;font-size:clamp(26px,3.4vw,42px);line-height:1;
   letter-spacing:-.05em;font-variant-numeric:tabular-nums;
 }
+.chrono-w .u .ico{width:13px;height:13px;color:var(--accent);margin-right:6px;vertical-align:-2px}
 .chrono-w .u{
   display:block;margin-top:8px;font-family:var(--label);font-size:11.5px;font-weight:600;
   letter-spacing:.13em;text-transform:uppercase;color:var(--fg-dim);
@@ -1897,9 +1900,17 @@ body::before{
   letter-spacing:-.045em;font-variant-numeric:tabular-nums;
 }
 .fbox .t{
-  display:block;margin-top:9px;font-family:var(--label);font-size:12px;font-weight:600;
+  display:flex;align-items:center;gap:8px;margin-top:9px;
+  font-family:var(--label);font-size:12px;font-weight:600;
   letter-spacing:.09em;text-transform:uppercase;color:var(--fg-dim);
 }
+.fbox .t .ico{width:15px;height:15px;color:var(--accent)}
+/* dans la case d'entrée et la case de sortie, le pictogramme est le seul
+   repère avant le chiffre : il passe devant lui, pas après */
+.fbox:not(.ch) .t{margin-top:0;margin-bottom:11px}
+.fbox:not(.ch) .n{order:2}
+.fbox:not(.ch){display:flex;flex-direction:column}
+.fbox:not(.ch) .d{order:3}
 .fbox .d{display:block;margin-top:8px;font-size:13.5px;line-height:1.4;color:var(--fg-soft)}
 /* les deux canaux, l'un sur l'autre */
 .fpair{display:grid;gap:clamp(10px,1.2vw,15px)}
@@ -2077,11 +2088,6 @@ body::before{
       animation-timeline:view(block);
       animation-range:entry calc(30% + var(--d,0) * 5%) entry calc(52% + var(--d,0) * 5%);
     }
-    .js .stop{
-      animation:rowIn linear both;
-      animation-timeline:view(block);
-      animation-range:entry 14% entry 62%;
-    }
     .js .pcell,.js .keynum .big{
       animation:rowIn linear both;
       animation-timeline:view(block);
@@ -2099,17 +2105,17 @@ body::before{
   .js .flow .fw:nth-of-type(3) .lit{transition-delay:.44s}
   .js .dots i{transition:transform .4s var(--spring) calc(.3s + var(--d,0) * .07s)}
   .js .flow.in .dots i{transform:scale(1)}
-  .js .stop,.js .pcell{
+  .js .pcell{
     opacity:0;transform:translate3d(0,20px,0);
     transition:opacity .6s var(--ease-out),transform .6s var(--ease-out);
   }
-  .js .stop.in,.js .pcell.in{opacity:1;transform:none}
+  .js .pcell.in{opacity:1;transform:none}
 }
 
 @media (prefers-reduced-motion:reduce){
   .flow .fw .lit{clip-path:none!important;animation:none!important;transition:none!important}
   .dots i{transform:scale(1)!important;animation:none!important;transition:none!important}
-  .stop,.pcell,.keynum .big{
+  .pcell,.keynum .big{
     animation:none!important;opacity:1!important;transform:none!important;transition:none!important;
   }
   .railh-fill{transition:none;transform:scaleX(1)}
@@ -2265,4 +2271,186 @@ body::before{
   .railh-head{display:none}
   .ratio-grid i{transform:none!important;opacity:1!important;transition:none!important}
   .stop::before{transition:none}
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   34. LE DÉFILÉ (accueil)
+   ───────────────────────────────────────────────────────────────────────────
+   Quatre affirmations sur ce qu'on exploite vraiment, chacune avec son image.
+   Le cadre est tenu à droite pendant que les affirmations défilent à gauche ;
+   l'image change quand l'affirmation en face devient active.
+
+   Les photographies ne décrivent pas un bénéfice — une photo ne sait pas
+   montrer « agenda prévisible », et essayer donne exactement l'illustration
+   générique qu'on voulait éviter. Elles sont la métaphore d'une chose qu'on
+   opère : une maille régulière pour une base construite ligne par ligne, des
+   baies pour l'infrastructure d'envoi, la Terre de nuit pour deux canaux sur
+   un même marché, des tours pour un agenda qui monte.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.defile{
+  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.04fr);
+  gap:clamp(28px,4.4vw,64px);align-items:start;
+}
+
+/* ---- la colonne des affirmations ---- */
+.defile-list{display:grid}
+.dstep{
+  position:relative;padding:clamp(22px,2.8vw,32px) 0 clamp(22px,2.8vw,32px) clamp(20px,2.4vw,30px);
+  border-top:1px solid var(--rule-soft);
+}
+.dstep:first-child{border-top:0}
+/* le trait d'activation, à gauche */
+.dstep::before{
+  content:"";position:absolute;left:0;top:0;bottom:0;width:2px;border-radius:2px;
+  background:var(--accent);transform:scaleY(0);transform-origin:top;
+  transition:transform .5s var(--ease-out);
+}
+.dstep.on::before{transform:scaleY(1)}
+.dstep .k{
+  display:flex;align-items:center;gap:9px;margin-bottom:11px;
+  font-family:var(--label);font-size:11.5px;font-weight:600;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--fg-dim);
+  transition:color .4s linear;
+}
+.dstep .k .ico{width:15px;height:15px}
+.dstep.on .k{color:var(--accent)}
+.dstep h3{
+  margin:0 0 10px;font-size:clamp(19px,2.2vw,25px);letter-spacing:-.025em;
+  color:var(--fg-soft);transition:color .4s linear;
+}
+.dstep.on h3{color:var(--fg)}
+.dstep p{margin:0;font-size:15.5px;line-height:1.5;color:var(--fg-dim);max-width:52ch}
+
+/* ---- le cadre d'images ---- */
+.defile-view{
+  position:sticky;top:calc(var(--header-h) + clamp(20px,3vw,40px));
+  border-radius:var(--radius);overflow:hidden;
+  border:1px solid var(--rule);
+  aspect-ratio:7/5;
+  background:var(--ink-2);
+  isolation:isolate;
+}
+.defile-view figure{position:absolute;inset:0;margin:0}
+.defile-view img{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  opacity:0;transform:scale(1.06);
+  transition:opacity .7s var(--ease-io),transform 1.4s var(--ease-out);
+  will-change:opacity;
+}
+.defile-view figure.on img{opacity:1;transform:scale(1)}
+/* un voile qui garde la légende lisible quelle que soit l'image */
+.defile-view::after{
+  content:"";position:absolute;inset:0;pointer-events:none;z-index:2;
+  background:linear-gradient(180deg,rgba(5,9,8,.12) 0%,rgba(5,9,8,.06) 42%,rgba(5,9,8,.82) 100%);
+}
+/* la légende, en bas du cadre */
+.defile-cap{
+  position:absolute;left:0;right:0;bottom:0;z-index:3;
+  padding:clamp(16px,2vw,24px);
+  display:flex;align-items:baseline;gap:12px;
+}
+.defile-cap b{
+  font-family:var(--mono);font-size:11.5px;font-weight:600;letter-spacing:.1em;
+  color:var(--accent);flex:none;
+}
+.defile-cap span{font-size:14.5px;line-height:1.4;color:var(--fg-soft)}
+
+@media (max-width:900px){
+  .defile{grid-template-columns:1fr;gap:clamp(20px,3vw,28px)}
+  .defile-view{position:relative;top:0;order:-1}
+  .dstep{padding-left:16px}
+}
+/* Sans JavaScript, aucune affirmation ne reçoit .on : la première image et la
+   première affirmation sont donc actives par défaut dans le balisage, et la
+   page reste lisible et illustrée. */
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   35. LA FRISE, SECONDE VERSION
+   ───────────────────────────────────────────────────────────────────────────
+   La première version se contentait de remplir un axe. Celle-ci fait passer
+   quelque chose : la tête court sur l'axe, et chaque arrêt s'allume au moment
+   précis où elle le dépasse — anneau qui s'ouvre, carte qui monte, chiffre de
+   la semaine qui apparaît en filigrane derrière.
+
+   Le cadencement est en cascade de retards, tous accrochés à la même classe
+   .in et calés sur la durée de course de la tête (1,4 s pour quatre arrêts,
+   donc un arrêt toutes les 350 ms). Changer la durée de la tête sans changer
+   ces retards désynchronise l'ensemble.
+
+   Rien que transform et opacity : aucun flou animé, aucune ombre animée.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.stop{
+  --t:0ms;                       /* retard propre à l'arrêt, posé plus bas */
+  opacity:0;transform:translate3d(0,26px,0) scale(.97);
+  transition:opacity .55s var(--ease-out) var(--t),
+             transform .62s var(--ease-out) var(--t),
+             border-color .4s linear var(--t);
+}
+.railh.in .stop{opacity:1;transform:none}
+.railh-row .stop:nth-child(1){--t:150ms}
+.railh-row .stop:nth-child(2){--t:500ms}
+.railh-row .stop:nth-child(3){--t:850ms}
+.railh-row .stop:nth-child(4){--t:1200ms}
+
+/* le filet d'accent sur l'arête haute, tiré de gauche à droite */
+.stop::after{
+  content:"";position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--accent),var(--accent-hi));
+  transform:scaleX(0);transform-origin:left;
+  transition:transform .6s var(--ease-out) var(--t);
+}
+.railh.in .stop::after{transform:none}
+
+/* l'anneau qui s'ouvre au passage de la tête */
+.stop .ring{
+  position:absolute;top:-32px;left:0;width:11px;height:11px;margin:0;
+  border-radius:50%;border:1.5px solid var(--accent);
+  transform:scale(1);opacity:0;pointer-events:none;
+}
+.railh.in .stop .ring{animation:onde .9s var(--ease-out) var(--t) both}
+@keyframes onde{
+  0%  {transform:scale(1);opacity:.9}
+  100%{transform:scale(3.4);opacity:0}
+}
+
+/* Le chiffre de la semaine, en filigrane derrière la carte. Il déborde, donc il
+   lui faut son propre calque rogné : rogner la carte elle-même couperait le
+   repère et son anneau, qui vivent au-dessus de son arête haute. */
+.ghostwrap{position:absolute;inset:0;overflow:hidden;border-radius:inherit;pointer-events:none}
+.stop .ghost{
+  position:absolute;right:-6px;bottom:-26px;pointer-events:none;
+  font-weight:800;font-size:clamp(78px,9vw,124px);line-height:1;letter-spacing:-.06em;
+  color:rgba(var(--fg-rgb),.045);
+  opacity:0;transform:translate3d(0,14px,0);
+  transition:opacity .7s var(--ease-out) calc(var(--t) + 160ms),
+             transform .9s var(--ease-out) calc(var(--t) + 160ms);
+}
+.railh.in .stop .ghost{opacity:1;transform:none}
+.stop.now .ghost{color:rgba(var(--accent-rgb),.11)}
+
+/* le contenu passe devant le filigrane */
+.stop .w,.stop h3,.stop p,.stop .you{position:relative;z-index:1}
+.stop .w{display:flex;align-items:center;gap:8px}
+.stop .w .ico{width:15px;height:15px}
+
+/* la semaine en cours respire, une fois la frise en place */
+.railh.in .stop.now::before{animation:pouls 2.8s var(--ease-io) 1.9s infinite}
+@keyframes pouls{
+  0%,100%{box-shadow:0 0 0 0 rgba(var(--accent-rgb),.34)}
+  50%    {box-shadow:0 0 0 7px rgba(var(--accent-rgb),0)}
+}
+
+@media (max-width:860px){
+  .stop .ghost{font-size:64px;bottom:-14px}
+  .stop .ring{top:18px;left:-26px}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .stop,.stop::after,.stop .ghost{
+    opacity:1!important;transform:none!important;transition:none!important;animation:none!important;
+  }
+  .stop .ring{display:none}
+  .railh.in .stop.now::before{animation:none}
 }

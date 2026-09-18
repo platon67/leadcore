@@ -188,6 +188,29 @@ un résumé encastré (`.sec.plate.tldr`) placé avant le premier paragraphe :
 | Collaboration | `.railh`, les quatre semaines sur une ligne horizontale | l'axe se remplit, une **tête lumineuse** court sur son arête et allume les quatre repères dans l'ordre, les cartes se lèvent |
 | Tarifs | `.price3` puis `.ratio` | les trois cartes se lèvent, les trente carrés apparaissent en cascade |
 
+L'accueil a le sien, `.defile` : quatre affirmations à gauche, un cadre d'image
+tenu à droite. L'affirmation qui traverse le tiers médian de la fenêtre devient
+active et fait changer l'image. La sélection est faite par la marge racine d'un
+`IntersectionObserver` (`-38% 0px -46% 0px`), donc sans écouteur de défilement
+ni calcul de position. **Sans JavaScript, le balisage porte déjà `.on` sur la
+première affirmation et la première image** : la page reste illustrée.
+
+La légende est posée sur la photographie, derrière un voile en dégradé.
+Contraste mesuré sur les pixels réellement rendus, image par image, et non sur
+la couleur de fond déclarée : **9,0 à 9,5:1** selon la photo.
+
+La frise de collaboration a été refaite une seconde fois : la tête court sur
+l'axe et chaque arrêt s'allume au moment où elle le dépasse — anneau qui
+s'ouvre, filet d'accent tiré sur l'arête haute, carte qui monte, chiffre de la
+semaine en filigrane. La cascade est une suite de retards calés sur la course
+de la tête : **1,4 s pour quatre arrêts, donc un arrêt toutes les 350 ms**.
+Changer la durée de la tête sans changer ces retards désynchronise l'ensemble.
+
+Le filigrane déborde de sa carte, donc il a son propre calque rogné
+(`.ghostwrap`). Rogner la carte elle-même couperait le repère et son anneau,
+qui vivent au-dessus de son arête haute — c'est ce qui s'était passé à la
+première tentative.
+
 La comète du schéma des canaux est la seule boucle du site en dehors des deux
 témoins de l'accueil : elle porte `data-live`, donc l'`IntersectionObserver` la
 met en pause hors du champ. Elle anime `stroke-dashoffset`, qui n'est pas
@@ -317,30 +340,39 @@ défilante.
 
 ## Images et photographies
 
-Le site n'en contient aucune, et ce n'est pas un oubli en attente d'être
-comblé par de la banque d'images.
+Quatre photographies sur l'accueil, dans le bloc « ce qu'on opère pour vous ».
+Provenance, licence et recette de traitement complètes dans
+[`assets/img/README.md`](assets/img/README.md).
 
-Une photographie de réunion ou de poignée de main achetée sur catalogue
-annoncerait exactement le contraire de ce que vend la page : elle dirait qu'on
-n'a rien de réel à montrer. La skill `anti-ui-slop` en fait une de ses règles,
-et pour une agence qui n'a pas encore de cas client c'est doublement vrai —
-la seule chose qu'on puisse montrer honnêtement aujourd'hui, c'est le
-mécanisme, et c'est ce que font les schémas.
+**Ce qu'elles illustrent, et ce qu'elles n'illustrent pas.** Aucune ne décrit un
+bénéfice. Une photo ne sait pas montrer « agenda prévisible », et essayer donne
+exactement l'illustration générique qu'on voulait éviter. Chacune est la
+métaphore d'une chose qu'on **opère** : une maille régulière pour une base
+construite ligne par ligne, des baies de serveurs pour l'infrastructure
+d'envoi, la Terre de nuit pour deux canaux sur un même marché, des tours pour
+un agenda qui monte.
 
-Ce qui vaudrait la peine d'être ajouté, dans l'ordre :
+**Le traitement est ce qui les empêche de faire pièce rapportée.** Les quatre
+passent par la même rampe : désaturation totale, puis interpolation entre une
+ombre graphite et une haute lumière émeraude, plus une vignette. Une photo non
+traitée posée à côté des trois autres se verrait immédiatement. **Si vous en
+remplacez une, repassez-la par la commande** du README des images sans changer
+les valeurs.
 
-1. **Une photo du fondateur**, dans le cadre « qui vous parle ». C'est la seule
-   image qui ajoute de la preuve plutôt que du décor : elle dit qu'il y a
-   quelqu'un derrière. Format 400 × 400 minimum, cadrage serré, à poser dans
-   `site/assets/` et à substituer aux initiales `PB`.
-2. **Des captures réelles** de l'outil d'envoi, d'un rapport mensuel ou d'une
-   fiche de rendez-vous, une fois qu'un vrai client existe et a donné son
-   accord écrit. Anonymisées.
+Ce qui manque encore, par ordre d'utilité :
+
+1. **Une photo du fondateur**, dans le cadre « qui vous parle », à la place des
+   initiales `PB`. C'est la seule image qui ajouterait de la preuve plutôt que
+   du climat.
+2. **Des captures réelles** anonymisées, quand un vrai client existe et a donné
+   son accord écrit.
 3. **Des logos clients**, quand il y en aura.
 
-Rien de tout cela ne se télécharge : ce sont des actifs à produire. Tant qu'ils
-n'existent pas, la page est plus crédible sans images qu'avec des images
-génériques.
+**Poids.** Deux largeurs par image, WebP avec repli JPEG : 136 Ko pour les
+quatre en 960, 51 Ko en 560. L'accueil passe de 250 à 402 Ko chargés. Le LCP
+n'en souffre pas — les images sont sous la ligne de flottaison et ne sont
+jamais l'élément le plus grand au premier rendu. Mesuré : 1 268 ms à CPU ÷4,
+CLS 0.
 
 ## Fichiers
 
@@ -358,6 +390,7 @@ site/
     ├── config.js           ← le seul fichier à modifier au quotidien
     ├── main.js             en-tête, apparitions, compteurs, calendrier
     ├── fonts/              Geist, Geist Mono, Instrument Serif (OFL 1.1)
+    ├── img/                les quatre photographies traitées + leur README
     ├── og-leadcore.png     image de partage, 1200 × 630
     ├── icon-180.png        icône d'écran d'accueil
     └── leadcore-logo*.png  version web ; l’original pleine définition vit dans deck/assets/
@@ -430,6 +463,9 @@ python3 -m http.server 8000 --directory site
       fois qu’elles sont complètes
 - [ ] Ajouter une image Open Graph au format 1200 × 630 si le partage sur
       LinkedIn compte
+
+- [ ] **Remplacer les initiales `PB` par une photo du fondateur** dans le cadre
+      « qui vous parle » de l'accueil. Voir « Images et photographies ».
 
 ## État actuel
 

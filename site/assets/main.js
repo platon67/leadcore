@@ -176,6 +176,38 @@
     Array.prototype.forEach.call(reveals, function (el) { revealIO.observe(el); });
   }
 
+  /* ─────────── 4 bis. le défilé de l'accueil ───────────
+     Une affirmation est active quand elle traverse le tiers médian de la
+     fenêtre ; l'image correspondante prend le dessus. Un seul observateur,
+     aucun écouteur de défilement, et la marge racine fait tout le travail de
+     sélection : ce qui est dans la bande est actif, le reste ne l'est pas.
+
+     Sans JavaScript, le balisage porte déjà .on sur la première affirmation et
+     la première image : la page reste illustrée et lisible. */
+  var defile = doc.querySelector(".defile");
+  if (defile && hasIO) {
+    var steps = defile.querySelectorAll(".dstep");
+    var vues = defile.querySelectorAll(".defile-view figure");
+    var cap = defile.querySelector(".defile-cap span");
+    var capN = defile.querySelector(".defile-cap b");
+    var poser = function (i) {
+      for (var k = 0; k < steps.length; k++) {
+        steps[k].classList.toggle("on", k === i);
+        if (vues[k]) vues[k].classList.toggle("on", k === i);
+      }
+      if (cap && vues[i]) cap.textContent = vues[i].getAttribute("data-cap") || "";
+      if (capN) capN.textContent = "0" + (i + 1);
+    };
+    var defIO = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        var i = Array.prototype.indexOf.call(steps, e.target);
+        if (i >= 0) poser(i);
+      });
+    }, { rootMargin: "-38% 0px -46% 0px", threshold: 0 });
+    Array.prototype.forEach.call(steps, function (el) { defIO.observe(el); });
+  }
+
   /* ─────────── 5. section courante dans la navigation ─────────── */
   var navLinks = nav ? nav.querySelectorAll('a[href^="#"]') : [];
   if (hasIO && navLinks.length) {
