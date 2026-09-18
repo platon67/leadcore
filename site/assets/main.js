@@ -161,7 +161,7 @@
      blocs visibles. */
   var reveals = doc.querySelectorAll(
     ".rv, .pipe, .node, .chrono-b, .led, .duo .col, .vs .r, .band-c, .spine, " +
-    ".flow, .railh, .stop, .pcell");
+    ".flow, .railh, .stop, .pcell, .ratio");
 
   if (calm || !hasIO) {
     Array.prototype.forEach.call(reveals, function (el) { el.classList.add("in"); });

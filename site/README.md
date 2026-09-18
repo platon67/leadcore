@@ -63,18 +63,27 @@ produit. Chaque cadre désamorce au passage une objection, sans jamais la nommer
 | Collaboration · la facture | les quatre conditions, ou rien | « je vais payer des rendez-vous bidons » |
 | Collaboration · la sortie | la base et les domaines vous restent | « je serai pris en otage » |
 | Tarifs · les trois lignes | 1 200 € / 500 € / 200 €, visibles d'emblée | « le vrai prix est caché en bas » |
-| Tarifs · le chiffre à retenir | 290 € le rendez-vous, deux signés sur trente | « je n'arrive pas à chiffrer » |
+| Tarifs · le ratio | deux signés sur trente, 7 % — et les vingt-huit qui restent | « je n'arrive pas à chiffrer » |
 | Tarifs · face à un recrutement | 8 700 € contre 11 100 €, et 2 700 € de perte maximale | « je préfère recruter » |
 | Tarifs · pour qui | on refuse des missions | « ils prennent tout le monde » |
 
-**Le chiffre à retenir, et ce qu'il ne dit pas.** La formulation naturelle —
-« rentable à partir d'un rendez-vous signé par trimestre » — **n'est pas vraie**
-à 7 000 € de valeur client : une signature rapporte 7 000 € pour 8 700 €
-dépensés, soit 80 % du trimestre. Elle ne devient vraie qu'au-dessus de
-8 700 € de valeur client. Le bloc dit donc trois choses exactes à la place : le
-coût unitaire tout compris (290 €), le ratio qui rend le trimestre rentable
-(deux signés sur trente, 7 %) et la perte maximale (2 700 €). **Ne pas
-remplacer ces trois chiffres par la formule courte** sans refaire le calcul.
+**Le ratio, et pourquoi c'est lui plutôt qu'un coût unitaire.** Ce que le
+dirigeant décide, ce n'est pas un prix à l'unité, c'est un pari : combien faut-il
+en signer pour que ça vaille le coup. Le bloc donne donc le ratio, dessiné en
+trente carrés dont deux sont pleins.
+
+Le calcul, à refaire si un montant bouge :
+
+| Valeur client | Signatures pour rembourser 8 700 € | Taux de signature | RDV qui restent |
+|---|---|---|---|
+| 7 000 € (le plancher) | 2 sur 30 | 6,7 % | 28 |
+| 8 700 € et au-dessus | 1 sur 30 | 3,3 % | 29 |
+
+La formulation courte « rentable à partir d'un rendez-vous signé par trimestre »
+**n'est pas vraie au plancher** : une signature à 7 000 € couvre 8 700 € de
+dépense à 80 %. Elle ne devient vraie qu'au-dessus de 8 700 € de valeur client,
+ce que la mention fine dit explicitement. **Ne pas la promouvoir en titre** sans
+refaire le tableau ci-dessus.
 
 Aucune section ne s'intitule « objections » et aucune ne pose de question
 rhétorique : l'objection est traitée dans le corps du texte, avant que le
@@ -162,14 +171,35 @@ et une arête, en deux poids seulement — plein pour ce qui porte l'information
 filet seul (`.pad.lite`) pour ce qui l'accompagne. Trois poids donneraient une
 page en damier.
 
+**Pictogrammes.** Un seul jeu, dans `gen_shell.ICONS`, dessiné sur la grille de
+24 et au filet de 1,5 des icônes déjà présentes, extrémités et jointures rondes,
+aucun aplat. Ils prennent `currentColor`, donc le même jeu sert sur tous les
+fonds. Deux emplois : glissé dans un libellé (`.ico`, 15 px) ou posé sur une
+pastille quand il ouvre un bloc (`.icob`). Ils sont `aria-hidden` parce qu'ils
+doublent toujours un intitulé écrit à côté — **un pictogramme qui ne dit rien de
+plus que son titre est du bruit**, et c'est le seul critère pour en ajouter un.
+
 **Chaque page répond d'abord en image.** Les trois pages de détail ouvrent sur
 un résumé encastré (`.sec.plate.tldr`) placé avant le premier paragraphe :
 
 | Page | Le résumé | Ce qui s'anime |
 |---|---|---|
-| Méthode | `.flow`, les deux canaux qui partent ensemble et convergent, puis l'entonnoir chiffré | les connecteurs se tracent au `clip-path`, les touches apparaissent une à une |
-| Collaboration | `.railh`, les quatre semaines sur une ligne horizontale | l'axe se remplit, les quatre cartes se lèvent en séquence |
-| Tarifs | `.price3` puis `.keynum` | les trois cartes et le grand chiffre se lèvent |
+| Méthode | `.flow`, les deux canaux qui partent ensemble et convergent, puis l'entonnoir chiffré | les connecteurs se tracent au `clip-path`, puis une **comète** parcourt chaque trajet en boucle, les touches battent à son passage et la sortie souffle |
+| Collaboration | `.railh`, les quatre semaines sur une ligne horizontale | l'axe se remplit, une **tête lumineuse** court sur son arête et allume les quatre repères dans l'ordre, les cartes se lèvent |
+| Tarifs | `.price3` puis `.ratio` | les trois cartes se lèvent, les trente carrés apparaissent en cascade |
+
+La comète du schéma des canaux est la seule boucle du site en dehors des deux
+témoins de l'accueil : elle porte `data-live`, donc l'`IntersectionObserver` la
+met en pause hors du champ. Elle anime `stroke-dashoffset`, qui n'est pas
+composité — mesuré à part sur trois SVG de 52 px de large, l'écart est de
+**0,2 image par seconde à CPU ÷4**, immobile. C'est le trajet que le schéma doit
+faire comprendre, donc c'est le trajet qui bouge.
+
+La tête de la frise est portée par une piste tendue d'un bord à l'autre : le
+pourcentage d'un `translate` se calcule sur la boîte de l'élément lui-même, donc
+`translateX(100%)` vaut exactement la longueur de l'axe — sans requête de
+conteneur ni mesure en JavaScript. **Ne pas passer `.railh` en
+`container-type:size`** : sa hauteur est automatique et il s'écraserait à zéro.
 
 Le connecteur de `.flow` est un SVG étiré par `preserveAspectRatio="none"`,
 donc il suit la largeur de sa cellule sans recalcul. Il est **dessiné pour une
@@ -284,6 +314,33 @@ haut de page, aucune animation ne tourne hors celles cadencées par le
 défilement (qui ne consomment rien quand la page ne bouge pas) et les deux
 témoins vivants voulus sur l'accueil, le point qui pulse et la bande
 défilante.
+
+## Images et photographies
+
+Le site n'en contient aucune, et ce n'est pas un oubli en attente d'être
+comblé par de la banque d'images.
+
+Une photographie de réunion ou de poignée de main achetée sur catalogue
+annoncerait exactement le contraire de ce que vend la page : elle dirait qu'on
+n'a rien de réel à montrer. La skill `anti-ui-slop` en fait une de ses règles,
+et pour une agence qui n'a pas encore de cas client c'est doublement vrai —
+la seule chose qu'on puisse montrer honnêtement aujourd'hui, c'est le
+mécanisme, et c'est ce que font les schémas.
+
+Ce qui vaudrait la peine d'être ajouté, dans l'ordre :
+
+1. **Une photo du fondateur**, dans le cadre « qui vous parle ». C'est la seule
+   image qui ajoute de la preuve plutôt que du décor : elle dit qu'il y a
+   quelqu'un derrière. Format 400 × 400 minimum, cadrage serré, à poser dans
+   `site/assets/` et à substituer aux initiales `PB`.
+2. **Des captures réelles** de l'outil d'envoi, d'un rapport mensuel ou d'une
+   fiche de rendez-vous, une fois qu'un vrai client existe et a donné son
+   accord écrit. Anonymisées.
+3. **Des logos clients**, quand il y en aura.
+
+Rien de tout cela ne se télécharge : ce sont des actifs à produire. Tant qu'ils
+n'existent pas, la page est plus crédible sans images qu'avec des images
+génériques.
 
 ## Fichiers
 

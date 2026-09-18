@@ -22,8 +22,8 @@
 <script>document.documentElement.className+=" js p-tarifs "</script>
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/geist-latin-19f9c925.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/instrument-serif-latin-5a51946d.woff2" crossorigin>
-<link rel="stylesheet" href="assets/fonts.css?v=20260918a">
-<link rel="stylesheet" href="assets/styles.css?v=20260918a">
+<link rel="stylesheet" href="assets/fonts.css?v=20260918b">
+<link rel="stylesheet" href="assets/styles.css?v=20260918b">
 </head>
 <body>
 <a class="skip" href="#main">Aller au contenu</a>
@@ -81,30 +81,45 @@
     <div class="schema">
       <div class="price3">
         <div class="pcell pad">
-          <span class="k">Une fois, au démarrage</span>
+          <span class="k"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.4 3.4H7a2 2 0 00-2 2v13.2a2 2 0 002 2h10a2 2 0 002-2V9l-5.6-5.6z"/><path d="M13.4 3.4V9H19M8.6 13.4h6.8M8.6 16.8h4.4"/></svg>Une fois, au démarrage</span>
           <span class="amt">1 200 <small>€</small></span>
           <h3>Setup</h3>
           <p>Domaines, DNS, boîtes d’envoi, comptes LinkedIn, warm-up, définition de la cible, construction de la base et rédaction des séquences. Facturé avant que la première campagne parte.</p>
         </div>
         <div class="pcell pad">
-          <span class="k">Chaque mois</span>
+          <span class="k"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19.2V13M10.3 19.2V8.6M15.7 19.2v-7.6M21 19.2V5"/></svg>Chaque mois</span>
           <span class="amt">500 <small>€ / mois</small></span>
           <h3>Infrastructure et pilotage</h3>
           <p>Domaines, boîtes et comptes LinkedIn maintenus, données et enrichissement, renouvellement de la base, arbitrage hebdomadaire des segments, reporting mensuel.</p>
         </div>
         <div class="pcell pad hot">
-          <span class="k">À la performance</span>
+          <span class="k"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.2" y="5" width="17.6" height="15.5" rx="2"/><path d="M3.2 9.8h17.6M8 3.5v3M16 3.5v3M9 14.6l2.2 2.2 4-4"/></svg>À la performance</span>
           <span class="amt">200 <small>€ / RDV honoré</small></span>
           <h3>Rendez-vous qualifiés</h3>
           <p>Dans votre cible, décisionnaire, besoin exprimé, <b>et présent au rendez-vous</b>. Les quatre, ou la ligne ne s’écrit pas. On replanifie un absent une fois, et on ne le facture que s’il vient.</p>
         </div>
       </div>
 
-      <div class="pad hot keynum rv" style="margin-top:clamp(16px,2vw,24px)">
-        <div class="big">290 <small>€</small></div>
-        <div>
-          <p class="say">C’est ce que vous coûte <b>un rendez-vous qualifié et honoré, tout compris</b> — setup et infrastructure inclus, sur un trimestre à dix rendez-vous par mois.</p>
-          <p class="fine">À 7 000 € de valeur client, il vous en faut <b>deux signés sur trente</b> pour être au-dessus&nbsp;: un taux de signature de 7 %. Et si votre marché ne répond pas du tout, vous aurez dépensé 2 700 € sur le trimestre — c’est votre perte maximale, connue à la signature.</p>
+      <div class="pad hot ratio rv" style="margin-top:clamp(16px,2vw,24px)">
+        <div class="keynum" style="align-items:start">
+          <div class="big">2 <small>sur 30</small></div>
+          <div>
+            <p class="say">C’est le nombre de rendez-vous qu’il faut <b>signer</b> sur un trimestre pour avoir remboursé Leadcore. Soit un <b>taux de signature de 7 %</b> — sur des prospects qualifiés, décisionnaires, et présents en face de vous.</p>
+            <p class="fine">La plupart des équipes commerciales font mieux que 7 % sur ce type de rendez-vous. Et au-dessus de 8 700 € de valeur client, un seul signé suffit.</p>
+          </div>
+        </div>
+
+        <div class="ratio-grid" role="img" aria-label="Trente rendez-vous honorés sur le trimestre, dont deux suffisent à rembourser la prestation"><i class="on" style="--d:0"></i><i class="on" style="--d:1"></i><i style="--d:2"></i><i style="--d:3"></i><i style="--d:4"></i><i style="--d:5"></i><i style="--d:6"></i><i style="--d:7"></i><i style="--d:8"></i><i style="--d:9"></i><i style="--d:10"></i><i style="--d:11"></i><i style="--d:12"></i><i style="--d:13"></i><i style="--d:14"></i><i style="--d:15"></i><i style="--d:16"></i><i style="--d:17"></i><i style="--d:18"></i><i style="--d:19"></i><i style="--d:20"></i><i style="--d:21"></i><i style="--d:22"></i><i style="--d:23"></i><i style="--d:24"></i><i style="--d:25"></i><i style="--d:26"></i><i style="--d:27"></i><i style="--d:28"></i><i style="--d:29"></i></div>
+
+        <div class="ratio-key">
+          <div>
+            <span class="sw on" aria-hidden="true"></span>
+            <div><b>2 rendez-vous signés</b><span>remboursent les 8 700 € du trimestre, setup compris.</span></div>
+          </div>
+          <div>
+            <span class="sw" aria-hidden="true"></span>
+            <div><b>28 rendez-vous qualifiés</b><span>qui restent, et tout ce que vous y signez est pour vous.</span></div>
+          </div>
         </div>
       </div>
     </div>
@@ -306,7 +321,7 @@
   </div>
 </footer>
 
-<script src="assets/config.js?v=20260918a"></script>
-<script src="assets/main.js?v=20260918a"></script>
+<script src="assets/config.js?v=20260918b"></script>
+<script src="assets/main.js?v=20260918b"></script>
 </body>
 </html>
