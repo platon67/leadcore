@@ -63,55 +63,52 @@ en boucle en permanence.
 
 Tout le site existe pour amener là, et c'est **le seul endroit où le système a
 le droit d'être rompu**. Partout ailleurs : rayons de 4, 10 ou 16, aplats, deux
-couleurs. Ici : une capsule, une aurore, un bloom. La seule chose ronde du site
-est le bouton qui prend un rendez-vous — c'est devenu un signal en soi.
+couleurs. Ici : une capsule, une matière irisée, un liseré qui tourne. La seule
+chose ronde du site est le bouton qui prend un rendez-vous.
 
-Un seul objet, `.cta-rdv`, en deux tailles. **Seize boutons**, une seule façon de
-dire « on prend rendez-vous ici ».
+Un seul objet, `.cta-rdv`, en deux tailles. **Seize boutons.**
 
-**Construit d'après les références du propriétaire, relevées image par image.**
-Ce que fait la maquette de tête et qu'un dégradé sage ne fait pas :
+**Relevé image par image sur les références du propriétaire.** Quatre principes,
+tous tirés des deux maquettes de tête :
 
-1. la capsule est **noire**, pas émeraude. La couleur est de la lumière posée
-   dessus, jamais un aplat.
-2. l'aurore occupe la moitié basse, avec des cœurs presque blancs là où elle
-   culmine. Le blanc est **jaune-vert**, pas neutre : un blanc neutre sur du
-   noir donne du gris.
-3. une touche **froide** — indigo — traîne sur un bord. Sans contre-ton, un
-   dégradé vert reste plat.
-4. un liseré vif suit le contour, un biseau translucide l'entoure, et le bloom
-   déborde loin en portant une trame de points.
+1. la matière **remplit** la forme et se déforme vite. Elle ne se pose pas au
+   fond comme un liquide au repos — c'était l'erreur de la version précédente.
+2. les teintes restent **franches** côte à côte : lime contre émeraude contre
+   violet. Trop de flou et tout se mélange en turquoise.
+3. un **liseré prismatique tourne** autour du contour. C'est lui qui attire
+   l'œil de loin ; la matière, c'est ce qu'on voit une fois venu.
+4. un **pictogramme vif** à gauche du libellé, qui bat avec le reste.
 
-Quatre nappes font l'aurore : deux chaudes qui montent, une émeraude qui
-traverse, une froide qui contre. Chacune a sa phase, donc la crête ne se répète
-jamais à l'identique sur un cycle de 9 s. Tout est en `transform` et `opacity`.
+Cinq masses, lime en tête, cycle de 4 s. Le liseré passe par une propriété
+enregistrée (`@property --ang`) : c'est le seul moyen d'animer l'angle d'un
+dégradé conique. Ce n'est pas au compositeur, contrairement au reste, mais la
+surface repeinte est celle d'un bouton. Sans `@property`, l'angle reste fixe et
+le liseré devient un dégradé statique : le bouton reste correct.
 
-**Le voile est la pièce maîtresse.** Sans lui les quatre nappes baignent toute
-la capsule et tout vire au turquoise : c'est le contraste entre le noir du haut
-et la lumière du bas qui fait lire une aurore plutôt qu'un dégradé. Il porte
-aussi un halo sombre centré sur la bande du texte, sans quoi le blanc tombe à
-**1,4:1** sur les crêtes. La référence a ce défaut ; sur le bouton le plus
-important d'un site, il n'est pas tenable.
+**La lisibilité ne tient pas à un voile général.** Un voile assez fort pour
+protéger le texte étouffe la matière. Ce qui marche, et que la référence fait
+avec sa flèche blanche sur une bulle : un halo sombre **serré** sous la bande du
+texte, plus une ombre portée sur le glyphe lui-même. Mesuré sur 40 instants du
+cycle, ombre désactivée : **6,7:1** en-tête, **11,8:1** contextuel.
 
-Sous `prefers-reduced-motion`, les nappes et le bloom s'arrêtent.
+Sous `prefers-reduced-motion`, tout s'arrête.
 
-### Ce que le harnais a trouvé et que l'œil n'a pas vu
+### Trois défauts trouvés par la mesure
 
-Le libellé du bouton d'en-tête était **noir sur une capsule noire**, à 1:1.
-`.nav a.btn-pri{color:var(--btn-fg)}` pèse 0,2,1 et l'emportait sur la règle du
-nouveau bouton ; ce presque-noir avait du sens tant que le bouton était un
-aplat émeraude. J'ai d'abord accusé le harnais de se tromper, avant de lire le
-chiffre qu'il donnait : `fg=[4,18,12]`.
+- Le libellé du bouton d'en-tête était **noir sur une capsule noire**, à 1:1.
+  `.nav a.btn-pri{color:var(--btn-fg)}` pèse 0,2,1 et l'emportait ; ce
+  presque-noir avait du sens tant que le bouton était un aplat émeraude.
+- Le bloom respire en `scale()` et déborde de 10 px de chaque côté. Sur
+  téléphone un bouton occupe toute la colonne : la respiration passe sur la
+  seule verticale. Défaut **transitoire**, invisible en mouvement réduit —
+  trouvé parce que le harnais mesure à chaque palier du parcours.
+- La marge `.nav .btn{margin-left:12px}` s'appliquait au bouton *à l'intérieur*
+  de son enveloppe : le biseau débordait de 12 px en gris.
 
-Le harnais de contraste a dû être corrigé deux fois au passage :
-
-- `getComputedStyle` ne sait pas aplatir un fond en **dégradé**. Il re-mesure
-  désormais au pixel les éléments concernés, sur la bande du texte et non sur
-  la boîte entière — sur un bouton, les bords portent la lumière et aucun glyphe.
-- la capture passe par la **poignée** de l'élément, jamais par un rectangle :
-  je relevais la boîte en coordonnées de fenêtre et la passais en clip de
-  capture, qui est en coordonnées de page. Sur un en-tête fixe mesuré après
-  défilement, les deux ne coïncident pas.
+Le harnais de contraste a dû être corrigé deux fois : `getComputedStyle` ne sait
+pas aplatir un fond en dégradé, et je lui passais des coordonnées de fenêtre là
+où il attendait des coordonnées de page. Il re-mesure désormais au pixel, par
+poignée d'élément, sur la bande du texte.
 
 ## Densité et cadres
 

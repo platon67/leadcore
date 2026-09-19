@@ -335,158 +335,152 @@ p:last-child{margin-bottom:0}
 /* ──── LE BOUTON DE PRISE DE RENDEZ-VOUS ────
    Tout le site existe pour amener ici, et c'est le seul endroit où le système
    a le droit d'être rompu. Partout ailleurs : rayons de 4, 10 ou 16, aplats,
-   deux couleurs. Ici : une capsule, une aurore, un bloom. La seule chose
-   ronde du site est le bouton qui prend un rendez-vous — c'est devenu un
-   signal en soi.
+   deux couleurs. Ici : une capsule, une matière irisée, un liseré qui tourne.
+   La seule chose ronde du site est le bouton qui prend un rendez-vous.
 
-   Construit d'après les références du propriétaire, relevé image par image.
-   Ce que fait la maquette de tête, et qu'un dégradé sage ne fait pas :
+   Relevé image par image sur les références. Ce que font les deux maquettes
+   de tête, et qu'une nappe posée au fond ne fait pas :
 
-     1. la capsule est NOIRE, pas émeraude. La couleur est de la lumière
-        posée dessus, jamais un aplat.
-     2. l'aurore occupe la moitié basse. Des crêtes qui ondulent, avec des
-        cœurs blancs là où elle culmine.
-     3. une touche FROIDE — indigo — traîne sur un bord. C'est elle qui donne
-        la profondeur ; sans contre-ton, un dégradé vert reste plat.
-     4. un liseré vif suit le contour, plus chaud là où l'aurore le touche.
-     5. un biseau translucide entoure le liseré, comme un verre.
-     6. le bloom déborde loin et tient une trame de points, qui l'accroche.
+     · la matière REMPLIT la forme et se déforme vite. Elle ne se pose pas au
+       fond comme un liquide au repos.
+     · les teintes restent FRANCHES côte à côte — lime contre émeraude contre
+       violet. Trop de flou et tout se mélange en turquoise.
+     · un liseré prismatique TOURNE autour du contour. C'est lui qui attire
+       l'œil de loin ; la matière, c'est ce qu'on voit une fois venu.
+     · un pictogramme vif à gauche du libellé, qui respire avec le reste.
 
-   Quatre nappes suffisent à faire une aurore : deux chaudes qui montent, une
-   émeraude qui traverse, une froide qui contre. Chacune a sa phase, donc la
-   crête ne se répète jamais à l'identique sur un cycle de 9 s. Tout est en
-   transform et opacity. */
+   Le liseré passe par une propriété enregistrée (@property) : c'est le seul
+   moyen d'animer un angle de dégradé conique. Ce n'est pas au compositeur,
+   contrairement au reste, mais la surface repeinte est celle d'un bouton et
+   elle est minuscule. Sans @property, l'angle reste fixe et le liseré est un
+   dégradé statique : le bouton reste correct. */
 
-.cta-rdv{
-  position:relative;display:inline-flex;isolation:isolate;
-  padding:3px;border-radius:var(--radius-pill);
-  background:linear-gradient(180deg,rgba(242,248,245,.13),rgba(242,248,245,.03) 52%,rgba(184,242,63,.16));
-  box-shadow:inset 0 1px 0 rgba(242,248,245,.16);
-}
-/* le bloom, et sa trame */
+@property --ang{syntax:"<angle>";inherits:false;initial-value:0deg}
+
+/* max-width et min-width:0 : l'enveloppe est un conteneur flex, et un élément
+   flex refuse par défaut de descendre sous sa largeur de contenu. Sans ça, un
+   libellé long plus l'étincelle poussent la page de 3 px à 390. */
+.cta-rdv{position:relative;display:inline-flex;isolation:isolate;max-width:100%}
+.cta-rdv>.btn{min-width:0;max-width:100%}
+/* le bloom, sans trame : la trame de points faisait une tache carrée */
 .cta-rdv::before{
-  content:"";position:absolute;inset:-46% -14%;z-index:-2;pointer-events:none;
-  background:
-    radial-gradient(closest-side,rgba(184,242,63,.055) 34%,transparent 66%),
-    radial-gradient(52% 104% at 50% 76%,rgba(184,242,63,.42),rgba(25,199,139,.16) 44%,transparent 70%);
-  background-size:6px 6px,100% 100%;
-  filter:blur(1px);
-  animation:blooomCta 9s var(--ease-io) infinite;
+  content:"";position:absolute;inset:-52% -16%;z-index:-2;pointer-events:none;
+  background:radial-gradient(52% 108% at 50% 62%,rgba(184,242,63,.5),rgba(25,199,139,.16) 44%,transparent 70%);
+  filter:blur(13px);
+  animation:blooomCta 4s var(--ease-io) infinite;
 }
 @keyframes blooomCta{
-  0%,100%{opacity:.62;transform:scale(1)}
-  46%    {opacity:1;transform:scale(1.07)}
+  0%,100%{opacity:.5;transform:scale(1)}
+  44%    {opacity:1;transform:scale(1.12)}
 }
 
-/* la capsule */
+/* la capsule, et son liseré tournant */
 .cta-rdv>.btn-pri{
   position:relative;z-index:1;width:100%;
-  background:linear-gradient(196deg,#0A1520 0%,#050B08 46%,#040806 100%);
-  color:var(--fg);border:0;border-radius:var(--radius-pill);
-  box-shadow:
-    inset 0 0 0 1.4px rgba(184,242,63,.9),
-    inset 0 -16px 30px -13px rgba(251,255,238,.7);
+  border:1.6px solid transparent;border-radius:var(--radius-pill);
+  color:var(--fg);
+  background:
+    linear-gradient(#0B1710,#060C09) padding-box,
+    conic-gradient(from var(--ang),
+      rgba(184,242,63,.25) 0deg, #E8FF8A 42deg, #FFFFFF 62deg, #B8F23F 86deg,
+      rgba(25,199,139,.45) 140deg, rgba(120,90,255,.5) 196deg,
+      rgba(184,242,63,.28) 250deg, #D9FF6B 318deg, rgba(184,242,63,.25) 360deg) border-box;
+  box-shadow:inset 0 -12px 24px -14px rgba(232,255,138,.5);
+  text-shadow:0 1px 3px rgba(4,8,6,.9),0 0 12px rgba(4,8,6,.75);
+  animation:tourne 3s linear infinite;
 }
-.cta-rdv>.btn-pri:hover{background:linear-gradient(196deg,#0B1826 0%,#060D0A 46%,#050A07 100%)}
+@keyframes tourne{to{--ang:360deg}}
 
-/* l'aurore : quatre nappes, quatre phases */
+/* la matière : cinq masses, lime en tête, qui remplissent la capsule */
 .aur{position:absolute;inset:0;z-index:-1;pointer-events:none;border-radius:inherit;overflow:hidden}
-/* Le voile. La moitié haute de la capsule doit rester noire : c'est le contraste
-   entre le noir du haut et la lumière du bas qui fait lire une aurore plutôt
-   qu'un dégradé. Sans lui, les quatre nappes baignent toute la surface et tout
-   vire au turquoise. */
+.aur i{position:absolute;display:block;border-radius:50%;filter:blur(11px);will-change:transform;
+  animation-duration:4s;animation-timing-function:var(--ease-io);animation-iteration-count:infinite;opacity:.95}
+.aur i:nth-child(1){left:-18%;bottom:-38%;width:88%;padding-bottom:88%;
+  background:radial-gradient(closest-side,#C6F94B 40%,rgba(198,249,75,.6) 66%,rgba(198,249,75,0) 84%);
+  animation-name:aurA}
+.aur i:nth-child(2){left:26%;bottom:-30%;width:62%;padding-bottom:62%;
+  background:radial-gradient(closest-side,#EFFFB0 36%,rgba(239,255,176,.5) 62%,rgba(239,255,176,0) 80%);
+  animation-name:aurB}
+.aur i:nth-child(3){right:-14%;bottom:-34%;width:70%;padding-bottom:70%;
+  background:radial-gradient(closest-side,#9BE82F 38%,rgba(155,232,47,.5) 64%,rgba(155,232,47,0) 82%);
+  animation-name:aurC}
+.aur i:nth-child(4){right:6%;top:-40%;width:54%;padding-bottom:54%;
+  background:radial-gradient(closest-side,rgba(25,199,139,.9) 34%,rgba(25,199,139,0) 68%);
+  animation-name:aurD}
+.aur i:nth-child(5){left:8%;top:-44%;width:48%;padding-bottom:48%;
+  background:radial-gradient(closest-side,rgba(126,96,255,.8) 32%,rgba(126,96,255,0) 66%);
+  animation-name:aurE}
+@keyframes aurA{0%,100%{transform:translate3d(0,0,0) scale(1)}
+  30%{transform:translate3d(76%,-34%,0) scale(1.34)} 64%{transform:translate3d(28%,12%,0) scale(.78)}}
+@keyframes aurB{0%,100%{transform:translate3d(0,0,0) scale(1)}
+  36%{transform:translate3d(-68%,-42%,0) scale(1.42)} 71%{transform:translate3d(52%,-8%,0) scale(.72)}}
+@keyframes aurC{0%,100%{transform:translate3d(0,0,0) scale(1)}
+  27%{transform:translate3d(-88%,-26%,0) scale(1.28)} 68%{transform:translate3d(-34%,18%,0) scale(.82)}}
+@keyframes aurD{0%,100%{transform:translate3d(0,0,0) scale(1);opacity:.85}
+  41%{transform:translate3d(-62%,58%,0) scale(1.3);opacity:1} 76%{transform:translate3d(14%,22%,0) scale(.8);opacity:.7}}
+@keyframes aurE{0%,100%{transform:translate3d(0,0,0) scale(1);opacity:.55}
+  33%{transform:translate3d(58%,66%,0) scale(1.26);opacity:.9} 70%{transform:translate3d(96%,20%,0) scale(.86);opacity:.45}}
+
+/* Le voile. Il tient deux rôles : garder un peu de nuit au-dessus de la
+   matière pour qu'elle se lise comme une matière, et surtout poser un halo
+   sombre sous le libellé — sans lui le blanc tombe à 1,4:1 sur les crêtes. */
 .aur::after{
   content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
   background:
-    /* le halo sombre du libellé : sans lui, le blanc tombe à 1,4:1 sur les
-       crêtes de l'aurore. La référence a le même défaut ; sur le bouton le plus
-       important d'un site, il n'est pas tenable. Il est centré sur la bande du
-       texte et laisse la crête du bas intacte. */
-    radial-gradient(72% 76% at 50% 42%,rgba(4,8,6,.88),rgba(4,8,6,.5) 58%,rgba(4,8,6,0) 82%),
-    linear-gradient(180deg,#040806 0%,rgba(4,8,6,.94) 24%,rgba(4,8,6,.55) 38%,rgba(4,8,6,.12) 50%,transparent 60%);
-}
-.aur i{position:absolute;display:block;border-radius:50%;filter:blur(13px);will-change:transform}
-/* 1 · la masse lime, qui tient le bas */
-.aur i:nth-child(1){
-  left:-24%;bottom:-54%;width:104%;padding-bottom:104%;
-  background:radial-gradient(closest-side,#C6F94B 34%,rgba(184,242,63,.55) 62%,rgba(184,242,63,0) 82%);
-  animation:aurA 9s var(--ease-io) infinite;
-}
-/* 2 · le cœur blanc, plus petit et plus vif */
-.aur i:nth-child(2){
-  left:16%;bottom:-44%;width:38%;padding-bottom:38%;
-  background:radial-gradient(closest-side,#F2FFC4 30%,rgba(230,255,170,.5) 58%,rgba(230,255,170,0) 78%);
-  animation:aurB 9s var(--ease-io) infinite;
-}
-/* 3 · l'émeraude du site, qui traverse */
-.aur i:nth-child(3){
-  right:-22%;bottom:-50%;width:76%;padding-bottom:76%;
-  background:radial-gradient(closest-side,#19C78B 32%,rgba(25,199,139,.5) 60%,rgba(25,199,139,0) 80%);
-  animation:aurC 9s var(--ease-io) infinite;
-}
-/* 4 · le contre-ton froid, qui donne la profondeur */
-.aur i:nth-child(4){
-  right:-16%;top:-68%;width:46%;padding-bottom:46%;
-  background:radial-gradient(closest-side,rgba(46,104,208,.62),rgba(46,104,208,0) 60%);
-  animation:aurD 9s var(--ease-io) infinite;
-}
-@keyframes aurA{
-  0%,100%{transform:translate3d(0,0,0) scale(1)}
-  28%    {transform:translate3d(38%,-13%,0) scale(1.2)}
-  61%    {transform:translate3d(84%,2%,0) scale(.9)}
-}
-@keyframes aurB{
-  0%,100%{transform:translate3d(0,0,0) scale(1)}
-  33%    {transform:translate3d(-40%,-22%,0) scale(1.3)}
-  70%    {transform:translate3d(78%,-6%,0) scale(.8)}
-}
-@keyframes aurC{
-  0%,100%{transform:translate3d(0,0,0) scale(1)}
-  40%    {transform:translate3d(-84%,-9%,0) scale(1.1)}
-  74%    {transform:translate3d(-22%,6%,0) scale(.95)}
-}
-@keyframes aurD{
-  0%,100%{transform:translate3d(0,0,0) scale(1);opacity:.62}
-  36%    {transform:translate3d(-58%,14%,0) scale(1.2);opacity:1}
-  72%    {transform:translate3d(-8%,-6%,0) scale(.9);opacity:.5}
+    radial-gradient(62% 62% at 50% 48%,rgba(4,8,6,.9),rgba(4,8,6,.58) 48%,rgba(4,8,6,0) 78%),
+    linear-gradient(180deg,rgba(4,8,6,.34) 0%,rgba(4,8,6,0) 34%);
 }
 
-/* Au survol l'aurore monte d'un cran et le liseré passe au blanc : le
-   visiteur est venu, le bouton répond au lieu de continuer à appeler. */
-.cta-rdv:hover>.btn-pri{
-  box-shadow:
-    inset 0 0 0 1.4px rgba(244,255,218,.95),
-    inset 0 -18px 32px -14px rgba(244,255,218,.8);
+/* le pictogramme : une étincelle, dessinée sur la grille de 24 comme les
+   quatorze autres du site. Elle bat avec la matière. */
+.spk{width:17px;height:17px;flex:none;fill:currentColor;stroke:none;
+  filter:drop-shadow(0 0 5px rgba(232,255,138,.8));
+  animation:etincelle 4s var(--ease-io) infinite}
+@keyframes etincelle{
+  0%,100%{transform:scale(1) rotate(0deg);opacity:.9}
+  22%    {transform:scale(1.26) rotate(22deg);opacity:1}
+  56%    {transform:scale(.94) rotate(-8deg);opacity:.82}
 }
-.cta-rdv:hover .aur i{animation-duration:4.5s}
-.cta-rdv:hover::before{opacity:1;animation-duration:4.5s}
 
-/* La taille réduite : même objet, biseau plus fin, nappes moins floues pour
-   qu'elles restent lisibles dans 44 px de haut. */
-.cta-rdv.sm{padding:2px}
-.cta-rdv.sm .aur i{filter:blur(12px)}
-/* Dans 44 px de haut, les nappes montent proportionnellement plus haut et le
-   libellé tombait sous 4,5:1 à certaines phases — trouvé par le harnais, pas à
-   l'œil : ma mesure ponctuelle n'échantillonnait que six instants et manquait
-   le pire. Le voile du texte se renforce, la crête du bas reste intacte. */
+/* Au survol, tout accélère et le liseré passe au blanc : le visiteur est
+   venu, le bouton répond au lieu de continuer à appeler. */
+.cta-rdv:hover>.btn-pri{animation-duration:1.4s;box-shadow:inset 0 -14px 28px -12px rgba(255,255,255,.6)}
+.cta-rdv:hover .aur i,.cta-rdv:hover .spk{animation-duration:2s}
+.cta-rdv:hover::before{opacity:1;animation-duration:2s}
+
+/* La taille réduite : même objet, matière moins floue pour rester lisible
+   dans 44 px, et voile plus franc sous le texte. */
+.cta-rdv.sm .aur i{filter:blur(9px)}
+.cta-rdv.sm .spk{width:15px;height:15px}
+.cta-rdv.sm::before{inset:-58% -13%}
 .cta-rdv.sm .aur::after{
   background:
-    radial-gradient(80% 88% at 50% 40%,rgba(4,8,6,.94),rgba(4,8,6,.66) 56%,rgba(4,8,6,.1) 84%),
-    linear-gradient(180deg,#040806 0%,rgba(4,8,6,.96) 26%,rgba(4,8,6,.7) 42%,rgba(4,8,6,.2) 56%,transparent 68%);
+    radial-gradient(70% 70% at 50% 48%,rgba(4,8,6,.94),rgba(4,8,6,.68) 48%,rgba(4,8,6,0) 80%),
+    linear-gradient(180deg,rgba(4,8,6,.4) 0%,rgba(4,8,6,0) 36%);
 }
-.cta-rdv.sm::before{inset:-62% -14%}
 
 /* Dans l'en-tête, le bouton vit sur les six pages et à toutes les hauteurs de
-   défilement : l'aurore tourne deux fois moins vite et le bloom disparaît. Une
-   lueur qui respire au-dessus du texte qu'on lit devient un moustique. */
+   défilement. Il garde le liseré, ralenti, et perd le bloom : une lueur qui
+   respire au-dessus du texte qu'on lit devient un moustique. */
 .hdr .cta-rdv::before{display:none}
-.hdr .cta-rdv .aur i{animation-duration:18s}
+.hdr .cta-rdv>.btn-pri{animation-duration:7s}
+.hdr .cta-rdv .aur i,.hdr .cta-rdv .spk{animation-duration:9s}
 
 @media (max-width:560px){
-  /* Spécificité : `.cta-rdv.sm::before` pèse 0,2,0 et est écrit plus haut. Le
-     bloom déborde horizontalement, et sur téléphone un bouton contextuel
-     occupe toute la colonne : il se replie sur la verticale. */
-  .cta-rdv::before,.cta-rdv.sm::before{inset:-64% 0}
+  /* Spécificité : `.cta-rdv.sm::before` pèse 0,2,0 et est écrit plus haut. Sur
+     téléphone un bouton contextuel occupe toute la colonne, donc le bloom se
+     replie sur la verticale, où il reste de la place. */
+  .cta-rdv::before,.cta-rdv.sm::before{inset:-60% 0}
+  /* Le bloom respire en scale() et déborde alors de 10 px de chaque côté. Sur
+     téléphone un bouton occupe toute la colonne : il n'y a pas ces 10 px. La
+     respiration passe donc sur la seule verticale. Défaut transitoire, visible
+     uniquement en mouvement par défaut — le harnais le trouve parce qu'il
+     mesure à chaque palier du parcours, pas seulement à l'arrivée. */
+  .cta-rdv::before{animation-name:blooomCtaY}
+}
+@keyframes blooomCtaY{
+  0%,100%{opacity:.5;transform:scaleY(1)}
+  44%    {opacity:1;transform:scaleY(1.14)}
 }
 
 .btn-gho{background:rgba(var(--fg-rgb),.015);color:var(--fg);border-color:var(--rule)}
