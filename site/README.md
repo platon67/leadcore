@@ -79,7 +79,7 @@ tous tirés des deux maquettes de tête :
    l'œil de loin ; la matière, c'est ce qu'on voit une fois venu.
 4. un **pictogramme vif** à gauche du libellé, qui bat avec le reste.
 
-Cinq masses, lime en tête, cycle de 4 s. Le liseré passe par une propriété
+Cinq masses, lime en tête, cycle de 4 s. Liseré de 2,4 px, halo serré. Le liseré passe par une propriété
 enregistrée (`@property --ang`) : c'est le seul moyen d'animer l'angle d'un
 dégradé conique. Ce n'est pas au compositeur, contrairement au reste, mais la
 surface repeinte est celle d'un bouton. Sans `@property`, l'angle reste fixe et
@@ -89,7 +89,17 @@ le liseré devient un dégradé statique : le bouton reste correct.
 protéger le texte étouffe la matière. Ce qui marche, et que la référence fait
 avec sa flèche blanche sur une bulle : un halo sombre **serré** sous la bande du
 texte, plus une ombre portée sur le glyphe lui-même. Mesuré sur 40 instants du
-cycle, ombre désactivée : **6,7:1** en-tête, **11,8:1** contextuel.
+cycle, ombre désactivée : **6,4:1** héros, **7,4:1** en-tête, **11,4:1**
+contextuel.
+
+Le bouton d'en-tête est le plus petit du lot, 107 × 44 : le liseré de 2,4 px y
+mange l'intérieur et la matière remonte d'autant sous le texte. Ses masses
+perdent donc un cran d'opacité ; les sorties contextuelles, deux à trois fois
+plus larges, gardent la leur.
+
+Le pictogramme est une **caméra** : il dit ce qui va se passer, un appel en
+visio. Tracé au trait sur la grille de 24, comme les quatorze autres du site —
+c'est le seul endroit où le bouton reste dans le langage de la maison.
 
 Sous `prefers-reduced-motion`, tout s'arrête.
 

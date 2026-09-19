@@ -364,20 +364,20 @@ p:last-child{margin-bottom:0}
 .cta-rdv>.btn{min-width:0;max-width:100%}
 /* le bloom, sans trame : la trame de points faisait une tache carrée */
 .cta-rdv::before{
-  content:"";position:absolute;inset:-52% -16%;z-index:-2;pointer-events:none;
-  background:radial-gradient(52% 108% at 50% 62%,rgba(184,242,63,.5),rgba(25,199,139,.16) 44%,transparent 70%);
-  filter:blur(13px);
+  content:"";position:absolute;inset:-32% -9%;z-index:-2;pointer-events:none;
+  background:radial-gradient(54% 104% at 50% 62%,rgba(184,242,63,.34),rgba(25,199,139,.1) 44%,transparent 72%);
+  filter:blur(11px);
   animation:blooomCta 4s var(--ease-io) infinite;
 }
 @keyframes blooomCta{
-  0%,100%{opacity:.5;transform:scale(1)}
-  44%    {opacity:1;transform:scale(1.12)}
+  0%,100%{opacity:.34;transform:scale(1)}
+  44%    {opacity:.62;transform:scale(1.09)}
 }
 
 /* la capsule, et son liseré tournant */
 .cta-rdv>.btn-pri{
   position:relative;z-index:1;width:100%;
-  border:1.6px solid transparent;border-radius:var(--radius-pill);
+  border:2.4px solid transparent;border-radius:var(--radius-pill);
   color:var(--fg);
   background:
     linear-gradient(#0B1710,#060C09) padding-box,
@@ -394,21 +394,21 @@ p:last-child{margin-bottom:0}
 /* la matière : cinq masses, lime en tête, qui remplissent la capsule */
 .aur{position:absolute;inset:0;z-index:-1;pointer-events:none;border-radius:inherit;overflow:hidden}
 .aur i{position:absolute;display:block;border-radius:50%;filter:blur(11px);will-change:transform;
-  animation-duration:4s;animation-timing-function:var(--ease-io);animation-iteration-count:infinite;opacity:.95}
+  animation-duration:4s;animation-timing-function:var(--ease-io);animation-iteration-count:infinite;opacity:.72}
 .aur i:nth-child(1){left:-18%;bottom:-38%;width:88%;padding-bottom:88%;
-  background:radial-gradient(closest-side,#C6F94B 40%,rgba(198,249,75,.6) 66%,rgba(198,249,75,0) 84%);
+  background:radial-gradient(closest-side,#A2D63C 40%,rgba(162,214,60,.5) 66%,rgba(162,214,60,0) 84%);
   animation-name:aurA}
 .aur i:nth-child(2){left:26%;bottom:-30%;width:62%;padding-bottom:62%;
-  background:radial-gradient(closest-side,#EFFFB0 36%,rgba(239,255,176,.5) 62%,rgba(239,255,176,0) 80%);
+  background:radial-gradient(closest-side,#CFE79A 36%,rgba(207,231,154,.44) 62%,rgba(207,231,154,0) 80%);
   animation-name:aurB}
 .aur i:nth-child(3){right:-14%;bottom:-34%;width:70%;padding-bottom:70%;
-  background:radial-gradient(closest-side,#9BE82F 38%,rgba(155,232,47,.5) 64%,rgba(155,232,47,0) 82%);
+  background:radial-gradient(closest-side,#7FBF2B 38%,rgba(127,191,43,.44) 64%,rgba(127,191,43,0) 82%);
   animation-name:aurC}
 .aur i:nth-child(4){right:6%;top:-40%;width:54%;padding-bottom:54%;
-  background:radial-gradient(closest-side,rgba(25,199,139,.9) 34%,rgba(25,199,139,0) 68%);
+  background:radial-gradient(closest-side,rgba(25,199,139,.68) 34%,rgba(25,199,139,0) 68%);
   animation-name:aurD}
 .aur i:nth-child(5){left:8%;top:-44%;width:48%;padding-bottom:48%;
-  background:radial-gradient(closest-side,rgba(126,96,255,.8) 32%,rgba(126,96,255,0) 66%);
+  background:radial-gradient(closest-side,rgba(116,90,225,.52) 32%,rgba(116,90,225,0) 66%);
   animation-name:aurE}
 @keyframes aurA{0%,100%{transform:translate3d(0,0,0) scale(1)}
   30%{transform:translate3d(76%,-34%,0) scale(1.34)} 64%{transform:translate3d(28%,12%,0) scale(.78)}}
@@ -427,50 +427,61 @@ p:last-child{margin-bottom:0}
 .aur::after{
   content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
   background:
-    radial-gradient(62% 62% at 50% 48%,rgba(4,8,6,.9),rgba(4,8,6,.58) 48%,rgba(4,8,6,0) 78%),
-    linear-gradient(180deg,rgba(4,8,6,.34) 0%,rgba(4,8,6,0) 34%);
+    radial-gradient(68% 70% at 50% 48%,rgba(4,8,6,.94),rgba(4,8,6,.7) 46%,rgba(4,8,6,0) 80%),
+    linear-gradient(180deg,rgba(4,8,6,.36) 0%,rgba(4,8,6,0) 34%);
 }
 
 /* le pictogramme : une étincelle, dessinée sur la grille de 24 comme les
    quatorze autres du site. Elle bat avec la matière. */
-.spk{width:17px;height:17px;flex:none;fill:currentColor;stroke:none;
-  filter:drop-shadow(0 0 5px rgba(232,255,138,.8));
-  animation:etincelle 4s var(--ease-io) infinite}
-@keyframes etincelle{
-  0%,100%{transform:scale(1) rotate(0deg);opacity:.9}
-  22%    {transform:scale(1.26) rotate(22deg);opacity:1}
-  56%    {transform:scale(.94) rotate(-8deg);opacity:.82}
+/* Le pictogramme dit ce qui va se passer : un appel en visio. Tracé au trait
+   sur la grille de 24, comme les quatorze autres du site — c'est le seul
+   endroit où le bouton reste dans le langage de la maison. Il respire au lieu
+   de tourner : une caméra qui pivote ne veut rien dire. */
+.visio{width:18px;height:18px;flex:none;fill:none;stroke:currentColor;
+  stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;
+  filter:drop-shadow(0 0 5px rgba(232,255,138,.55));
+  animation:visioBat 4s var(--ease-io) infinite}
+@keyframes visioBat{
+  0%,100%{transform:scale(1);opacity:.92}
+  24%    {transform:scale(1.14);opacity:1}
+  58%    {transform:scale(.97);opacity:.86}
 }
 
 /* Au survol, tout accélère et le liseré passe au blanc : le visiteur est
    venu, le bouton répond au lieu de continuer à appeler. */
 .cta-rdv:hover>.btn-pri{animation-duration:1.4s;box-shadow:inset 0 -14px 28px -12px rgba(255,255,255,.6)}
-.cta-rdv:hover .aur i,.cta-rdv:hover .spk{animation-duration:2s}
+.cta-rdv:hover .aur i,.cta-rdv:hover .visio{animation-duration:2s}
 .cta-rdv:hover::before{opacity:1;animation-duration:2s}
 
 /* La taille réduite : même objet, matière moins floue pour rester lisible
    dans 44 px, et voile plus franc sous le texte. */
 .cta-rdv.sm .aur i{filter:blur(9px)}
-.cta-rdv.sm .spk{width:15px;height:15px}
-.cta-rdv.sm::before{inset:-58% -13%}
+.cta-rdv.sm .visio{width:16px;height:16px}
+.cta-rdv.sm::before{inset:-38% -8%}
 .cta-rdv.sm .aur::after{
   background:
-    radial-gradient(70% 70% at 50% 48%,rgba(4,8,6,.94),rgba(4,8,6,.68) 48%,rgba(4,8,6,0) 80%),
-    linear-gradient(180deg,rgba(4,8,6,.4) 0%,rgba(4,8,6,0) 36%);
+    radial-gradient(66% 68% at 50% 48%,rgba(4,8,6,.92),rgba(4,8,6,.62) 48%,rgba(4,8,6,0) 80%),
+    linear-gradient(180deg,rgba(4,8,6,.36) 0%,rgba(4,8,6,0) 36%);
 }
+/* Le bouton d'en-tête est le plus petit du lot : 107 × 44. Le liseré de
+   2,4 px y mange l'intérieur et la matière remonte d'autant sous le texte — le
+   libellé tombait à 4,13:1, juste sous AA. Ses masses perdent donc un cran
+   d'opacité. Les sorties contextuelles, deux à trois fois plus larges, gardent
+   la leur : elles ont la place. */
+.hdr .cta-rdv .aur i{opacity:.6}
 
 /* Dans l'en-tête, le bouton vit sur les six pages et à toutes les hauteurs de
    défilement. Il garde le liseré, ralenti, et perd le bloom : une lueur qui
    respire au-dessus du texte qu'on lit devient un moustique. */
 .hdr .cta-rdv::before{display:none}
 .hdr .cta-rdv>.btn-pri{animation-duration:7s}
-.hdr .cta-rdv .aur i,.hdr .cta-rdv .spk{animation-duration:9s}
+.hdr .cta-rdv .aur i,.hdr .cta-rdv .visio{animation-duration:9s}
 
 @media (max-width:560px){
   /* Spécificité : `.cta-rdv.sm::before` pèse 0,2,0 et est écrit plus haut. Sur
      téléphone un bouton contextuel occupe toute la colonne, donc le bloom se
      replie sur la verticale, où il reste de la place. */
-  .cta-rdv::before,.cta-rdv.sm::before{inset:-60% 0}
+  .cta-rdv::before,.cta-rdv.sm::before{inset:-40% 0}
   /* Le bloom respire en scale() et déborde alors de 10 px de chaque côté. Sur
      téléphone un bouton occupe toute la colonne : il n'y a pas ces 10 px. La
      respiration passe donc sur la seule verticale. Défaut transitoire, visible
@@ -479,8 +490,8 @@ p:last-child{margin-bottom:0}
   .cta-rdv::before{animation-name:blooomCtaY}
 }
 @keyframes blooomCtaY{
-  0%,100%{opacity:.5;transform:scaleY(1)}
-  44%    {opacity:1;transform:scaleY(1.14)}
+  0%,100%{opacity:.34;transform:scaleY(1)}
+  44%    {opacity:.62;transform:scaleY(1.12)}
 }
 
 .btn-gho{background:rgba(var(--fg-rgb),.015);color:var(--fg);border-color:var(--rule)}
