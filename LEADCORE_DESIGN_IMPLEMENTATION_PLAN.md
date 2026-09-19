@@ -112,7 +112,21 @@ parcours ; il est ici dépensé sans contrepartie informationnelle.
 
 ---
 
-# PHASE 2 — UX / CONVERSION
+# PHASE 2 — UX / CONVERSION — **faite le 19 septembre 2026**
+
+| ID | État | Mesure |
+|---|---|---|
+| CVR-02 | fait | plus grand trou sans porte de sortie : 7 000 → 2 700 px |
+| A11Y-01 | fait | 0 cible sous 44 × 44, contre 7 avant |
+| UX-01 | fait | la fiche passe sur l'accueil, à 47 % au lieu de 55 % d'une page secondaire |
+| UX-02 | fait | CTA d'en-tête local, et le calendrier est sur les quatre pages |
+| UX-03 | sans objet | l'échange d'images a disparu avec les photographies |
+| COPY-01 | fait | SPF/DKIM/DMARC, warm-up et délivrabilité glosés ; ICP, bookés et outbound traduits |
+| COPY-02 | fait | sur-titre de catégorie au-dessus du titre de l'accueil |
+
+*Note : SLOP-04 (suppression des photographies) est tombé avec UX-01 — les quatre
+photos ne vivaient que dans le défilé, dont le cadre porte maintenant la fiche.*
+
 
 ### CVR-02 · Combler le trou de CTA
 **Localisation :** Méthode, Collaboration, Tarifs.

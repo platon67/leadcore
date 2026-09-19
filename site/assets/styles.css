@@ -216,7 +216,9 @@ p:last-child{margin-bottom:0}
 /* masqué au défilement descendant, rendu au premier geste vers le haut */
 .hdr.is-hidden{transform:translate3d(0,-100%,0)}
 .hdr .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px}
-.mark{display:flex;align-items:center;flex:none}
+/* Zones tactiles (WCAG 2.5.5) : le rembourrage porte la cible à 44 px et la
+   marge négative rend l'espace pris, pour que rien ne bouge à l'écran. */
+.mark{display:flex;align-items:center;flex:none;padding:10px 0;margin:-10px 0}
 .mark img{width:126px}
 
 /* jauge de progression : une hairline sous l'en-tête */
@@ -229,7 +231,7 @@ p:last-child{margin-bottom:0}
 .nav{display:flex;align-items:center;gap:4px}
 .nav a{
   position:relative;font-size:14.5px;font-weight:450;letter-spacing:-.008em;color:var(--fg-soft);
-  text-decoration:none;padding:8px 13px;border-radius:8px;
+  text-decoration:none;padding:10.5px 13px;border-radius:8px;
   transition:color var(--t-fast) ease,background var(--t-fast) ease;
 }
 .nav a:hover{color:var(--fg);background:rgba(var(--fg-rgb),.04)}
@@ -245,7 +247,7 @@ p:last-child{margin-bottom:0}
 .nav a.btn-gho{color:var(--fg)}
 
 .nav-toggle{
-  display:none;background:none;border:1px solid var(--rule);border-radius:9px;width:42px;height:38px;
+  display:none;background:none;border:1px solid var(--rule);border-radius:9px;width:44px;height:44px;
   color:var(--fg);cursor:pointer;align-items:center;justify-content:center;flex:none;
   transition:border-color var(--t-fast) ease;
 }
@@ -285,7 +287,7 @@ p:last-child{margin-bottom:0}
 
 .btn-gho{background:rgba(var(--fg-rgb),.015);color:var(--fg);border-color:var(--rule)}
 .btn-gho:hover{border-color:var(--accent-dim);color:var(--accent-hi);background:rgba(var(--accent-rgb),.05)}
-.btn-sm{padding:11px 18px;font-size:14.5px;border-radius:9px}
+.btn-sm{padding:11px 18px;min-height:44px;font-size:14.5px;border-radius:9px}
 
 /* ═══════════ 4. sections ═══════════ */
 
@@ -331,6 +333,12 @@ section[id],main>span[id]{scroll-margin-top:calc(var(--header-h) + 20px)}
    par signe — « Vos commerciaux » porte deux m et fait 8,225 em, là où une
    chaîne de même longueur en lettres étroites en fait 7,75. À 74 px elle
    occupe 609 px pour une colonne qui en fait 637. */
+/* Sur-titre de catégorie. Volontairement sourd : il répond à « c'est quoi ? »
+   sans disputer l'attention au titre, ni à l'éméraude du mot accentué. */
+.hero-cat{
+  font-family:var(--label);font-size:13px;font-weight:600;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--fg-dim);margin:0 0 clamp(14px,1.7vw,20px);
+}
 .hero h1{font-size:clamp(40px,5.5vw,74px);line-height:.98}
 .hero h1 .ln{display:block;overflow:hidden;padding-bottom:.17em;margin-bottom:-.17em}
 /* nowrap : une ligne trop longue serait coupée par le masque, jamais renvoyée */
@@ -665,6 +673,36 @@ ul.crosses li::before{background:none;border:1.5px solid var(--fg-dim);border-ra
 .slot .ph .btn{margin-top:22px}
 .slot iframe{width:100%;min-height:640px;border:0;border-radius:var(--radius-sm);display:block}
 .slot[data-state="loaded"]{padding:12px;min-height:0;display:block}
+/* Dans une carte, le calendrier n'a pas besoin de son propre cadre : deux
+   boîtes emboitées ne hiérarchisent rien, elles se concurrencent. Il hérite du
+   cadre de la carte et s'aligne sur sa largeur — la vue mois de Cal a besoin
+   de place. */
+.card .slot,.card .slot[data-state="loaded"]{
+  border:0;background:none;backdrop-filter:none;-webkit-backdrop-filter:none;
+  padding:0;min-height:0;width:100%;margin-top:clamp(24px,3vw,34px);
+}
+
+/* ---- la sortie contextuelle ----
+   Un CTA au point de conviction, pas un bouton de plus. La conviction a une
+   demi-vie courte : entre deux portes de sortie, l'accueil laissait 7 000 px.
+   C'est un lien, pas un bouton, parce qu'un bouton toutes les deux sections
+   ne hiérarchise plus rien — et parce que celui qui n'est pas prêt continue
+   de lire sans se sentir poussé. */
+.cta-ctx{
+  margin:clamp(30px,3.6vw,46px) 0 0;padding-top:clamp(18px,2vw,24px);
+  border-top:1px solid var(--rule-soft);
+}
+.cta-ctx a{
+  display:inline-flex;align-items:center;gap:10px;padding:11px 0;margin:-11px 0;
+  font-family:var(--label);font-size:13px;font-weight:600;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--accent-lo);text-decoration:none;
+  transition:color var(--t-fast) ease;
+}
+.cta-ctx a:hover{color:var(--accent-hi)}
+.cta-ctx svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2;
+  stroke-linecap:round;stroke-linejoin:round;flex:none;
+  transition:transform var(--t-mid) var(--ease-out)}
+.cta-ctx a:hover svg{transform:translateX(4px)}
 
 /* ═══════════ 19. pied de page ═══════════ */
 
@@ -674,6 +712,7 @@ ul.crosses li::before{background:none;border:1.5px solid var(--fg-dim);border-ra
 .ftr-top p{margin-top:14px;max-width:34ch;color:var(--fg-dim);font-size:15px;line-height:1.5}
 .ftr-links{display:grid;grid-template-columns:repeat(2,auto);gap:10px 44px}
 .ftr-links a{color:var(--fg-soft);text-decoration:none;font-size:15px;
+  padding:10px 0;margin:-10px 0;
   transition:color var(--t-fast) ease}
 .ftr-links a:hover{color:var(--accent-hi)}
 /* le nom en grand, coupé en bas : une signature, pas un logo de plus */
@@ -689,7 +728,7 @@ ul.crosses li::before{background:none;border:1.5px solid var(--fg-dim);border-ra
   display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;
   font-family:var(--label);font-size:13px;font-weight:500;letter-spacing:.05em;
 }
-.ftr-bot a{color:var(--fg-soft);text-decoration:none}
+.ftr-bot a{color:var(--fg-soft);text-decoration:none;padding:12px 0;margin:-12px 0}
 .ftr-bot a:hover{color:var(--accent-hi)}
 
 /* ═══════════ 20. pages légales ═══════════ */
@@ -732,15 +771,17 @@ ul.crosses li::before{background:none;border:1.5px solid var(--fg-dim);border-ra
 
 /* ---- entrée du héros : chaque ligne du titre monte derrière son masque ---- */
 .js .hero h1 .ln>span{opacity:0;transform:translate3d(0,1.1em,0)}
-.js .hero .lede,.js .hero .cta{opacity:0;transform:translate3d(0,14px,0)}
+.js .hero .hero-cat,.js .hero .lede,.js .hero .cta{opacity:0;transform:translate3d(0,14px,0)}
 .js .hero .fiche{opacity:0;transform:translate3d(0,26px,0) scale(.985)}
 
+.js .hero.boot .hero-cat,
 .js .hero.boot h1 .ln>span,
 .js .hero.boot .lede,
 .js .hero.boot .cta,
 .js .hero.boot .fiche{
   animation:rise .9s var(--ease-out) forwards;
 }
+.js .hero.boot .hero-cat{animation-delay:0s}
 .js .hero.boot h1 .ln:nth-child(1)>span{animation-delay:.06s}
 .js .hero.boot h1 .ln:nth-child(2)>span{animation-delay:.15s}
 .js .hero.boot h1 .ln:nth-child(3)>span{animation-delay:.24s}
@@ -842,7 +883,7 @@ ul.crosses li::before{background:none;border:1.5px solid var(--fg-dim);border-ra
    et à sa place. */
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
-  .js .rv,.js .hero h1 .ln>span,.js .hero .lede,.js .hero .cta,
+  .js .rv,.js .hero h1 .ln>span,.js .hero .hero-cat,.js .hero .lede,.js .hero .cta,
   .js .hero .fiche{opacity:1;transform:none;transition:none;animation:none}
   .js .rv .eyebrow::before{transform:none;transition:none}
   .tape-track,.dot::after,.infra .rail .pkt,.hero .scan{animation:none!important}
@@ -1236,7 +1277,7 @@ body::before{
 
 /* fil d'Ariane discret, juste au-dessus du titre */
 .crumb{
-  display:inline-flex;align-items:center;gap:9px;margin-bottom:18px;
+  display:inline-flex;align-items:center;gap:9px;padding:12px 0;margin:-12px 0 6px;
   font-family:var(--label);font-size:12.5px;font-weight:550;letter-spacing:.06em;
   text-transform:uppercase;color:var(--fg-dim);text-decoration:none;
 }
@@ -1566,6 +1607,7 @@ body::before{
   text-decoration:none;color:var(--fg-dim);font-family:var(--label);font-size:14px;
   transition:color var(--t-fast) linear;
 }
+.legend a{padding:11px 0;margin:-11px 0;display:inline-block}
 .legend a:hover,.legend a:focus-visible{color:var(--fg)}
 @media (max-width:900px){.legend{display:none}}
 @media (max-width:900px){
@@ -2306,48 +2348,22 @@ body::before{
 .dstep.on h3{color:var(--fg)}
 .dstep p{margin:0;font-size:15.5px;line-height:1.5;color:var(--fg-dim);max-width:52ch}
 
-/* ---- le cadre d'images ---- */
+/* ---- le porte-fiche ---- */
 .defile-view{
   position:sticky;top:calc(var(--header-h) + clamp(20px,3vw,40px));
-  border-radius:var(--radius);overflow:hidden;
-  border:1px solid var(--rule);
-  aspect-ratio:7/5;
-  background:var(--ink-2);
-  isolation:isolate;
 }
-.defile-view figure{position:absolute;inset:0;margin:0}
-.defile-view img{
-  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
-  opacity:0;transform:scale(1.06);
-  transition:opacity .7s var(--ease-io),transform 1.4s var(--ease-out);
-  will-change:opacity;
+.defile-lbl{
+  margin:0 0 clamp(12px,1.4vw,16px);
+  font-family:var(--label);font-size:11.5px;font-weight:600;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--fg-dim);
 }
-.defile-view figure.on img{opacity:1;transform:scale(1)}
-/* un voile qui garde la légende lisible quelle que soit l'image */
-.defile-view::after{
-  content:"";position:absolute;inset:0;pointer-events:none;z-index:2;
-  background:linear-gradient(180deg,rgba(5,9,8,.12) 0%,rgba(5,9,8,.06) 42%,rgba(5,9,8,.82) 100%);
-}
-/* la légende, en bas du cadre */
-.defile-cap{
-  position:absolute;left:0;right:0;bottom:0;z-index:3;
-  padding:clamp(16px,2vw,24px);
-  display:flex;align-items:baseline;gap:12px;
-}
-.defile-cap b{
-  font-family:var(--mono);font-size:11.5px;font-weight:600;letter-spacing:.1em;
-  color:var(--accent);flex:none;
-}
-.defile-cap span{font-size:14.5px;line-height:1.4;color:var(--fg-soft)}
-
 @media (max-width:900px){
   .defile{grid-template-columns:1fr;gap:clamp(20px,3vw,28px)}
   .defile-view{position:relative;top:0;order:-1}
   .dstep{padding-left:16px}
 }
-/* Sans JavaScript, aucune affirmation ne reçoit .on : la première image et la
-   première affirmation sont donc actives par défaut dans le balisage, et la
-   page reste lisible et illustrée. */
+/* Sans JavaScript, aucune affirmation ne reçoit .on : la première est donc
+   active par défaut dans le balisage, et la fiche est là de toute façon. */
 
 /* ═══════════════════════════════════════════════════════════════════════════
    35. LA FRISE, SECONDE VERSION

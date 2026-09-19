@@ -186,25 +186,16 @@
 
   /* ─────────── 4 bis. le défilé de l'accueil ───────────
      Une affirmation est active quand elle traverse le tiers médian de la
-     fenêtre ; l'image correspondante prend le dessus. Un seul observateur,
-     aucun écouteur de défilement, et la marge racine fait tout le travail de
-     sélection : ce qui est dans la bande est actif, le reste ne l'est pas.
+     fenêtre. Un seul observateur, aucun écouteur de défilement, et la marge
+     racine fait tout le travail de sélection : ce qui est dans la bande est
+     actif, le reste ne l'est pas.
 
-     Sans JavaScript, le balisage porte déjà .on sur la première affirmation et
-     la première image : la page reste illustrée et lisible. */
+     Sans JavaScript, le balisage porte déjà .on sur la première affirmation. */
   var defile = doc.querySelector(".defile");
   if (defile && hasIO) {
     var steps = defile.querySelectorAll(".dstep");
-    var vues = defile.querySelectorAll(".defile-view figure");
-    var cap = defile.querySelector(".defile-cap span");
-    var capN = defile.querySelector(".defile-cap b");
     var poser = function (i) {
-      for (var k = 0; k < steps.length; k++) {
-        steps[k].classList.toggle("on", k === i);
-        if (vues[k]) vues[k].classList.toggle("on", k === i);
-      }
-      if (cap && vues[i]) cap.textContent = vues[i].getAttribute("data-cap") || "";
-      if (capN) capN.textContent = "0" + (i + 1);
+      for (var k = 0; k < steps.length; k++) steps[k].classList.toggle("on", k === i);
     };
     var defIO = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
@@ -442,7 +433,13 @@
   var src = url;
   var sep = url.indexOf("?") === -1 ? "?" : "&";
   if (provider === "cal") {
-    src += sep + "embed=true&theme=dark&layout=month_view";
+    /* La vue mois demande de la largeur : sur un téléphone elle tombe à 260 px
+       et devient illisible. En dessous de 640 px, Cal a une vue en colonne
+       faite pour ça. Le choix se fait au chargement, pas au redimensionnement :
+       recharger l'iframe pendant que quelqu'un choisit une date lui ferait
+       perdre sa sélection. */
+    src += sep + "embed=true&theme=dark&layout=" +
+           (window.innerWidth < 640 ? "column_view" : "month_view");
   } else if (provider === "calendly") {
     src += sep + "hide_gdpr_banner=1&background_color=0A110F&text_color=F2F8F5&primary_color=19C78B";
   }

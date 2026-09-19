@@ -74,6 +74,11 @@
 
   <div class="wrap hero-grid">
     <div class="hero-copy">
+      <!-- La catégorie avant la promesse : un dirigeant cherche à savoir ce
+           qu'il regarde avant de savoir ce qu'on lui promet. Le sur-titre avait
+           été retiré plus tôt dans le projet, à tort : rien dans le premier écran
+           ne disait le métier. -->
+      <p class="hero-cat">Agence de prospection B2B · Email et LinkedIn</p>
       <h1>
         <span class="ln"><span>Vos commerciaux</span></span>
         <span class="ln"><span>ne prospectent</span></span>
@@ -132,24 +137,24 @@
   <div class="tape-track">
     <div class="tape-row">
       <span class="tape-item" style="color:var(--accent)">Production mensuelle par client</span>
-      <span class="tape-item"><b>1 900</b> contacts ICP</span>
+      <span class="tape-item"><b>1 900</b> contacts dans votre cible</span>
       <span class="tape-item"><b>7 600</b> emails</span>
       <span class="tape-item"><b>2 200</b> touches LinkedIn</span>
       <span class="tape-item"><b>10</b> boîtes d’envoi</span>
       <span class="tape-item"><b>120</b> réponses traitées</span>
       <span class="tape-item"><b>29</b> réponses positives</span>
-      <span class="tape-item"><b>16</b> rendez-vous bookés</span>
+      <span class="tape-item"><b>16</b> rendez-vous pris</span>
       <span class="tape-item"><b>12</b> rendez-vous honorés</span>
     </div>
     <div class="tape-row">
       <span class="tape-item" style="color:var(--accent)">Production mensuelle par client</span>
-      <span class="tape-item"><b>1 900</b> contacts ICP</span>
+      <span class="tape-item"><b>1 900</b> contacts dans votre cible</span>
       <span class="tape-item"><b>7 600</b> emails</span>
       <span class="tape-item"><b>2 200</b> touches LinkedIn</span>
       <span class="tape-item"><b>10</b> boîtes d’envoi</span>
       <span class="tape-item"><b>120</b> réponses traitées</span>
       <span class="tape-item"><b>29</b> réponses positives</span>
-      <span class="tape-item"><b>16</b> rendez-vous bookés</span>
+      <span class="tape-item"><b>16</b> rendez-vous pris</span>
       <span class="tape-item"><b>12</b> rendez-vous honorés</span>
     </div>
   </div>
@@ -196,8 +201,9 @@
          donne quatre-vingt-dix secondes ne descend jamais. -->
     <div class="banner rv" style="margin-top:clamp(12px,1.6vw,18px)">
       <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M6 18L18 6"/></svg>
-      <span><b>On refuse les missions sous 7 000 € de valeur client.</b> En dessous, l’outbound vous coûte plus qu’il ne rapporte&nbsp;: vous ne renouvelez pas, et on perd notre temps tous les deux. On vous le dit pendant l’appel, pas au troisième mois.</span>
+      <span><b>On refuse les missions sous 7 000 € de valeur client.</b> En dessous, la prospection à froid — écrire à des gens qui ne vous ont rien demandé — vous coûte plus qu’elle ne rapporte&nbsp;: vous ne renouvelez pas, et on perd notre temps tous les deux. On vous le dit pendant l’appel, pas au troisième mois.</span>
     </div>
+    <p class="cta-ctx rv"><a href="#rendez-vous">Voir si votre cas passe le seuil<svg class="ar" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></p>
   </div>
 </section>
 
@@ -236,42 +242,44 @@
         </article>
       </div>
 
+      <!-- Le cadre tenu à droite ne montre plus une photographie mais la
+           chose elle-même : le rendez-vous tel qu'il arrive dans l'agenda. Une
+           photo ne sait pas montrer « agenda prévisible » ; la fiche, si. Elle
+           vivait à 55 % de la page Méthode, où un dirigeant pressé ne descend
+           jamais. -->
       <div class="defile-view">
-        <figure class="on" data-cap="Une maille régulière&nbsp;: la base se construit rang par rang.">
-          <picture>
-            <source type="image/webp" media="(max-width:900px)" srcset="assets/img/base-560.webp">
-            <source type="image/webp" srcset="assets/img/base-960.webp">
-            <img src="assets/img/base-960.jpg" alt="" width="960" height="686"
-                 fetchpriority="high" decoding="async">
-          </picture>
+        <p class="defile-lbl">Ce que votre commercial ouvre le matin</p>
+        <figure class="fiche">
+          <figcaption class="fiche-hd" data-live>
+            <span class="dot" aria-hidden="true"></span>
+            <span class="lbl">Rendez-vous qualifié</span>
+            <span class="tag">Exemple</span>
+          </figcaption>
+          <div class="fiche-body">
+            <div class="fiche-id">
+              <span class="who">Éditeur de logiciels, 40 salariés</span>
+              <span class="what">Île-de-France</span>
+              <span class="what">Directrice des opérations</span>
+            </div>
+            <blockquote class="fiche-q">
+              «&nbsp;On a arrêté notre prospection interne en janvier. Personne pour traiter les réponses.&nbsp;»
+              <cite>Réponse LinkedIn, 2<sup>e</sup> touche</cite>
+            </blockquote>
+            <ul class="checks" data-checks>
+              <li><span class="bx" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></span>Dans la cible définie avec vous</li>
+              <li><span class="bx" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></span>Besoin exprimé, échéance au quatrième trimestre</li>
+              <li><span class="bx" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></span>Décisionnaire sur le sujet</li>
+              <li><span class="bx" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></span>Présente au rendez-vous</li>
+            </ul>
+            <div class="fiche-ft">
+              <span class="k">Montant facturé</span>
+              <span class="v">200 €</span>
+            </div>
+          </div>
         </figure>
-        <figure data-cap="L’infrastructure d’envoi&nbsp;: ce qu’on exploite, et ce qui prend le risque.">
-          <picture>
-            <source type="image/webp" media="(max-width:900px)" srcset="assets/img/infra-560.webp">
-            <source type="image/webp" srcset="assets/img/infra-960.webp">
-            <img src="assets/img/infra-960.jpg" alt="" width="960" height="686"
-                 loading="lazy" decoding="async">
-          </picture>
-        </figure>
-        <figure data-cap="Deux canaux qui couvrent le même marché, en même temps.">
-          <picture>
-            <source type="image/webp" media="(max-width:900px)" srcset="assets/img/canaux-560.webp">
-            <source type="image/webp" srcset="assets/img/canaux-960.webp">
-            <img src="assets/img/canaux-960.jpg" alt="" width="960" height="686"
-                 loading="lazy" decoding="async">
-          </picture>
-        </figure>
-        <figure data-cap="L’agenda qui se remplit, semaine après semaine.">
-          <picture>
-            <source type="image/webp" media="(max-width:900px)" srcset="assets/img/agenda-560.webp">
-            <source type="image/webp" srcset="assets/img/agenda-960.webp">
-            <img src="assets/img/agenda-960.jpg" alt="" width="960" height="686"
-                 loading="lazy" decoding="async">
-          </picture>
-        </figure>
-        <div class="defile-cap"><b>01</b><span>Une maille régulière&nbsp;: la base se construit rang par rang.</span></div>
       </div>
     </div>
+    <p class="cta-ctx rv"><a href="#rendez-vous">Voir à quoi ressemblerait la vôtre<svg class="ar" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></p>
   </div>
 </section>
 
@@ -333,7 +341,7 @@
     <div class="sec-head rv">
       <p class="eyebrow">Prendre un créneau</p>
       <h2>Trente minutes pour savoir si <span class="ex">ça vaut le coup chez vous.</span></h2>
-      <p class="lede">On regarde votre offre, votre valeur client et la capacité de vos commerciaux. Si l’outbound ne tient pas dans votre cas, on vous le dit pendant l’appel et on s’arrête là.</p>
+      <p class="lede">On regarde votre offre, votre valeur client et la capacité de vos commerciaux. Si la prospection à froid ne tient pas dans votre cas, on vous le dit pendant l’appel et on s’arrête là.</p>
     </div>
 
     <div class="book-grid">
