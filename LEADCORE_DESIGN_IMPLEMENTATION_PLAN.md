@@ -6,6 +6,11 @@ dans quel ordre, et pourquoi cet ordre.
 
 **Convention d'effort :** Low ≤ 1 h · Medium 1 à 4 h · High > 4 h.
 
+**Arbitrages rendus le 19 septembre 2026 par le propriétaire :** DA-03 → option B
+(suppression de `.sig`) · SLOP-04 → suppression des photographies · DA-02 → dans
+le périmètre. CVR-01 est débloqué : calendrier Cal.com et adresse de contact
+branchés.
+
 ---
 
 # TOP 10 PRIORITY MATRIX
@@ -66,6 +71,14 @@ défaut et mouvement réduit — et parcourt la page de haut en bas avant de mes
 vers une adresse qui n'existe pas encore, et la page l'annonce : « Le calendrier en
 ligne n'est pas encore branché. » Un `mailto:` échoue silencieusement chez tout
 visiteur desktop sans client mail configuré.
+**État au 19 septembre 2026 :** le calendrier est branché (`cal`,
+`https://cal.com/platon-gsniv4/30min`), l'adresse de contact est
+`platon.leadcore@gmail.com`, et la phrase qui annonçait la panne est retirée.
+**Reste à faire en phase 1 :** router les CTA primaires de Méthode, Collaboration
+et Tarifs vers `index.html#rendez-vous` au lieu d'un `mailto:`, et vérifier le
+rendu du calendrier sur téléphone (non testable ici, `cal.com` est bloqué par le
+proxy d'environnement).
+
 **Modification, par ordre de préférence :**
 1. Brancher un calendrier (`provider` dans `config.js` — l'intégration est déjà écrite).
 2. À défaut, un formulaire en deux champs (email + ticket moyen) traité côté serveur.
@@ -186,6 +199,8 @@ d'application, l'exception devient la norme et ne signale plus rien.
 **Problème mesuré :** 40 tailles de police, 9 graisses, 53 approches, 58
 interlignages, 41 paddings, 30 gaps, 14 rayons — pour 2 rayons déclarés en jetons.
 Cause : `clamp()` sur chaque composant produit une valeur continue par élément.
+**Décision : dans le périmètre.**
+
 **Modification :**
 - Échelle typographique fermée à 8 pas : 12 / 14 / 16 / 19 / 23 / 29 / 38 / 56.
 - Trois graisses : 400, 600, 800. Supprimer 450, 550, 650, 750.
@@ -204,6 +219,8 @@ tailles ne produisent pas une gamme, elles produisent une absence de gamme.
 - **A — amplifier :** une page = une dominante réellement lisible (variation de
   luminance d'au moins 8 niveaux entre pages au même point).
 - **B — supprimer :** retirer `.sig` et ses trois couches, garder le sol et le grain.
+**Décision : B, arbitrée.** Recommandation d'origine ci-dessous.
+
 **Recommandation : B.** Le système coûte du code, de la documentation et de la
 complexité pour un résultat nul. Sa suppression libère la voie pour une
 différenciation qui se voit — la typographie ou la composition.
@@ -253,7 +270,7 @@ Supprimer le battement des sept points et le souffle de la case de sortie.
 **Justification :** une animation ne hiérarchise que si elle est seule à bouger.
 **Priorité :** High · **Effort :** Low
 
-### SLOP-04 · Trancher sur les photographies
+### SLOP-04 · Trancher sur les photographies — **tranché : suppression**
 **Problème :** quatre photos Unsplash, 150 Ko, sur l'accueil seulement, qui
 n'apportent aucune information. Le traitement en bichromie les intègre visuellement
 mais ne leur donne pas de fonction.

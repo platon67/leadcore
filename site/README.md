@@ -491,8 +491,18 @@ python3 -m http.server 8000 --directory site
       `docs/MAJ-OFFRE-2026-09.md`, qui classent encore le second canal parmi
       les sujets ouverts. Voir « Écart connu » plus haut.
 
-- [ ] Renseigner `provider` et `url` dans `assets/config.js`
-- [ ] Vérifier l’adresse email de contact
+- [x] ~~Renseigner `provider` et `url` dans `assets/config.js`~~ **Réglé.**
+      `provider: "cal"`, `url: "https://cal.com/platon-gsniv4/30min"`. Le
+      calendrier s’affiche en iframe dans `#booking-slot`. **Reste à vérifier sur
+      le site déployé, depuis un téléphone** : `cal.com` est bloqué par le proxy de
+      l’environnement d’agent, donc le rendu interne du calendrier n’a pas pu être
+      contrôlé ici. À 320 px l’iframe ne fait que 258 px de large : si la vue mois
+      est illisible, passer à `layout=column_view` sous 560 px dans `main.js` §11.
+- [x] ~~Vérifier l’adresse email de contact~~ **Réglé, à titre provisoire.**
+      `platon.leadcore@gmail.com`. Aucun domaine n’est rattaché au projet Vercel,
+      donc `contact@leadcore.fr` ne pouvait pas exister. À remplacer par une
+      adresse sur le domaine dès qu’il est en place : un seul endroit,
+      `assets/config.js`.
 - [ ] Compléter `mentions-legales.html` (raison sociale, SIREN, hébergeur)
 - [ ] Compléter `confidentialite.html` avec un juriste (base légale, durées,
       sous-traitants). Le sujet RGPD est encore ouvert, voir
@@ -520,10 +530,8 @@ Le site est déployé. Il n’est **pas** accessible au public, et c’est voulu
 
 Deux choses à faire avant d’ouvrir le site à vos prospects, dans cet ordre :
 
-1. **Créer l’adresse de contact.** `contact@leadcore.fr` n’existe pas encore.
-   C’est la seule action possible pour un visiteur : sans elle, la page se
-   termine sur un lien mort. L’adresse se change à un seul endroit,
-   `assets/config.js`.
+1. ~~**Créer l’adresse de contact.**~~ Fait : `platon.leadcore@gmail.com`, et le
+   calendrier Cal.com est branché. Le visiteur a désormais deux sorties réelles.
 2. **Couper Vercel Authentication**, dans *Settings → Deployment Protection*.
    Tant qu’elle est active, un visiteur tombe sur un écran de connexion Vercel.
    Elle ne s’applique pas aux domaines personnalisés : brancher `leadcore.fr`
