@@ -41,6 +41,48 @@ du jeton `?v=` doit être reportée dans les six. C'est le prix du « pas de bui
 assumé : six fichiers restent relisibles, un générateur serait une dépendance de
 plus à faire tourner avant chaque mise en ligne.
 
+## Mouvement
+
+**Deux gestes d'arrivée, et deux seulement.** Une montée neutre (`rowIn`) et une
+écriture de gauche à droite pour le grand livre (`writeIn`). Il y en avait six,
+qui faisaient tous « un bloc arrive » : six variantes d'un même geste ne
+produisent pas six sens, elles produisent du bruit. Ce qui différencie deux
+entrées, c'est leur **plage** de déclenchement, pas une image-clé de plus.
+
+**Les boucles.** Une animation ne hiérarchise que si elle est seule à bouger.
+Méthode en faisait tourner onze en même temps — trois comètes, sept battements
+de touches, un souffle sur la case de sortie. Il en reste trois, les comètes,
+qui expliquent le trajet. Mesuré au pire moment du défilement : accueil 1,
+méthode 3, collaboration 1, tarifs 0.
+
+**La bande défilante a été supprimée.** Motif générique et daté, illisible en
+mouvement, qui répétait des chiffres présents deux écrans plus bas et tournait
+en boucle en permanence.
+
+## Densité et cadres
+
+**La carte est réservée aux objets.** Une fiche, un panneau de prix, un arrêt de
+frise, une case de schéma : ce sont des choses. Le texte courant et les listes
+reviennent au fil du fond, avec un filet à gauche quand une séparation est
+nécessaire — un filet dit « c'est lié à ce qui précède » là où un cadre dit
+« c'est une chose à part ». Si tout est figure, il n'y a plus de fond.
+Boîtes bordées par page : accueil 13, méthode 17, collaboration 12, tarifs 6 —
+contre 17, 30, 17 et 10 avant.
+
+**La densité varie avec la nature du contenu.** Une plaque porte de la donnée et
+se lit d'un coup d'œil : elle est serrée. Une section de prose se lit ligne à
+ligne : elle respire. C'est le seul endroit où le pas change, et il change pour
+une raison.
+
+## Deux couleurs, deux registres
+
+L'émeraude dit ce que vous gagnez. **L'ambre dit ce que ça vous prend** : les
+trois bandeaux du site — le seuil de 7 000 €, les trois heures et demie
+demandées, la nuance sur le recrutement — sont des réserves, jamais des gains.
+Le jeton `--amber` existait depuis le début sans servir à rien d'autre qu'aux
+blocs à faire des pages légales. Un jeton qu'on déclare et qu'on n'emploie pas
+est une intention, pas un système.
+
 ## Le discours
 
 La page est construite sur ce que le client **gagne**, pas sur la façon dont on
@@ -309,7 +351,7 @@ qu'aucune ne se lise comme un morceau détaché d'une autre :
 Les bandeaux d'ouverture se ferment sur `.pnav`, l'index des trois pages : elles
 se lisent dans l'ordre et sans ce repère chacune a l'air isolée.
 
-L'en-tête, la bande défilante, le héros et le pied vivent hors des sections.
+L'en-tête, le héros et le pied vivent hors des sections.
 
 **Contraste.** Un audit parcourt chaque nœud de texte des six pages, aplatit les
 fonds semi-opaques sur leurs parents et compare au seuil WCAG AA correspondant à

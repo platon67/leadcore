@@ -448,7 +448,8 @@
   frame.src = src;
   frame.title = "Calendrier de prise de rendez-vous Leadcore";
   frame.loading = "lazy";
-  frame.style.minHeight = (cfg.height || 680) + "px";
+  /* la vue colonne tient dans moins de hauteur que la vue mois */
+  frame.style.minHeight = (window.innerWidth < 640 ? 520 : (cfg.height || 680)) + "px";
   frame.setAttribute("allow", "fullscreen");
 
   slot.innerHTML = "";

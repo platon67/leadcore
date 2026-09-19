@@ -102,7 +102,7 @@
   --s5:clamp(20px,2.6vw,32px);
   --s6:clamp(28px,4vw,52px);
   --s7:clamp(44px,6vw,84px);
-  --s8:clamp(80px,10vw,132px);  /* le pas des sections */
+  --s8:clamp(58px,10vw,132px);  /* le pas des sections */
 
   --radius-xs:4px;   /* petites marques, puces, étiquettes */
   --radius-sm:10px;  /* pavés, boutons, champs */
@@ -452,24 +452,6 @@ section[id],main>span[id]{scroll-margin-top:calc(var(--header-h) + 20px)}
 .fiche-ft .v{font-size:var(--t6);font-weight:800;letter-spacing:-.04em;color:var(--accent-hi);
   font-variant-numeric:tabular-nums;white-space:nowrap}
 
-/* ═══════════ 6. bande défilante ═══════════ */
-
-.tape{
-  position:relative;border-top:1px solid var(--rule-soft);border-bottom:1px solid var(--rule-soft);
-  background:var(--surface);overflow:hidden;
-  mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);
-  -webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);
-}
-.tape-track{display:flex;width:max-content}
-.tape-row{display:flex;align-items:center;flex:none;padding:15px 0}
-.tape-item{
-  display:inline-flex;align-items:baseline;gap:var(--s2);padding:0 clamp(18px,2.4vw,30px);
-  font-family:var(--mono);font-size:var(--t2);letter-spacing:.03em;color:var(--fg-dim);white-space:nowrap;
-}
-.tape-item b{color:var(--fg);font-weight:400;font-variant-numeric:tabular-nums;letter-spacing:.02em}
-.tape-item::after{content:"";width:3px;height:3px;border-radius:50%;background:var(--accent-dim);
-  margin-left:clamp(18px,2.4vw,30px);align-self:center}
-
 /* ═══════════ 7. chiffres clés ═══════════ */
 
 .keys{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--rule-soft);
@@ -551,11 +533,16 @@ section[id],main>span[id]{scroll-margin-top:calc(var(--header-h) + 20px)}
 /* ═══════════ 10. entonnoir de production ═══════════ */
 
 .funnel{display:flex;flex-direction:column;gap:var(--s2)}
+/* Six lignes qui disent le même genre de chose à six échelles : c'est un
+   tableau, pas six objets. Réglées plutôt qu'encadrées, elles se lisent comme
+   une colonne de chiffres, ce qu'elles sont. La barre de fond reste — c'est
+   elle qui porte la comparaison. */
 .lvl{
   position:relative;display:flex;align-items:center;gap:var(--s4);
-  border:1px solid var(--rule-soft);border-radius:var(--radius-sm);background:var(--surface);
-  padding:19px clamp(18px,2.6vw,26px);overflow:hidden;align-self:stretch;
+  border-top:1px solid var(--rule-soft);background:none;
+  padding:19px clamp(14px,2vw,20px);overflow:hidden;align-self:stretch;
 }
+.lvl:last-of-type{border-bottom:1px solid var(--rule-soft)}
 /* la barre est un fond mis à l'échelle : scaleX, jamais width */
 .lvl .bar{
   position:absolute;inset:0;transform-origin:left;transform:scaleX(0);
@@ -636,17 +623,25 @@ ul.crosses li::before{background:none;border:1.5px solid var(--fg-dim);border-ra
 
 /* ═══════════ 14. bandeau ═══════════ */
 
+/* Le bandeau porte l'ambre, et c'est la seconde valeur du système.
+
+   Tout était émeraude : un bénéfice, une réserve et un refus se ressemblaient.
+   Or les trois bandeaux du site disent la même chose — ce que ça coûte, ce
+   qu'on demande, ce qu'on refuse. Ce n'est jamais un gain. Leur donner une
+   couleur à eux fait exister deux registres : l'émeraude pour ce que vous
+   gagnez, l'ambre pour ce que ça vous prend.
+   Le jeton --amber existait depuis le début et ne servait qu'aux blocs à faire
+   des pages légales. Un jeton qu'on déclare et qu'on n'emploie pas est une
+   intention, pas un système. */
 .banner{
-  margin-top:clamp(28px,3.6vw,40px);border:1px solid var(--accent-dim);border-radius:var(--radius);
-  background:linear-gradient(94deg,rgba(var(--accent-rgb),.14),rgba(var(--accent-rgb),.02));
+  margin-top:clamp(28px,3.6vw,40px);border:1px solid var(--amber-dim);border-radius:var(--radius);
+  background:linear-gradient(94deg,rgba(224,167,90,.10),rgba(224,167,90,.015));
   padding:21px clamp(20px,2.8vw,28px);display:flex;gap:var(--s3);align-items:flex-start;
   font-size:var(--t3);line-height:1.55;
 }
-.banner svg{flex:none;width:21px;height:21px;margin-top:3px;stroke:var(--accent);fill:none;
+.banner svg{flex:none;width:21px;height:21px;margin-top:3px;stroke:var(--amber);fill:none;
   stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
 .banner b{font-weight:600;color:var(--fg);font-variant-numeric:tabular-nums}
-.banner.warn{border-color:var(--amber-dim);background:linear-gradient(94deg,rgba(224,167,90,.11),rgba(224,167,90,.015))}
-.banner.warn svg{stroke:var(--amber)}
 
 /* ═══════════ 15. tarifs ═══════════ */
 
@@ -731,6 +726,7 @@ ul.crosses li::before{background:none;border:1.5px solid var(--fg-dim);border-ra
 .slot .ph p{color:var(--fg-soft);font-size:var(--t3)}
 .slot .ph .btn{margin-top:22px}
 .slot iframe{width:100%;min-height:640px;border:0;border-radius:var(--radius-sm);display:block}
+@media (max-width:640px){.slot iframe{min-height:520px}}
 .slot[data-state="loaded"]{padding:12px;min-height:0;display:block}
 /* Dans une carte, le calendrier n'a pas besoin de son propre cadre : deux
    boîtes emboitées ne hiérarchisent rien, elles se concurrencent. Il hérite du
@@ -871,12 +867,8 @@ ul.crosses li::before{background:none;border:1.5px solid var(--fg-dim);border-ra
 /* ---- bande défilante ----
    Deux copies identiques du contenu, translation de -50 % : la boucle est
    invisible et le navigateur n'anime qu'une transform. */
-.tape-track{animation:tape 42s linear infinite;will-change:transform}
 /* en pause hors du champ et au survol ; la position est conservée, donc la
    bande repart où elle en était au lieu de sauter au début */
-.js .tape:not(.live) .tape-track,
-.tape:hover .tape-track{animation-play-state:paused}
-@keyframes tape{to{transform:translate3d(-50%,0,0)}}
 
 /* ---- paquet qui descend les rails de l'infrastructure ---- */
 .infra.live .rail .pkt{animation:pkt 2.1s var(--ease-io) infinite}
@@ -938,7 +930,7 @@ ul.crosses li::before{background:none;border:1.5px solid var(--fg-dim);border-ra
   .js .rv,.js .hero h1 .ln>span,.js .hero .hero-cat,.js .hero .lede,.js .hero .cta,
   .js .hero .fiche{opacity:1;transform:none;transition:none;animation:none}
   .js .rv .eyebrow::before{transform:none;transition:none}
-  .tape-track,.dot::after,.infra .rail .pkt,.hero .scan{animation:none!important}
+  .dot::after,.infra .rail .pkt,.hero .scan{animation:none!important}
   .hero .scan{display:none}
   .infra .rail .pkt{opacity:0}
   .lvl .bar,.pipe-fill,.cond::before{transform:none;transition:none}
@@ -1228,6 +1220,14 @@ body::before{
     inset 0 14px 28px -18px rgba(0,0,0,.9),
     inset 0 -1px 0 rgba(0,0,0,.6);
 }
+/* La densité varie avec la nature du contenu, et c'est le seul endroit où elle
+   varie. Une plaque porte de la donnée — un résumé, un panneau de chiffres,
+   une grille : elle se lit d'un coup d'œil et n'a pas besoin d'air. Une
+   section de prose se lit ligne à ligne et en demande. Le site avait le même
+   pas partout sur 8 000 px, ce qui donne un rythme plat : rien ne dit au
+   lecteur qu'il change de registre. */
+.sec.plate{padding-block:clamp(44px,6.2vw,88px)}
+
 /* soulevée : la section se détache du sol, un seul usage par page */
 .sec.raise{
   background:linear-gradient(180deg,var(--lifted),#101917);
@@ -1567,8 +1567,13 @@ body::before{
   .chrono-y{grid-column:2;justify-items:start;text-align:left;margin-top:4px}
 }
 @media (max-width:680px){
-  .chrono-row{grid-template-columns:1fr;gap:var(--s3)}
-  .chrono-y{grid-column:1}
+  /* La semaine et ce qu'elle vous coûte tiennent sur la même ligne, le récit
+     passe dessous. Empilées, les trois colonnes faisaient trois rangs par
+     semaine et la section à elle seule pesait trois écrans et demi. */
+  .chrono-row{grid-template-columns:minmax(0,1fr) auto;gap:var(--s3) var(--s4)}
+  .chrono-w{grid-column:1;grid-row:1}
+  .chrono-y{grid-column:2;grid-row:1;justify-items:end;text-align:right;margin-top:0}
+  .chrono-b{grid-column:1 / -1;grid-row:2}
   .chrono-w::after{display:none}
 }
 
@@ -1751,10 +1756,9 @@ body::before{
   @media (prefers-reduced-motion:no-preference){
 
     /* ---- méthode : la colonne de filtrage ----
-       Chaque étape se lève depuis sa droite, l'indentation la portant déjà vers
-       l'intérieur. Le repère du rail grossit une fois l'étape en place. */
+       Chaque étape monte, et le repère du rail grossit une fois en place. */
     .js .node{
-      animation:nodeIn linear both;
+      animation:rowIn linear both;
       animation-timeline:view(block);
       animation-range:entry 6% entry 58%;
     }
@@ -1776,7 +1780,7 @@ body::before{
        Le numéro de semaine dérive à vitesse réduite, le bloc de droite arrive
        au rythme normal. Deux vitesses, un seul défilement. */
     .js .chrono-w{
-      animation:slowRise linear both;
+      animation:rowIn linear both;
       animation-timeline:view(block);
       animation-range:entry 0% cover 34%;
     }
@@ -1786,8 +1790,8 @@ body::before{
       animation-range:entry 8% entry 62%;
     }
     /* les deux colonnes face à face entrent en sens inverse */
-    .js .duo .col.a{animation:fromLeft linear both;animation-timeline:view(block);animation-range:entry 4% entry 52%}
-    .js .duo .col.b{animation:fromRight linear both;animation-timeline:view(block);animation-range:entry 4% entry 56%}
+    .js .duo .col.a{animation:rowIn linear both;animation-timeline:view(block);animation-range:entry 4% entry 52%}
+    .js .duo .col.b{animation:rowIn linear both;animation-timeline:view(block);animation-range:entry 4% entry 56%}
 
     /* ---- tarifs : le grand livre s'écrit ----
        Chaque ligne se découvre de gauche à droite, comme une écriture portée
@@ -1798,7 +1802,7 @@ body::before{
       animation-range:entry 4% entry 54%;
     }
     .js .led .f{
-      animation:slowRise linear both;
+      animation:rowIn linear both;
       animation-timeline:view(block);
       animation-range:entry 0% cover 30%;
     }
@@ -1812,42 +1816,21 @@ body::before{
   }
 }
 
-@keyframes nodeIn{
-  from{opacity:0;transform:translate3d(22px,16px,0)}
-  to{opacity:1;transform:none}
-}
-/* Sur un écran étroit il ne reste que 18 px à droite d'une étape : la levée
-   depuis la droite en poussait 22, et la page débordait de 4 px pendant la
-   demi-seconde de l'animation. Une barre de défilement qui apparaît en cours de
-   lecture est un défaut, même bref. Sous 560 px l'étape se lève donc droit :
-   l'indentation qui justifiait le geste vaut de toute façon 7 px à cette
-   largeur, le mouvement latéral n'y raconte plus rien. */
-@media (max-width:560px){
-  @keyframes nodeIn{
-    from{opacity:0;transform:translate3d(0,16px,0)}
-    to{opacity:1;transform:none}
-  }
-}
 @keyframes dotPop{
   from{transform:scale(.4)}
   60%{transform:scale(1)}
   to{transform:scale(1)}
 }
+/* Deux gestes d'arrivée, et deux seulement. Il y en avait six — rowIn,
+   slowRise, nodeIn, fromLeft, fromRight, writeIn — qui faisaient tous « un
+   bloc arrive ». Six variantes d'un même geste ne produisent pas six sens,
+   elles produisent du bruit. Ce qui différencie deux entrées, c'est leur
+   PLAGE de déclenchement, pas une image-clé de plus.
+   Effet de bord heureux : rowIn est purement vertical, donc le débordement
+   transitoire de 4 px que nodeIn provoquait sous 560 px ne peut plus revenir,
+   et son correctif a disparu avec lui. */
 @keyframes rowIn{
   from{opacity:0;transform:translate3d(0,22px,0)}
-  to{opacity:1;transform:none}
-}
-@keyframes slowRise{
-  from{opacity:.3;transform:translate3d(0,26px,0)}
-  40%{opacity:1}
-  to{opacity:1;transform:translate3d(0,-10px,0)}
-}
-@keyframes fromLeft{
-  from{opacity:0;transform:translate3d(-16px,10px,0)}
-  to{opacity:1;transform:none}
-}
-@keyframes fromRight{
-  from{opacity:0;transform:translate3d(16px,10px,0)}
   to{opacity:1;transform:none}
 }
 @keyframes writeIn{
@@ -1897,16 +1880,24 @@ body::before{
 /* ---- le cadre, surface de base ----
    Deux poids seulement. Plein pour ce qui porte l'information, filet seul pour
    ce qui l'accompagne : trois poids donneraient une page en damier. */
+/* Le pavé de texte n'est pas un objet : c'est du texte courant. Il portait le
+   même cadre qu'une carte, souvent à l'intérieur d'une carte — deux boîtes
+   emboîtées qui ne hiérarchisent rien. Si tout est figure, il n'y a plus de
+   fond. Il revient au fil du fond, avec un filet à gauche quand une séparation
+   est nécessaire : un filet dit « c'est lié à ce qui précède » là où un cadre
+   dit « c'est une chose à part ». */
 .pad{
-  background:linear-gradient(180deg,rgba(242,248,245,.032),rgba(242,248,245,.013));
-  border:1px solid var(--rule-soft);
-  border-radius:var(--radius);
-  padding:clamp(18px,2.2vw,28px);
+  border-left:1px solid var(--rule-soft);
+  padding:2px 0 2px clamp(16px,2vw,24px);
 }
-.pad.lite{background:none;border-color:var(--rule-soft)}
+.pad.lite{border-left-color:var(--rule-soft)}
+/* La variante chaude garde un fond : c'est le seul cas où le pavé signale
+   autre chose que du texte courant, et un filet seul ne suffirait pas à le
+   dire. Le filet passe à l'émeraude et le fond reste très bas. */
 .pad.hot{
-  background:linear-gradient(180deg,rgba(var(--accent-rgb),.075),rgba(var(--accent-rgb),.022));
-  border-color:rgba(var(--accent-rgb),.3);
+  background:linear-gradient(90deg,rgba(var(--accent-rgb),.06),rgba(var(--accent-rgb),0) 62%);
+  border-left-color:rgba(var(--accent-rgb),.42);
+  padding:clamp(14px,1.8vw,20px) clamp(16px,2vw,24px);
 }
 .pad>:first-child{margin-top:0}
 .pad>:last-child{margin-bottom:0}
@@ -2216,20 +2207,12 @@ body::before{
   72%  {opacity:1}
   80%,100%{stroke-dashoffset:-96;opacity:0}
 }
-/* la sortie respire quand la comète vient d'arriver */
-.flow.live .fbox.out{animation:souffle 2.6s var(--ease-io) infinite 1.75s}
-@keyframes souffle{
-  0%,100%{box-shadow:0 0 0 0 rgba(var(--accent-rgb),0)}
-  22%    {box-shadow:0 0 0 6px rgba(var(--accent-rgb),.13)}
-  60%    {box-shadow:0 0 0 12px rgba(var(--accent-rgb),0)}
-}
-/* les touches battent au passage, l'une après l'autre */
-.flow.live .dots i{animation:battement 2.6s var(--ease-out) infinite calc(.55s + var(--d,0) * .12s)}
-@keyframes battement{
-  0%,74%,100%{transform:scale(1);background:var(--accent)}
-  8%         {transform:scale(1.5);background:var(--accent-hi)}
-  20%        {transform:scale(1)}
-}
+/* Onze boucles tournaient ici en même temps : trois comètes, sept battements de
+   touches, et un souffle sur la case de sortie. Une animation ne hiérarchise
+   que si elle est seule à bouger — onze en parallèle ne désignent rien, elles
+   agitent. Les comètes restent : elles expliquent le trajet, c'est leur
+   fonction. Le battement des sept touches et le souffle de la sortie sont
+   partis ; les touches gardent leur point fixe, qui dit déjà combien il y en a. */
 
 /* ---- la frise, animée ----
    L'axe se remplit à la position du défilement et une tête lumineuse court sur

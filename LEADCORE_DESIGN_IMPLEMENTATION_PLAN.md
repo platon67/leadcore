@@ -282,7 +282,16 @@ tête, remplacement des photos du défilé, usage en filigrane.
 
 ---
 
-# PHASE 4 — AI-SLOP REMOVAL
+# PHASE 4 — AI-SLOP REMOVAL — **faite le 19 septembre 2026**
+
+| ID | État | Mesure |
+|---|---|---|
+| SLOP-01 | fait | bande défilante supprimée, balisage, feuille et images-clés |
+| SLOP-02 | fait | 6 gestes d'arrivée → 2 |
+| SLOP-03 | fait | Méthode : 11 boucles simultanées → 3 |
+| SLOP-04 | fait | tombé en phase 2 avec UX-01 |
+| SLOP-05 | fait | boîtes bordées : 17/30/17/10 → 13/17/12/6 |
+
 
 ### SLOP-01 · Supprimer la bande défilante
 **Problème :** motif générique et daté, illisible en mouvement, qui répète des
@@ -324,7 +333,16 @@ au fil du fond, avec un simple filet quand une séparation est nécessaire.
 
 ---
 
-# PHASE 5 — POLISH
+# PHASE 5 — POLISH — **faite le 19 septembre 2026**
+
+| ID | État | Mesure |
+|---|---|---|
+| POL-01 | fait | le seuil de 7 000 € passe au-dessus des quatre gains |
+| POL-02 | fait, en partie | une phrase de redite retirée ; le reste du détail ajoute vraiment — c'est la mise en page qui pesait, pas le texte |
+| POL-03 | fait | l'ambre devient le registre des réserves ; le jeton existait sans servir |
+| POL-04 | fait | les plaques se resserrent, la prose respire |
+| POL-05 | fait | mobile 10,3–14,1 écrans → 9,9–13,2 |
+
 
 | ID | Point | Priorité | Effort |
 |---|---|---|---|
