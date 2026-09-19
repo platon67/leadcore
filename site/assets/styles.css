@@ -323,73 +323,104 @@ p:last-child{margin-bottom:0}
 .btn:hover .ar{transform:translateX(3px)}
 
 /* ──── LE BOUTON DE PRISE DE RENDEZ-VOUS ────
-   Tout le site existe pour amener ici. Le bouton doit donc être la chose la
-   plus vivante de l'écran, et il peut l'être sans crier : les boucles ont été
-   retirées partout ailleurs (onze sur Méthode, une bande défilante, sept
-   battements de touches), donc il est littéralement le seul élément qui bouge
-   à l'arrêt. Une animation ne hiérarchise que si elle est seule à bouger —
-   c'est la règle qu'on s'est donnée, et c'est elle qui rend ceci légitime.
+   Tout le site existe pour amener ici. Le bouton est donc la chose la plus
+   vivante de l'écran, et il peut l'être sans crier : les boucles ont été
+   retirées partout ailleurs. Une animation ne hiérarchise que si elle est
+   seule à bouger.
 
-   Trois gestes, et ils sont synchrones :
-     le balai   une lumière traverse la face toutes les 4,6 s ;
-     l'appel    une onde s'ouvre depuis le bord, comme les anneaux de la frise —
-                on réutilise le motif du site au lieu d'en importer un ;
-     la lueur   un halo fixe, qui donne au bouton une présence même à l'arrêt.
-   Tout est en transform et opacity, donc au compositeur. Au survol, les boucles
-   s'arrêtent : le visiteur est déjà venu, inutile de continuer à l'appeler. */
+   Construit d'après les références fournies. Ce qu'elles ont en commun : une
+   lumière vivante À L'INTÉRIEUR de la forme, pas un ornement posé autour ; un
+   halo qui échappe au bouton et teinte le fond ; un mouvement continu et lent,
+   sans temps fort. La plus proche de notre palette — pastille sombre, vert qui
+   monte du bas, lueur qui déborde — sert de modèle.
+
+   Trois couches, et une seule balise en plus :
+     ::before    une nappe claire qui dérive par le haut
+     ::after     une nappe émeraude qui monte du bas, déphasée
+     l'enveloppe porte le halo extérieur, qui respire — il vit dehors, donc il
+                 ne peut pas être rogné par le bouton, et c'est sa seule raison
+                 d'être.
+   Le filet lumineux du bord bas reste statique : c'est lui qui donne l'arête,
+   il n'a pas à bouger. Tout le reste est en transform et opacity. */
 .btn-pri{
-  background:var(--btn-bg);color:var(--btn-fg);border-color:var(--btn-bg);font-weight:600;
-  box-shadow:0 0 0 1px rgba(var(--accent-rgb),.34), 0 10px 34px -18px rgba(var(--accent-rgb),.7);
+  background:var(--btn-bg);color:var(--btn-fg);border-color:transparent;font-weight:600;
+  box-shadow:inset 0 -1.5px 0 rgba(234,255,246,.5), inset 0 1px 0 rgba(234,255,246,.2);
 }
-.btn-pri:hover{background:var(--btn-bg-hi);border-color:var(--btn-bg-hi);
-  box-shadow:0 0 0 1px rgba(var(--accent-rgb),.5), 0 14px 40px -14px rgba(var(--accent-rgb),.75)}
+.btn-pri>*{position:relative;z-index:1}
 
-/* halo qui suit le pointeur, à l'intérieur du bouton */
+/* z-index négatif, et ce n'est pas un détail : un pseudo-élément positionné à
+   z-index 0 peint APRÈS le contenu en ligne, donc les nappes passaient devant
+   le libellé et le délayaient. À -1 elles peignent entre le fond du bouton et
+   son texte, ce qui est exactement leur place. */
+.btn-pri::before,.btn-pri::after{
+  content:"";position:absolute;pointer-events:none;z-index:-1;border-radius:50%;
+}
 .btn-pri::before{
-  content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:0;
-  background:radial-gradient(120px circle at var(--mx,50%) var(--my,50%),rgba(var(--fg-rgb),.34),transparent 62%);
-  transition:opacity var(--t-mid) ease;
+  left:-16%;top:-72%;width:58%;padding-bottom:58%;
+  background:radial-gradient(closest-side,rgba(240,255,249,.9),rgba(240,255,249,0) 72%);
+  filter:blur(13px);
+  animation:nappeA 7.2s var(--ease-io) infinite;
 }
-.btn-pri:hover::before{opacity:1}
-
-/* le balai */
 .btn-pri::after{
-  content:"";position:absolute;top:-60%;bottom:-60%;left:0;width:30%;z-index:0;pointer-events:none;
-  background:linear-gradient(100deg,transparent,rgba(255,255,255,.4),transparent);
-  transform:translate3d(-320%,0,0) skewX(-16deg);
-  animation:balai 4.6s var(--ease-io) infinite;
+  right:-12%;bottom:-88%;width:76%;padding-bottom:76%;
+  background:radial-gradient(closest-side,var(--emerald-hi),rgba(92,237,186,0) 66%);
+  filter:blur(13px);
+  animation:nappeB 7.2s var(--ease-io) infinite;
 }
-.btn-pri:hover::after{animation-play-state:paused}
-@keyframes balai{
-  0%,64%  {transform:translate3d(-320%,0,0) skewX(-16deg)}
-  88%,100%{transform:translate3d(430%,0,0)  skewX(-16deg)}
+@keyframes nappeA{
+  0%,100%{transform:translate3d(0,0,0) scale(1)}
+  34%    {transform:translate3d(118%,30%,0) scale(1.2)}
+  67%    {transform:translate3d(60%,-12%,0) scale(.88)}
 }
-
-/* l'appel : l'onde vit sur un calque à part, parce que .btn rogne son
-   débordement et qu'une onde rognée ne s'ouvre pas */
-.cta-appel{position:relative;display:inline-flex;isolation:isolate}
-.cta-appel::before,.cta-appel::after{
-  content:"";position:absolute;inset:0;border-radius:var(--radius-sm);z-index:-1;
-  border:1.5px solid var(--emerald-hi);opacity:0;pointer-events:none;
-  animation:appel 4.6s var(--ease-out) infinite;
-}
-.cta-appel::after{animation-delay:.34s}
-.cta-appel:hover::before,.cta-appel:hover::after{animation-play-state:paused;opacity:0}
-/* L'onde s'ouvre vite puis attend : sur un cycle de 4,6 s, elle ne vit que
-   les 850 premières millisecondes. Première version fausse — l'opacité tombait
-   à zéro en 26 % du cycle alors que l'échelle n'avait atteint que 1,07 : l'onde
-   mourait sur l'arête du bouton, avant d'être visible. */
-@keyframes appel{
-  0%       {transform:scale(1);opacity:.7}
-  6%       {opacity:.7}
-  18%,100% {transform:scale(1.3);opacity:0}
+@keyframes nappeB{
+  0%,100%{transform:translate3d(0,0,0) scale(1)}
+  30%    {transform:translate3d(-80%,-28%,0) scale(1.24)}
+  62%    {transform:translate3d(-146%,12%,0) scale(.92)}
 }
 
-/* Dans l'en-tête, le bouton est présent sur les six pages et à toutes les
-   hauteurs de défilement. Il garde le balai, il perd l'onde : un halo qui
-   s'ouvre en permanence au-dessus du texte qu'on lit devient un moustique. */
-.hdr .cta-appel::before,.hdr .cta-appel::after{display:none}
-.hdr .btn-pri::after{animation-duration:7s}
+.cta-rdv{position:relative;display:inline-flex}
+.cta-rdv::before{
+  content:"";position:absolute;inset:-16% -7%;z-index:-1;pointer-events:none;
+  background:radial-gradient(58% 118% at 50% 76%,rgba(var(--accent-rgb),.66),rgba(var(--accent-rgb),0) 70%);
+  filter:blur(15px);
+  animation:souffleCta 7.2s var(--ease-io) infinite;
+}
+@keyframes souffleCta{
+  0%,100%{opacity:.48;transform:scale(1)}
+  40%    {opacity:.88;transform:scale(1.11)}
+}
+.cta-rdv>.btn{position:relative;z-index:1}
+
+/* Au survol la lumière se fige et le halo monte d'un cran : le visiteur est
+   venu, on arrête de l'appeler et on lui répond. */
+.cta-rdv:hover .btn-pri{background:var(--btn-bg-hi)}
+.cta-rdv:hover .btn-pri::before,
+.cta-rdv:hover .btn-pri::after,
+.cta-rdv:hover::before{animation-play-state:paused}
+.cta-rdv:hover::before{opacity:1}
+
+/* La taille réduite : même objet, même lumière, deux tiers de l'intensité.
+   Elle sert à l'en-tête et aux sorties contextuelles — neuf boutons identiques
+   ne hiérarchiseraient pas mieux que neuf liens identiques. */
+.cta-rdv.sm::before{inset:-20% -9%;filter:blur(12px)}
+.cta-rdv.sm .btn-pri::before,.cta-rdv.sm .btn-pri::after{filter:blur(10px)}
+.cta-rdv.sm .btn{font-size:var(--t2);padding:12px 20px;min-height:44px}
+
+/* Sur téléphone, un bouton contextuel occupe toute la colonne : le halo n'a
+   plus de place à sa droite et sa gauche, et ses 32 px de débord allongeaient
+   la zone de défilement de 20 px. Il se replie sur la verticale, où il reste
+   de la place — et où la référence le met de toute façon, sous le bouton. */
+@media (max-width:560px){
+  /* Spécificité : `.cta-rdv.sm::before` est écrit plus bas et pèse 0,2,0. Une
+     règle à 0,1,0 ici ne l'emportait pas, et le débord revenait. */
+  .cta-rdv::before,.cta-rdv.sm::before{inset:-26% 0}
+}
+
+/* Dans l'en-tête, le bouton vit sur les six pages et à toutes les hauteurs de
+   défilement. Il garde les nappes, ralenties, et perd le halo : une lueur qui
+   respire au-dessus du texte qu'on lit devient un moustique. */
+.hdr .cta-rdv::before{display:none}
+.hdr .btn-pri::before,.hdr .btn-pri::after{animation-duration:12s}
 
 .btn-gho{background:rgba(var(--fg-rgb),.015);color:var(--fg);border-color:var(--rule)}
 .btn-gho:hover{border-color:var(--accent-dim);color:var(--accent-hi);background:rgba(var(--accent-rgb),.05)}
@@ -790,36 +821,19 @@ ul.crosses li::before{background:none;border:1.5px solid var(--fg-dim);border-ra
 }
 
 /* ---- la sortie contextuelle ----
-   Un CTA au point de conviction, pas un bouton de plus. La conviction a une
-   demi-vie courte : entre deux portes de sortie, l'accueil laissait 7 000 px.
-   C'est un lien, pas un bouton, parce qu'un bouton toutes les deux sections
-   ne hiérarchise plus rien — et parce que celui qui n'est pas prêt continue
-   de lire sans se sentir poussé. */
+   Un CTA au point de conviction. La conviction a une demi-vie courte : entre
+   deux portes de sortie, l'accueil laissait 7 000 px.
+
+   C'était un lien, et c'est devenu un bouton — le même objet que celui du
+   héros, en taille réduite. L'objection tient toujours : neuf boutons
+   identiques ne hiérarchisent pas mieux que neuf liens identiques. C'est la
+   taille et l'intensité de la lumière qui font la hiérarchie, pas la nature de
+   l'objet, et le site n'a plus qu'une seule façon de dire « on prend
+   rendez-vous ici ». */
 .cta-ctx{
   margin:clamp(30px,3.6vw,46px) 0 0;padding-top:clamp(18px,2vw,24px);
   border-top:1px solid var(--rule-soft);
 }
-.cta-ctx a{
-  display:inline-flex;align-items:center;gap:var(--s2);padding:14px 0;margin:-14px 0;
-  font-family:var(--label);font-size:var(--t1);font-weight:600;letter-spacing:.06em;
-  text-transform:uppercase;color:var(--accent-lo);text-decoration:none;
-  transition:color var(--t-fast) ease;
-}
-.cta-ctx a:hover{color:var(--accent-hi)}
-/* Ces liens mènent aussi à la prise de rendez-vous. Ils restent des liens — un
-   bouton toutes les deux sections ne hiérarchise plus rien — mais un filet se
-   tire sous le libellé au survol, pour qu'on sente qu'ils mènent quelque part. */
-.cta-ctx a::after{
-  content:"";position:absolute;left:0;right:0;bottom:9px;height:1px;
-  background:var(--accent-hi);transform:scaleX(0);transform-origin:left;
-  transition:transform .42s var(--ease-out);
-}
-.cta-ctx a{position:relative}
-.cta-ctx a:hover::after,.cta-ctx a:focus-visible::after{transform:scaleX(1)}
-.cta-ctx svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2;
-  stroke-linecap:round;stroke-linejoin:round;flex:none;
-  transition:transform var(--t-mid) var(--ease-out)}
-.cta-ctx a:hover svg{transform:translateX(4px)}
 
 /* ═══════════ 19. pied de page ═══════════ */
 
@@ -989,7 +1003,7 @@ ul.crosses li::before{background:none;border:1.5px solid var(--fg-dim);border-ra
   .js .hero .fiche{opacity:1;transform:none;transition:none;animation:none}
   .js .rv .eyebrow::before{transform:none;transition:none}
   .dot::after,.infra .rail .pkt,.hero .scan{animation:none!important}
-  .btn-pri::after,.cta-appel::before,.cta-appel::after{animation:none!important;opacity:0!important}
+  .btn-pri::before,.btn-pri::after,.cta-rdv::before{animation:none!important}
   .hero .scan{display:none}
   .infra .rail .pkt{opacity:0}
   .lvl .bar,.pipe-fill,.cond::before{transform:none;transition:none}
@@ -1042,7 +1056,7 @@ ul.crosses li::before{background:none;border:1.5px solid var(--fg-dim);border-ra
   .founder .portrait{width:112px;height:112px}
   .founder .ini{font-size:var(--t6)}
   .hero .cta{flex-direction:column;align-items:stretch}
-  .hero .cta .btn,.hero .cta .cta-appel{width:100%}
+  .hero .cta .btn,.hero .cta .cta-rdv{width:100%}
   .ftr-links{grid-template-columns:1fr 1fr}
 }
 

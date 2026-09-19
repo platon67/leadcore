@@ -59,6 +59,48 @@ méthode 3, collaboration 1, tarifs 0.
 mouvement, qui répétait des chiffres présents deux écrans plus bas et tournait
 en boucle en permanence.
 
+## Le bouton de prise de rendez-vous
+
+Tout le site existe pour amener là. **Il y a un seul objet**, `.cta-rdv`, en deux
+tailles : pleine pour le héros, réduite (`.sm`) pour l'en-tête et les onze
+sorties contextuelles. Seize boutons, une seule façon de dire « on prend
+rendez-vous ici ».
+
+**Construit d'après des références fournies par le propriétaire.** Ce qu'elles
+avaient en commun : une lumière vivante *à l'intérieur* de la forme et non un
+ornement posé autour ; un halo qui échappe au bouton et teinte le fond ; un
+mouvement continu et lent, sans temps fort.
+
+| couche | ce qu'elle fait | où |
+|---|---|---|
+| `::before` | une nappe claire qui dérive par le haut | dans le bouton, rognée |
+| `::after` | une nappe émeraude qui monte du bas, déphasée | dans le bouton, rognée |
+| `.cta-rdv::before` | le halo extérieur, qui respire | dehors — seule raison d'être de l'enveloppe |
+
+Le filet lumineux du bord bas est un `box-shadow` **statique** : c'est lui qui
+donne l'arête, il n'a pas à bouger. Tout le reste est en `transform` et
+`opacity`, donc au compositeur. Cycle de 7,2 s, 12 s dans l'en-tête.
+
+**Trois pièges, rencontrés et documentés :**
+
+- Un pseudo-élément positionné à `z-index:0` peint **après** le contenu en ligne.
+  Les nappes passaient donc devant le libellé et le délayaient. À `-1` elles
+  peignent entre le fond et le texte, ce qui est leur place. Contraste du
+  libellé mesuré sur tout le cycle : **9,5 à 11:1**.
+- Le halo déborde horizontalement. Sur téléphone, un bouton contextuel occupe
+  toute la colonne : ses 32 px de débord allongeaient la page de 37 px. Sous
+  560 px il se replie sur la verticale.
+- `.cta-rdv.sm::before` pèse 0,2,0 et est écrit plus bas : la règle mobile a dû
+  monter à la même spécificité, sinon le débord revenait.
+
+Sous `prefers-reduced-motion`, les trois couches s'arrêtent.
+
+**Le compte de boucles remonte, et c'est voulu** : de 1/3/1/0 à 6/6/7/3 au pire
+moment du défilement. Elles sont toutes sur les boutons de rendez-vous, lentes
+et synchrones — un objet qui respire, pas sept agitations indépendantes. C'est
+exactement ce que la règle disait : une animation ne hiérarchise que si elle
+est seule à bouger, et c'est le cas ici puisqu'il ne reste presque rien d'autre.
+
 ## Densité et cadres
 
 **La carte est réservée aux objets.** Une fiche, un panneau de prix, un arrêt de
