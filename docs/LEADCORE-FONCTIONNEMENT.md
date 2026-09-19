@@ -308,12 +308,22 @@ Exemple de segmentation :
 - niveau de priorité ;
 - angle de campagne.
 
-**Renouvellement des segments.** Un segment travaillé à ce rythme s'épuise en 4
-à 6 mois. Dès l'onboarding, un plan est écrit : segment 1 actif, segments 2 et 3
+**Renouvellement des segments.** La production consomme **1 900 contacts uniques
+par mois** (voir le modèle de volumes en section 1). Un segment de 7 600 à
+11 400 contacts s'épuise donc en 4 à 6 mois.
+
+Ce calcul part des contacts *uniques*, jamais d'un volume de touches ou
+d'emails : un contact travaillé quatre fois consomme une ligne du segment, pas
+quatre.
+
+Dès l'onboarding, un plan est écrit : segment 1 actif, segments 2 et 3
 identifiés, volume disponible estimé pour chacun. Un tableau de suivi par client
 tient le volume total, le volume déjà touché, le volume restant et le taux de
 réponse observé. Quand le volume restant passe sous deux mois de production, le
 segment suivant est préparé.
+
+Si le volume total adressable ne couvre pas douze mois de production, c'est une
+raison de refuser la mission, et cela se dit en semaine 1.
 
 ### Phase 3 — Infrastructure email
 

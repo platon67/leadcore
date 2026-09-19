@@ -18,7 +18,7 @@ jour en conséquence.
 | Promesse de volume | 15 à 20 RDV / mois | **8 à 12 RDV / mois** annoncés | On livre 15 à 20 quand le marché le permet. Sur-livrer fidélise, manquer une promesse coûte le client et le cas client. |
 | No-show | non facturé, sans plus de précision | **Prospect absent** : replanifié une fois, facturé seulement s'il a lieu. **Annulation ou absence côté client** : facturée 50 %. | Le taux de présence dépend aussi du client. On ne porte pas seul un risque qu'on ne contrôle qu'à moitié. |
 | Reporting | s'arrête au RDV honoré | ajout du **statut de chaque RDV à J+30** (perdu / en cours / signé + montant) | Sans le CA généré, impossible de prouver le ROI, donc impossible de monter les prix ni de produire un cas client chiffré. |
-| Segments | non suivis dans le temps | **plan de renouvellement écrit dès l'onboarding** | À 2 400 contacts touchés par mois, un segment s'épuise en 4 à 6 mois. Le décrochage arrive au mois 5 si rien n'est prévu. |
+| Segments | non suivis dans le temps | **plan de renouvellement écrit dès l'onboarding** | À 1 900 contacts uniques consommés par mois, un segment de 7 600 à 11 400 contacts s'épuise en 4 à 6 mois. Le décrochage arrive au mois 5 si rien n'est prévu. |
 
 ### Grille tarifaire retenue
 
@@ -110,6 +110,18 @@ Deux conséquences opérationnelles : il faut environ 1 900 contacts en ICP
 nouveaux chaque mois, et environ 120 réponses à traiter par client et par mois.
 C'est cette charge de traitement, pas l'envoi, qui fixe le nombre de clients
 qu'un opérateur peut suivre.
+
+**Une seule définition du volume, à ne pas confondre.** Les 1 900 sont des
+*contacts uniques nouveaux* entrant dans la production chaque mois. Le nombre de
+contacts *touchés* dans un mois calendaire est supérieur, puisque les contacts
+entrés le mois précédent reçoivent encore leurs dernières touches — mais c'est
+une mesure d'activité, pas de consommation.
+
+**C'est le chiffre des contacts uniques qui vide un segment**, parce qu'un
+contact travaillé quatre fois consomme une ligne du segment et non quatre.
+Tout calcul d'épuisement part donc de 1 900, jamais d'un volume de touches.
+Une version antérieure de ce document donnait 2 400 dans la ligne « Segments »
+du tableau ci-dessus : c'était une erreur, corrigée le 19 septembre 2026.
 
 ---
 

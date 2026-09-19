@@ -62,7 +62,7 @@ produit. Chaque cadre désamorce au passage une objection, sans jamais la nommer
 | Méthode · ce qui porte votre nom | domaine et comptes hors circuit | « ça va cramer ma délivrabilité » |
 | Collaboration · la frise | quatre semaines, trois heures et demie | « combien de temps avant de voir quelque chose » |
 | Collaboration · la balance | trois lignes chez vous, dix chez nous | « je vais devoir tout piloter » |
-| Collaboration · le cinquième mois | le segment s'épuise, le plan de renouvellement est écrit en semaine 1 | « vos 1 900 contacts, vous les tenez combien de temps » |
+| Collaboration · le cinquième mois | 1 900 contacts consommés par mois, un segment de 7 600 à 11 400 tient 4 à 6 mois, le plan est écrit en semaine 1 | « vos 1 900 contacts, vous les tenez combien de temps » |
 | Collaboration · la facture | les quatre conditions, ou rien | « je vais payer des rendez-vous bidons » |
 | Collaboration · la sortie | la base et les domaines vous restent | « je serai pris en otage » |
 | Tarifs · les trois lignes | 1 200 € / 500 € / 200 €, visibles d'emblée | « le vrai prix est caché en bas » |
@@ -98,6 +98,28 @@ Les chiffres contractuels ne bougent jamais sans passer par
 [`docs/MAJ-OFFRE-2026-09.md`](../docs/MAJ-OFFRE-2026-09.md). La promesse reste
 à 8-12 rendez-vous par mois ; les 15 à 20 de l'objectif interne ne figurent
 nulle part sur le site.
+
+### Une seule définition du volume
+
+Le site, `LEADCORE-FONCTIONNEMENT.md` et `MAJ-OFFRE-2026-09.md` disent tous les
+trois **1 900 contacts uniques consommés par mois**. C'est le chiffre qui sort
+de la chaîne de l'entonnoir (29 réponses positives ÷ 1,5 % = 1 939, arrondi) et
+c'est celui qui sert à tout calcul d'épuisement de segment.
+
+`MAJ-OFFRE` a porté **2 400** pendant un temps, dans la seule ligne « Segments »
+de son tableau. C'était faux, et la correction est datée dans le document.
+Deux garde-fous pour que ça ne revienne pas :
+
+- **Un segment se vide en contacts uniques, pas en touches.** Un contact
+  travaillé quatre fois consomme une ligne du segment et non quatre. Le nombre
+  de contacts *touchés* dans un mois calendaire est plus élevé — c'est une
+  mesure d'activité, pas de consommation.
+- Le 2 400 erroné était identique au **2 400 € de variable** (12 × 200 €) situé
+  deux tableaux plus bas dans le même document. Se méfier de cette confusion en
+  relisant.
+
+Conséquence chiffrée, affichée sur Collaboration : un segment de 7 600 à
+11 400 contacts s'épuise en 4 à 6 mois.
 
 ### Écart connu avec les documents de fonctionnement : LinkedIn
 
