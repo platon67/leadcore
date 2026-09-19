@@ -190,7 +190,19 @@ B2B · Email et LinkedIn ».
 
 ---
 
-# PHASE 3 — VISUAL IDENTITY
+# PHASE 3 — VISUAL IDENTITY — **faite le 19 septembre 2026**
+
+| ID | État | Mesure |
+|---|---|---|
+| TRUST-01 | fait à 80 % | bloc reconstruit et remonté de 3 029 à 1 700 px ; **attend la photo et les deux phrases de parcours** |
+| DA-01 | fait | 21 titres à la formule italique → 8 |
+| DA-02 | fait | 40 tailles → 19 ; 9 graisses → 3 ; 14 rayons → 4 ; 35 gouttières → 6 pas |
+| DA-03 | fait | `.sig` supprimé des six pages, option B |
+| DA-04 | fait | un geste de composition par page, section 37 de la feuille |
+| DA-05 | fait | un pictogramme en filigrane par page, 340 px au lieu de 15 |
+
+*Note : SLOP-04 est tombé en phase 2 avec UX-01.*
+
 
 *C'est la phase qui décide si le site reste un template ou devient Leadcore.*
 

@@ -154,9 +154,27 @@ alternait des cadres clairs et sombres par jetons de thème (`t-jour`,
 page en tranches et se lisait comme un gabarit, pas comme un lieu. Le système a
 été retiré en entier.
 
-Ce qui le remplace, en section 24 de `styles.css`, tient en quatre couches
+Ce qui le remplace, en section 24 de `styles.css`, tient en **deux** couches
 fixées au cadre, donc lues comme une lumière d'ambiance et non comme un décor
-qui défile :
+qui défile — le sol et le grain.
+
+Il y en avait quatre. **La signature lumineuse** — une géométrie de lumière
+différente par page, dôme, biseau, strates, voûte — a été retirée le
+19 septembre 2026 après mesure : les quatre pages s'échantillonnaient à
+l'identique. Après suppression, elles donnent 14, 16 et 13 sur 255 aux mêmes
+trois hauteurs, exactement ce qu'elles donnaient avec. Trente lignes de feuille
+et un paragraphe de documentation pour un résultat nul.
+
+Ce qui distingue une page d'une autre est désormais **sa composition**, en
+section 37 : un geste par page, et un seul. Accueil large et asymétrique ;
+Méthode avec un résumé pleine largeur puis une colonne de travail resserrée à
+1 100 px et calée à gauche ; Collaboration en trame horizontale, chapeau à
+gauche et contenu à droite ; Tarifs en colonne étroite de 880 px, sections
+séparées au filet — un devis, pas une page de site. Chaque page porte aussi en
+filigrane, derrière son bandeau de tête, un grand pictogramme qui lui est
+propre.
+
+Les couches restantes :
 
 | Couche | Ce qu'elle fait |
 |---|---|
@@ -382,39 +400,23 @@ défilante.
 
 ## Images et photographies
 
-Quatre photographies sur l'accueil, dans le bloc « ce qu'on opère pour vous ».
-Provenance, licence et recette de traitement complètes dans
-[`assets/img/README.md`](assets/img/README.md).
+**Il n'y en a plus.** Les quatre photographies de l'accueil ont été retirées le
+19 septembre 2026. Elles n'apportaient aucune information : une photo ne sait
+pas montrer « agenda prévisible », et le traitement en bichromie les intégrait
+visuellement sans leur donner de fonction. Le cadre qu'elles occupaient porte
+maintenant **la fiche de rendez-vous**, qui est l'objet que le client reçoit
+vraiment — la seule chose sur ce site qui ressemble à une preuve.
 
-**Ce qu'elles illustrent, et ce qu'elles n'illustrent pas.** Aucune ne décrit un
-bénéfice. Une photo ne sait pas montrer « agenda prévisible », et essayer donne
-exactement l'illustration générique qu'on voulait éviter. Chacune est la
-métaphore d'une chose qu'on **opère** : une maille régulière pour une base
-construite ligne par ligne, des baies de serveurs pour l'infrastructure
-d'envoi, la Terre de nuit pour deux canaux sur un même marché, des tours pour
-un agenda qui monte.
+**La recette de traitement est conservée** dans
+[`assets/img/README.md`](assets/img/README.md). Elle servira aux vraies images :
+une photographie du fondateur, des captures anonymisées quand un client
+existera. Toute image ajoutée doit y passer, sinon elle se verra comme une
+pièce rapportée.
 
-**Le traitement est ce qui les empêche de faire pièce rapportée.** Les quatre
-passent par la même rampe : désaturation totale, puis interpolation entre une
-ombre graphite et une haute lumière émeraude, plus une vignette. Une photo non
-traitée posée à côté des trois autres se verrait immédiatement. **Si vous en
-remplacez une, repassez-la par la commande** du README des images sans changer
-les valeurs.
-
-Ce qui manque encore, par ordre d'utilité :
-
-1. **Une photo du fondateur**, dans le cadre « qui vous parle », à la place des
-   initiales `PB`. C'est la seule image qui ajouterait de la preuve plutôt que
-   du climat.
-2. **Des captures réelles** anonymisées, quand un vrai client existe et a donné
-   son accord écrit.
-3. **Des logos clients**, quand il y en aura.
-
-**Poids.** Deux largeurs par image, WebP avec repli JPEG : 136 Ko pour les
-quatre en 960, 51 Ko en 560. L'accueil passe de 250 à 402 Ko chargés. Le LCP
-n'en souffre pas — les images sont sous la ligne de flottaison et ne sont
-jamais l'élément le plus grand au premier rendu. Mesuré : 1 268 ms à CPU ÷4,
-CLS 0.
+**Le portrait du fondateur.** Le cadre est prêt dans `index.html`, section
+`#equipe` : déposer `assets/portrait.jpg` (carré, 1 200 px minimum) et
+décommenter la balise `<img>`. Le carré fait 160 px, les initiales `PB`
+l'occupent en attendant, et rien d'autre ne bouge dans la page.
 
 ## Fichiers
 
@@ -490,6 +492,21 @@ un élément qui traverse l'écran ne déborde que pendant sa translation.
 Règle de travail : avant de corriger un défaut de mise en page, vérifier que le
 script **échoue** dessus. Un test qui ne peut pas échouer ne teste rien.
 
+`tools/verif-contraste.js` fait la même chose pour le contraste WCAG AA, dans
+les deux régimes et après parcours, pour la même raison : un texte jamais
+révélé n'est jamais mesuré.
+
+`tools/captures.js` et `tools/compare.js` mesurent ce qu'un changement de
+feuille **déplace** — hauteur de page, par page et par largeur — au lieu de
+l'estimer :
+
+```
+SP=<…> node tools/captures.js /tmp/avant
+… modifications …
+SP=<…> node tools/captures.js /tmp/apres
+node tools/compare.js /tmp/avant /tmp/apres
+```
+
 ## Voir le site en local
 
 ```bash
@@ -542,8 +559,15 @@ python3 -m http.server 8000 --directory site
 - [ ] Ajouter une image Open Graph au format 1200 × 630 si le partage sur
       LinkedIn compte
 
-- [ ] **Remplacer les initiales `PB` par une photo du fondateur** dans le cadre
-      « qui vous parle » de l'accueil. Voir « Images et photographies ».
+- [ ] **Déposer la photo du fondateur.** `assets/portrait.jpg`, carrée,
+      1 200 px minimum, puis décommenter la balise `<img>` dans `#equipe`. Le
+      cadre est déjà en place et dimensionné : rien d'autre ne bouge. Sans
+      logo client et sans cas chiffré, l'incarnation est le seul transfert de
+      confiance disponible — c'est l'élément à plus fort rendement de la liste.
+- [ ] **Compléter le bloc fondateur** avec ce qu'il faisait avant Leadcore et
+      pourquoi il fait ça, en une ligne chacun, à la première personne. Ces
+      deux phrases n'existent nulle part dans le dépôt et ne peuvent pas être
+      inventées.
 
 ## État actuel
 

@@ -690,13 +690,24 @@ ul.crosses li::before{background:none;border:1.5px solid var(--fg-dim);border-ra
 
 /* ═══════════ 17. fondateur ═══════════ */
 
+/* Le cadre du portrait fait 160 px de côté et attend sa photographie. Les
+   initiales l'occupent en attendant : quand le fichier arrive, il prend la
+   place exacte du carré et rien d'autre ne bouge dans la page. */
 .founder{display:grid;grid-template-columns:auto 1fr;gap:var(--s5);align-items:center}
-.founder .ini{
-  width:104px;height:104px;border-radius:var(--radius);display:grid;place-items:center;flex:none;
-  border:1px solid var(--accent-dim);
+.founder .portrait{
+  width:160px;height:160px;border-radius:var(--radius);overflow:hidden;flex:none;
+  border:1px solid var(--accent-dim);display:grid;place-items:center;
   background:linear-gradient(158deg,rgba(var(--accent-rgb),.2),rgba(var(--accent-rgb),.03));
+}
+.founder .portrait img{width:100%;height:100%;object-fit:cover;display:block}
+.founder .ini{
   font-size:var(--t7);font-weight:800;letter-spacing:-.04em;color:var(--accent-hi);
 }
+.founder .role{
+  margin-top:6px;font-family:var(--label);font-size:var(--t1);font-weight:600;
+  letter-spacing:.06em;text-transform:uppercase;color:var(--accent-lo);
+}
+.founder .role+p{margin-top:var(--s4)}
 
 /* ═══════════ 18. prise de rendez-vous ═══════════ */
 
@@ -977,7 +988,8 @@ ul.crosses li::before{background:none;border:1.5px solid var(--fg-dim);border-ra
   .tl{border-top:0}
   .tl .t{border-top:1px solid var(--rule);padding-right:0}
   .founder{grid-template-columns:1fr}
-  .founder .ini{width:76px;height:76px;font-size:var(--t6)}
+  .founder .portrait{width:112px;height:112px}
+  .founder .ini{font-size:var(--t6)}
   .hero .cta{flex-direction:column;align-items:stretch}
   .hero .cta .btn{width:100%}
   .ftr-links{grid-template-columns:1fr 1fr}
@@ -1241,6 +1253,22 @@ body::before{
   position:relative;isolation:isolate;overflow:clip;
   padding:calc(var(--header-h) + clamp(44px,5.6vw,78px)) 0 clamp(36px,4.4vw,58px);
 }
+/* La marque de page, en filigrane. Les quatorze pictogrammes du site sont les
+   seuls objets réellement propriétaires du système visuel : dessinés sur une
+   grille de 24, pas importés d'une bibliothèque. Ils vivaient tous à 15 px.
+   Un seul par page, très grand et très sourd, donne au bandeau de tête une
+   identité qui ne coûte rien et qui ne ressemble à personne d'autre.
+   On renforce ce qui distingue déjà, on ne cherche pas ailleurs. */
+.phead-mark{
+  position:absolute;z-index:0;pointer-events:none;
+  right:calc(var(--pad) - 1vw);top:calc(var(--header-h) + 2vw);
+  width:clamp(200px,24vw,340px);height:auto;
+  stroke:var(--accent);fill:none;stroke-width:.55;
+  stroke-linecap:round;stroke-linejoin:round;opacity:.16;
+}
+@media (max-width:900px){
+  .phead-mark{right:-8vw;width:clamp(200px,52vw,300px);opacity:.1}
+}
 .phead .wrap{position:relative;z-index:1}
 .phead h1{font-size:var(--t8);line-height:1.03;letter-spacing:-.04em;max-width:22ch}
 .phead h1 .ex{font-size:1.06em}
@@ -1470,10 +1498,10 @@ body::before{
 /* L'indentation progresse : on avance en descendant. nth-of-type et non
    nth-child, parce que le rail .spine-fill est le premier enfant de .spine et
    décalait le compte d'un cran — la dernière étape revenait à zéro. */
-.node:nth-of-type(2){margin-left:clamp(0px,1.8vw,32px)}
-.node:nth-of-type(3){margin-left:clamp(0px,3.6vw,64px)}
-.node:nth-of-type(4){margin-left:clamp(0px,5.4vw,96px)}
-.node:nth-of-type(5){margin-left:clamp(0px,7.2vw,128px)}
+.node:nth-of-type(2){margin-left:clamp(0px,1vw,18px)}
+.node:nth-of-type(3){margin-left:clamp(0px,2vw,36px)}
+.node:nth-of-type(4){margin-left:clamp(0px,3vw,54px)}
+.node:nth-of-type(5){margin-left:clamp(0px,4vw,72px)}
 .node .k{
   font-family:var(--label);font-size:var(--t1);font-weight:600;letter-spacing:.11em;
   text-transform:uppercase;color:var(--accent);display:block;margin-bottom:12px;
@@ -2448,6 +2476,85 @@ body::before{
   .stop .ring{display:none}
   .railh.in .stop.now::before{animation:none}
 }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   37. LA FORME PROPRE À CHAQUE PAGE
+   ───────────────────────────────────────────────────────────────────────────
+   Les quatre pages partageaient la même charpente et la même largeur de
+   colonne du haut en bas. Aucune rupture d'échelle, aucun pleine largeur,
+   aucun silence. Avec la signature lumineuse retirée, la composition est
+   désormais la seule chose qui distingue une page d'une autre — et c'est
+   tant mieux : un rythme se voit, une nappe à 7 % d'opacité non.
+
+   Un geste par page, et un seul :
+
+   ACCUEIL       large et asymétrique. Deux colonnes inégales, le contenu
+                 poussé vers les bords. C'est une vitrine.
+   MÉTHODE       l'atelier. Le résumé du haut prend toute la largeur, puis la
+                 colonne se resserre et reste calée à gauche : on passe du plan
+                 d'ensemble au détail d'exécution, et la page le montre.
+   COLLABORATION la trame horizontale. Le chapeau de section passe à gauche et
+                 le contenu à droite : la page se lit en bandes, comme la
+                 frise qu'elle raconte.
+   TARIFS        le document. Colonne étroite, séparations au filet plutôt
+                 qu'au blanc. Un devis, pas une page de site.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ---- TARIFS : le document ----
+   La colonne tombe à 880 px. Ce qui est tabulaire garde la pleine largeur :
+   on resserre la lecture, pas les chiffres. */
+.p-tarifs .sec>.wrap{max-width:880px}
+.p-tarifs .sec>.wrap>.panneau,
+.p-tarifs .sec>.wrap>.ratio,
+.p-tarifs .sec>.wrap>.vs,
+.p-tarifs .sec>.wrap>.duo,
+.p-tarifs .sec>.wrap>.conds,
+.p-tarifs .sec>.wrap>.keys,
+.p-tarifs .sec>.wrap>.bento{
+  width:min(calc(var(--maxw) - var(--pad) * 2), calc(100vw - var(--pad) * 2));
+  margin-left:50%;transform:translateX(-50%);
+}
+/* les sections se séparent au filet, pas au blanc : c'est ce qui fait lire
+   une suite de clauses plutôt qu'une suite d'écrans */
+.p-tarifs .sec+.sec{padding-top:0}
+.p-tarifs .sec+.sec>.wrap{border-top:1px solid var(--rule-soft);padding-top:var(--s7)}
+.p-tarifs .sec-head{max-width:none}
+
+/* ---- MÉTHODE : l'atelier ----
+   La rupture d'échelle se joue en haut : le schéma du résumé sort du
+   conteneur et prend la fenêtre, puis tout le détail revient dans une colonne
+   de lecture. On passe du plan d'ensemble au détail d'exécution, et la page
+   le montre au lieu de l'annoncer.
+
+   Première tentative, abandonnée : resserrer le conteneur à 1 040 px sur tout
+   ce qui suit. Le rail de filtrage est déjà en deux colonnes et ses étapes
+   s'indentent en descendant — les deux rétrécissements se cumulaient et la
+   dernière étape finissait à la moitié de la largeur de la première. */
+@media (min-width:1100px){
+  /* Le résumé garde la pleine largeur du conteneur et gagne la fenêtre sur les
+     grands écrans ; tout ce qui suit tombe à 1 100 px et reste calé à gauche.
+     260 px de rupture à 1 440 : assez pour qu'on voie qu'on a changé de
+     registre, du plan d'ensemble au détail d'exécution. */
+  .p-methode #resume>.wrap{max-width:min(1680px, calc(100vw - var(--s5) * 2))}
+  .p-methode .sec:not(#resume):not(.phead)>.wrap{
+    max-width:1100px;margin-left:max(var(--pad), calc((100vw - var(--maxw)) / 2 + var(--pad)));
+  }
+}
+.p-methode .sec:not(#resume) .sec-head{max-width:56ch}
+.p-methode .sec:not(#resume) .lede{max-width:64ch}
+
+/* ---- COLLABORATION : la trame horizontale ----
+   Le chapeau passe à gauche, le contenu à droite. La page se lit en bandes. */
+@media (min-width:1100px){
+  .p-collab .sec>.wrap>.sec-head{
+    display:grid;grid-template-columns:minmax(0,20ch) minmax(0,1fr);
+    gap:var(--s6);max-width:none;align-items:start;
+  }
+  .p-collab .sec>.wrap>.sec-head .eyebrow{grid-column:1;grid-row:1;margin-bottom:0}
+  .p-collab .sec>.wrap>.sec-head h2{grid-column:2;grid-row:1}
+  .p-collab .sec>.wrap>.sec-head .lede{grid-column:2;grid-row:2;margin-top:var(--s4);max-width:62ch}
+}
+
 
 /* ═══════════════════════════════════════════════════════════════════════════
    36. LE PANNEAU DE PRIX (héros de l'accueil)
