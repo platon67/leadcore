@@ -30,9 +30,17 @@ branchés.
 
 ---
 
-# PHASE 1 — FOUNDATION
+# PHASE 1 — FOUNDATION — **faite le 19 septembre 2026**
 
 *Ce qui est cassé en production. Rien d'autre ne doit passer avant.*
+
+| ID | État | Mesure |
+|---|---|---|
+| BUG-02 | fait | harnais reconstruit dans `tools/`, 6 pages × 9 largeurs × 2 régimes |
+| BUG-01 | fait | 2 596 px → 1 440 px à 1 440 ; anneau du premier arrêt intact à 100 % |
+| BUG-03 | fait | le coupable n'était pas `span.s3` mais `article.node`, en transitoire |
+| PERF-01 | fait | campagne 3 450 → 969 ms ; accès direct 3 489 → 2 309 ms |
+| CVR-01 | fait | calendrier branché, trois CTA routés vers `#rendez-vous` |
 
 ### BUG-01 · Débordement horizontal de Collaboration
 **Localisation :** `styles.css` §35, `.railh` / `.railh-head`.

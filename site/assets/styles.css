@@ -964,6 +964,10 @@ ul.crosses li::before{background:none;border:1.5px solid var(--fg-dim);border-ra
    Comme partout ailleurs : transform, opacity et clip-path uniquement.
    ═══════════════════════════════════════════════════════════════════════════ */
 
+/* Durée totale : 1,70 s, contre 2,60 s auparavant — facteur 0,65 appliqué
+   uniformément, les quatre temps gardent leurs proportions. Et la séquence ne
+   joue plus du tout sur une arrivée de campagne (voir main.js §1) : un visiteur
+   venu d'un email froid voit le titre immédiatement. */
 .intro{display:none}
 /* le défilement est gelé pendant l'ouverture, et seulement pendant */
 .intro-on,.intro-on body{overflow:hidden}
@@ -976,7 +980,7 @@ ul.crosses li::before{background:none;border:1.5px solid var(--fg-dim);border-ra
   --mh:clamp(58px,8.4vw,104px);          /* hauteur de la marque */
   --gap:calc(var(--mh) * .252);           /* gouttière du logo d'origine */
   --shift:calc(var(--mh) * 1.94);         /* (largeur du mot + gouttière) / 2 */
-  animation:introOut .5s var(--ease-out) 2.1s forwards;
+  animation:introOut .33s var(--ease-out) 1.37s forwards;
 }
 @keyframes introOut{to{opacity:0;visibility:hidden}}
 
@@ -985,7 +989,7 @@ ul.crosses li::before{background:none;border:1.5px solid var(--fg-dim);border-ra
   content:"";position:absolute;left:50%;top:50%;width:640px;height:640px;
   margin:-320px 0 0 -320px;border-radius:50%;pointer-events:none;opacity:0;
   background:radial-gradient(closest-side,rgba(25,199,139,.3),transparent 70%);
-  animation:introBloom 1.05s var(--ease-out) .74s;
+  animation:introBloom .68s var(--ease-out) .48s;
 }
 @keyframes introBloom{0%{opacity:0;transform:scale(.25)}20%{opacity:1}100%{opacity:0;transform:scale(1.3)}}
 
@@ -996,13 +1000,13 @@ ul.crosses li::before{background:none;border:1.5px solid var(--fg-dim);border-ra
   background:var(--emerald-hi);box-shadow:0 0 14px 2px rgba(25,199,139,.55);
   opacity:0;transform:translate3d(0,0,0) scale(.2);
 }
-.js .intro.go .intro-seeds i{animation:seed 1.05s cubic-bezier(.22,1.2,.36,1) forwards}
+.js .intro.go .intro-seeds i{animation:seed .68s cubic-bezier(.22,1.2,.36,1) forwards}
 .js .intro.go .intro-seeds i:nth-child(1){--dx:0px;--dy:-118px;animation-delay:0s}
-.js .intro.go .intro-seeds i:nth-child(2){--dx:102px;--dy:-59px;animation-delay:.045s}
-.js .intro.go .intro-seeds i:nth-child(3){--dx:102px;--dy:59px;animation-delay:.09s}
-.js .intro.go .intro-seeds i:nth-child(4){--dx:0px;--dy:118px;animation-delay:.135s}
-.js .intro.go .intro-seeds i:nth-child(5){--dx:-102px;--dy:59px;animation-delay:.18s}
-.js .intro.go .intro-seeds i:nth-child(6){--dx:-102px;--dy:-59px;animation-delay:.225s}
+.js .intro.go .intro-seeds i:nth-child(2){--dx:102px;--dy:-59px;animation-delay:.03s}
+.js .intro.go .intro-seeds i:nth-child(3){--dx:102px;--dy:59px;animation-delay:.06s}
+.js .intro.go .intro-seeds i:nth-child(4){--dx:0px;--dy:118px;animation-delay:.09s}
+.js .intro.go .intro-seeds i:nth-child(5){--dx:-102px;--dy:59px;animation-delay:.12s}
+.js .intro.go .intro-seeds i:nth-child(6){--dx:-102px;--dy:-59px;animation-delay:.15s}
 @keyframes seed{
   0%  {opacity:0;transform:translate3d(0,0,0) scale(.2)}
   14% {opacity:1}
@@ -1023,8 +1027,8 @@ ul.crosses li::before{background:none;border:1.5px solid var(--fg-dim);border-ra
 /* la marque éclôt du point d'impact, puis encaisse une pulsation */
 .js .intro.go .intro-mark{
   opacity:0;clip-path:circle(0% at 50% 50%);
-  animation:markBloom .68s cubic-bezier(.22,1.3,.38,1) .78s forwards,
-            markPulse .5s var(--ease-out) 1.42s;
+  animation:markBloom .44s cubic-bezier(.22,1.3,.38,1) .51s forwards,
+            markPulse .33s var(--ease-out) .92s;
 }
 @keyframes markBloom{
   0%  {opacity:0;clip-path:circle(0% at 50% 50%);transform:scale(.5)}
@@ -1041,7 +1045,7 @@ ul.crosses li::before{background:none;border:1.5px solid var(--fg-dim);border-ra
 /* le mot se révèle par balayage ; le verrou recentre la composition */
 .js .intro.go .intro-word{
   opacity:0;clip-path:inset(0 100% 0 0);
-  animation:wordWipe .62s var(--ease-out) 1.5s forwards;
+  animation:wordWipe .4s var(--ease-out) .98s forwards;
 }
 @keyframes wordWipe{
   0%  {opacity:0;clip-path:inset(0 100% 0 0);transform:translateY(calc(-50% + 8px))}
@@ -1049,8 +1053,8 @@ ul.crosses li::before{background:none;border:1.5px solid var(--fg-dim);border-ra
   100%{opacity:1;clip-path:inset(0 0 0 0);transform:translateY(-50%)}
 }
 .js .intro.go .intro-lockup{
-  animation:lockupCenter .62s var(--ease-out) 1.5s forwards,
-            lockupHandoff .55s var(--ease-io) 2.05s forwards;
+  animation:lockupCenter .4s var(--ease-out) .98s forwards,
+            lockupHandoff .36s var(--ease-io) 1.33s forwards;
 }
 @keyframes lockupCenter{to{transform:translate(calc(-50% - var(--shift)),-50%)}}
 @keyframes lockupHandoff{to{transform:translate(calc(-50% - var(--shift)),-50%) scale(.4)}}
@@ -1748,6 +1752,18 @@ body::before{
   from{opacity:0;transform:translate3d(22px,16px,0)}
   to{opacity:1;transform:none}
 }
+/* Sur un écran étroit il ne reste que 18 px à droite d'une étape : la levée
+   depuis la droite en poussait 22, et la page débordait de 4 px pendant la
+   demi-seconde de l'animation. Une barre de défilement qui apparaît en cours de
+   lecture est un défaut, même bref. Sous 560 px l'étape se lève donc droit :
+   l'indentation qui justifiait le geste vaut de toute façon 7 px à cette
+   largeur, le mouvement latéral n'y raconte plus rien. */
+@media (max-width:560px){
+  @keyframes nodeIn{
+    from{opacity:0;transform:translate3d(0,16px,0)}
+    to{opacity:1;transform:none}
+  }
+}
 @keyframes dotPop{
   from{transform:scale(.4)}
   60%{transform:scale(1)}
@@ -2161,8 +2177,21 @@ body::before{
    longueur de l'axe, sans requête de conteneur ni mesure en JavaScript.
    (La piste ne peut pas être un conteneur de taille : .railh a une hauteur
    automatique, et container-type:size l'écraserait à zéro.) */
-.railh-head{
+/* La piste rogne ce que la tête laisse sortir du cadre. C'est la piste qui
+   rogne, pas .railh : l'anneau du premier arrêt s'ouvre à 13 px à gauche de
+   l'arête de la frise, et un rognage posé sur .railh lui mangeait 36 % de sa
+   surface. Mesuré, pas supposé.
+   Les deux axes sont rognés, parce que overflow-clip-margin reste sans effet
+   quand un seul l'est — un axe `visible` désactive la marge sur l'autre. La
+   marge de 16 px laisse passer le halo du point, qui déborde de 12 px, sans
+   rien rendre à la zone de défilement : un débordement d'encre n'allonge pas
+   une page, seul un débordement de boîte le fait. */
+.railh-rail{
   position:absolute;top:14px;left:0;right:0;height:9px;margin-top:-4px;
+  pointer-events:none;overflow:clip;overflow-clip-margin:16px;
+}
+.railh-head{
+  position:absolute;inset:0;
   pointer-events:none;opacity:0;transform:translate3d(0,0,0);
 }
 .railh-head::before{
@@ -2180,7 +2209,7 @@ body::before{
 .railh.in .stop:nth-child(3)::before{transition-delay:.85s}
 .railh.in .stop:nth-child(4)::before{transition-delay:1.2s}
 @media (max-width:860px){
-  .railh-head{top:6px;bottom:6px;left:5px;right:auto;width:9px;height:auto;margin:0 0 0 -4px}
+  .railh-rail{top:6px;bottom:6px;left:5px;right:auto;width:9px;height:auto;margin:0 0 0 -4px}
   .railh-head::before{left:0;top:-4px}
   .railh.in .railh-head{transform:translate3d(0,calc(100% - 9px),0)}
 }

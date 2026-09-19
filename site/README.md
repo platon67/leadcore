@@ -462,6 +462,34 @@ window.LEADCORE_CONTACT = { email: "contact@leadcore.fr" };
 
 Elle alimente le bouton de repli et le lien du pied de page.
 
+## Vérifier la mise en page
+
+`tools/verif-mise-en-page.js` contrôle le débordement horizontal sur les six
+pages, à neuf largeurs, dans les deux régimes de mouvement.
+
+```
+cd site && python3 -m http.server 8391 &
+SP=<dossier contenant node_modules/playwright> node ../tools/verif-mise-en-page.js
+```
+
+Il sort en code 1 dès qu'une combinaison déborde. Les trois listes se
+restreignent pour isoler un cas pendant une correction :
+
+```
+PAGES=collaboration.html W=1440 MOTION=no-preference node tools/verif-mise-en-page.js
+```
+
+**Pourquoi il est écrit comme ça.** La version précédente vivait dans un dossier
+temporaire, créait tous ses contextes en `reducedMotion:'reduce'` et ne défilait
+jamais. Sous cette préférence, les éléments animés portent `display:none` ; sans
+défilement, les révélations ne se déclenchent pas. Six pages × huit largeurs
+passaient au vert pendant qu'une page débordait de 1 156 px en production.
+Le script mesure donc **à chaque palier du parcours**, pas seulement à l'arrivée :
+un élément qui traverse l'écran ne déborde que pendant sa translation.
+
+Règle de travail : avant de corriger un défaut de mise en page, vérifier que le
+script **échoue** dessus. Un test qui ne peut pas échouer ne teste rien.
+
 ## Voir le site en local
 
 ```bash

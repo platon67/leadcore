@@ -37,11 +37,19 @@
      Coût assumé : l'ouverture couvre le héros pendant 2,4 s, donc elle
      repousse d'autant le Largest Contentful Paint de la première visite. */
   var intro = doc.getElementById("intro");
-  var INTRO_MS = 2600;
+  var INTRO_MS = 1700;
   var seen = false;
   try { seen = sessionStorage.getItem("lc-intro") === "1"; } catch (e) {}
 
-  var playIntro = intro && !calm && !seen &&
+  /* Un visiteur qui arrive d'une campagne — email froid, LinkedIn — a déjà
+     décidé de venir. Lui faire attendre l'ouverture avant le premier mot dépense
+     son attention à l'endroit du parcours où elle coûte le plus cher, et c'est
+     le public que ce site sert d'abord. L'ouverture est donc réservée à l'accès
+     direct : celui qui tape l'adresse, ou qui revient. */
+  var campagne = /[?&](utm_[a-z]+|c|ref|gclid|fbclid|li_fat_id|mc_[a-z]+)=/i
+                   .test(window.location.search);
+
+  var playIntro = intro && !calm && !seen && !campagne &&
     !window.location.hash &&
     !(window.performance && performance.getEntriesByType &&
       (performance.getEntriesByType("navigation")[0] || {}).type === "back_forward");
