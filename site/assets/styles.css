@@ -287,11 +287,21 @@ p:last-child{margin-bottom:0}
 .nav a[aria-current]::after{
   content:"";position:absolute;left:13px;right:13px;bottom:2px;height:1px;background:var(--accent);
 }
-.nav .btn{margin-left:12px}
-/* `.nav a` porte une couleur de lien et pèse 0,1,1 en spécificité, contre
-   0,1,0 pour `.btn-pri` : sans ce rappel elle l'emporte, et le libellé du
-   bouton de l'en-tête sort en gris sur l'émeraude au lieu du presque-noir. */
-.nav a.btn-pri{color:var(--btn-fg)}
+/* La marge va sur l'enveloppe, pas sur le bouton : appliquée à l'intérieur,
+   elle poussait le bouton dans sa propre enveloppe et le biseau débordait de
+   12 px à gauche, en gris. */
+.nav .cta-rdv{margin-left:12px}
+.nav .cta-rdv .btn{margin-left:0}
+.nav>.btn{margin-left:12px}
+/* `.nav a` porte une couleur de lien et pèse 0,1,1 en spécificité : sans ce
+   rappel elle l'emporte sur `.btn-pri` (0,1,0) et le libellé du bouton de
+   l'en-tête sort en gris.
+   Il a longtemps valu `--btn-fg`, le presque-noir, parce que le bouton était
+   un aplat émeraude. Depuis que c'est une capsule sombre, ce presque-noir
+   était du noir sur du noir : 1:1, invisible. Trouvé par le harnais de
+   contraste, pas à l'œil — j'ai même accusé le harnais de se tromper avant de
+   regarder le chiffre qu'il donnait. */
+.nav a.btn-pri{color:var(--fg)}
 .nav a.btn-gho{color:var(--fg)}
 
 .nav-toggle{
@@ -323,104 +333,161 @@ p:last-child{margin-bottom:0}
 .btn:hover .ar{transform:translateX(3px)}
 
 /* ──── LE BOUTON DE PRISE DE RENDEZ-VOUS ────
-   Tout le site existe pour amener ici. Le bouton est donc la chose la plus
-   vivante de l'écran, et il peut l'être sans crier : les boucles ont été
-   retirées partout ailleurs. Une animation ne hiérarchise que si elle est
-   seule à bouger.
+   Tout le site existe pour amener ici, et c'est le seul endroit où le système
+   a le droit d'être rompu. Partout ailleurs : rayons de 4, 10 ou 16, aplats,
+   deux couleurs. Ici : une capsule, une aurore, un bloom. La seule chose
+   ronde du site est le bouton qui prend un rendez-vous — c'est devenu un
+   signal en soi.
 
-   Construit d'après les références fournies. Ce qu'elles ont en commun : une
-   lumière vivante À L'INTÉRIEUR de la forme, pas un ornement posé autour ; un
-   halo qui échappe au bouton et teinte le fond ; un mouvement continu et lent,
-   sans temps fort. La plus proche de notre palette — pastille sombre, vert qui
-   monte du bas, lueur qui déborde — sert de modèle.
+   Construit d'après les références du propriétaire, relevé image par image.
+   Ce que fait la maquette de tête, et qu'un dégradé sage ne fait pas :
 
-   Trois couches, et une seule balise en plus :
-     ::before    une nappe claire qui dérive par le haut
-     ::after     une nappe émeraude qui monte du bas, déphasée
-     l'enveloppe porte le halo extérieur, qui respire — il vit dehors, donc il
-                 ne peut pas être rogné par le bouton, et c'est sa seule raison
-                 d'être.
-   Le filet lumineux du bord bas reste statique : c'est lui qui donne l'arête,
-   il n'a pas à bouger. Tout le reste est en transform et opacity. */
-.btn-pri{
-  background:var(--btn-bg);color:var(--btn-fg);border-color:transparent;font-weight:600;
-  box-shadow:inset 0 -1.5px 0 rgba(234,255,246,.5), inset 0 1px 0 rgba(234,255,246,.2);
-}
-.btn-pri>*{position:relative;z-index:1}
+     1. la capsule est NOIRE, pas émeraude. La couleur est de la lumière
+        posée dessus, jamais un aplat.
+     2. l'aurore occupe la moitié basse. Des crêtes qui ondulent, avec des
+        cœurs blancs là où elle culmine.
+     3. une touche FROIDE — indigo — traîne sur un bord. C'est elle qui donne
+        la profondeur ; sans contre-ton, un dégradé vert reste plat.
+     4. un liseré vif suit le contour, plus chaud là où l'aurore le touche.
+     5. un biseau translucide entoure le liseré, comme un verre.
+     6. le bloom déborde loin et tient une trame de points, qui l'accroche.
 
-/* z-index négatif, et ce n'est pas un détail : un pseudo-élément positionné à
-   z-index 0 peint APRÈS le contenu en ligne, donc les nappes passaient devant
-   le libellé et le délayaient. À -1 elles peignent entre le fond du bouton et
-   son texte, ce qui est exactement leur place. */
-.btn-pri::before,.btn-pri::after{
-  content:"";position:absolute;pointer-events:none;z-index:-1;border-radius:50%;
-}
-.btn-pri::before{
-  left:-16%;top:-72%;width:58%;padding-bottom:58%;
-  background:radial-gradient(closest-side,rgba(240,255,249,.9),rgba(240,255,249,0) 72%);
-  filter:blur(13px);
-  animation:nappeA 7.2s var(--ease-io) infinite;
-}
-.btn-pri::after{
-  right:-12%;bottom:-88%;width:76%;padding-bottom:76%;
-  background:radial-gradient(closest-side,var(--emerald-hi),rgba(92,237,186,0) 66%);
-  filter:blur(13px);
-  animation:nappeB 7.2s var(--ease-io) infinite;
-}
-@keyframes nappeA{
-  0%,100%{transform:translate3d(0,0,0) scale(1)}
-  34%    {transform:translate3d(118%,30%,0) scale(1.2)}
-  67%    {transform:translate3d(60%,-12%,0) scale(.88)}
-}
-@keyframes nappeB{
-  0%,100%{transform:translate3d(0,0,0) scale(1)}
-  30%    {transform:translate3d(-80%,-28%,0) scale(1.24)}
-  62%    {transform:translate3d(-146%,12%,0) scale(.92)}
-}
+   Quatre nappes suffisent à faire une aurore : deux chaudes qui montent, une
+   émeraude qui traverse, une froide qui contre. Chacune a sa phase, donc la
+   crête ne se répète jamais à l'identique sur un cycle de 9 s. Tout est en
+   transform et opacity. */
 
-.cta-rdv{position:relative;display:inline-flex}
+.cta-rdv{
+  position:relative;display:inline-flex;isolation:isolate;
+  padding:3px;border-radius:var(--radius-pill);
+  background:linear-gradient(180deg,rgba(242,248,245,.13),rgba(242,248,245,.03) 52%,rgba(184,242,63,.16));
+  box-shadow:inset 0 1px 0 rgba(242,248,245,.16);
+}
+/* le bloom, et sa trame */
 .cta-rdv::before{
-  content:"";position:absolute;inset:-16% -7%;z-index:-1;pointer-events:none;
-  background:radial-gradient(58% 118% at 50% 76%,rgba(var(--accent-rgb),.66),rgba(var(--accent-rgb),0) 70%);
-  filter:blur(15px);
-  animation:souffleCta 7.2s var(--ease-io) infinite;
+  content:"";position:absolute;inset:-46% -14%;z-index:-2;pointer-events:none;
+  background:
+    radial-gradient(closest-side,rgba(184,242,63,.055) 34%,transparent 66%),
+    radial-gradient(52% 104% at 50% 76%,rgba(184,242,63,.42),rgba(25,199,139,.16) 44%,transparent 70%);
+  background-size:6px 6px,100% 100%;
+  filter:blur(1px);
+  animation:blooomCta 9s var(--ease-io) infinite;
 }
-@keyframes souffleCta{
-  0%,100%{opacity:.48;transform:scale(1)}
-  40%    {opacity:.88;transform:scale(1.11)}
+@keyframes blooomCta{
+  0%,100%{opacity:.62;transform:scale(1)}
+  46%    {opacity:1;transform:scale(1.07)}
 }
-.cta-rdv>.btn{position:relative;z-index:1}
 
-/* Au survol la lumière se fige et le halo monte d'un cran : le visiteur est
-   venu, on arrête de l'appeler et on lui répond. */
-.cta-rdv:hover .btn-pri{background:var(--btn-bg-hi)}
-.cta-rdv:hover .btn-pri::before,
-.cta-rdv:hover .btn-pri::after,
-.cta-rdv:hover::before{animation-play-state:paused}
-.cta-rdv:hover::before{opacity:1}
-
-/* La taille réduite : même objet, même lumière, deux tiers de l'intensité.
-   Elle sert à l'en-tête et aux sorties contextuelles — neuf boutons identiques
-   ne hiérarchiseraient pas mieux que neuf liens identiques. */
-.cta-rdv.sm::before{inset:-20% -9%;filter:blur(12px)}
-.cta-rdv.sm .btn-pri::before,.cta-rdv.sm .btn-pri::after{filter:blur(10px)}
-.cta-rdv.sm .btn{font-size:var(--t2);padding:12px 20px;min-height:44px}
-
-/* Sur téléphone, un bouton contextuel occupe toute la colonne : le halo n'a
-   plus de place à sa droite et sa gauche, et ses 32 px de débord allongeaient
-   la zone de défilement de 20 px. Il se replie sur la verticale, où il reste
-   de la place — et où la référence le met de toute façon, sous le bouton. */
-@media (max-width:560px){
-  /* Spécificité : `.cta-rdv.sm::before` est écrit plus bas et pèse 0,2,0. Une
-     règle à 0,1,0 ici ne l'emportait pas, et le débord revenait. */
-  .cta-rdv::before,.cta-rdv.sm::before{inset:-26% 0}
+/* la capsule */
+.cta-rdv>.btn-pri{
+  position:relative;z-index:1;width:100%;
+  background:linear-gradient(196deg,#0A1520 0%,#050B08 46%,#040806 100%);
+  color:var(--fg);border:0;border-radius:var(--radius-pill);
+  box-shadow:
+    inset 0 0 0 1.4px rgba(184,242,63,.9),
+    inset 0 -16px 30px -13px rgba(251,255,238,.7);
 }
+.cta-rdv>.btn-pri:hover{background:linear-gradient(196deg,#0B1826 0%,#060D0A 46%,#050A07 100%)}
+
+/* l'aurore : quatre nappes, quatre phases */
+.aur{position:absolute;inset:0;z-index:-1;pointer-events:none;border-radius:inherit;overflow:hidden}
+/* Le voile. La moitié haute de la capsule doit rester noire : c'est le contraste
+   entre le noir du haut et la lumière du bas qui fait lire une aurore plutôt
+   qu'un dégradé. Sans lui, les quatre nappes baignent toute la surface et tout
+   vire au turquoise. */
+.aur::after{
+  content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:
+    /* le halo sombre du libellé : sans lui, le blanc tombe à 1,4:1 sur les
+       crêtes de l'aurore. La référence a le même défaut ; sur le bouton le plus
+       important d'un site, il n'est pas tenable. Il est centré sur la bande du
+       texte et laisse la crête du bas intacte. */
+    radial-gradient(72% 76% at 50% 42%,rgba(4,8,6,.88),rgba(4,8,6,.5) 58%,rgba(4,8,6,0) 82%),
+    linear-gradient(180deg,#040806 0%,rgba(4,8,6,.94) 24%,rgba(4,8,6,.55) 38%,rgba(4,8,6,.12) 50%,transparent 60%);
+}
+.aur i{position:absolute;display:block;border-radius:50%;filter:blur(13px);will-change:transform}
+/* 1 · la masse lime, qui tient le bas */
+.aur i:nth-child(1){
+  left:-24%;bottom:-54%;width:104%;padding-bottom:104%;
+  background:radial-gradient(closest-side,#C6F94B 34%,rgba(184,242,63,.55) 62%,rgba(184,242,63,0) 82%);
+  animation:aurA 9s var(--ease-io) infinite;
+}
+/* 2 · le cœur blanc, plus petit et plus vif */
+.aur i:nth-child(2){
+  left:16%;bottom:-44%;width:38%;padding-bottom:38%;
+  background:radial-gradient(closest-side,#F2FFC4 30%,rgba(230,255,170,.5) 58%,rgba(230,255,170,0) 78%);
+  animation:aurB 9s var(--ease-io) infinite;
+}
+/* 3 · l'émeraude du site, qui traverse */
+.aur i:nth-child(3){
+  right:-22%;bottom:-50%;width:76%;padding-bottom:76%;
+  background:radial-gradient(closest-side,#19C78B 32%,rgba(25,199,139,.5) 60%,rgba(25,199,139,0) 80%);
+  animation:aurC 9s var(--ease-io) infinite;
+}
+/* 4 · le contre-ton froid, qui donne la profondeur */
+.aur i:nth-child(4){
+  right:-16%;top:-68%;width:46%;padding-bottom:46%;
+  background:radial-gradient(closest-side,rgba(46,104,208,.62),rgba(46,104,208,0) 60%);
+  animation:aurD 9s var(--ease-io) infinite;
+}
+@keyframes aurA{
+  0%,100%{transform:translate3d(0,0,0) scale(1)}
+  28%    {transform:translate3d(38%,-13%,0) scale(1.2)}
+  61%    {transform:translate3d(84%,2%,0) scale(.9)}
+}
+@keyframes aurB{
+  0%,100%{transform:translate3d(0,0,0) scale(1)}
+  33%    {transform:translate3d(-40%,-22%,0) scale(1.3)}
+  70%    {transform:translate3d(78%,-6%,0) scale(.8)}
+}
+@keyframes aurC{
+  0%,100%{transform:translate3d(0,0,0) scale(1)}
+  40%    {transform:translate3d(-84%,-9%,0) scale(1.1)}
+  74%    {transform:translate3d(-22%,6%,0) scale(.95)}
+}
+@keyframes aurD{
+  0%,100%{transform:translate3d(0,0,0) scale(1);opacity:.62}
+  36%    {transform:translate3d(-58%,14%,0) scale(1.2);opacity:1}
+  72%    {transform:translate3d(-8%,-6%,0) scale(.9);opacity:.5}
+}
+
+/* Au survol l'aurore monte d'un cran et le liseré passe au blanc : le
+   visiteur est venu, le bouton répond au lieu de continuer à appeler. */
+.cta-rdv:hover>.btn-pri{
+  box-shadow:
+    inset 0 0 0 1.4px rgba(244,255,218,.95),
+    inset 0 -18px 32px -14px rgba(244,255,218,.8);
+}
+.cta-rdv:hover .aur i{animation-duration:4.5s}
+.cta-rdv:hover::before{opacity:1;animation-duration:4.5s}
+
+/* La taille réduite : même objet, biseau plus fin, nappes moins floues pour
+   qu'elles restent lisibles dans 44 px de haut. */
+.cta-rdv.sm{padding:2px}
+.cta-rdv.sm .aur i{filter:blur(12px)}
+/* Dans 44 px de haut, les nappes montent proportionnellement plus haut et le
+   libellé tombait sous 4,5:1 à certaines phases — trouvé par le harnais, pas à
+   l'œil : ma mesure ponctuelle n'échantillonnait que six instants et manquait
+   le pire. Le voile du texte se renforce, la crête du bas reste intacte. */
+.cta-rdv.sm .aur::after{
+  background:
+    radial-gradient(80% 88% at 50% 40%,rgba(4,8,6,.94),rgba(4,8,6,.66) 56%,rgba(4,8,6,.1) 84%),
+    linear-gradient(180deg,#040806 0%,rgba(4,8,6,.96) 26%,rgba(4,8,6,.7) 42%,rgba(4,8,6,.2) 56%,transparent 68%);
+}
+.cta-rdv.sm::before{inset:-62% -14%}
 
 /* Dans l'en-tête, le bouton vit sur les six pages et à toutes les hauteurs de
-   défilement. Il garde les nappes, ralenties, et perd le halo : une lueur qui
-   respire au-dessus du texte qu'on lit devient un moustique. */
+   défilement : l'aurore tourne deux fois moins vite et le bloom disparaît. Une
+   lueur qui respire au-dessus du texte qu'on lit devient un moustique. */
 .hdr .cta-rdv::before{display:none}
-.hdr .btn-pri::before,.hdr .btn-pri::after{animation-duration:12s}
+.hdr .cta-rdv .aur i{animation-duration:18s}
+
+@media (max-width:560px){
+  /* Spécificité : `.cta-rdv.sm::before` pèse 0,2,0 et est écrit plus haut. Le
+     bloom déborde horizontalement, et sur téléphone un bouton contextuel
+     occupe toute la colonne : il se replie sur la verticale. */
+  .cta-rdv::before,.cta-rdv.sm::before{inset:-64% 0}
+}
 
 .btn-gho{background:rgba(var(--fg-rgb),.015);color:var(--fg);border-color:var(--rule)}
 .btn-gho:hover{border-color:var(--accent-dim);color:var(--accent-hi);background:rgba(var(--accent-rgb),.05)}
@@ -1003,7 +1070,7 @@ ul.crosses li::before{background:none;border:1.5px solid var(--fg-dim);border-ra
   .js .hero .fiche{opacity:1;transform:none;transition:none;animation:none}
   .js .rv .eyebrow::before{transform:none;transition:none}
   .dot::after,.infra .rail .pkt,.hero .scan{animation:none!important}
-  .btn-pri::before,.btn-pri::after,.cta-rdv::before{animation:none!important}
+  .aur i,.cta-rdv::before{animation:none!important}
   .hero .scan{display:none}
   .infra .rail .pkt{opacity:0}
   .lvl .bar,.pipe-fill,.cond::before{transform:none;transition:none}

@@ -61,45 +61,57 @@ en boucle en permanence.
 
 ## Le bouton de prise de rendez-vous
 
-Tout le site existe pour amener là. **Il y a un seul objet**, `.cta-rdv`, en deux
-tailles : pleine pour le héros, réduite (`.sm`) pour l'en-tête et les onze
-sorties contextuelles. Seize boutons, une seule façon de dire « on prend
-rendez-vous ici ».
+Tout le site existe pour amener là, et c'est **le seul endroit où le système a
+le droit d'être rompu**. Partout ailleurs : rayons de 4, 10 ou 16, aplats, deux
+couleurs. Ici : une capsule, une aurore, un bloom. La seule chose ronde du site
+est le bouton qui prend un rendez-vous — c'est devenu un signal en soi.
 
-**Construit d'après des références fournies par le propriétaire.** Ce qu'elles
-avaient en commun : une lumière vivante *à l'intérieur* de la forme et non un
-ornement posé autour ; un halo qui échappe au bouton et teinte le fond ; un
-mouvement continu et lent, sans temps fort.
+Un seul objet, `.cta-rdv`, en deux tailles. **Seize boutons**, une seule façon de
+dire « on prend rendez-vous ici ».
 
-| couche | ce qu'elle fait | où |
-|---|---|---|
-| `::before` | une nappe claire qui dérive par le haut | dans le bouton, rognée |
-| `::after` | une nappe émeraude qui monte du bas, déphasée | dans le bouton, rognée |
-| `.cta-rdv::before` | le halo extérieur, qui respire | dehors — seule raison d'être de l'enveloppe |
+**Construit d'après les références du propriétaire, relevées image par image.**
+Ce que fait la maquette de tête et qu'un dégradé sage ne fait pas :
 
-Le filet lumineux du bord bas est un `box-shadow` **statique** : c'est lui qui
-donne l'arête, il n'a pas à bouger. Tout le reste est en `transform` et
-`opacity`, donc au compositeur. Cycle de 7,2 s, 12 s dans l'en-tête.
+1. la capsule est **noire**, pas émeraude. La couleur est de la lumière posée
+   dessus, jamais un aplat.
+2. l'aurore occupe la moitié basse, avec des cœurs presque blancs là où elle
+   culmine. Le blanc est **jaune-vert**, pas neutre : un blanc neutre sur du
+   noir donne du gris.
+3. une touche **froide** — indigo — traîne sur un bord. Sans contre-ton, un
+   dégradé vert reste plat.
+4. un liseré vif suit le contour, un biseau translucide l'entoure, et le bloom
+   déborde loin en portant une trame de points.
 
-**Trois pièges, rencontrés et documentés :**
+Quatre nappes font l'aurore : deux chaudes qui montent, une émeraude qui
+traverse, une froide qui contre. Chacune a sa phase, donc la crête ne se répète
+jamais à l'identique sur un cycle de 9 s. Tout est en `transform` et `opacity`.
 
-- Un pseudo-élément positionné à `z-index:0` peint **après** le contenu en ligne.
-  Les nappes passaient donc devant le libellé et le délayaient. À `-1` elles
-  peignent entre le fond et le texte, ce qui est leur place. Contraste du
-  libellé mesuré sur tout le cycle : **9,5 à 11:1**.
-- Le halo déborde horizontalement. Sur téléphone, un bouton contextuel occupe
-  toute la colonne : ses 32 px de débord allongeaient la page de 37 px. Sous
-  560 px il se replie sur la verticale.
-- `.cta-rdv.sm::before` pèse 0,2,0 et est écrit plus bas : la règle mobile a dû
-  monter à la même spécificité, sinon le débord revenait.
+**Le voile est la pièce maîtresse.** Sans lui les quatre nappes baignent toute
+la capsule et tout vire au turquoise : c'est le contraste entre le noir du haut
+et la lumière du bas qui fait lire une aurore plutôt qu'un dégradé. Il porte
+aussi un halo sombre centré sur la bande du texte, sans quoi le blanc tombe à
+**1,4:1** sur les crêtes. La référence a ce défaut ; sur le bouton le plus
+important d'un site, il n'est pas tenable.
 
-Sous `prefers-reduced-motion`, les trois couches s'arrêtent.
+Sous `prefers-reduced-motion`, les nappes et le bloom s'arrêtent.
 
-**Le compte de boucles remonte, et c'est voulu** : de 1/3/1/0 à 6/6/7/3 au pire
-moment du défilement. Elles sont toutes sur les boutons de rendez-vous, lentes
-et synchrones — un objet qui respire, pas sept agitations indépendantes. C'est
-exactement ce que la règle disait : une animation ne hiérarchise que si elle
-est seule à bouger, et c'est le cas ici puisqu'il ne reste presque rien d'autre.
+### Ce que le harnais a trouvé et que l'œil n'a pas vu
+
+Le libellé du bouton d'en-tête était **noir sur une capsule noire**, à 1:1.
+`.nav a.btn-pri{color:var(--btn-fg)}` pèse 0,2,1 et l'emportait sur la règle du
+nouveau bouton ; ce presque-noir avait du sens tant que le bouton était un
+aplat émeraude. J'ai d'abord accusé le harnais de se tromper, avant de lire le
+chiffre qu'il donnait : `fg=[4,18,12]`.
+
+Le harnais de contraste a dû être corrigé deux fois au passage :
+
+- `getComputedStyle` ne sait pas aplatir un fond en **dégradé**. Il re-mesure
+  désormais au pixel les éléments concernés, sur la bande du texte et non sur
+  la boîte entière — sur un bouton, les bords portent la lumière et aucun glyphe.
+- la capture passe par la **poignée** de l'élément, jamais par un rectangle :
+  je relevais la boîte en coordonnées de fenêtre et la passais en clip de
+  capture, qui est en coordonnées de page. Sur un en-tête fixe mesuré après
+  défilement, les deux ne coïncident pas.
 
 ## Densité et cadres
 

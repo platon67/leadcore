@@ -74,7 +74,16 @@ const MOTION = liste('MOTION', ['no-preference','reduce']);
       const need = large ? 3 : 4.5;
       if (ratio < need) {
         const sec = el.closest('section,footer,header');
+        let img = false;
+        for (let n = el; n && n !== document.documentElement; n = n.parentElement) {
+          if (getComputedStyle(n).backgroundImage !== 'none') { img = true; break; }
+        }
+        /* La boîte est enregistrée en coordonnées de PAGE, parce que le clip d'une
+           capture l'est aussi. Un élément fixe fait exception : il suit la
+           fenêtre, donc on le mesurera après être remonté en haut. */
+        if (img) el.setAttribute('data-lc-check', String(out.length));
         out.push({
+          img, idx: out.length, fg: st.color,
           sec: sec ? (sec.id || sec.className.split(' ')[0]) : '?',
           theme: (sec && (sec.className.match(/t-\w+/) || ['nuit'])[0]) || 'nuit',
           sel: el.tagName.toLowerCase() + (el.className && typeof el.className === 'string' ? '.' + el.className.split(' ').slice(0, 2).join('.') : ''),
@@ -86,6 +95,53 @@ const MOTION = liste('MOTION', ['no-preference','reduce']);
     return out;
   });
 
+  /* Re-mesure au pixel des cas à fond en image. getComputedStyle ne sait pas
+     aplatir un dégradé : le calcul analytique donnait 1,03:1 sur un bouton
+     lisible à 9:1.
+
+     La capture passe par la POIGNÉE de l'élément, jamais par un rectangle.
+     Première version fausse : je relevais la boîte avec getBoundingClientRect
+     (coordonnées de fenêtre) et je la passais en clip de capture (coordonnées
+     de page). Sur l'en-tête, qui est fixe et que le harnais mesure après avoir
+     défilé, les deux ne coïncident pas : le harnais photographiait autre chose
+     et criait au défaut sur un bouton parfaitement lisible. */
+  const reels = [];
+  const sharp = (px) => { const c = px.map(v => v/255).map(v => v <= 0.04045 ? v/12.92 : Math.pow((v+0.055)/1.055, 2.4));
+    return 0.2126*c[0] + 0.7152*c[1] + 0.0722*c[2]; };
+  for (const x of bad) {
+    if (!x.img) { reels.push(x); continue; }
+    const h = await p.$(`[data-lc-check="${x.idx}"]`);
+    if (!h) { reels.push(x); continue; }
+    await p.evaluate(() => {
+      const st = document.createElement('style'); st.id = 'lc-mask';
+      st.textContent = '*{color:transparent!important;text-shadow:none!important}';
+      document.head.appendChild(st);
+    });
+    let shot = null;
+    try { shot = await h.screenshot(); } catch (e) {}
+    await p.evaluate(() => { const e = document.getElementById('lc-mask'); e && e.remove(); });
+    if (!shot) { reels.push(x); continue; }
+    /* On échantillonne la BANDE DU TEXTE, pas la boîte entière : sur un bouton,
+       les bords portent la lumière et aucun glyphe. */
+    const px = await p.evaluate(async (b64) => {
+      const im = new Image(); im.src = 'data:image/png;base64,' + b64;
+      await im.decode();
+      const x0 = Math.floor(im.width*0.2), y0 = Math.floor(im.height*0.26);
+      const w = Math.max(1, Math.floor(im.width*0.6)), hh = Math.max(1, Math.floor(im.height*0.48));
+      const cv = document.createElement('canvas'); cv.width = im.width; cv.height = im.height;
+      cv.getContext('2d').drawImage(im, 0, 0);
+      const d = cv.getContext('2d').getImageData(x0, y0, w, hh).data;
+      const out = []; for (let i=0;i<d.length;i+=4) out.push([d[i],d[i+1],d[i+2]]);
+      return out;
+    }, shot.toString('base64'));
+    const fg = (x.fg.match(/[\d.]+/g)||[242,248,245]).slice(0,3).map(Number);
+    const lf = sharp(fg);
+    let pire = 99;
+    for (const q of px) { const l2 = sharp(q);
+      const r = (Math.max(lf,l2)+0.05)/(Math.min(lf,l2)+0.05); if (r < pire) pire = r; }
+    if (pire < x.need) { x.ratio = +pire.toFixed(2); reels.push(x); }
+  }
+  bad.length = 0; bad.push(...reels);
   total += bad.length;
   console.log(`  ${pg.padEnd(24)}${String(w).padStart(5)}px  ${bad.length ? bad.length + ' sous le seuil' : 'conforme'}`);
   bad.forEach(x => console.log(
