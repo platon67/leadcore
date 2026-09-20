@@ -135,14 +135,28 @@ se lit d'un coup d'œil : elle est serrée. Une section de prose se lit ligne à
 ligne : elle respire. C'est le seul endroit où le pas change, et il change pour
 une raison.
 
-## Deux couleurs, deux registres
+## Une seule couleur, et jamais sur un contenant
 
-L'émeraude dit ce que vous gagnez. **L'ambre dit ce que ça vous prend** : les
-trois bandeaux du site — le seuil de 7 000 €, les trois heures et demie
-demandées, la nuance sur le recrutement — sont des réserves, jamais des gains.
-Le jeton `--amber` existait depuis le début sans servir à rien d'autre qu'aux
-blocs à faire des pages légales. Un jeton qu'on déclare et qu'on n'emploie pas
-est une intention, pas un système.
+L'émeraude ne borde plus rien : elle vit sur les nombres, les pictogrammes et
+les boutons. Trois dispositifs ont été retirés pour ça, parce qu'ils disaient
+« important » en le coloriant :
+
+| Retiré | Ce qui porte l'accent maintenant |
+|---|---|
+| le trait de tête émeraude des quatre cellules de l'accueil | le nombre, et le filet gauche que chaque cellule avait déjà |
+| le filet émeraude et le lavis vert de `.pad.hot` | une plaque très légèrement en creux, arête claire en haut |
+| le filet émeraude de la troisième ligne de prix | le montant, seul en émeraude dans une rangée de trois |
+
+Un filet accentué de 2 px en haut d'une carte est la signature la plus
+reconnaissable d'une interface produite sans intention ; ici il faisait en plus
+le travail du filet gauche une seconde fois, en couleur.
+
+**L'ambre a disparu.** Les trois bandeaux — le seuil, le temps demandé, la
+nuance sur le recrutement — étaient des cadres ambrés à pictogramme : la
+grammaire d'un message d'erreur de navigateur, sur les passages les plus
+engageants du site. Ils sont devenus des apartés : un filet, un intitulé qui
+nomme le propos, et le texte une taille au-dessus du corps. Le jeton
+`--amber` ne sert plus qu'aux blocs à faire des pages légales.
 
 ## Le discours
 
@@ -153,7 +167,7 @@ produit. Chaque cadre désamorce au passage une objection, sans jamais la nommer
 |---|---|---|
 | Accueil · héros | leurs commerciaux closent au lieu de prospecter | — |
 | Accueil · panneau de prix | 1 200 / 500 / 200, et 2 700 € de perte maximale | « combien, et qu'est-ce que je risque » |
-| Accueil · bandeau de sélection | on refuse sous 7 000 € de valeur client | « ils prennent tout le monde » |
+| Accueil · le seuil | le modèle tient à partir de 7 000 € de valeur client | « ils prennent tout le monde » |
 | Accueil · ce que vous y gagnez | agenda prévisible, risque borné, zéro embauche, réponse datée | « un commercial me coûterait moins cher » |
 | Accueil · les trois questions | comment, ce que ça prend, combien — avec les montants | « je n'ai pas le temps de lire trois pages » |
 | Accueil · qui vous parle | un opérateur, quatre à six clients | « je serai un numéro dans une agence » |
@@ -334,9 +348,11 @@ sélection à 1 519 px, le fondateur à 3 029 px.
 de texte posé sur le fond. Un bloc de prose sur du vide n'offre aucune prise :
 le regard glisse et ne s'arrête nulle part, ce qui est exactement le contraire
 de ce dont a besoin un dirigeant qui parcourt. Le jeton `.pad` donne une surface
-et une arête, en deux poids seulement — plein pour ce qui porte l'information,
-filet seul (`.pad.lite`) pour ce qui l'accompagne. Trois poids donneraient une
-page en damier.
+et une arête, en trois usages et trois seulement : filet gauche pour ce qui
+accompagne la prose (`.pad.lite`), filet gauche aussi pour les cellules d'une
+rangée — quatre cellules séparées par des filets, c'est un tableau — et plaque
+en creux (`.pad.hot`) pour le bloc isolé qui porte une donnée. Aucun des trois
+n'emploie la couleur. Un quatrième poids donnerait une page en damier.
 
 **Pictogrammes.** Un seul jeu, dans `gen_shell.ICONS`, dessiné sur la grille de
 24 et au filet de 1,5 des icônes déjà présentes, extrémités et jointures rondes,

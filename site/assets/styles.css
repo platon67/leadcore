@@ -788,14 +788,24 @@ ul.crosses li::before{background:none;border:1.5px solid var(--fg-dim);border-ra
    Le jeton --amber existait depuis le début et ne servait qu'aux blocs à faire
    des pages légales. Un jeton qu'on déclare et qu'on n'emploie pas est une
    intention, pas un système. */
+/* Ces trois blocs étaient des cadres ambrés à pictogramme : la grammaire d'un
+   message d'erreur de navigateur. Le registre disait « attention » avant que
+   le premier mot soit lu, sur des passages qui sont en réalité les plus
+   engageants du site — le seuil, le temps demandé, la place du commercial.
+   Plus de cadre, plus de couleur, plus de pictogramme : un filet, un intitulé
+   qui nomme le propos, et le texte une taille au-dessus du corps courant.
+   C'est un aparté de l'auteur, et il se lit comme tel. */
 .banner{
-  margin-top:clamp(28px,3.6vw,40px);border:1px solid var(--amber-dim);border-radius:var(--radius);
-  background:linear-gradient(94deg,rgba(224,167,90,.10),rgba(224,167,90,.015));
-  padding:21px clamp(20px,2.8vw,28px);display:flex;gap:var(--s3);align-items:flex-start;
-  font-size:var(--t3);line-height:1.55;
+  margin-top:clamp(28px,3.6vw,40px);
+  border:0;border-top:1px solid var(--rule);border-radius:0;background:none;
+  padding:clamp(17px,2.1vw,23px) 0 0;display:block;
+  font-size:var(--t4);line-height:1.5;color:var(--fg-soft);letter-spacing:-.012em;
 }
-.banner svg{flex:none;width:21px;height:21px;margin-top:3px;stroke:var(--amber);fill:none;
-  stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.banner>span:not(.k){display:block;max-width:74ch}
+.banner .k{
+  display:block;font-family:var(--label);font-size:var(--t1);font-weight:600;
+  letter-spacing:.13em;text-transform:uppercase;color:var(--fg-dim);margin-bottom:11px;
+}
 .banner b{font-weight:600;color:var(--fg);font-variant-numeric:tabular-nums}
 
 /* ═══════════ 15. tarifs ═══════════ */
@@ -1859,7 +1869,7 @@ body::before{
 .band-c{position:relative}
 .band-c .k{
   font-family:var(--label);font-size:var(--t1);font-weight:600;letter-spacing:.12em;
-  text-transform:uppercase;color:var(--accent);display:block;margin-bottom:14px;
+  text-transform:uppercase;color:var(--fg-dim);display:block;margin-bottom:14px;
 }
 .band-c .v{
   display:flex;align-items:baseline;gap:.1em;font-weight:800;
@@ -1868,14 +1878,13 @@ body::before{
 }
 .band-c .v small{font-size:.4em;font-weight:600;letter-spacing:-.02em;color:var(--fg-soft)}
 .band-c p{margin:14px 0 0;font-size:var(--t2);line-height:1.45;color:var(--fg-dim)}
-/* le trait de tête s'allume quand la cellule apparaît */
-.band-c::before{
-  content:"";position:absolute;top:-1px;left:-1px;right:-1px;height:2px;
-  border-radius:var(--radius) var(--radius) 0 0;background:var(--accent);
-  transform:scaleX(0);transform-origin:left;transition:transform .7s var(--ease-out);
-  transition-delay:calc(var(--i,0) * 90ms);
-}
-.band-c.in::before{transform:none}
+/* Le trait de tête émeraude a été retiré, pas remplacé. Chaque cellule porte
+   déjà le filet gauche de `.pad` : le bandeau lumineux faisait le même travail
+   une seconde fois, en couleur, et un filet accentué de 2 px en haut d'une
+   carte est la signature la plus reconnaissable d'une interface produite sans
+   intention. Quatre cellules séparées par des filets, c'est un tableau ; le
+   même tableau avec quatre barres qui s'allument, c'est une vitrine.
+   Ce qui porte l'accent maintenant : le nombre, et le seul pictogramme. */
 @media (max-width:900px){.band{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:520px){.band{grid-template-columns:1fr}}
 
@@ -2036,13 +2045,17 @@ body::before{
   padding:2px 0 2px clamp(16px,2vw,24px);
 }
 .pad.lite{border-left-color:var(--rule-soft)}
-/* La variante chaude garde un fond : c'est le seul cas où le pavé signale
-   autre chose que du texte courant, et un filet seul ne suffirait pas à le
-   dire. Le filet passe à l'émeraude et le fond reste très bas. */
+/* La variante appuyée ne se signale plus par la couleur mais par la surface :
+   une plaque très légèrement en creux, arête claire en haut comme une pièce
+   encastrée dans le fond. Un filet émeraude et un lavis vert disaient
+   « important » en le coloriant ; une plaque le dit en le posant ailleurs.
+   L'émeraude reste où elle a un sens — sur les nombres et sur les carrés
+   allumés du ratio — au lieu de border ce qui les contient. */
 .pad.hot{
-  background:linear-gradient(90deg,rgba(var(--accent-rgb),.06),rgba(var(--accent-rgb),0) 62%);
-  border-left-color:rgba(var(--accent-rgb),.42);
-  padding:clamp(14px,1.8vw,20px) clamp(16px,2vw,24px);
+  border-left:0;border-radius:var(--radius-sm);
+  background:rgba(var(--fg-rgb),.028);
+  box-shadow:inset 0 1px 0 rgba(var(--fg-rgb),.06);
+  padding:clamp(15px,1.9vw,21px) clamp(17px,2.1vw,25px);
 }
 .pad>:first-child{margin-top:0}
 .pad>:last-child{margin-bottom:0}
@@ -2051,7 +2064,7 @@ body::before{
   display:block;font-family:var(--label);font-size:var(--t1);font-weight:600;
   letter-spacing:.13em;text-transform:uppercase;color:var(--fg-dim);margin-bottom:12px;
 }
-.pad.hot .k{color:var(--accent)}
+.pad.hot .k{color:var(--fg-dim)}
 
 /* ---- SCHÉMA 1 : les deux canaux ----
    Sept colonnes : quatre étapes et trois connecteurs. Le connecteur est un SVG
@@ -2198,7 +2211,11 @@ body::before{
 .pcell .amt small{font-size:.32em;font-weight:600;letter-spacing:-.01em;color:var(--fg-soft)}
 .pcell h3{margin:16px 0 8px;font-size:var(--t4);letter-spacing:-.02em}
 .pcell p{margin:0;font-size:var(--t2);line-height:1.45;color:var(--fg-soft)}
-.pcell.hot .amt{color:var(--accent-hi)}
+/* La troisième ligne est la seule variable. Elle se distinguait par un filet
+   émeraude et un lavis vert autour de la cellule, dans une rangée où les deux
+   autres portaient un filet gris : trois cellules, deux traitements. Il ne
+   reste que le nombre en émeraude — c'est lui qu'on compare, pas son cadre. */
+.pcell.perf .amt{color:var(--accent-hi)}
 @media (max-width:820px){.price3{grid-template-columns:1fr}}
 
 /* ---- LE CHIFFRE À RETENIR ----
@@ -2687,16 +2704,34 @@ body::before{
   .p-tarifs .ratio .keynum>div:not(.big){display:contents}
   .p-tarifs .ratio .keynum .fine{margin-top:0}
 
-  /* Le dégradé de `.pad.hot` s'éteint à 62 % : calibré pour une colonne de
-     788 px, il mourait à 774 px dans un pavé de 1 248 et la nuance de droite
-     se retrouvait posée sur le fond nu. On l'étire à la largeur réelle. */
-  .p-tarifs .ratio.hot{
-    background:linear-gradient(90deg,rgba(var(--accent-rgb),.07),rgba(var(--accent-rgb),0) 94%);
-  }
-
   .p-tarifs .ratio-grid{grid-template-columns:repeat(30,1fr);max-width:none}
   .p-tarifs .ratio-key{
     display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--s6);
+  }
+}
+
+/* ---- la sortie contextuelle s'aligne sur le bloc qu'elle suit ----
+   Le bouton était calé à gauche de la colonne de lecture, sous des blocs qui
+   ne commencent pas là : sous le ledger, dont tous les montants sont à droite,
+   il pendait à l'opposé de la seule colonne que l'œil suivait ; sous le
+   schéma élargi, il démarrait 240 px à l'intérieur d'un bloc qui va d'un bord
+   à l'autre. Il passe à droite, et son filet prend la largeur du bloc du
+   dessus — c'est la même règle que celle qui ferme le ledger. */
+.p-tarifs .cta-ctx{text-align:right}
+/* Le halo du bouton déborde de 8 % de sa largeur de chaque côté. Calé à
+   gauche il débordait dans la gouttière, ce qui ne coûtait rien ; calé à
+   droite il passait le bord du document — 25 px à 768, 7 px à 1 280, mesurés.
+   On écrête au niveau de la section, qui fait la largeur de la fenêtre : au
+   large rien n'est coupé (le halo s'arrête à 1 375 dans une fenêtre de 1 440),
+   et à l'étroit il s'arrête au bord de l'écran, là où il aurait disparu de
+   toute façon. `clip` et non `hidden` : sur un seul axe il laisse l'axe
+   vertical en `visible`, donc les révélations au défilement sont intactes. */
+.p-tarifs .sec{overflow-x:clip}
+@media (min-width:1100px){
+  /* Sous le schéma, le filet et le bouton suivent le schéma, pas la colonne. */
+  .p-tarifs #lignes>.wrap>.cta-ctx{
+    width:min(calc(var(--maxw) - var(--pad) * 2), calc(100vw - var(--pad) * 2));
+    margin-left:50%;transform:translateX(-50%);
   }
 }
 
