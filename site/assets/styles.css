@@ -915,7 +915,24 @@ ul.crosses li::before{background:none;border:1.5px solid var(--fg-dim);border-ra
 .cta-ctx{
   margin:clamp(30px,3.6vw,46px) 0 0;padding-top:clamp(18px,2vw,24px);
   border-top:1px solid var(--rule-soft);
+  /* La sortie ferme le bloc qu'elle suit, donc elle se cale sur son bord de
+     fin. Calée à gauche elle pendait à l'opposé de là où le regard arrive :
+     sous un ledger dont tous les montants sont à droite, sous un bento qui va
+     d'un bord à l'autre. Les onze paragraphes de sortie partagent déjà le bord
+     droit du bloc qui les précède — mesuré sur les quatre pages — il suffit
+     donc d'y amener le bouton. */
+  text-align:right;
 }
+/* Le halo du bouton déborde de 8 % de sa largeur de chaque côté. Calé à
+   gauche il tombait dans la gouttière, ce qui ne coûtait rien ; calé à droite
+   il passe le bord du document — 25 px à 768, 7 px à 1 280, mesurés. On écrête
+   au niveau de la section, qui fait la largeur de la fenêtre : au large rien
+   n'est coupé (le halo s'arrête à 1 375 dans une fenêtre de 1 440), à l'étroit
+   il s'arrête au bord de l'écran, là où il aurait disparu de toute façon.
+   `clip` et non `hidden` : sur un seul axe il laisse l'axe vertical en
+   `visible`, donc les révélations au défilement sont intactes, et il ne crée
+   pas de conteneur de défilement, donc les éléments collants ne bougent pas. */
+.sec{overflow-x:clip}
 
 /* ═══════════ 19. pied de page ═══════════ */
 
@@ -2710,26 +2727,14 @@ body::before{
   }
 }
 
-/* ---- la sortie contextuelle s'aligne sur le bloc qu'elle suit ----
-   Le bouton était calé à gauche de la colonne de lecture, sous des blocs qui
-   ne commencent pas là : sous le ledger, dont tous les montants sont à droite,
-   il pendait à l'opposé de la seule colonne que l'œil suivait ; sous le
-   schéma élargi, il démarrait 240 px à l'intérieur d'un bloc qui va d'un bord
-   à l'autre. Il passe à droite, et son filet prend la largeur du bloc du
-   dessus — c'est la même règle que celle qui ferme le ledger. */
-.p-tarifs .cta-ctx{text-align:right}
-/* Le halo du bouton déborde de 8 % de sa largeur de chaque côté. Calé à
-   gauche il débordait dans la gouttière, ce qui ne coûtait rien ; calé à
-   droite il passait le bord du document — 25 px à 768, 7 px à 1 280, mesurés.
-   On écrête au niveau de la section, qui fait la largeur de la fenêtre : au
-   large rien n'est coupé (le halo s'arrête à 1 375 dans une fenêtre de 1 440),
-   et à l'étroit il s'arrête au bord de l'écran, là où il aurait disparu de
-   toute façon. `clip` et non `hidden` : sur un seul axe il laisse l'axe
-   vertical en `visible`, donc les révélations au défilement sont intactes. */
-.p-tarifs .sec{overflow-x:clip}
 @media (min-width:1100px){
-  /* Sous le schéma, le filet et le bouton suivent le schéma, pas la colonne. */
-  .p-tarifs #lignes>.wrap>.cta-ctx{
+  /* Deux sections de tarifs posent un bloc qui sort de la colonne : `#lignes`
+     son schéma, `#fit` son bento. Leur sortie contextuelle sort avec, sinon
+     le filet et le bouton s'arrêtent 240 px avant le bord du bloc qu'ils
+     ferment — mesuré sur `#fit`. `#addition` n'y est pas : son ledger reste
+     dans la colonne, donc son bouton aussi. */
+  .p-tarifs #lignes>.wrap>.cta-ctx,
+  .p-tarifs #fit>.wrap>.cta-ctx{
     width:min(calc(var(--maxw) - var(--pad) * 2), calc(100vw - var(--pad) * 2));
     margin-left:50%;transform:translateX(-50%);
   }
