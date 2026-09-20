@@ -273,7 +273,11 @@ section 37 : un geste par page, et un seul. Accueil large et asymétrique ;
 Méthode avec un résumé pleine largeur puis une colonne de travail resserrée à
 1 100 px et calée à gauche ; Collaboration en trame horizontale, chapeau à
 gauche et contenu à droite ; Tarifs en colonne étroite de 880 px, sections
-séparées au filet — un devis, pas une page de site. Chaque page porte aussi en
+séparées au filet — un devis, pas une page de site, mais les blocs tabulaires
+en sortent (les trois lignes, le ratio, la comparaison), parce qu'un tableau de
+prix n'a pas à se lire à la mesure d'un paragraphe. Au-delà de 1 100 px le
+ratio se recompose en trois bandes pleine largeur et ses trente carrés passent
+sur une seule rangée. Chaque page porte aussi en
 filigrane, derrière son bandeau de tête, un grand pictogramme qui lui est
 propre.
 

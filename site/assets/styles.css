@@ -2642,6 +2642,64 @@ body::before{
   width:min(calc(var(--maxw) - var(--pad) * 2), calc(100vw - var(--pad) * 2));
   margin-left:50%;transform:translateX(-50%);
 }
+/* Les trois lignes et le ratio vivaient dans un `.schema` : la règle
+   ci-dessus ne visait que les enfants directs de `.wrap`, donc aucun des deux
+   ne sortait de la colonne de 880. Mesuré à 1 440 : les trois cellules de prix
+   tombaient à 245 px — trente signes par ligne, et « 200 € / RDV honoré » qui
+   passait à la ligne quand les deux autres montants tenaient sur une seule.
+   Sur une page de tarifs, la seule chose qui doit s'aligner, ce sont les
+   montants. Le `.schema` sort donc lui aussi, et ce qu'il contient se
+   recompose ci-dessous pour occuper la largeur au lieu de la subir.
+   À 1 440 : cellules 245 -> 405 px, bloc 413 -> 292 px de haut.
+
+   ---- le ratio à partir de 1 100 px ----
+   Trois bandes qui prennent chacune toute la largeur, au lieu d'une pile
+   étroite avec 500 px de vide à sa droite :
+
+     2 sur 30   │  l'argument          │  la nuance
+     ▪▪▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫▫  (les trente, en une seule rangée)
+     ■ 2 signés                       □ 28 qualifiés
+
+   La rangée unique n'est pas un choix décoratif : à 15 × 2 dans un conteneur
+   de 1 248 px les carrés montent à 76 px et le dessin se lit comme un damier
+   — c'est pour ça que `.ratio-grid` était bridé à 640 px, et ce bridage est
+   précisément ce qui laissait le vide à droite. Étirés sur une rangée de
+   trente ils retombent à 33 px, la taille que ce dessin avait déjà, et la
+   fraction se lit d'un coup parce que les deux allumés ouvrent la bande. */
+@media (min-width:1100px){
+  /* Le `.schema` ne sort qu'ici, et la rangée de trente ne vaut qu'ici.
+     Mesuré : à 900 px de fenêtre la sortie ne gagne que 20 px de conteneur,
+     à 1 099 elle en gagne 219 mais la rangée de trente y tombe à 26 px de
+     côté. En dessous du seuil on garde donc les 15 × 2 et la colonne, c'est-
+     à-dire exactement ce qui existait : rien ne change sous 1 100 px. */
+  .p-tarifs .sec>.wrap>.schema{
+    width:min(calc(var(--maxw) - var(--pad) * 2), calc(100vw - var(--pad) * 2));
+    margin-left:50%;transform:translateX(-50%);
+  }
+
+  .p-tarifs .ratio .keynum{
+    grid-template-columns:auto minmax(0,1.35fr) minmax(0,1fr);
+    column-gap:var(--s6);
+  }
+  /* `.say` et `.fine` sont enfermés dans un div sans rôle : on le dissout pour
+     qu'ils deviennent les deux dernières colonnes. Sans ça la prose court sur
+     1 000 px, ce qui est illisible à 19 px. */
+  .p-tarifs .ratio .keynum>div:not(.big){display:contents}
+  .p-tarifs .ratio .keynum .fine{margin-top:0}
+
+  /* Le dégradé de `.pad.hot` s'éteint à 62 % : calibré pour une colonne de
+     788 px, il mourait à 774 px dans un pavé de 1 248 et la nuance de droite
+     se retrouvait posée sur le fond nu. On l'étire à la largeur réelle. */
+  .p-tarifs .ratio.hot{
+    background:linear-gradient(90deg,rgba(var(--accent-rgb),.07),rgba(var(--accent-rgb),0) 94%);
+  }
+
+  .p-tarifs .ratio-grid{grid-template-columns:repeat(30,1fr);max-width:none}
+  .p-tarifs .ratio-key{
+    display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--s6);
+  }
+}
+
 /* les sections se séparent au filet, pas au blanc : c'est ce qui fait lire
    une suite de clauses plutôt qu'une suite d'écrans */
 .p-tarifs .sec+.sec{padding-top:0}
