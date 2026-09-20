@@ -2952,62 +2952,215 @@ body::before{
 
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   36. LE PANNEAU DE PRIX (héros de l'accueil)
+   36. L'AGENDA QUI SE REMPLIT (héros de l'accueil)
    ───────────────────────────────────────────────────────────────────────────
-   Il occupe la place la plus visible du site, à droite du titre. Elle était
-   tenue par une trajectoire chiffrée étiquetée « Exemple » — donc inventée, et
-   un dirigeant qui lit « Exemple » décote tout le reste de la page. Le prix
-   prend sa place : c'est la première chose qu'on cherche, et la seule que le
-   visiteur ne peut obtenir nulle part ailleurs en quinze secondes.
+   La place la plus visible du site. Elle a porté une trajectoire chiffrée
+   étiquetée « Exemple », puis la grille tarifaire. Elle porte maintenant le
+   livrable lui-même : un rendez-vous qui arrive dans un agenda, avec le
+   dossier du prospect attaché. Le prix reste sur la page, dans la carte
+   « 03 · Combien » et sur toute la page Tarifs.
 
-   Il réutilise la coque de la section 26 (cadre, dégradé, ombre, en-tête).
-   Trois lignes, une perte maximale, un ratio. Rien de plus : au-delà, il cesse
-   d'être lisible d'un coup d'œil, ce qui est son seul travail.
-   ═══════════════════════════════════════════════════════════════════════════ */
+   Une seule boucle, de 13 s, partagée par tous les éléments : chacun porte la
+   même `animation-duration` et découpe sa fenêtre en pourcentages du cycle.
+   Pas de JS, pas de bibliothèque, et une seule horloge — donc rien à
+   resynchroniser.
 
-/* ---- les trois lignes ----
-   Colonne de montants à largeur fixe, et non `auto` : chaque ligne est sa
-   propre grille, donc trois colonnes `auto` se dimensionnent chacune sur son
-   propre contenu et les montants ne se terminent pas au même fer. La largeur
-   couvre « 1 200 € » au corps maximal. */
-.trio{padding:clamp(6px,1vw,10px) 0;--wa:clamp(88px,9.8vw,140px)}
-.tr{
-  display:grid;grid-template-columns:var(--wa) minmax(0,1fr);
-  gap:var(--s4);align-items:baseline;
-  padding:clamp(11px,1.4vw,15px) clamp(20px,2.6vw,28px);
-}
-.tr+.tr{border-top:1px solid var(--rule-soft)}
-/* justify-self et non text-align : l'élément ne s'étire pas dans une colonne
-   auto, donc aligner le texte dans sa boîte ne déplace rien. C'est la boîte
-   qu'il faut pousser à droite pour que les trois montants se terminent au
-   même fer. */
-.tr .a{
-  font-weight:800;font-size:var(--t7);line-height:1;letter-spacing:-.05em;
-  font-variant-numeric:tabular-nums;justify-self:end;white-space:nowrap;
-}
-.tr .l{font-size:var(--t2);line-height:1.35;color:var(--fg-soft)}
-.tr .l b{color:var(--fg);font-weight:600}
-/* la ligne à la performance : la seule qui bouge, donc la seule accentuée */
-.tr.hot .a{color:var(--accent-hi)}
+      0 →  5 %   l'agenda respire, six créneaux déjà pris
+      5 → 15 %   une réponse entre par la gauche et rejoint le centre
+     15 → 27 %   les trois conditions s'allument l'une après l'autre
+     27 → 34 %   la puce tombe dans le créneau libre du mercredi
+     34 → 40 %   le créneau devient un rendez-vous
+     38 → 90 %   le dossier se remplit champ par champ, et tient
+     90 → 97 %   le rendez-vous rejoint les autres : il est à vous
+     97 → 100 %  reprise
 
-/* ---- la perte maximale ----
-   L'argument du panneau. Un dirigeant décide sur ce qu'il risque, pas sur ce
-   qu'on lui promet, et c'est le seul chiffre du site qui borne son risque. */
-.tmax{
-  padding:clamp(16px,2vw,22px) clamp(20px,2.6vw,28px);
-  border-top:1px solid var(--rule);
-  background:linear-gradient(180deg,rgba(var(--accent-rgb),.085),rgba(var(--accent-rgb),.025));
-  display:grid;grid-template-columns:clamp(88px,9.8vw,140px) minmax(0,1fr);
-  gap:var(--s4);align-items:start;
+   Première minuterie, sur 13 s : le dossier n'arrivait qu'à 7,4 s. C'est le
+   panneau d'accroche de l'accueil — personne n'attend sept secondes pour
+   comprendre ce qu'on lui montre. Il arrive maintenant à 4,2 s et tient
+   jusqu'à 9,9 s, soit la moitié du cycle.
+
+   Tout est en `transform` et `opacity` : rien ne remet en page, rien ne
+   repeint hors du compositeur. En mouvement réduit, la boucle s'arrête sur
+   l'état final — l'agenda rempli et le dossier ouvert, qui est ce que le
+   panneau a à dire. */
+.agenda{position:relative;display:grid;--cyc:11s}
+
+/* ---- la piste d'arrivée ---- */
+.ag-piste{
+  position:relative;display:flex;align-items:center;justify-content:center;
+  height:46px;padding:0 clamp(14px,1.8vw,18px);
+  border-bottom:1px solid var(--rule-soft);
 }
-.tmax .a{
-  font-weight:800;font-size:var(--t7);line-height:1;letter-spacing:-.05em;
-  font-variant-numeric:tabular-nums;color:var(--accent-hi);white-space:nowrap;justify-self:end;
+/* le rail sur lequel la réponse glisse */
+.ag-piste::before{
+  content:"";position:absolute;left:clamp(14px,1.8vw,18px);right:clamp(14px,1.8vw,18px);
+  top:50%;border-top:1px dashed var(--rule);
 }
-.tmax p{margin:0;font-size:var(--t2);line-height:1.45;color:var(--fg-soft)}
-.tmax p b{color:var(--fg);font-weight:600}
+.ag-puce{
+  position:relative;display:flex;align-items:center;gap:7px;
+  padding:5px 10px;border-radius:var(--radius-pill);
+  border:1px solid var(--rule);background:var(--surface-3);
+  font-size:var(--t1);color:var(--fg-soft);white-space:nowrap;
+  animation:agPuce var(--cyc) linear infinite;
+}
+.ag-puce .ico{width:13px;height:13px;flex:none;color:var(--accent);
+  fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+@keyframes agPuce{
+  0%,4%      {transform:translate3d(-340%,0,0);opacity:0}
+  5%         {opacity:1}
+  15%,26%    {transform:translate3d(0,0,0);opacity:1}
+  /* elle tombe dans le créneau : la descente et l'effacement se croisent avec
+     l'apparition du rendez-vous, c'est ce croisement qui fait l'accroche */
+  34%,100%   {transform:translate3d(0,78px,0) scale(.72);opacity:0}
+}
+
+/* ---- les trois conditions ---- */
+.ag-cond{
+  display:flex;flex-wrap:wrap;gap:6px;justify-content:center;
+  padding:10px clamp(14px,1.8vw,18px);border-bottom:1px solid var(--rule-soft);
+}
+.ag-cond span{
+  display:flex;align-items:center;gap:5px;
+  font-family:var(--label);font-size:var(--t1);font-weight:600;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--fg-dim);
+  animation:agCond var(--cyc) var(--ease-out) infinite;
+  animation-delay:calc(var(--i) * .55s);
+}
+.ag-cond span{position:relative}
+.ag-cond span::before{
+  content:"";width:13px;height:13px;flex:none;border-radius:50%;
+  border:1px solid var(--rule);
+}
+@keyframes agCond{
+  0%,14%   {color:var(--fg-dim)}
+  19%,88%  {color:var(--accent)}
+  96%,100% {color:var(--fg-dim)}
+}
+/* la pastille se remplit : un `scale`, donc composité */
+.ag-cond i{
+  position:absolute;left:0;top:50%;margin-top:-6.5px;
+  width:13px;height:13px;border-radius:50%;
+  background:var(--accent);transform:scale(0);
+  animation:agPast var(--cyc) var(--spring) infinite;
+  animation-delay:calc(var(--i) * .55s);
+}
+@keyframes agPast{
+  0%,14%   {transform:scale(0)}
+  19%,88%  {transform:scale(1)}
+  96%,100% {transform:scale(0)}
+}
+
+/* ---- la semaine ---- */
+.ag-cal{padding:clamp(12px,1.6vw,16px) clamp(14px,1.8vw,18px)}
+.ag-jours{
+  display:grid;grid-template-columns:repeat(5,1fr);gap:5px;margin-bottom:7px;
+  font-family:var(--label);font-size:var(--t1);font-weight:600;letter-spacing:.09em;
+  text-transform:uppercase;color:var(--fg-dim);text-align:center;
+}
+.ag-jours b{font-weight:600;color:var(--fg-soft)}
+.ag-grid{
+  position:relative;display:grid;grid-template-columns:repeat(5,1fr);
+  grid-template-rows:repeat(7,15px);gap:5px;
+}
+/* la trame horaire, en fond */
+.ag-grid::before{
+  content:"";position:absolute;inset:0;border-radius:var(--radius-xs);
+  background:repeating-linear-gradient(180deg,
+    rgba(var(--fg-rgb),.035) 0 15px,transparent 15px 20px);
+}
+.ag-ev{
+  position:relative;grid-column:var(--c);grid-row:var(--r) / span var(--n);
+  border-radius:var(--radius-xs);background:rgba(var(--fg-rgb),.1);
+}
+/* le créneau visé : vide, il respire doucement jusqu'à ce qu'il se remplisse */
+.ag-cible{
+  background:none;border:1px dashed rgba(var(--accent-rgb),.45);
+  animation:agCible var(--cyc) var(--ease-io) infinite;
+}
+@keyframes agCible{
+  0%,26%   {opacity:.45}
+  15%,22%  {opacity:.9}
+  34%,100% {opacity:0}
+}
+/* le rendez-vous qui s'installe */
+.ag-neuf{
+  background:linear-gradient(140deg,var(--accent-hi),var(--accent));
+  transform:scaleY(0);transform-origin:top;
+  animation:agNeuf var(--cyc) var(--spring) infinite;
+}
+@keyframes agNeuf{
+  0%,33%    {transform:scaleY(0);opacity:0}
+  40%,89%   {transform:scaleY(1);opacity:1}
+  /* il rejoint les autres : il devient un créneau comme un autre */
+  94%,97%   {transform:scaleY(1);opacity:.42}
+  100%      {transform:scaleY(1);opacity:0}
+}
+
+/* ---- le dossier ---- */
+.ag-fiche{
+  padding:clamp(13px,1.7vw,17px) clamp(14px,1.8vw,18px);
+  border-top:1px solid var(--rule-soft);display:grid;gap:8px;
+}
+/* Les intitulés restent, les valeurs arrivent. Première version : la fiche
+   entière apparaissait, donc pendant la moitié du cycle le bas du panneau
+   était un vide de 200 px. Un formulaire vide dit déjà quelque chose — voilà
+   les champs que vous recevez — là où un vide ne dit rien. */
+.ag-quand,.ag-l>span{
+  transform:translate3d(0,7px,0);opacity:0;
+  animation:agLigne var(--cyc) var(--ease-out) infinite;
+  animation-delay:calc(var(--i) * .14s);
+}
+@keyframes agLigne{
+  0%,38%   {transform:translate3d(0,7px,0);opacity:0}
+  44%,90%  {transform:none;opacity:1}
+  97%,100% {transform:translate3d(0,7px,0);opacity:0}
+}
+/* le trait d'attente sous un champ encore vide : il s'efface quand la valeur
+   se pose, donc les deux ne sont jamais visibles ensemble */
+.ag-l{position:relative}
+.ag-l::after{
+  content:"";position:absolute;left:calc(7.5ch + var(--s3));right:22%;top:9px;
+  border-top:1px dashed var(--rule);
+  animation:agAttente var(--cyc) var(--ease-out) infinite;
+  animation-delay:calc(var(--i) * .14s);
+}
+@keyframes agAttente{
+  0%,38%   {opacity:1}
+  44%,96%  {opacity:0}
+  100%     {opacity:1}
+}
+.ag-quand{
+  display:flex;align-items:baseline;gap:var(--s2);flex-wrap:wrap;
+  font-weight:700;font-size:var(--t4);letter-spacing:-.02em;color:var(--accent-hi);
+}
+.ag-quand em{font-style:normal;font-size:var(--t2);font-weight:600;color:var(--fg-dim)}
+.ag-l{display:grid;grid-template-columns:minmax(0,7.5ch) minmax(0,1fr);gap:var(--s3);align-items:start}
+.ag-l>b{
+  font-family:var(--label);font-size:var(--t1);font-weight:600;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--fg-dim);padding-top:2px;opacity:.75;
+}
+.ag-l>span{font-size:var(--t2);line-height:1.45;color:var(--fg-soft);min-width:0}
+.ag-l q{color:var(--fg);font-style:italic}
+.ag-l .ico{width:13px;height:13px;color:var(--accent);vertical-align:-2px;margin-right:5px;
+  fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
 
 @media (max-width:440px){
-  .tr,.tmax{grid-template-columns:1fr;gap:7px}
-  .tr .a,.tmax .a{justify-self:start}
+  .ag-cond span{font-size:10px;letter-spacing:.05em}
+  .ag-l{grid-template-columns:1fr;gap:2px}
+}
+
+/* Mouvement réduit : la boucle s'arrête sur son état final. Le panneau doit
+   dire « un rendez-vous est arrivé, voilà son dossier » ; figé au début il ne
+   dirait rien du tout. */
+@media (prefers-reduced-motion:reduce){
+  .ag-puce,.ag-cond span,.ag-cond i,.ag-cible,.ag-neuf,
+  .ag-quand,.ag-l>span,.ag-l::after{animation:none!important}
+  .ag-l::after{opacity:0}
+  /* la piste n'a plus de trajet à montrer : un rail vide ne dit rien */
+  .ag-piste{display:none}
+  .ag-cible{opacity:0}
+  .ag-cond span{color:var(--accent)}
+  .ag-cond i{transform:scale(1)}
+  .ag-neuf{transform:none;opacity:1}
+  .ag-quand,.ag-l>span{transform:none;opacity:1}
 }

@@ -19,7 +19,7 @@ pages, plus les deux pages légales.
 
 | Page | Ce qu'elle porte | Composition | Hauteur |
 |---|---|---|---|
-| `index.html` | héros et grille tarifaire, les quatre gains, le défilé, le fondateur, trois cartes vers le détail, la prise de rendez-vous | panneau de prix + défilé illustré | 5 920 px |
+| `index.html` | héros et agenda animé, les quatre gains, le défilé, le fondateur, trois cartes vers le détail, la prise de rendez-vous | l'agenda qui se remplit + défilé illustré | 5 920 px |
 | `methode.html` | schéma des deux canaux, entonnoir chiffré, six filtres, la fiche livrée, ce qui porte votre nom | schéma animé + énoncé tenu + colonne de filtrage | 8 240 px |
 | `collaboration.html` | la frise des quatre semaines, le détail semaine par semaine, la balance des charges, la facture, la sortie | frise horizontale animée + balance | 7 765 px |
 | `tarifs.html` | les trois montants, le chiffre à retenir, l'addition d'un trimestre, face à un recrutement, à qui on dit non | trois cartes + grand livre + comparaison | 7 190 px |
@@ -143,7 +143,7 @@ poignée d'élément, sur la bande du texte.
 
 ## Densité et cadres
 
-**La carte est réservée aux objets.** Une fiche, un panneau de prix, un arrêt de
+**La carte est réservée aux objets.** Une fiche, un agenda, un arrêt de
 frise, une case de schéma : ce sont des choses. Le texte courant et les listes
 reviennent au fil du fond, avec un filet à gauche quand une séparation est
 nécessaire — un filet dit « c'est lié à ce qui précède » là où un cadre dit
@@ -178,6 +178,47 @@ grammaire d'un message d'erreur de navigateur, sur les passages les plus
 engageants du site. Ils sont devenus des apartés : un filet, un intitulé qui
 nomme le propos, et le texte une taille au-dessus du corps. Le jeton
 `--amber` ne sert plus qu'aux blocs à faire des pages légales.
+
+## Le panneau du héros : l'agenda qui se remplit
+
+La place la plus visible du site a porté trois choses. Une trajectoire chiffrée
+étiquetée « Exemple » — donc inventée. Puis la grille tarifaire. Elle porte
+maintenant le livrable lui-même : **un rendez-vous qui entre dans un agenda,
+avec le dossier du prospect attaché**.
+
+Le prix n'a pas disparu de l'accueil : il est dans la carte « 03 · Combien »,
+et toute la page Tarifs lui est consacrée.
+
+Une seule boucle de 11 s, partagée par tous les éléments : chacun porte la même
+`animation-duration` et découpe sa fenêtre en pourcentages. Pas de JS, pas de
+bibliothèque, une seule horloge, donc rien à resynchroniser.
+
+| Fenêtre | Ce qui se passe |
+|---|---|
+| 0 → 5 % | l'agenda respire, six créneaux déjà pris |
+| 5 → 15 % | une réponse entre par la gauche et rejoint le centre |
+| 15 → 27 % | les trois conditions s'allument l'une après l'autre |
+| 27 → 34 % | la puce tombe dans le créneau libre du mercredi |
+| 34 → 40 % | le créneau devient un rendez-vous |
+| 38 → 90 % | le dossier se remplit champ par champ, et tient |
+| 90 → 97 % | le rendez-vous rejoint les autres : il est à vous |
+
+Deux corrections, toutes deux trouvées au rendu :
+
+**Le dossier arrivait à 7,4 s.** La première minuterie tenait sur 13 s.
+Personne n'attend sept secondes pour comprendre le panneau d'accroche d'un
+accueil. Cycle ramené à 11 s et dossier avancé à 4,2 s, où il tient jusqu'à
+9,9 s — la moitié du cycle.
+
+**Le bas du panneau était un vide de 200 px** pendant la première moitié de la
+boucle, parce que la fiche entière apparaissait d'un coup. Les intitulés
+restent maintenant visibles du début à la fin, et seules les valeurs arrivent :
+un formulaire vide dit déjà « voilà les champs que vous recevez », là où un
+vide ne dit rien.
+
+Tout est en `transform` et `opacity` : **60 i/s à CPU ÷4**. En mouvement
+réduit, la boucle s'arrête sur son état final — l'agenda rempli, le dossier
+ouvert — parce que figée au départ elle ne dirait rien.
 
 ## Quatre schémas à la place de la prose
 
@@ -218,7 +259,7 @@ produit. Chaque cadre désamorce au passage une objection, sans jamais la nommer
 | Page · cadre | Ce qu'il vend | L'objection qu'il tue |
 |---|---|---|
 | Accueil · héros | leurs commerciaux closent au lieu de prospecter | — |
-| Accueil · panneau de prix | 1 200 / 500 / 200, et 2 700 € de perte maximale | « combien, et qu'est-ce que je risque » |
+| Accueil · l'agenda animé | un RDV qui entre dans la semaine, avec le dossier du prospect | « qu'est-ce que je reçois, concrètement » |
 | Accueil · le seuil | le modèle tient à partir de 7 000 € de valeur client | « ils prennent tout le monde » |
 | Accueil · ce que vous y gagnez | agenda prévisible, risque borné, zéro embauche, réponse datée | « un commercial me coûterait moins cher » |
 | Accueil · les trois questions | comment, ce que ça prend, combien — avec les montants | « je n'ai pas le temps de lire trois pages » |
@@ -238,7 +279,7 @@ produit. Chaque cadre désamorce au passage une objection, sans jamais la nommer
 | Tarifs · sous la carte setup | un prestataire qui ne facture pas le setup le bâcle | « pourquoi payer avant d'avoir quelque chose » |
 | Tarifs · la durée | trois mois, sinon on vous vend une réponse que l'infra ne peut pas produire | « vous vous protégez, pas moi » |
 | Tarifs · le ratio | deux signés sur trente, 7 % — et les vingt-huit qui restent | « je n'arrive pas à chiffrer » |
-| Tarifs · face à un recrutement | 8 700 € contre 11 100 €, et 2 700 € de perte maximale | « je préfère recruter » |
+| Tarifs · face à un recrutement | 8 700 € contre 11 100 €, dont 6 000 qui ne courent que si on livre | « je préfère recruter » |
 | Tarifs · pour qui | on refuse des missions | « ils prennent tout le monde » |
 
 **Le ratio, et pourquoi c'est lui plutôt qu'un coût unitaire.** Ce que le

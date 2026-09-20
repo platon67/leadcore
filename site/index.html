@@ -70,17 +70,21 @@
 
   <div class="wrap hero-grid">
     <div class="hero-copy">
-      <!-- L'accroche dit le livrable et le modèle, dans cet ordre : un chiffre
-           d'abord, parce que c'est ce qu'un dirigeant cherche, puis ce qui le
-           rend sûr. L'italique marque un vrai retournement — une agence payée
-           à l'unité et non au forfait — donc elle a le droit d'être là.
+      <!-- L'accroche dit le livrable, sa qualité et le modèle, dans cet ordre :
+           un chiffre d'abord, parce que c'est ce qu'un dirigeant cherche.
+           L'italique marque un vrai retournement — une agence payée à l'unité
+           et non au forfait — donc elle a le droit d'être là.
+           « Exclusifs » se dit du rendez-vous, pas du secteur : il est pris
+           pour vous et n'est revendu à personne. L'exclusivité sectorielle,
+           elle, n'est pas tranchée (voir docs/MAJ-OFFRE-2026-09.md), donc le
+           chapeau referme le sens tout de suite.
            La catégorie est passée du sur-titre à la première ligne du chapeau :
            un seul endroit, et il se lit. -->
       <h1>
-        <span class="ln"><span>8 à 12 RDV/mois.</span></span>
-        <span class="ln"><span class="ex">Payés à l’unité.</span></span>
+        <span class="ln"><span>8 à 12 RDV qualifiés.</span></span>
+        <span class="ln"><span class="ex">Exclusifs. Payés à l’unité.</span></span>
       </h1>
-      <p class="lede">Prospection B2B par email et LinkedIn. Chaque RDV&nbsp;: <b>votre cible, un décisionnaire, un besoin déjà formulé</b>.</p>
+      <p class="lede">Prospection B2B par email et LinkedIn. Chaque RDV&nbsp;: <b>votre cible, un décisionnaire, un besoin formulé — et vendu à vous seul</b>.</p>
       <div class="cta">
         <span class="cta-rdv"><a class="btn btn-pri" href="#rendez-vous"><span class="aur" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span><svg class="visio" viewBox="0 0 24 24" aria-hidden="true"><rect x="2.6" y="6.6" width="12.9" height="10.8" rx="2.6"/><path d="M15.5 10.7l5.4-3v8.6l-5.4-3z"/></svg>Prendre RDV
           <svg class="ar" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
@@ -89,40 +93,53 @@
       </div>
     </div>
 
-    <!-- Le panneau le plus visible du site porte le prix. Il a porté une
-         trajectoire chiffrée étiquetée «&nbsp;Exemple&nbsp;», donc inventée&nbsp;: un
-         dirigeant qui lit «&nbsp;Exemple&nbsp;» décote tout le reste de la page, et le
-         prix, lui, n'est obtenable nulle part ailleurs en quinze secondes.
-         Mise en forme en section 36 de la feuille de style. -->
-    <figure class="stats rv">
+    <!-- Le panneau le plus visible du site montre le livrable : un rendez-vous
+         qui entre dans un agenda avec le dossier du prospect. Il a porté une
+         trajectoire inventée, puis la grille tarifaire ; le prix reste sur la
+         page dans la carte «&nbsp;03&nbsp;· Combien&nbsp;» et sur toute la page Tarifs.
+         Une seule boucle de 13 s, découpée en pourcentages — section 36. -->
+    <figure class="stats agenda rv">
       <figcaption class="stats-hd">
-        <span class="lbl">Ce que ça coûte</span>
-        <span class="tag">Grille actuelle</span>
+        <span class="lbl">Ce qui arrive dans votre agenda</span>
+        <span class="tag">Cette semaine</span>
       </figcaption>
 
-      <div class="trio">
-        <div class="tr">
-          <span class="a">1 200 €</span>
-          <span class="l">de <b>setup</b>, une seule fois au démarrage</span>
-        </div>
-        <div class="tr">
-          <span class="a">500 €</span>
-          <span class="l">par mois, <b>infrastructure et pilotage</b></span>
-        </div>
-        <div class="tr hot">
-          <span class="a">200 €</span>
-          <span class="l">par <b>rendez-vous honoré</b>, et seulement s’il a lieu</span>
+      <div class="ag-piste" aria-hidden="true">
+        <span class="ag-puce">
+          <svg class="ico" viewBox="0 0 24 24"><circle cx="6" cy="7" r="2.6"/><circle cx="18" cy="12" r="2.6"/><circle cx="6" cy="17" r="2.6"/><path d="M8.3 8.3l7.4 2.6M8.3 15.7l7.4-2.6"/></svg>
+          Une réponse vient d’arriver
+        </span>
+      </div>
+
+      <div class="ag-cond" aria-hidden="true">
+        <span style="--i:0"><i></i>Dans votre cible</span>
+        <span style="--i:1"><i></i>Décisionnaire</span>
+        <span style="--i:2"><i></i>Besoin formulé</span>
+      </div>
+
+      <div class="ag-cal" aria-hidden="true">
+        <div class="ag-jours"><span>Lun</span><span>Mar</span><b>Mer</b><span>Jeu</span><span>Ven</span></div>
+        <div class="ag-grid">
+          <span class="ag-ev" style="--c:1;--r:2;--n:2"></span>
+          <span class="ag-ev" style="--c:1;--r:6;--n:1"></span>
+          <span class="ag-ev" style="--c:2;--r:4;--n:2"></span>
+          <span class="ag-ev" style="--c:4;--r:3;--n:1"></span>
+          <span class="ag-ev" style="--c:4;--r:6;--n:2"></span>
+          <span class="ag-ev" style="--c:5;--r:5;--n:2"></span>
+          <span class="ag-ev ag-cible" style="--c:3;--r:4;--n:2"></span>
+          <span class="ag-neuf ag-ev" style="--c:3;--r:4;--n:2"></span>
         </div>
       </div>
 
-      <div class="tmax">
-        <span class="a">2 700 €</span>
-        <p>C’est tout ce que vous aurez dépensé sur le trimestre <b>si aucun rendez-vous n’a lieu</b>. Votre engagement maximum, connu à la signature.</p>
+      <div class="ag-fiche">
+        <div class="ag-quand" style="--i:0">Mercredi 14:30 <em>· 30 min, en visio</em></div>
+        <div class="ag-l" style="--i:1"><b>Qui</b><span>Direction commerciale — elle décide, et elle signe.</span></div>
+        <div class="ag-l" style="--i:2"><b>Société</b><span>Éditeur SaaS B2B, 40 à 80 salariés, dans votre cible.</span></div>
+        <div class="ag-l" style="--i:3"><b>Besoin</b><span><q>Deux commerciaux recrutés ce trimestre, pas assez de rendez-vous à leur donner.</q></span></div>
+        <div class="ag-l" style="--i:4"><b>Canal</b><span><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="7" r="2.6"/><circle cx="18" cy="12" r="2.6"/><circle cx="6" cy="17" r="2.6"/><path d="M8.3 8.3l7.4 2.6M8.3 15.7l7.4-2.6"/></svg>LinkedIn, réponse au deuxième message.</span></div>
       </div>
 
-      <div class="stats-ft">
-        Et dans l’autre sens&nbsp;: <b>deux rendez-vous signés sur trente</b> remboursent le trimestre entier.
-      </div>
+      <div class="stats-ft">Le créneau part dans l’agenda de votre commercial avec ce dossier. <b>Il n’a plus qu’à s’y présenter.</b></div>
     </figure>
   </div>
 </section>
