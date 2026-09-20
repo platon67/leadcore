@@ -420,41 +420,10 @@
   }
 
   /* ─────────── 11. calendrier ───────────
-     Tant que provider et url ne sont pas renseignés dans config.js, le bloc de
-     repli écrit dans le HTML reste affiché. */
-  var slot = doc.getElementById("booking-slot");
-  if (!slot) return;
-
-  var cfg = window.LEADCORE_BOOKING || {};
-  var url = (cfg.url || "").trim();
-  var provider = cfg.provider;
-  if (!provider || !url) return;
-
-  var src = url;
-  var sep = url.indexOf("?") === -1 ? "?" : "&";
-  if (provider === "cal") {
-    /* La vue mois demande de la largeur : sur un téléphone elle tombe à 260 px
-       et devient illisible. En dessous de 640 px, Cal a une vue en colonne
-       faite pour ça. Le choix se fait au chargement, pas au redimensionnement :
-       recharger l'iframe pendant que quelqu'un choisit une date lui ferait
-       perdre sa sélection. */
-    src += sep + "embed=true&theme=dark&layout=" +
-           (window.innerWidth < 640 ? "column_view" : "month_view");
-  } else if (provider === "calendly") {
-    src += sep + "hide_gdpr_banner=1&background_color=0A110F&text_color=F2F8F5&primary_color=19C78B";
-  }
-
-  var frame = doc.createElement("iframe");
-  frame.src = src;
-  frame.title = "Calendrier de prise de rendez-vous Leadcore";
-  frame.loading = "lazy";
-  /* la vue colonne tient dans moins de hauteur que la vue mois */
-  frame.style.minHeight = (window.innerWidth < 640 ? 520 : (cfg.height || 680)) + "px";
-  frame.setAttribute("allow", "fullscreen");
-
-  slot.innerHTML = "";
-  slot.appendChild(frame);
-  slot.setAttribute("data-state", "loaded");
+     L'iframe Cal a été remplacée par une interface écrite dans la direction
+     artistique du site : voir assets/rdv.js, chargé après ce fichier. Le bloc
+     de repli du HTML reste la sortie de secours — il s'affiche tel quel si
+     `eventTypeId` n'est pas renseigné dans config.js. */
 
   void root;
 })();

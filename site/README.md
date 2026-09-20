@@ -656,29 +656,56 @@ site/
     └── leadcore-logo*.png  version web ; l’original pleine définition vit dans deck/assets/
 ```
 
-## Brancher le calendrier
+## La prise de rendez-vous
 
-Tout passe par `assets/config.js` :
+Elle est écrite ici, dans `assets/rdv.js`, et ne dépend d'aucun serveur.
+L'iframe de Cal posait sa propre interface au milieu de la page — d'autres
+polices, d'autres rayons, un autre noir, et un cadre qu'on ne peut pas
+toucher. Il ne reste d'elle que les données.
 
-```js
-window.LEADCORE_BOOKING = {
-  provider: "cal",                                   // "cal" | "calendly" | null
-  url: "https://cal.com/leadcore/diagnostic-30min",
-  height: 680
-};
-```
+**Aucune clé, aucune fonction, aucun secret.** Les deux points d'entrée de
+l'API publique de Cal répondent en `access-control-allow-origin: *`, et aucun
+des deux ne demande d'authentification pour un type de rendez-vous public.
+Vérifié par préflight : `access-control-allow-methods` contient `POST`,
+`access-control-allow-headers` contient `cal-api-version` et `Content-Type`.
 
-Tant que `provider` vaut `null`, la page affiche le bloc de repli avec le bouton
-email. Dès que `provider` et `url` sont renseignés, le calendrier s’affiche à la
-place, sans autre changement.
+| Appel | En-tête de version | Ce qu'il rend |
+|---|---|---|
+| `GET api.cal.com/v2/slots` | `2024-09-04` | `{ data: { "2026-09-22": [ { start }, … ] } }` |
+| `POST api.cal.com/v2/bookings` | `2024-08-13` | la réservation créée |
 
-L’adresse de contact se change au même endroit :
+Le corps du POST : `start`, `eventTypeId`, `attendee { name, email, timeZone,
+language }`, et `bookingFieldsResponses { notes }` quand il y a quelque chose
+à mettre dedans. Le type de rendez-vous n'a pas de champ « société » : elle est
+préfixée aux notes.
 
-```js
-window.LEADCORE_CONTACT = { email: "contact@leadcore.fr" };
-```
+**Le fuseau est celui du visiteur**, pas le nôtre. C'est ce que Cal attend pour
+découper les créneaux, et c'est ce qu'il faut afficher : un horaire sans fuseau
+est une cause d'absence au rendez-vous. Il est écrit dans l'en-tête du panneau.
 
-Elle alimente le bouton de repli et le lien du pied de page.
+**Dix états, tous à l'écran** : chargement, échec réseau, aucun créneau sur
+l'horizon, choix du jour, choix de l'heure, formulaire, champ manquant, envoi
+en cours, créneau pris entre-temps, confirmation. Le créneau pris entre-temps
+est le cas qui arrive vraiment — quelqu'un réserve pendant qu'on remplit le
+formulaire — et il recharge les disponibilités au lieu de laisser réessayer
+dans le vide.
+
+**Trois replis, dans cet ordre.** Sans `eventTypeId` dans `config.js`, rien ne
+se monte et le bloc écrit dans le HTML reste affiché. Sans `fetch` ni
+`Element.closest`, pareil. Si l'API ne répond pas, le panneau affiche le lien
+vers la page Cal et l'adresse email.
+
+Ce qu'il faut changer si le compte Cal change : `eventTypeId` dans
+`assets/config.js`. On le retrouve avec
+
+    curl "https://api.cal.com/v2/event-types?username=<compte>" \
+         -H "cal-api-version: 2024-06-14"
+
+Un piège rencontré en le construisant : la bande de jours est une rangée flex
+d'une vingtaine de boutons, et sans `minmax(0,1fr)` sur la grille parente elle
+lui impose sa largeur intrinsèque. Mesuré : la grille des heures passait à
+quatorze colonnes et sortait du cadre. C'est le `min-width:auto` des éléments
+de grille, le même piège que sur les éléments flex.
 
 ## Vérifier la mise en page
 

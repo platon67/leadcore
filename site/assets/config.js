@@ -12,7 +12,23 @@
 window.LEADCORE_BOOKING = {
   provider: "cal",
   url: "https://cal.com/platon-gsniv4/30min",
-  // Hauteur minimale du calendrier intégré, en pixels.
+
+  /* Identifiant du type de rendez-vous chez Cal, lu par assets/rdv.js pour
+     interroger l'API. On le retrouve avec :
+       curl "https://api.cal.com/v2/event-types?username=<compte>" \
+            -H "cal-api-version: 2024-06-14"
+     Si ce champ est vide, le calendrier maison ne se monte pas et le bloc de
+     repli du HTML reste affiché — avec le lien vers la page Cal et l'email. */
+  eventTypeId: 7144191,
+
+  /* Durée affichée dans l'interface. Cal la connaît déjà ; elle n'est ici que
+     pour l'écrire à l'écran sans un aller-retour de plus. */
+  dureeMin: 30,
+
+  /* Nombre de jours explorés en avant à partir d'aujourd'hui. */
+  horizonJours: 28,
+
+  // Hauteur minimale du bloc, en pixels, pour éviter un saut au chargement.
   height: 680
 };
 

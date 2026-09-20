@@ -41,7 +41,10 @@ Business documents, SOPs and client-facing material are written in French.
 - Reference documentation lives in `docs/`.
 - `site/` holds the public marketing site: static HTML and CSS, no build step.
   It has two jobs, inform the prospects reached by outbound and let them book a
-  call. The booking provider and the contact address live in
+  call. Booking is **handled by the site itself** (`site/assets/rdv.js`), which
+  reads availability and creates the booking through Cal's public API straight
+  from the browser — no key, no backend, no secret, so the site stays static.
+  The Cal account, the event type id and the contact address live in
   `site/assets/config.js`. See `site/README.md`.
 - `.claude/settings.json` enables the `caveman`, `taste-skill` and
   `ui-ux-pro-max` plugins repository-wide. `taste-skill` carries the frontend

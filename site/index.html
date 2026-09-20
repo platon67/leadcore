@@ -144,6 +144,44 @@
   </div>
 </section>
 
+<!-- ══════════════════════════ LE PRIX, SOUS LE HÉROS ══════════════════════════
+     Le héros a porté la grille tarifaire, puis l'agenda animé. Le prix ne
+     disparaît pas pour autant de l'au-dessus du pli : il passe juste en
+     dessous, dans le composant `.price3` déjà employé sur la page Tarifs —
+     même rangée de trois, mêmes filets, mêmes montants. Version courte ici,
+     le détail de chaque ligne restant sur Tarifs. -->
+<section class="sec" id="prix" style="padding-block:clamp(34px,4.4vw,56px)">
+  <div class="wrap">
+    <div class="price3">
+      <div class="pcell pad">
+        <span class="k"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.4 3.4H7a2 2 0 00-2 2v13.2a2 2 0 002 2h10a2 2 0 002-2V9l-5.6-5.6z"/><path d="M13.4 3.4V9H19M8.6 13.4h6.8M8.6 16.8h4.4"/></svg>Une fois, au démarrage</span>
+        <span class="amt">1 200 <small>€</small></span>
+        <h3>Setup</h3>
+        <p>Domaines, boîtes d’envoi, comptes LinkedIn, base et séquences. Tout est acheté à votre nom et vous reste.</p>
+      </div>
+      <div class="pcell pad">
+        <span class="k"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19.2V13M10.3 19.2V8.6M15.7 19.2v-7.6M21 19.2V5"/></svg>Chaque mois</span>
+        <span class="amt">500 <small>€ / mois</small></span>
+        <h3>Infrastructure et pilotage</h3>
+        <p>Comptes maintenus, base renouvelée, segments arbitrés chaque semaine, reporting mensuel.</p>
+      </div>
+      <div class="pcell pad perf">
+        <span class="k"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.2" y="5" width="17.6" height="15.5" rx="2"/><path d="M3.2 9.8h17.6M8 3.5v3M16 3.5v3M9 14.6l2.2 2.2 4-4"/></svg>À la performance</span>
+        <span class="amt">200 <small>€ / RDV honoré</small></span>
+        <h3>Rendez-vous qualifiés</h3>
+        <p>Votre cible, un décisionnaire, un besoin formulé, et présent au rendez-vous. Les quatre, ou la ligne ne s’écrit pas.</p>
+      </div>
+    </div>
+
+    <p class="cta-ctx rv" style="text-align:left">
+      <span class="prix-pied">Sur un trimestre, <b>2 700 €</b> si aucun rendez-vous n’a lieu&nbsp;: c’est votre engagement maximum, connu à la signature.</span>
+      <a class="go-lien" href="tarifs.html">Le détail, ligne par ligne
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </p>
+  </div>
+</section>
+
 <!-- ══════════════════════════ BANDEAU DE COTATION ══════════════════════════ -->
 <section class="sec plate" id="gains" style="padding-top:clamp(52px,6.4vw,82px)">
   <div class="wrap">
@@ -395,5 +433,6 @@
 
 <script src="assets/config.js?v=20260918b"></script>
 <script src="assets/main.js?v=20260918b"></script>
+<script src="assets/rdv.js?v=20260920a"></script>
 </body>
 </html>

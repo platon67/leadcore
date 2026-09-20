@@ -2951,6 +2951,193 @@ body::before{
 }
 
 
+/* ---- le pied de la rangée de prix (accueil) ----
+   Le plancher à gauche, le lien vers le détail à droite, sur le filet qui
+   ferme la rangée. C'est la seule sortie de l'accueil qui ne mène pas à la
+   prise de rendez-vous, donc elle ne prend pas le bouton. */
+.prix-pied{font-size:var(--t2);line-height:1.5;color:var(--fg-dim);max-width:62ch}
+.prix-pied b{color:var(--fg-soft);font-weight:600;font-variant-numeric:tabular-nums}
+#prix .cta-ctx{
+  display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;
+  gap:var(--s3) var(--s5);
+}
+.go-lien{
+  display:inline-flex;align-items:center;gap:7px;white-space:nowrap;
+  font-size:var(--t2);font-weight:600;color:var(--accent);text-decoration:none;
+}
+.go-lien svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.9;
+  stroke-linecap:round;stroke-linejoin:round;transition:transform .2s var(--ease-out)}
+.go-lien:hover svg{transform:translateX(3px)}
+@media (prefers-reduced-motion:reduce){.go-lien svg{transition:none}}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   35 bis. LA PRISE DE RENDEZ-VOUS
+   ───────────────────────────────────────────────────────────────────────────
+   L'iframe de Cal posait sa propre interface au milieu de la page : d'autres
+   polices, d'autres rayons, un autre noir, et un cadre qu'on ne peut pas
+   toucher. Elle est remplacée par celle-ci, qui n'emprunte que les données.
+
+   Tout est construit sur les jetons déjà là — filets, `--surface`, l'échelle
+   typographique, les trois graisses. Aucune couleur sur un contenant : les
+   jours et les heures sont des boutons au filet, et l'émeraude ne marque que
+   la sélection et la confirmation, c'est-à-dire l'état, jamais le décor.
+   ═══════════════════════════════════════════════════════════════════════════ */
+.rdv{display:grid;min-height:var(--rdv-h,420px)}
+.rdv-hd{
+  display:flex;align-items:center;gap:var(--s3);padding:13px 16px;
+  border-bottom:1px solid var(--rule-soft);
+  font-family:var(--label);font-size:var(--t1);font-weight:600;
+  letter-spacing:.11em;text-transform:uppercase;
+}
+.rdv-lbl{color:var(--accent)}
+.rdv-tz{
+  margin-left:auto;color:var(--fg-dim);border:1px solid var(--rule);
+  border-radius:var(--radius-xs);padding:3px 8px;letter-spacing:.06em;
+  text-transform:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:16ch;
+}
+.rdv-corps{padding:clamp(14px,1.9vw,20px)}
+
+/* ---- chargement ---- */
+.rdv-charge{display:grid;justify-items:center;gap:var(--s3);padding:clamp(34px,6vw,64px) 0;text-align:center}
+.rdv-charge p{margin:0;font-size:var(--t2);color:var(--fg-dim)}
+.rdv-points{display:flex;gap:6px}
+.rdv-points i{
+  width:7px;height:7px;border-radius:50%;background:var(--accent);opacity:.3;
+  animation:rdvPt 1.15s var(--ease-io) infinite;
+}
+.rdv-points i:nth-child(2){animation-delay:.16s}
+.rdv-points i:nth-child(3){animation-delay:.32s}
+@keyframes rdvPt{0%,100%{opacity:.25;transform:scale(.8)}45%{opacity:1;transform:scale(1)}}
+
+/* ---- message (vide, erreur) ---- */
+.rdv-msg{padding:clamp(22px,4vw,40px) 0;max-width:46ch}
+.rdv-msg-t{margin:0;font-size:var(--t4);font-weight:600;letter-spacing:-.02em}
+.rdv-msg-d{margin:9px 0 0;font-size:var(--t2);line-height:1.55;color:var(--fg-dim)}
+.rdv-replis{display:flex;flex-wrap:wrap;gap:var(--s3);margin-top:var(--s4)}
+
+/* ---- choix : les jours, puis les heures ---- */
+/* `minmax(0,1fr)` et `min-width:0` : sans eux, la bande de jours — une rangée
+   flex de vingt boutons — impose sa largeur intrinsèque à son bloc, le bloc à
+   la grille, et la grille au panneau. Mesuré : la grille des heures passait à
+   quatorze colonnes et sortait du cadre. C'est le piège habituel du
+   `min-width:auto` sur un élément de grille. */
+.rdv-choix{display:grid;gap:var(--s5);grid-template-columns:minmax(0,1fr)}
+.rdv-bloc{min-width:0}
+.rdv-t{
+  margin:0 0 11px;font-family:var(--label);font-size:var(--t1);font-weight:600;
+  letter-spacing:.11em;text-transform:uppercase;color:var(--fg-dim);
+}
+/* Les jours défilent horizontalement : sur l'horizon de quatre semaines il y
+   en a une vingtaine, et une grille les empilerait sur cinq rangées pour un
+   choix qui se fait en une seconde. */
+.rdv-jours{
+  display:flex;gap:7px;overflow-x:auto;padding-bottom:6px;
+  scrollbar-width:thin;scroll-snap-type:x proximity;
+}
+.rdv-j{
+  flex:none;scroll-snap-align:start;
+  display:grid;gap:1px;justify-items:center;min-width:60px;
+  padding:9px 8px 8px;border:1px solid var(--rule);border-radius:var(--radius-sm);
+  background:var(--surface-3);color:var(--fg-soft);cursor:pointer;
+  font:inherit;transition:border-color .16s linear,background-color .16s linear;
+}
+.rdv-j:hover{border-color:var(--rule-fort,var(--fg-dim))}
+.rdv-j .d{font-family:var(--label);font-size:var(--t1);letter-spacing:.06em;text-transform:uppercase;color:var(--fg-dim)}
+.rdv-j .n{font-size:var(--t4);font-weight:700;letter-spacing:-.03em;line-height:1.1}
+.rdv-j .m{font-size:var(--t1);color:var(--fg-dim)}
+.rdv-j .c{
+  margin-top:4px;font-family:var(--label);font-size:10px;font-weight:600;
+  letter-spacing:.04em;color:var(--accent);opacity:.75;
+}
+.rdv-j.on{
+  border-color:var(--accent);background:rgba(var(--accent-rgb),.1);color:var(--fg);
+}
+.rdv-j.on .d,.rdv-j.on .m{color:var(--fg-soft)}
+.rdv-j.on .c{opacity:1}
+
+.rdv-heures{display:grid;grid-template-columns:repeat(auto-fill,minmax(84px,1fr));gap:7px}
+.rdv-h{
+  padding:10px 6px;border:1px solid var(--rule);border-radius:var(--radius-sm);
+  background:var(--surface-3);color:var(--fg-soft);cursor:pointer;
+  font:inherit;font-size:var(--t3);font-variant-numeric:tabular-nums;
+  transition:border-color .16s linear,background-color .16s linear,color .16s linear;
+}
+.rdv-h:hover{border-color:var(--accent);color:var(--fg);background:rgba(var(--accent-rgb),.08)}
+
+/* ---- le formulaire ---- */
+.rdv-form{display:grid;gap:var(--s4)}
+.rdv-recap{
+  display:flex;align-items:baseline;flex-wrap:wrap;gap:4px var(--s3);
+  padding-bottom:var(--s3);border-bottom:1px solid var(--rule-soft);
+}
+.rdv-recap .q{font-size:var(--t4);font-weight:700;letter-spacing:-.02em;color:var(--accent-hi)}
+.rdv-recap .s{font-size:var(--t2);color:var(--fg-dim)}
+.rdv-chg{
+  margin-left:auto;background:none;border:0;padding:0;cursor:pointer;font:inherit;
+  font-size:var(--t2);color:var(--fg-dim);text-decoration:underline;text-underline-offset:3px;
+}
+.rdv-chg:hover{color:var(--fg)}
+.rdv-form form{display:grid;gap:var(--s3)}
+.rdv-duo{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--s3)}
+.rdv-ch{display:grid;gap:6px;min-width:0}
+.rdv-ch>span{
+  font-family:var(--label);font-size:var(--t1);font-weight:600;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--fg-dim);
+}
+.rdv-ch>span em{font-style:normal;letter-spacing:.04em;opacity:.7;margin-left:5px}
+.rdv-ch input,.rdv-ch textarea{
+  width:100%;padding:11px 13px;border:1px solid var(--rule);border-radius:var(--radius-sm);
+  background:var(--surface-3);color:var(--fg);font:inherit;font-size:var(--t3);
+  transition:border-color .16s linear;resize:vertical;
+}
+.rdv-ch input:focus,.rdv-ch textarea:focus{border-color:var(--accent);outline:none}
+.rdv-ch textarea::placeholder{color:var(--fg-dim)}
+.rdv-err{
+  margin:0;font-size:var(--t2);line-height:1.45;color:var(--amber);
+}
+/* `.btn-pri` seul ne pose aucun fond : le site ne l'emploie qu'à l'intérieur
+   de `.cta-rdv`, qui le lui donne. Sur un <button>, le style par défaut du
+   navigateur reprend donc la main — mesuré : fond rgb(239,239,239), texte
+   noir, au milieu d'une page sombre. Ce bouton-ci reçoit son propre aplat.
+   Il ne prend pas l'aurore : celle-ci dit « on prend rendez-vous par ici » et
+   mène à cet écran ; ici on est arrivé, et le geste est de confirmer. */
+.rdv-go{
+  justify-self:start;margin-top:var(--s2);
+  background:linear-gradient(160deg,var(--accent-hi),var(--accent));
+  color:var(--btn-fg);border-color:transparent;
+}
+.rdv-go:hover{box-shadow:0 8px 26px -12px rgba(var(--accent-rgb),.75)}
+.rdv-go[disabled]{opacity:.62;cursor:progress;box-shadow:none}
+.rdv-fine{margin:0;font-size:var(--t2);line-height:1.5;color:var(--fg-dim);max-width:52ch}
+
+/* ---- confirmation ---- */
+.rdv-ok{display:grid;justify-items:start;gap:9px;padding:clamp(18px,3vw,32px) 0;max-width:48ch}
+.rdv-coche{
+  display:grid;place-items:center;width:42px;height:42px;border-radius:50%;
+  background:rgba(var(--accent-rgb),.14);border:1px solid rgba(var(--accent-rgb),.5);
+  margin-bottom:var(--s2);
+}
+.rdv-coche svg{width:21px;height:21px;fill:none;stroke:var(--accent-hi);stroke-width:2.2;
+  stroke-linecap:round;stroke-linejoin:round;
+  stroke-dasharray:26;stroke-dashoffset:26;animation:rdvCoche .5s var(--ease-out) .08s forwards}
+@keyframes rdvCoche{to{stroke-dashoffset:0}}
+.rdv-ok-t{margin:0;font-size:var(--t5);font-weight:700;letter-spacing:-.025em}
+.rdv-ok-q{margin:0;font-size:var(--t4);font-weight:600;color:var(--accent-hi)}
+.rdv-ok-d{margin:4px 0 0;font-size:var(--t2);line-height:1.55;color:var(--fg-dim)}
+.rdv-ok-d b{color:var(--fg-soft);font-weight:600}
+.rdv-ok .btn{margin-top:var(--s3)}
+
+@media (max-width:560px){
+  .rdv-duo{grid-template-columns:1fr}
+  .rdv-heures{grid-template-columns:repeat(auto-fill,minmax(74px,1fr))}
+}
+@media (prefers-reduced-motion:reduce){
+  .rdv-points i{animation:none;opacity:.6}
+  .rdv-coche svg{animation:none;stroke-dashoffset:0}
+  .rdv-j,.rdv-h,.rdv-ch input,.rdv-ch textarea{transition:none}
+}
+
+
 /* ═══════════════════════════════════════════════════════════════════════════
    36. L'AGENDA QUI SE REMPLIT (héros de l'accueil)
    ───────────────────────────────────────────────────────────────────────────
