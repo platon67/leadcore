@@ -49,8 +49,9 @@ Business documents, SOPs and client-facing material are written in French.
   (nextlevelbuilder, MIT) adds seven design skills and a searchable local
   database of styles, palettes, font pairings and UX rules; its search script
   needs Python 3. Use it for work on `site/` and `deck/`.
-- `.claude/skills/` holds eight vendored skills, each with its source and
-  licence recorded. Use them on `site/` and `deck/`:
+- `.claude/skills/` holds eleven vendored skills, each with its source and
+  licence recorded. The first eight are for design work on `site/` and
+  `deck/`:
   - `stop-slop` (MIT, Hardik Pandya) — removes AI writing patterns from prose.
     Use it on client-facing copy, sequences and deck text.
   - `anti-ui-slop` (MIT, UIZZE) — the markers of interface built without
@@ -63,3 +64,14 @@ Business documents, SOPs and client-facing material are written in French.
     `.claude/skills/AGENTIC-AWESOME-SKILLS.md`.
   - `interaction-design` (from `wshobson/agents`) and `premium-frontend-ui`
     (from `github/awesome-copilot`).
+
+  The last three are about how the agent works rather than what it builds,
+  and apply to any code in the repository. See
+  `.claude/skills/OUTILS-DE-TRAVAIL.md`, which records what is known about
+  their provenance and two caveats:
+  - `karpathy-guidelines` (MIT, `forrestchang/andrej-karpathy-skills`) —
+    four rules against common LLM coding mistakes: think before coding,
+    simplicity first, surgical changes, verifiable success criteria.
+  - `headroom` and `rtk` — local context and shell-output compression. Both
+    need a CLI that is **not installed in this environment**, and neither was
+    supplied with a licence.
