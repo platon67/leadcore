@@ -115,6 +115,27 @@ Sous `prefers-reduced-motion`, tout s'arrête.
 - La marge `.nav .btn{margin-left:12px}` s'appliquait au bouton *à l'intérieur*
   de son enveloppe : le biseau débordait de 12 px en gris.
 
+**Les onze sorties contextuelles sont calées à droite.** Une sortie ferme le
+bloc qu'elle suit, donc elle se pose sur son bord de fin : sous un ledger dont
+tous les montants sont à droite, sous un bento qui va d'un bord à l'autre, le
+bouton calé à gauche pendait à l'opposé de là où le regard arrive. Mesuré sur
+les quatre pages avant de généraliser : les onze paragraphes de sortie
+partagent déjà le bord droit du bloc qui les précède, à une exception près —
+celle de `#fit`, dont le bento sortait de la colonne sans que sa sortie le
+suive, 240 px d'écart. Les deux sections de tarifs qui posent un bloc hors
+colonne (`#lignes`, `#fit`) sortent donc leur `.cta-ctx` avec lui ; partout
+ailleurs `text-align:right` suffit.
+
+Effet de bord, mesuré : le halo du bouton déborde de 8 % de sa largeur. À
+gauche il tombait dans la gouttière ; à droite il passe le bord du document —
+25 px à 768, 7 px à 1 280. `.sec{overflow-x:clip}` écrête au niveau de la
+section, qui fait la largeur de la fenêtre : au large rien n'est coupé, à
+l'étroit le halo s'arrête au bord de l'écran. `clip` et non `hidden` — il
+laisse l'axe vertical en `visible` et ne crée pas de conteneur de défilement,
+donc les révélations et le sommaire collant de Méthode sont intacts (vérifié :
+hauteur de document identique avec et sans, et le collant s'accroche à ses
+122 px dans les deux cas).
+
 Le harnais de contraste a dû être corrigé deux fois : `getComputedStyle` ne sait
 pas aplatir un fond en dégradé, et je lui passais des coordonnées de fenêtre là
 où il attendait des coordonnées de page. Il re-mesure désormais au pixel, par
