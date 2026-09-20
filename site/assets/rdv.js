@@ -89,11 +89,59 @@
     });
   }
 
+  /* ─────────── le questionnaire ───────────
+     Il passe entre le choix du créneau et la confirmation, et non après,
+     pour une raison technique : les réponses partent dans les notes de la
+     réservation, et l'API v2 de Cal ne sait pas ajouter de notes à une
+     réservation déjà créée (elle sait replanifier, annuler, confirmer,
+     refuser, changer le lieu — pas éditer les réponses). Récoltées après le
+     POST, elles n'auraient nulle part où aller.
+
+     Une question par écran, qui avance toute seule au clic. Un formulaire de
+     cinq questions empilées se lit comme une corvée ; cinq écrans d'un seul
+     geste se traversent en dix secondes, et on voit la fin dès le début grâce
+     à la barre de progression. Aucun champ à remplir jusqu'au dernier écran,
+     où il n'en reste que deux, ceux que Cal exige.
+
+     La question de la valeur client est le critère de sélection du site. Une
+     réponse sous le seuil n'arrête rien et ne déclenche aucun avertissement :
+     la page Tarifs dit qu'on en parle pendant l'appel, c'est donc pendant
+     l'appel qu'on en parle. Elle part dans les notes, et l'appel est préparé. */
+  var QUESTIONS = [
+    {
+      id: "activite", q: "Vous vendez quoi\u00a0?",
+      r: ["Du logiciel B2B", "Des prestations d\u2019agence", "Du conseil ou de l\u2019expertise",
+          "De la prestation technique", "Autre service B2B"]
+    },
+    {
+      id: "valeur", q: "Combien vous rapporte un client, en moyenne\u00a0?",
+      aide: "Sur toute sa durée de vie, pas sur la première facture.",
+      r: ["Moins de 7\u202f000\u00a0\u20ac", "7\u202f000 \u00e0 20\u202f000\u00a0\u20ac",
+          "20\u202f000 \u00e0 50\u202f000\u00a0\u20ac", "Plus de 50\u202f000\u00a0\u20ac"]
+    },
+    {
+      id: "capacite", q: "Vos commerciaux peuvent honorer combien de rendez-vous par mois\u00a0?",
+      aide: "On cale le volume dessus. Mieux vaut sous-estimer.",
+      r: ["Moins de 5", "5 \u00e0 10", "10 \u00e0 20", "Plus de 20"]
+    },
+    {
+      id: "deja", q: "Vous avez déjà tenté quoi\u00a0?", multi: true,
+      aide: "Plusieurs réponses possibles.",
+      r: ["Rien pour l\u2019instant", "De l\u2019emailing", "LinkedIn", "Du téléphone", "Une agence"]
+    },
+    {
+      id: "quand", q: "Vous voudriez démarrer quand\u00a0?",
+      r: ["Tout de suite", "Ce trimestre", "Je me renseigne"]
+    }
+  ];
+
   /* ─────────── état ─────────── */
 
   var jours = [];        // [{ cle, creneaux:[iso] }]
   var jourActif = null;
   var choisi = null;     // l'ISO du créneau retenu
+  var etape = 0;         // la question en cours
+  var reponses = {};     // { id: "réponse" } ou { id: ["a","b"] } si multi
 
   /* ─────────── squelette ─────────── */
 
@@ -110,6 +158,8 @@
   hote.querySelector(".rdv-tz").textContent = fuseau.replace(/_/g, " ");
   hote.setAttribute("data-state", "monte");
 
+  var libelle = hote.querySelector(".rdv-lbl");
+  function phase(t) { if (libelle) libelle.textContent = t; }
   function peindre(html) { corps.innerHTML = html; }
 
   function messageBrut(titre, texte, action) {
@@ -196,6 +246,7 @@
   /* ─────────── choix du jour et de l'heure ─────────── */
 
   function peindreChoix() {
+    phase("Choisir un créneau");
     var jourObj = null;
     for (var i = 0; i < jours.length; i++) if (jours[i].cle === jourActif) jourObj = jours[i];
     if (!jourObj) jourObj = jours[0];
@@ -230,17 +281,102 @@
     );
   }
 
+  /* ─────────── le questionnaire ─────────── */
+
+  /* Six étapes en tout : les cinq questions, puis les coordonnées. Comptée sur
+     cinq, la barre serait vide au premier écran — ce qui se lit comme un
+     défaut d'affichage plutôt que comme un début. */
+  function barre(n) {
+    return '<div class="rdv-prog" aria-hidden="true">' +
+             '<span class="rdv-prog-b" style="--p:' + (n / (QUESTIONS.length + 1)) + '"></span>' +
+           "</div>";
+  }
+
+  function peindreQuestion() {
+    if (etape >= QUESTIONS.length) { peindreForm(); return; }
+    phase("Préqualification");
+    var Q = QUESTIONS[etape];
+    var choix = reponses[Q.id];
+
+    var boutons = Q.r.map(function (txt, i) {
+      var pris = Q.multi ? (choix || []).indexOf(txt) !== -1 : choix === txt;
+      return '<button type="button" class="rdv-r' + (pris ? " on" : "") + '"' +
+             ' data-q="' + Q.id + '" data-v="' + echappe(txt) + '" style="--i:' + i + '"' +
+             ' aria-pressed="' + (pris ? "true" : "false") + '">' +
+               '<span class="t">' + echappe(txt) + "</span>" +
+               '<span class="k" aria-hidden="true"></span>' +
+             "</button>";
+    }).join("");
+
+    /* Une question à réponse unique avance d'elle-même ; une question à
+       réponses multiples ne peut pas deviner qu'on a fini, donc elle seule
+       porte un bouton de passage. */
+    var suite = Q.multi
+      ? '<button type="button" class="rdv-suite" data-suite' +
+        ((choix && choix.length) ? "" : " disabled") + ">Continuer</button>"
+      : "";
+
+    peindre(
+      '<div class="rdv-q">' +
+        barre(etape + 1) +
+        '<div class="rdv-q-hd">' +
+          '<button type="button" class="rdv-back" data-arriere aria-label="Revenir">' +
+            '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>' +
+          "</button>" +
+          '<span class="rdv-pas">Question ' + (etape + 1) + " sur " + QUESTIONS.length + "</span>" +
+          '<span class="rdv-quand">' + echappe(jourLong(jourActif) + " · " + heure(choisi)) + "</span>" +
+        "</div>" +
+        '<p class="rdv-q-t">' + Q.q + "</p>" +
+        (Q.aide ? '<p class="rdv-q-a">' + Q.aide + "</p>" : "") +
+        '<div class="rdv-rs" role="group">' + boutons + "</div>" +
+        suite +
+      "</div>"
+    );
+  }
+
+  function repondre(bouton) {
+    var id = bouton.getAttribute("data-q");
+    var val = bouton.getAttribute("data-v");
+    var Q = QUESTIONS[etape];
+
+    if (Q.multi) {
+      var l = reponses[id] || [];
+      var i = l.indexOf(val);
+      if (i === -1) l.push(val); else l.splice(i, 1);
+      reponses[id] = l;
+      peindreQuestion();
+      return;
+    }
+
+    reponses[id] = val;
+    /* On marque le choix, puis on avance : sans ce délai le bouton n'a jamais
+       l'air d'avoir été pressé, et le saut d'écran paraît accidentel. */
+    bouton.classList.add("on");
+    bouton.setAttribute("aria-pressed", "true");
+    var attend = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 220;
+    setTimeout(avancer, attend);
+  }
+
+  function avancer() {
+    etape++;
+    peindreQuestion();
+  }
+
   /* ─────────── formulaire ─────────── */
 
   function peindreForm() {
     var quand = jourLong(jourActif) + " à " + heure(choisi);
+    phase("Confirmer");
     peindre(
       '<div class="rdv-form">' +
+        barre(QUESTIONS.length + 1) +
         '<div class="rdv-recap">' +
           '<span class="q">' + echappe(quand) + "</span>" +
           '<span class="s">' + DUREE + "&nbsp;min, en visio · " + echappe(fuseau.replace(/_/g, " ")) + "</span>" +
           '<button type="button" class="rdv-chg" data-retour>Changer</button>' +
         "</div>" +
+        jetons() +
+        '<p class="rdv-f-t">Il ne manque que ça.</p>' +
         '<form novalidate>' +
           '<div class="rdv-duo">' +
             '<label class="rdv-ch"><span>Nom et prénom</span>' +
@@ -250,8 +386,6 @@
           "</div>" +
           '<label class="rdv-ch"><span>Société</span>' +
             '<input name="societe" type="text" autocomplete="organization"></label>' +
-          '<label class="rdv-ch"><span>Ce qu’on devrait regarder <em>facultatif</em></span>' +
-            '<textarea name="mot" rows="2" placeholder="Votre ticket moyen, ce que vous avez déjà tenté…"></textarea></label>' +
           '<p class="rdv-err" role="alert" hidden></p>' +
           '<button type="submit" class="btn btn-pri rdv-go">Confirmer le rendez-vous</button>' +
           '<p class="rdv-fine">Vous recevrez l’invitation et le lien visio par email. Aucun autre usage n’est fait de votre adresse.</p>' +
@@ -260,11 +394,34 @@
     );
   }
 
+  function jetons() {
+    /* Les réponses données restent visibles au dernier écran : on vient de les
+       donner en cinq gestes, et on doit pouvoir vérifier qu'on n'a pas cliqué
+       de travers avant de valider. Un clic ramène à la question. */
+    var h = QUESTIONS.map(function (Q, i) {
+      var v = reponses[Q.id];
+      if (!v || (Q.multi && !v.length)) return "";
+      var txt = Q.multi ? v.join(", ") : v;
+      return '<button type="button" class="rdv-jeton" data-q-retour="' + i + '">' +
+             echappe(txt) + "</button>";
+    }).join("");
+    return h ? '<div class="rdv-jetons">' + h + "</div>" : "";
+  }
+
+  function notesPrequal() {
+    var l = [];
+    QUESTIONS.forEach(function (Q) {
+      var v = reponses[Q.id];
+      if (!v || (Q.multi && !v.length)) return;
+      l.push(Q.q.replace(/\u00a0/g, " ") + " " + (Q.multi ? v.join(", ") : v));
+    });
+    return l;
+  }
+
   function envoyer(form) {
     var nom = form.nom.value.trim();
     var email = form.email.value.trim();
     var societe = form.societe.value.trim();
-    var mot = form.mot.value.trim();
     var err = form.parentNode.querySelector(".rdv-err");
 
     function dire(m) {
@@ -278,7 +435,8 @@
 
     var notes = [];
     if (societe) notes.push("Société : " + societe);
-    if (mot) notes.push(mot);
+    var pq = notesPrequal();
+    if (pq.length) notes.push("— Préqualification —\n" + pq.join("\n"));
 
     var bouton = form.querySelector(".rdv-go");
     bouton.disabled = true;
@@ -324,6 +482,7 @@
   }
 
   function confirmer(data, nom, email) {
+    phase("C’est réservé");
     var quand = jourLong(jourActif) + " à " + heure(choisi);
     var lien = data && (data.meetingUrl || (data.location && /^https?:/.test(data.location) ? data.location : ""));
     peindre(
@@ -348,7 +507,28 @@
     if (j) { jourActif = j.getAttribute("data-jour"); peindreChoix(); return; }
 
     var h = ev.target.closest ? ev.target.closest(".rdv-h") : null;
-    if (h) { choisi = h.getAttribute("data-iso"); peindreForm(); return; }
+    if (h) {
+      choisi = h.getAttribute("data-iso");
+      etape = 0; reponses = {};
+      peindreQuestion();
+      return;
+    }
+
+    var r = ev.target.closest ? ev.target.closest(".rdv-r") : null;
+    if (r) { repondre(r); return; }
+
+    var pr = ev.target.closest ? ev.target.closest("[data-suite]") : null;
+    if (pr) { avancer(); return; }
+
+    var ar = ev.target.closest ? ev.target.closest("[data-arriere]") : null;
+    if (ar) {
+      if (etape > 0) { etape--; peindreQuestion(); }
+      else { choisi = null; peindreChoix(); }
+      return;
+    }
+
+    var jt = ev.target.closest ? ev.target.closest("[data-q-retour]") : null;
+    if (jt) { etape = +jt.getAttribute("data-q-retour"); peindreQuestion(); return; }
 
     if (ev.target.closest && ev.target.closest("[data-retour]")) { choisi = null; peindreChoix(); }
   });

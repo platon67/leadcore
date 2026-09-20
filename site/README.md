@@ -15,14 +15,15 @@ mouvement sont propres au site.
 ## Les quatre pages
 
 Le site tenait sur une page unique de 11 600 px. Il est désormais en quatre
-pages, plus les deux pages légales.
+pages et la prise de rendez-vous, plus les deux pages légales.
 
 | Page | Ce qu'elle porte | Composition | Hauteur |
 |---|---|---|---|
-| `index.html` | héros et agenda animé, les quatre gains, le défilé, le fondateur, trois cartes vers le détail, la prise de rendez-vous | l'agenda qui se remplit + défilé illustré | 5 920 px |
+| `index.html` | héros et agenda animé, le prix, les quatre gains, le défilé, le fondateur, trois cartes vers le détail | l'agenda qui se remplit + défilé illustré | 5 920 px |
 | `methode.html` | schéma des deux canaux, entonnoir chiffré, six filtres, la fiche livrée, ce qui porte votre nom | schéma animé + énoncé tenu + colonne de filtrage | 8 240 px |
 | `collaboration.html` | la frise des quatre semaines, le détail semaine par semaine, la balance des charges, la facture, la sortie | frise horizontale animée + balance | 7 765 px |
-| `tarifs.html` | les trois montants, le chiffre à retenir, l'addition d'un trimestre, face à un recrutement, à qui on dit non | trois cartes + grand livre + comparaison | 7 190 px |
+| `tarifs.html` | les trois montants, le chiffre à retenir, l'addition d'un trimestre, face à un recrutement, à qui ça convient | trois cartes + grand livre + comparaison | 7 190 px |
+| `rendez-vous.html` | le choix du créneau, la préqualification, la confirmation | une seule colonne, l'outil occupe la page | — |
 
 L'accueil a perdu **61 %** de sa hauteur et **67 %** de ses mots par rapport à
 la page unique d'origine. Il ne garde que
@@ -682,6 +683,31 @@ préfixée aux notes.
 **Le fuseau est celui du visiteur**, pas le nôtre. C'est ce que Cal attend pour
 découper les créneaux, et c'est ce qu'il faut afficher : un horaire sans fuseau
 est une cause d'absence au rendez-vous. Il est écrit dans l'en-tête du panneau.
+
+**Elle a sa page**, `rendez-vous.html`, et les seize boutons du site y mènent.
+Elle vivait en bas de chaque page, en quatre exemplaires : le même outil monté
+quatre fois, et un visiteur qui cliquait « Prendre RDV » se retrouvait à
+défiler jusqu'au bas de la page où il était déjà. Les quatre sections ont été
+retirées.
+
+**Un questionnaire s'intercale entre le créneau et la confirmation.** Cinq
+questions, une par écran, qui avancent d'elles-mêmes au clic — aucun champ à
+remplir avant le dernier écran, où il n'en reste que trois. Empilées dans un
+formulaire, ces cinq questions se liraient comme une corvée ; en cinq gestes
+elles se traversent en dix secondes, et la barre de progression dit dès le
+premier écran que c'est court. Les réponses restent relisables en jetons au
+dernier écran, et un clic dessus ramène à la question.
+
+Il passe **avant** le POST, pas après, pour une raison technique : les
+réponses partent dans les notes de la réservation, et l'API v2 de Cal ne sait
+pas ajouter de notes à une réservation déjà créée — elle sait replanifier,
+annuler, confirmer, refuser, changer le lieu, pas éditer les réponses.
+Récoltées après, elles n'auraient nulle part où aller.
+
+La question de la valeur client est le critère de sélection du site. Une
+réponse sous le seuil **n'arrête rien et ne déclenche aucun avertissement** :
+la page Tarifs promet qu'on en parle pendant l'appel, c'est donc pendant
+l'appel qu'on en parle. Elle part dans les notes, et l'appel est préparé.
 
 **Dix états, tous à l'écran** : chargement, échec réseau, aucun créneau sur
 l'horizon, choix du jour, choix de l'heure, formulaire, champ manquant, envoi

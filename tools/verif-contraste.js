@@ -12,7 +12,7 @@ const { chromium } = require((process.env.SP || '.') + '/node_modules/playwright
 const BASE = process.env.BASE || 'http://127.0.0.1:8391/';
 const CHROME = process.env.CHROME || '/opt/pw-browsers/chromium-1194/chrome-linux/chrome';
 const liste = (v, def) => (process.env[v] ? process.env[v].split(',') : def);
-const PAGES = liste('PAGES', ['index.html','methode.html','collaboration.html','tarifs.html','mentions-legales.html','confidentialite.html']);
+const PAGES = liste('PAGES', ['index.html','methode.html','collaboration.html','tarifs.html','rendez-vous.html','mentions-legales.html','confidentialite.html']);
 const W = liste('W', ['1440','390']).map(Number);
 const MOTION = liste('MOTION', ['no-preference','reduce']);
 (async () => {

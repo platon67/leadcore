@@ -3064,6 +3064,82 @@ body::before{
 }
 .rdv-h:hover{border-color:var(--accent);color:var(--fg);background:rgba(var(--accent-rgb),.08)}
 
+/* ---- le questionnaire ----
+   Une question par écran, cinq écrans, aucun champ à remplir. Un formulaire
+   de cinq questions empilées se lit comme une corvée ; cinq gestes se
+   traversent en dix secondes, et la barre dit dès le premier écran que c'est
+   court. Les réponses sont des boutons pleine largeur : sur un téléphone, une
+   cible de la largeur de l'écran ne se rate pas. */
+.rdv-q{display:grid;gap:var(--s3)}
+.rdv-prog{height:2px;background:rgba(var(--fg-rgb),.09);border-radius:1px;overflow:hidden}
+.rdv-prog-b{
+  display:block;height:100%;border-radius:1px;
+  background:linear-gradient(90deg,var(--accent-dim),var(--accent-hi));
+  transform:scaleX(var(--p,0));transform-origin:left;
+  transition:transform .45s var(--ease-out);
+}
+.rdv-q-hd{display:flex;align-items:center;gap:var(--s3);min-height:30px}
+.rdv-back{
+  position:relative;display:grid;place-items:center;width:30px;height:30px;flex:none;
+  border:1px solid var(--rule);border-radius:var(--radius-xs);
+  background:none;color:var(--fg-dim);cursor:pointer;padding:0;
+}
+/* La cible tactile est portée à 44 × 44 sans grossir le dessin : à 30 px le
+   bouton était la seule chose du site sous le seuil de la règle 2.5.5. */
+.rdv-back::after{content:"";position:absolute;inset:-7px}
+.rdv-back:hover{color:var(--fg);border-color:var(--fg-dim)}
+.rdv-back svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.9;
+  stroke-linecap:round;stroke-linejoin:round}
+.rdv-pas{
+  font-family:var(--label);font-size:var(--t1);font-weight:600;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--fg-dim);
+}
+.rdv-quand{
+  margin-left:auto;font-size:var(--t2);color:var(--fg-dim);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.rdv-q-t{margin:var(--s2) 0 0;font-size:var(--t5);font-weight:700;letter-spacing:-.025em;line-height:1.2}
+.rdv-q-a{margin:0;font-size:var(--t2);line-height:1.45;color:var(--fg-dim)}
+.rdv-rs{display:grid;gap:8px;margin-top:var(--s2)}
+.rdv-r{
+  display:flex;align-items:center;gap:var(--s3);width:100%;
+  padding:14px 16px;border:1px solid var(--rule);border-radius:var(--radius-sm);
+  background:var(--surface-3);color:var(--fg-soft);cursor:pointer;
+  font:inherit;font-size:var(--t3);text-align:left;
+  transition:border-color .16s linear,background-color .16s linear,color .16s linear;
+}
+.rdv-r .t{min-width:0}
+/* la pastille de droite : vide tant qu'on n'a pas choisi, pleine ensuite */
+.rdv-r .k{
+  margin-left:auto;width:19px;height:19px;flex:none;border-radius:50%;
+  border:1px solid var(--rule);position:relative;
+}
+.rdv-r .k::after{
+  content:"";position:absolute;inset:3px;border-radius:50%;
+  background:var(--accent);transform:scale(0);
+  transition:transform .2s var(--spring);
+}
+.rdv-r:hover{border-color:var(--fg-dim);color:var(--fg)}
+.rdv-r.on{border-color:var(--accent);background:rgba(var(--accent-rgb),.1);color:var(--fg)}
+.rdv-r.on .k{border-color:var(--accent)}
+.rdv-r.on .k::after{transform:scale(1)}
+.rdv-suite{
+  justify-self:start;margin-top:var(--s2);padding:12px 22px;
+  border:1px solid var(--accent);border-radius:var(--radius-sm);
+  background:rgba(var(--accent-rgb),.12);color:var(--fg);
+  font:inherit;font-size:var(--t3);font-weight:600;cursor:pointer;
+}
+.rdv-suite[disabled]{opacity:.4;cursor:not-allowed;border-color:var(--rule);background:none;color:var(--fg-dim)}
+
+/* ---- les réponses rappelées au dernier écran ---- */
+.rdv-jetons{display:flex;flex-wrap:wrap;gap:7px}
+.rdv-jeton{
+  padding:6px 11px;border:1px solid var(--rule);border-radius:var(--radius-pill);
+  background:none;color:var(--fg-dim);font:inherit;font-size:var(--t2);cursor:pointer;
+}
+.rdv-jeton:hover{border-color:var(--accent);color:var(--fg)}
+.rdv-f-t{margin:0;font-size:var(--t4);font-weight:600;letter-spacing:-.02em}
+
 /* ---- le formulaire ---- */
 .rdv-form{display:grid;gap:var(--s4)}
 .rdv-recap{
@@ -3134,7 +3210,8 @@ body::before{
 @media (prefers-reduced-motion:reduce){
   .rdv-points i{animation:none;opacity:.6}
   .rdv-coche svg{animation:none;stroke-dashoffset:0}
-  .rdv-j,.rdv-h,.rdv-ch input,.rdv-ch textarea{transition:none}
+  .rdv-j,.rdv-h,.rdv-ch input,.rdv-ch textarea,
+  .rdv-r,.rdv-r .k::after,.rdv-prog-b{transition:none}
 }
 
 

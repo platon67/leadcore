@@ -27,6 +27,7 @@ const CHROME = process.env.CHROME || '/opt/pw-browsers/chromium-1194/chrome-linu
    cas pendant une correction : PAGES=collaboration.html W=1440 MOTION=no-preference */
 const liste = (v, def) => (process.env[v] ? process.env[v].split(',') : def);
 const PAGES  = liste('PAGES', ['index.html','methode.html','collaboration.html','tarifs.html',
+                               'rendez-vous.html',
                                'mentions-legales.html','confidentialite.html']);
 const W      = liste('W', ['320','390','560','768','900','1024','1280','1440','1920']).map(Number);
 const MOTION = liste('MOTION', ['no-preference', 'reduce']);
