@@ -1853,9 +1853,20 @@ body::before{
 }
 
 /* ---- COMPARAISON (tarifs) ----
-   Deux barres à la même échelle. Le gris est l'autre option, l'émeraude la
-   nôtre. La longueur fait l'argument ; le chiffre le confirme. */
-.vs{display:grid;gap:var(--s5)}
+   Deux barres à la même échelle, empilées par nature de dépense. La version
+   précédente donnait trois totaux et 660 signes de légende pour dire ce que
+   l'empilement montre : que les 11 100 € d'un salaire sont dus en entier quoi
+   qu'il arrive, et que sur les 8 700 € de Leadcore, 6 000 ne courent que si
+   les rendez-vous ont eu lieu.
+
+   L'empilement supprime aussi la troisième barre. Le « plancher à 2 700 € »
+   était le total des deux lignes fixes : une fois le fixe et le variable
+   séparés dans la barre de Leadcore, c'est le segment plein qu'on lit
+   directement. Une ligne de données au lieu d'une ligne de plus.
+
+   L'échelle est commune aux deux barres, 11 100 € pour la largeur pleine ;
+   les pourcentages sont portés par le gabarit, pas recalculés ici. */
+.vs{display:grid;gap:var(--s6)}
 .vs .r{display:grid;gap:var(--s3)}
 .vs .hd{display:flex;align-items:baseline;justify-content:space-between;gap:var(--s4)}
 .vs .hd b{font-weight:600;font-size:var(--t3);letter-spacing:-.015em}
@@ -1863,17 +1874,175 @@ body::before{
   font-weight:800;font-size:var(--t6);line-height:1;letter-spacing:-.045em;
   font-variant-numeric:tabular-nums;white-space:nowrap;
 }
-.vs .t{position:relative;height:9px;border-radius:var(--radius-xs);background:rgba(var(--fg-rgb),.06);overflow:hidden}
-.vs .t i{
-  position:absolute;inset:0;border-radius:var(--radius-xs);transform-origin:left;transform:scaleX(0);
-  background:linear-gradient(90deg,#3E4C47,#697C74);
-  transition:transform 1.05s var(--ease-out) calc(var(--i,0) * 130ms);
+.vs .t{
+  position:relative;height:15px;border-radius:var(--radius-xs);
+  background:rgba(var(--fg-rgb),.05);
 }
-.vs .r.in .t i{transform:scaleX(var(--w,1))}
-.vs .r.us .t i{background:linear-gradient(90deg,var(--accent-dim),var(--accent) 70%,var(--accent-hi))}
+/* Un segment : `--p` sa part de l'échelle, `--o` son décalage depuis la
+   gauche. Il se déploie depuis son propre bord gauche, donc de proche en
+   proche : le fixe d'abord, le variable ensuite. */
+.vs .t i{
+  position:absolute;top:0;bottom:0;
+  left:calc(var(--o,0) * 100%);width:calc(var(--p,1) * 100%);
+  border-radius:var(--radius-xs);
+  transform-origin:left;transform:scaleX(0);
+  background:linear-gradient(90deg,#3E4C47,#697C74);
+  transition:transform .9s var(--ease-out) calc((var(--i,0) * 2 + var(--j,0)) * 150ms);
+}
+.vs .r.in .t i{transform:none}
+.vs .r.us .t i.fix{background:linear-gradient(90deg,var(--accent-dim),var(--accent) 80%,var(--accent-hi))}
+/* Le variable se lit comme une réserve, pas comme une dépense acquise : même
+   émeraude, posée à plat et translucide. C'est la seule chose que la barre
+   doit dire de plus que son total. */
+.vs .r.us .t i.var{background:rgba(var(--accent-rgb),.36)}
 .vs .r.us .hd .a{color:var(--accent-hi)}
-.vs .n{margin:0;font-size:var(--t2);line-height:1.5;color:var(--fg-dim);max-width:64ch}
-.vs .n b{color:var(--fg-soft);font-weight:600}
+
+/* la légende des segments, sous la barre */
+.vs .seg{
+  display:flex;flex-wrap:wrap;gap:var(--s2) var(--s5);
+  margin:0;font-size:var(--t2);line-height:1.45;color:var(--fg-dim);
+}
+.vs .seg>span{display:flex;align-items:baseline;gap:var(--s2);min-width:0}
+.vs .seg .sw{
+  width:11px;height:11px;flex:none;border-radius:2px;align-self:center;
+  background:linear-gradient(90deg,#3E4C47,#697C74);
+}
+.vs .r.us .seg .sw.fix{background:linear-gradient(90deg,var(--accent-dim),var(--accent))}
+.vs .r.us .seg .sw.var{background:rgba(var(--accent-rgb),.3)}
+.vs .seg b{color:var(--fg-soft);font-weight:600;font-variant-numeric:tabular-nums}
+@media (prefers-reduced-motion:reduce){.vs .t i{transition:none}}
+
+/* ---- L'ARBRE DE FACTURATION (collaboration) ----
+   Trois règles imbriquées — le prospect vient, il ne vient pas et on
+   replanifie, vous n'êtes pas là — tenaient en prose dans une puce et un
+   paragraphe. En prose, le lecteur doit reconstruire l'arbre pour savoir ce
+   qu'il paie dans son cas ; dessiné, il suit une branche et lit un montant.
+
+   Les connecteurs sont des bordures sur pseudo-éléments : rien à charger, et
+   la liste reste une liste imbriquée pour qui la lit au lecteur d'écran. */
+.arbre{margin:0;font-size:var(--t2)}
+.arbre .tete{
+  display:block;font-family:var(--label);font-size:var(--t1);font-weight:600;
+  letter-spacing:.11em;text-transform:uppercase;color:var(--fg-soft);margin-bottom:13px;
+}
+.arbre ul{list-style:none;margin:0;padding:0}
+.arbre ul ul{margin-top:9px}
+.arbre li{position:relative;padding-left:21px;margin-top:9px}
+.arbre>ul>li:first-child{margin-top:0}
+/* le trait vertical de la branche, coupé à hauteur du dernier té */
+.arbre li::before{
+  content:"";position:absolute;left:0;top:0;bottom:0;border-left:1px solid var(--rule);
+}
+.arbre li:last-child::before{bottom:auto;height:.78em}
+/* le té horizontal qui rejoint la ligne */
+.arbre li::after{
+  content:"";position:absolute;left:0;top:.78em;width:13px;border-top:1px solid var(--rule);
+}
+.arbre .l{display:flex;align-items:baseline;justify-content:space-between;gap:var(--s3)}
+.arbre .c{color:var(--fg-soft);line-height:1.45;min-width:0}
+.arbre .v{
+  font-weight:700;font-size:var(--t3);letter-spacing:-.02em;white-space:nowrap;
+  font-variant-numeric:tabular-nums;color:var(--accent-hi);
+}
+/* Un montant nul n'est pas un gain : il se lit au même poids, sans l'accent. */
+.arbre .v.nul{color:var(--fg-dim)}
+.arbre .v.moit{color:var(--fg-soft)}
+/* une étape intermédiaire, qui n'a pas de montant à elle */
+.arbre .etape{color:var(--fg-dim)}
+
+/* ---- LE RELAIS DE SEGMENTS (collaboration) ----
+   Trois paragraphes disaient : un segment porte quatre à six mois d'envois,
+   et le suivant se prépare avant que le premier soit vide. La phrase demande
+   au lecteur de se représenter deux durées qui se chevauchent — c'est
+   exactement ce qu'un dessin fait sans effort, et le chevauchement *est*
+   l'argument. S'il n'y avait pas recouvrement, il y aurait un trou.
+
+   Huit colonnes de mois partagées par les deux pistes. Chaque barre se place
+   en `grid-column` : sa position dans le temps est sa position à l'écran. */
+.relais{display:grid;gap:var(--s3);font-variant-numeric:tabular-nums}
+.rl-l{
+  display:grid;grid-template-columns:var(--kcol,minmax(0,10ch)) repeat(8,1fr);
+  gap:0 var(--s2);align-items:center;
+}
+.rl-l .rl-m{
+  grid-row:1;font-family:var(--label);font-size:var(--t1);font-weight:600;
+  letter-spacing:.06em;color:var(--fg-dim);text-align:center;
+}
+.rl-k{
+  grid-column:1;font-family:var(--label);font-size:var(--t1);font-weight:600;
+  letter-spacing:.11em;text-transform:uppercase;color:var(--fg-soft);
+}
+.rl-b{
+  grid-column:calc(var(--a) + 1) / calc(var(--b) + 1);grid-row:1;
+  height:16px;border-radius:var(--radius-xs);
+  transform:scaleX(0);transform-origin:left;
+  transition:transform .75s var(--ease-out) calc(var(--i,0) * 190ms);
+}
+.relais.in .rl-b{transform:none}
+.rl-b.prod{background:linear-gradient(90deg,var(--accent-dim),var(--accent))}
+/* Les deux derniers mois d'un segment : la zone où le suivant s'ouvre. Même
+   émeraude à plat, pour dire « encore en production, mais on a commencé ». */
+.rl-b.seuil{background:rgba(var(--accent-rgb),.34)}
+/* La préparation n'est pas de la production : un filet, pas un plein. */
+.rl-b.prep{
+  background:none;border:1px dashed rgba(var(--accent-rgb),.5);
+  border-radius:var(--radius-xs);
+}
+.rl-n{
+  margin:0;font-size:var(--t2);line-height:1.45;color:var(--fg-dim);
+}
+.rl-n b{color:var(--fg-soft);font-weight:600}
+/* Sous 640 px les huit colonnes tombent à 30 px : l'échelle en mois n'est
+   plus lisible et le libellé mange la piste. Le libellé passe au-dessus et
+   l'échelle disparaît — mais la colonne de libellé, elle, reste, à largeur
+   nulle. Supprimée, elle décalait toutes les barres d'un mois vers la droite
+   (elles se placent en `calc(var(--a) + 1)`) et la dernière débordait sur une
+   neuvième colonne implicite, ce qui rétrécissait les huit autres. */
+@media (max-width:640px){
+  .rl-l{grid-template-columns:0 repeat(8,1fr);gap:0 3px}
+  .rl-k{grid-column:1 / -1;grid-row:1;margin-bottom:7px}
+  .rl-b{grid-row:2}
+  .rl-l .rl-m{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  .rl-b{transform:none!important;transition:none!important}
+}
+
+/* ---- LES PHASES DU TRIMESTRE (tarifs) ----
+   « Trois semaines de montée en volume, quatre d'optimisation, puis le reste
+   à plein régime » était écrit deux fois : dans le chapeau de la section et
+   dans la description de la ligne « durée initiale ». Une phrase qui décrit
+   trois durées inégales demande au lecteur de les tenir en tête pour les
+   comparer ; la barre les met à l'échelle, et la question « pourquoi trois
+   mois » se répond en la regardant.
+
+   Les segments sont dimensionnés en `fr` sur le nombre de semaines, donc la
+   largeur est la durée. La teinte monte de pas en pas : la forme dit la
+   montée en régime que le texte décrivait. */
+.phases{display:grid;grid-template-columns:3fr 4fr 6fr;gap:var(--s3);align-items:start}
+.phases>*{min-width:0}
+.ph .d{
+  display:block;font-family:var(--label);font-size:var(--t1);font-weight:600;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--fg-dim);margin-bottom:10px;
+}
+.ph .b{
+  display:block;height:15px;border-radius:var(--radius-xs);
+  background:rgba(var(--accent-rgb),var(--o,.2));
+  transform:scaleX(0);transform-origin:left;
+  transition:transform .8s var(--ease-out) calc(var(--i,0) * 170ms);
+}
+.phases.in .ph .b{transform:none}
+.ph .t{display:block;margin-top:13px;font-size:var(--t3);font-weight:600;letter-spacing:-.015em}
+.ph .s{display:block;margin-top:5px;font-size:var(--t2);line-height:1.45;color:var(--fg-dim)}
+/* Sous 720 px les trois colonnes tombent à 60 px et la durée ne tient plus.
+   On empile, et la largeur relative passe sur la barre elle-même. */
+@media (max-width:720px){
+  .phases{grid-template-columns:1fr;gap:var(--s4)}
+  .ph .b{width:calc(var(--part) * 100%)}
+}
+@media (prefers-reduced-motion:reduce){
+  .ph .b{transform:none!important;transition:none!important}
+}
 
 /* ---- BANDE DE CHIFFRES (accueil) ----
    Les quatre gains sur une seule ligne réglée, comme un bandeau de cotation.

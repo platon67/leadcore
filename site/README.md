@@ -179,6 +179,37 @@ engageants du site. Ils sont devenus des apartés : un filet, un intitulé qui
 nomme le propos, et le texte une taille au-dessus du corps. Le jeton
 `--amber` ne sert plus qu'aux blocs à faire des pages légales.
 
+## Quatre schémas à la place de la prose
+
+Quatre passages demandaient au lecteur de reconstruire une structure dans sa
+tête pour s'en servir. Ils sont dessinés.
+
+| Schéma | Où | Ce qu'il remplace | Ce que le dessin dit que la phrase ne disait pas |
+|---|---|---|---|
+| `.vs` empilé | Tarifs · face à un recrutement | trois totaux et leurs légendes | que 6 000 des 8 700 € ne courent que si on livre, alors que les 11 100 € d'un salaire sont dus en entier |
+| `.phases` | Tarifs · la durée | l'énumération des trois durées, écrite deux fois | que les trois phases sont inégales, et pourquoi trois mois ne se raccourcissent pas |
+| `.relais` | Collaboration · le cinquième mois | deux paragraphes sur l'épuisement des segments | que la préparation du segment suivant **recouvre** la fin du précédent — sans recouvrement, il y a un trou |
+| `.arbre` | Collaboration · la facture | une puce et un paragraphe | qu'il y a trois branches et quatre issues, et laquelle est la vôtre |
+
+**L'empilement a supprimé une ligne de données.** La troisième barre de la
+comparaison, « votre plancher à 2 700 € », était la somme des deux lignes
+fixes : une fois le fixe et le variable séparés dans la barre de Leadcore,
+c'est le segment plein qu'on lit directement.
+
+**Le cinquième schéma prévu n'a pas été construit**, parce qu'il existait
+déjà. Les deux canaux parallèles sont dessinés depuis le début par le `.flow`
+en tête de Méthode, et son repli — deux entrées, une sortie — y est structurel.
+Ce qui manquait n'était pas un dessin mais une coupe : la même idée était
+énoncée trois fois sur la page. Il n'en reste qu'une, dans la légende, sous le
+schéma qui la montre.
+
+**Le gain en signes est modeste : −623 sur les quatre pages, soit −2,2 %**,
+là où l'audit en annonçait 2 300. L'écart est entier dans les schémas
+eux-mêmes : un dessin porte ses intitulés, ses échelles et sa légende, et ça
+reprend la moitié de ce que la prose rendait. Ce n'est pas le nombre de signes
+qui change, c'est qu'on lit une branche au lieu d'en reconstruire trois.
+
+
 ## Le discours
 
 La page est construite sur ce que le client **gagne**, pas sur la façon dont on

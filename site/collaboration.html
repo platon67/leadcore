@@ -185,9 +185,24 @@
 
     <div class="pad rv" style="margin-top:clamp(22px,2.8vw,34px)">
       <div class="padhd"><span class="icob"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19.2V13M10.3 19.2V8.6M15.7 19.2v-7.6M21 19.2V5"/></svg></span><h3>Le cinquième mois est préparé dès la semaine&nbsp;1</h3></div>
-      <p>La production consomme <b>1 900 contacts par mois</b>&nbsp;: un segment de 7 600 à 11 400 porte <b>quatre à six mois d’envois</b>. Le suivant ne s’improvise donc pas le jour où il faut l’ouvrir — il se construit pendant que le premier tourne.</p>
-      <p style="margin-top:14px">Le plan de renouvellement s’écrit en semaine&nbsp;1&nbsp;: segment&nbsp;1 actif, segments&nbsp;2 et&nbsp;3 déjà identifiés, volume estimé pour chacun. <b>Quand le restant passe sous deux mois de production, on prépare le suivant</b>, et le rythme ne bouge pas.</p>
-      <p style="margin-top:14px">On mesure le volume disponible sur votre marché avant de démarrer, et on vous le montre. Vous savez dès la semaine&nbsp;1 combien de mois votre cible peut alimenter.</p>
+      <p>La production consomme <b>1 900 contacts par mois</b>&nbsp;: un segment de 7 600 à 11 400 porte <b>quatre à six mois d’envois</b>.</p>
+
+      <div class="relais rv" style="margin-top:clamp(18px,2.2vw,24px)" role="img" aria-label="Deux segments qui se relaient. Le segment 1 produit pendant cinq mois ; ses deux derniers mois ouvrent la préparation du segment 2, qui prend le relais sans interruption.">
+        <div class="rl-l" aria-hidden="true">
+          <span class="rl-m" style="grid-column:2">M1</span><span class="rl-m" style="grid-column:3">M2</span><span class="rl-m" style="grid-column:4">M3</span><span class="rl-m" style="grid-column:5">M4</span><span class="rl-m" style="grid-column:6">M5</span><span class="rl-m" style="grid-column:7">M6</span><span class="rl-m" style="grid-column:8">M7</span><span class="rl-m" style="grid-column:9">M8</span>
+        </div>
+        <div class="rl-l">
+          <span class="rl-k">Segment 1</span>
+          <span class="rl-b prod" style="--a:1;--b:4;--i:0"></span>
+          <span class="rl-b seuil" style="--a:4;--b:6;--i:1"></span>
+        </div>
+        <div class="rl-l">
+          <span class="rl-k">Segment 2</span>
+          <span class="rl-b prep" style="--a:4;--b:6;--i:2"></span>
+          <span class="rl-b prod" style="--a:6;--b:9;--i:3"></span>
+        </div>
+        <p class="rl-n"><b>Le recouvrement est le sujet.</b> Sous deux mois de restant, le segment suivant s’ouvre&nbsp;: il est identifié et chiffré dès la semaine&nbsp;1, pas le jour où il faut l’ouvrir. Sans ce recouvrement, il y aurait un trou — et trois semaines ne suffisent pas à reconstituer un segment.</p>
+      </div>
     </div>
     <p class="cta-ctx rv"><span class="cta-rdv sm"><a class="btn btn-pri" href="#parler"><span class="aur" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span><svg class="visio" viewBox="0 0 24 24" aria-hidden="true"><rect x="2.6" y="6.6" width="12.9" height="10.8" rx="2.6"/><path d="M15.5 10.7l5.4-3v8.6l-5.4-3z"/></svg>Savoir quand on pourrait commencer chez vous<svg class="ar" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></span></p>
   </div>
@@ -271,20 +286,31 @@
     <div class="bento bento-2" style="margin-top:clamp(20px,2.6vw,30px)">
       <div class="card rv" style="--i:0">
         <span class="tag">Ce qu’on ne vous facturera jamais</span>
-        <h3>Les cinq cas qui ne passent pas</h3>
+        <h3>Les quatre cas qui ne passent pas</h3>
         <ul class="ticks crosses" style="margin-top:18px">
           <li>Un contact hors cible, même s’il a répondu avec enthousiasme.</li>
           <li>Une demande de tarifs ou de plaquette sans intention d’achat.</li>
           <li>Un interlocuteur sans pouvoir de décision ni influence.</li>
           <li>Un «&nbsp;rappelez-moi dans six mois&nbsp;» déguisé en rendez-vous.</li>
-          <li>Un prospect absent&nbsp;: on le replanifie une fois, et on ne facture que s’il vient.</li>
         </ul>
       </div>
       <div class="card accent rv" style="--i:1">
-        <span class="tag">Et dans l’autre sens</span>
-        <h3>Si c’est vous qui n’êtes pas là</h3>
-        <p>Une annulation ou une absence de votre côté se facture à 50 %. Le travail a été fait, et votre délai de réponse pèse autant que le nôtre sur le taux de présence.</p>
-        <p>C’est écrit au contrat dans les deux sens, pour qu’aucun des deux n’ait à plaider sa cause en fin de mois.</p>
+        <span class="tag">Une fois les quatre conditions réunies</span>
+        <h3>Ce qui est facturé, cas par cas</h3>
+        <div class="arbre" style="margin-top:18px">
+          <span class="tete">Un créneau est posé</span>
+          <ul>
+            <li><span class="l"><span class="c">Le prospect est là</span><span class="v">200 €</span></span></li>
+            <li><span class="l"><span class="c etape">Le prospect ne vient pas — on replanifie, une fois</span></span>
+              <ul>
+                <li><span class="l"><span class="c">Il vient au second créneau</span><span class="v">200 €</span></span></li>
+                <li><span class="l"><span class="c">Il ne vient pas non plus</span><span class="v nul">0 €</span></span></li>
+              </ul>
+            </li>
+            <li><span class="l"><span class="c">Vous annulez, ou vous n’êtes pas là</span><span class="v moit">100 €</span></span></li>
+          </ul>
+        </div>
+        <p style="margin-top:18px">Écrit au contrat dans les deux sens, pour qu’aucun des deux n’ait à plaider sa cause en fin de mois.</p>
       </div>
     </div>
   </div>
