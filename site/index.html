@@ -91,24 +91,71 @@
       </div>
     </div>
 
-    <!-- ══════════ LA MACHINE ══════════
-         Le panneau le plus visible du site porte le mécanisme, en volume et
-         sans un mot : le marché tombe en poussière, la trémie en retient
-         l'essentiel sur ses parois, le peu qui passe est forgé au cœur de la
-         machine, et la pièce descend s'empiler sur le socle du client.
+    <!-- ══════════ LA BOÎTE DE RÉCEPTION ══════════
+         Le panneau le plus visible du site montre ce que le client reçoit,
+         littéralement : des rendez-vous qui tombent un par un dans une boîte,
+         chacun avec la fiche du prospect écrite dedans. Ce n'est pas une
+         métaphore de ce qu'on produit, c'est le livrable.
 
-         Rendu par `forge.js` dans un canevas 2D : projection en perspective,
-         faces triées en profondeur, éclairage directionnel plus une source
-         ponctuelle au foyer. Pas de bibliothèque 3D, pas de WebGL — la scène
-         fait cent vingt faces, ce qui tient largement dans un rendu logiciel,
-         et l'écrire à la main est le seul moyen de tenir la charte : du métal
-         très sombre, une seule lumière colorée, aucune matière plastique.
+         Le texte est réel et tenu : les quatre lignes viennent des cibles
+         décrites dans docs/LEADCORE-FONCTIONNEMENT.md, les deux canaux sont
+         ceux du dossier, et le pied rappelle les critères contractuels. Rien
+         n'est inventé pour faire joli — si un chiffre ou un critère bouge dans
+         le dossier, ces quatre lignes bougent avec lui.
 
-         Le panneau est décoratif de bout en bout et ne porte aucun texte :
-         rien à restituer à un lecteur d'écran, d'où `aria-hidden`. Ce qu'il
-         illustre est écrit à côté, dans le titre et le chapeau. -->
-    <figure class="forge rv" aria-hidden="true">
-      <div class="forge-stage"><canvas class="forge-c"></canvas></div>
+         Une seule boucle de 19 s, en CSS, sans une ligne de JavaScript :
+         chaque ligne porte la même `animation-duration` et se décale par son
+         `--i`. Une seule horloge, donc rien à resynchroniser. Tout est en
+         `transform` et `opacity` — section 36. -->
+    <figure class="inbox rv">
+      <figcaption class="ib-hd">
+        <span class="lbl"><i class="dot" aria-hidden="true"></i>Rendez-vous qualifiés</span>
+        <span class="tag">Cette semaine</span>
+      </figcaption>
+
+      <div class="ib-list">
+        <article class="ib-row" style="--i:0">
+          <span class="ib-flash" aria-hidden="true"></span>
+          <header class="ib-top">
+            <span class="ib-when">Mardi <b>10:00</b></span>
+            <span class="ib-src"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.4 6.6h17.2v10.8H3.4z"/><path d="M3.4 7.4l8.6 5.6 8.6-5.6"/></svg>Email</span>
+          </header>
+          <p class="ib-who">Dirigeant<span> · Bureau d’études thermiques, 25 salariés</span></p>
+          <p class="ib-need"><q>On répond aux appels d’offres, on ne va jamais chercher.</q></p>
+        </article>
+
+        <article class="ib-row" style="--i:1">
+          <span class="ib-flash" aria-hidden="true"></span>
+          <header class="ib-top">
+            <span class="ib-when">Mercredi <b>14:30</b></span>
+            <span class="ib-src"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="7" r="2.6"/><circle cx="18" cy="12" r="2.6"/><circle cx="6" cy="17" r="2.6"/><path d="M8.3 8.3l7.4 2.6M8.3 15.7l7.4-2.6"/></svg>LinkedIn</span>
+          </header>
+          <p class="ib-who">Directrice commerciale<span> · Éditeur SaaS B2B, 40 à 80 salariés</span></p>
+          <p class="ib-need"><q>Deux commerciaux recrutés, pas assez de rendez-vous à leur donner.</q></p>
+        </article>
+
+        <article class="ib-row" style="--i:2">
+          <span class="ib-flash" aria-hidden="true"></span>
+          <header class="ib-top">
+            <span class="ib-when">Jeudi <b>09:00</b></span>
+            <span class="ib-src"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.4 6.6h17.2v10.8H3.4z"/><path d="M3.4 7.4l8.6 5.6 8.6-5.6"/></svg>Email</span>
+          </header>
+          <p class="ib-who">Directeur général<span> · ESN, 120 salariés</span></p>
+          <p class="ib-need"><q>Notre croissance vient du bouche-à-oreille, elle plafonne.</q></p>
+        </article>
+
+        <article class="ib-row" style="--i:3">
+          <span class="ib-flash" aria-hidden="true"></span>
+          <header class="ib-top">
+            <span class="ib-when">Vendredi <b>11:30</b></span>
+            <span class="ib-src"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="7" r="2.6"/><circle cx="18" cy="12" r="2.6"/><circle cx="6" cy="17" r="2.6"/><path d="M8.3 8.3l7.4 2.6M8.3 15.7l7.4-2.6"/></svg>LinkedIn</span>
+          </header>
+          <p class="ib-who">Directeur associé<span> · Cabinet de conseil RH, 12 salariés</span></p>
+          <p class="ib-need"><q>On perd des affaires faute d’être consultés en amont.</q></p>
+        </article>
+      </div>
+
+      <div class="ib-ft">Chacun a passé les trois filtres&nbsp;: <b>votre cible, un décisionnaire, un besoin formulé</b>. Il part dans l’agenda de votre commercial avec ce contexte.</div>
     </figure>
   </div>
 </section>
@@ -369,7 +416,6 @@
 
 <script src="assets/config.js?v=20260921a"></script>
 <script src="assets/main.js?v=20260921a"></script>
-<script src="assets/forge.js?v=20260921a"></script>
 <script src="assets/rdv.js?v=20260920a"></script>
 </body>
 </html>

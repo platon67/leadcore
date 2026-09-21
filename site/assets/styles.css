@@ -185,7 +185,7 @@ body::after{
 
 img{max-width:100%;height:auto;display:block}
 a{color:inherit}
-/* `.fiche` et `.forge` sont des <figure>, et un figure porte 1em 40px de marge
+/* `.fiche` et `.inbox` sont des <figure>, et un figure porte 1em 40px de marge
    par défaut : sans ce rappel le bloc perd 80 px de largeur, ce qui ne se voit
    qu'au moment où sa colonne devient étroite. */
 figure,figcaption,blockquote{margin:0}
@@ -509,7 +509,7 @@ section[id],main>span[id]{scroll-margin-top:calc(var(--header-h) + 20px)}
 
 .hero{
   position:relative;isolation:isolate;overflow:clip;
-  padding:calc(var(--header-h) + clamp(34px,4.4vw,54px)) 0 clamp(40px,5vw,58px);
+  padding:calc(var(--header-h) + clamp(40px,5.2vw,66px)) 0 clamp(40px,5vw,58px);
 }
 
 /* ---- le fond du héros ----
@@ -520,7 +520,7 @@ section[id],main>span[id]{scroll-margin-top:calc(var(--header-h) + 20px)}
    Le fond dit maintenant la même chose que le reste du site — une salle de
    mesure. Trois couches, toutes statiques, toutes peintes une fois :
 
-     1. une réglure horizontale au pas de 78 px, à 1,6 % de blanc. Pas un
+     1. une réglure horizontale au pas de 74 px, à 3 % de blanc. Pas un
         quadrillage : des lignes de niveau, comme une échelle sur laquelle on
         relève une valeur. Elle est masquée en radial autour de la chaîne et
         s'éteint complètement sous le titre, où elle passerait derrière le
@@ -536,8 +536,8 @@ section[id],main>span[id]{scroll-margin-top:calc(var(--header-h) + 20px)}
 .hero::before{
   content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
   background:
-    radial-gradient(54% 42% at 74% 52%,rgba(var(--accent-rgb),.055),transparent 70%),
-    radial-gradient(70% 56% at 78% 58%,rgba(var(--accent-hi-rgb),.022),transparent 74%);
+    radial-gradient(52% 44% at 80% 50%,rgba(var(--accent-rgb),.06),transparent 70%),
+    radial-gradient(68% 58% at 84% 56%,rgba(var(--accent-hi-rgb),.022),transparent 74%);
 }
 .hero::after{
   content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
@@ -545,16 +545,16 @@ section[id],main>span[id]{scroll-margin-top:calc(var(--header-h) + 20px)}
     180deg,
     rgba(var(--fg-rgb),.03) 0 1px,
     transparent 1px 74px);
-  -webkit-mask-image:radial-gradient(62% 52% at 76% 50%,#000 12%,transparent 78%);
-  mask-image:radial-gradient(62% 52% at 76% 50%,#000 12%,transparent 78%);
+  -webkit-mask-image:radial-gradient(58% 52% at 81% 50%,#000 12%,transparent 78%);
+  mask-image:radial-gradient(58% 52% at 81% 50%,#000 12%,transparent 78%);
 }
 
-/* La colonne du titre cède de la place à la chaîne : elle portait 1,18 part
-   contre 0,82, soit 683 px contre 474 à 1 440. Le mécanisme a six stations
-   empilées — il lui faut de la hauteur, donc de la largeur, puisque son
-   rapport est verrouillé. À 1,02 contre 0,98 les deux colonnes font 610 et
-   586, et la scène gagne 112 px de large, donc 142 px de haut. */
-.hero-grid{display:grid;grid-template-columns:1.02fr .98fr;gap:var(--s6);align-items:center}
+/* Les colonnes reviennent à 1,18 / 0,82. Elles étaient passées à 1,02 / 0,98
+   pour une scène en volume dont le rapport était verrouillé : il lui fallait
+   de la largeur pour avoir de la hauteur. Une liste de quatre lignes n'a pas
+   ce problème — elle se lit très bien sur 474 px — et ces cotes-ci sont celles
+   qui ont été mesurées contre la longueur des lignes du titre. */
+.hero-grid{display:grid;grid-template-columns:1.18fr .82fr;gap:var(--s6);align-items:center}
 /* Sans min-width:0, la ligne de titre en nowrap impose sa largeur maximale à sa
    piste et écrase la fiche : les proportions en fr ne sont plus respectées. */
 .hero-grid>*{min-width:0}
@@ -565,17 +565,12 @@ section[id],main>span[id]{scroll-margin-top:calc(var(--header-h) + 20px)}
    par signe — « Vos commerciaux » porte deux m et fait 8,225 em, là où une
    chaîne de même longueur en lettres étroites en fait 7,75. À 74 px elle
    occupe 609 px pour une colonne qui en fait 637. */
-/* Le titre ne prend plus --td1 (jusqu'à 74 px). Deux lignes à 74 px sur la
-   moitié gauche laissaient la chaîne à l'étroit, et l'accroche n'a pas besoin
-   de cette taille pour être la première chose lue : elle est seule en haut à
-   gauche, sur du noir, au-dessus d'un chapeau et de deux boutons. À 54 px elle
-   garde son rang et rend 27 % de sa hauteur au mécanisme. */
-.hero h1{font-size:clamp(31px,4.1vw,54px);line-height:1.0}
+.hero h1{font-size:var(--td1);line-height:.98}
 .hero h1 .ln{display:block;overflow:hidden;padding-bottom:.17em;margin-bottom:-.17em}
 /* nowrap : une ligne trop longue serait coupée par le masque, jamais renvoyée */
 .hero h1 .ln>span{display:block;white-space:nowrap}
-.hero .lede{max-width:44ch;margin-top:22px}
-.hero .cta{display:flex;flex-wrap:wrap;gap:var(--s3);margin-top:32px}
+.hero .lede{max-width:46ch;margin-top:26px}
+.hero .cta{display:flex;flex-wrap:wrap;gap:var(--s3);margin-top:36px}
 
 /* ---- fiche de rendez-vous : le livrable, montré ---- */
 
@@ -1030,13 +1025,13 @@ ul.crosses li::before{background:none;border:1.5px solid var(--fg-dim);border-ra
 /* ---- entrée du héros : chaque ligne du titre monte derrière son masque ---- */
 .js .hero h1 .ln>span{opacity:0;transform:translate3d(0,1.1em,0)}
 .js .hero .lede,.js .hero .cta{opacity:0;transform:translate3d(0,14px,0)}
-.js .hero .fiche,.js .hero .forge{opacity:0;transform:translate3d(0,26px,0) scale(.985)}
+.js .hero .fiche,.js .hero .inbox{opacity:0;transform:translate3d(0,26px,0) scale(.985)}
 
 .js .hero.boot h1 .ln>span,
 .js .hero.boot .lede,
 .js .hero.boot .cta,
 .js .hero.boot .fiche,
-.js .hero.boot .forge{
+.js .hero.boot .inbox{
   animation:rise .9s var(--ease-out) forwards;
 }
 .js .hero.boot h1 .ln:nth-child(1)>span{animation-delay:.06s}
@@ -1044,7 +1039,7 @@ ul.crosses li::before{background:none;border:1.5px solid var(--fg-dim);border-ra
 .js .hero.boot .lede{animation-delay:.3s}
 .js .hero.boot .cta{animation-delay:.38s}
 .js .hero.boot .fiche,
-.js .hero.boot .forge{animation-delay:.24s;animation-duration:1.1s}
+.js .hero.boot .inbox{animation-delay:.24s;animation-duration:1.1s}
 
 @keyframes rise{to{opacity:1;transform:none}}
 
@@ -1120,7 +1115,7 @@ ul.crosses li::before{background:none;border:1.5px solid var(--fg-dim);border-ra
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   .js .rv,.js .hero h1 .ln>span,.js .hero .lede,.js .hero .cta,
-  .js .hero .fiche,.js .hero .forge{opacity:1;transform:none;transition:none;animation:none}
+  .js .hero .fiche,.js .hero .inbox{opacity:1;transform:none;transition:none;animation:none}
   .js .rv .eyebrow::before{transform:none;transition:none}
   .dot::after,.infra .rail .pkt{animation:none!important}
   .aur i,.cta-rdv::before{animation:none!important}
@@ -3205,55 +3200,168 @@ body::before{
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   36. LA MACHINE (héros de l'accueil)
+   36. LA BOÎTE DE RÉCEPTION (héros de l'accueil)
    ───────────────────────────────────────────────────────────────────────────
-   La place la plus visible du site a porté une trajectoire chiffrée inventée,
-   puis la grille tarifaire, puis un agenda qui se remplissait. Elle porte
-   maintenant le mécanisme lui-même, en volume et sans un mot : le marché tombe
-   en poussière, la trémie en retient l'essentiel sur ses parois, le peu qui
-   passe est forgé au cœur de la machine, et la pièce descend s'empiler sur le
-   socle du client.
+   La place la plus visible du site a porté une trajectoire chiffrée étiquetée
+   « Exemple » — donc inventée —, puis la grille tarifaire, puis un agenda qui
+   se remplissait, puis une machine en 3D. Elle porte maintenant la chose la
+   plus simple, et la seule que le lecteur achète : **des rendez-vous qui
+   tombent un par un dans une boîte, avec la fiche du prospect écrite dedans.**
 
-   Côté feuille de style il n'y a presque rien à dire, et c'est voulu : la
-   scène est un canevas, et tout ce qui s'y peint est dans `forge.js`. Ce bloc
-   ne fait que deux choses — verrouiller le rapport de la scène, et lui donner
-   sa largeur.
+   Ce n'est pas une illustration de ce qu'on produit, c'est le livrable. D'où
+   deux règles sur le contenu :
 
-   Le rapport est verrouillé parce que le cadrage du rendu s'en déduit :
-   `forge.js` projette réellement tous les sommets de la machine, aux deux
-   extrêmes de son oscillation, et en tire la focale qui lui donne 68 % de la
-   hauteur. Une hauteur qui dépendrait du contenu ferait respirer la
-   perspective à chaque recalcul de mise en page.
+   · Le texte est réel et tenu. Les quatre lignes reprennent des cibles
+     décrites dans `docs/LEADCORE-FONCTIONNEMENT.md`, les deux canaux sont ceux
+     du dossier, et le pied rappelle les trois critères contractuels. Si un
+     critère bouge dans le dossier, ces quatre lignes bougent avec lui.
+   · Le panneau n'est pas `aria-hidden`. Tout ce qu'il montre est du texte, et
+     ce texte est le meilleur résumé du produit qui existe sur la page — il
+     serait absurde de le cacher à un lecteur d'écran.
 
-   Aucun cadre, aucun fond, aucun filet. Le panneau précédent était une carte —
-   bordure, dégradé, en-tête, pied. Une machine dans une boîte est une vignette ;
-   posée sur le noir de la page, elle est dans la même pièce que le titre. */
+   Une seule boucle de 19 s, en CSS, sans une ligne de JavaScript : chaque
+   ligne porte la même `animation-duration` et décale sa fenêtre par son `--i`.
+   Une seule horloge, donc rien à resynchroniser.
 
-/* Sans JavaScript, le canevas reste vide et la scène laisserait un trou de
-   700 px dans le héros. Elle disparaît. Le panneau est décoratif : la page
-   garde son titre, son chapeau et ses deux boutons, c'est-à-dire tout ce
-   qu'elle a à dire. La classe `.js` est posée par le script en ligne du
-   <head>, donc la règle s'applique avant la première image. */
-html:not(.js) .forge{display:none}
+      0,3 s · 1,9 s · 3,5 s · 5,1 s   les quatre lignes tombent
+      jusqu'à 17,4 s                  la boîte reste pleine, et se lit
+      puis                            elle se vide et recommence
 
-.forge{position:relative}
+   La boîte tient **onze secondes pleine sur dix-neuf**, soit 58 % du cycle :
+   c'est le seul réglage qui compte. Le panneau d'accroche d'un accueil doit
+   être lisible quand on arrive dessus, pas seulement quand on attend.
 
-.forge-stage{position:relative;width:100%;aspect-ratio:1/1.2}
-.forge-c{
-  position:absolute;inset:0;width:100%;height:100%;
-  pointer-events:none;
-  /* Le canevas déborde volontairement de sa boîte : la poussière du marché
-     monte au-delà du cadrage utile, et un grain coupé net sur un bord droit
-     trahirait la boîte. Il n'y a rien à écrêter — le fond est transparent. */
+   Tout est en `transform` et `opacity`. Les hauteurs sont réservées dès le
+   départ : une ligne qui apparaîtrait en poussant les autres vers le bas
+   ferait une mise en page par image, et ferait sauter le pied du panneau
+   quatre fois par cycle. Elles se révèlent donc en place.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.inbox{
+  --cyc:19s;
+  border:1px solid var(--rule);border-radius:var(--radius);overflow:hidden;
+  background:linear-gradient(168deg,var(--surface-3),var(--surface) 64%);
+  box-shadow:0 40px 90px -50px rgba(0,0,0,.9);
 }
 
-@media (max-width:1120px){
-  /* En colonne, la scène n'a plus de raison de faire la largeur du texte :
-     au-delà de 520 px elle grandit sans rien montrer de plus, et sa hauteur
-     suit. Elle se pose à gauche, à sa taille. */
-  .forge{max-width:520px}
+.ib-hd{
+  display:flex;align-items:center;gap:var(--s2);padding:14px 18px;
+  border-bottom:1px solid var(--rule-soft);background:rgba(var(--bg-rgb),.45);
+  font-family:var(--label);font-size:var(--t1);font-weight:600;
+  letter-spacing:.11em;text-transform:uppercase;
+}
+.ib-hd .lbl{display:flex;align-items:center;gap:9px;color:var(--accent);white-space:nowrap}
+.ib-hd .tag{
+  margin-left:auto;color:var(--fg-dim);border:1px solid var(--rule);border-radius:var(--radius-xs);
+  padding:3px 8px;font-weight:600;letter-spacing:.1em;white-space:nowrap;
 }
 
-/* Mouvement réduit : `forge.js` avance la scène à vide jusqu'à un état qui dit
-   quelque chose — la trémie pleine, une pièce en chemin, des lingots posés —
-   rend une seule image, et n'ouvre jamais de boucle. Rien à couper ici. */
+/* ---- les lignes ---- */
+.ib-row{
+  position:relative;padding:13px clamp(16px,2vw,20px) 14px;
+  border-top:1px solid var(--rule-soft);
+}
+.ib-row:first-child{border-top:0}
+
+/* Le liseré gauche, qui s'écrit de haut en bas quand la ligne arrive. C'est le
+   seul geste directionnel du panneau, et il dit « ceci vient d'entrer ». */
+.ib-row::before{
+  content:"";position:absolute;left:0;top:0;bottom:0;width:2px;
+  background:var(--accent);transform:scaleY(0);transform-origin:top;
+}
+/* Le voile d'arrivée. Un aplat émeraude à opacité nulle, monté puis éteint :
+   la couleur est fixe, c'est l'opacité qui bouge, donc le compositeur suffit.
+   Animer le fond lui-même repeindrait la ligne à chaque image. */
+.ib-flash{
+  position:absolute;inset:0;pointer-events:none;opacity:0;
+  background:linear-gradient(90deg,rgba(var(--accent-rgb),.16),transparent 62%);
+}
+
+.ib-top{display:flex;align-items:baseline;gap:var(--s3);margin-bottom:5px}
+.ib-when{
+  font-family:var(--label);font-size:var(--t1);font-weight:600;
+  letter-spacing:.09em;text-transform:uppercase;color:var(--fg-dim);
+}
+.ib-when b{
+  font-size:var(--t3);font-weight:700;letter-spacing:-.02em;text-transform:none;
+  color:var(--accent-hi);font-variant-numeric:tabular-nums;
+}
+.ib-src{
+  margin-left:auto;display:inline-flex;align-items:center;gap:6px;white-space:nowrap;
+  font-family:var(--label);font-size:var(--t1);font-weight:600;
+  letter-spacing:.06em;color:var(--fg-dim);
+}
+.ib-src .ico{
+  width:13px;height:13px;flex:none;color:var(--accent);
+  stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;
+}
+
+.ib-who{margin:0;font-size:var(--t3);font-weight:600;letter-spacing:-.012em;line-height:1.35}
+.ib-who span{font-weight:400;color:var(--fg-dim)}
+.ib-need{margin:5px 0 0;font-size:var(--t2);line-height:1.45;color:var(--fg-soft)}
+.ib-need q{font-family:var(--serif);font-style:italic;font-size:var(--t4);color:var(--fg)}
+
+.ib-ft{
+  padding:14px clamp(16px,2vw,20px);border-top:1px solid var(--rule-soft);
+  font-size:var(--t2);line-height:1.5;color:var(--fg-dim);
+}
+.ib-ft b{color:var(--fg-soft);font-weight:600}
+
+/* ---- la boucle ---- */
+.js .ib-row{opacity:0}
+.js .ib-row,
+.js .ib-row::before,
+.js .ib-flash{
+  animation-duration:var(--cyc);
+  animation-timing-function:var(--ease-out);
+  animation-iteration-count:infinite;
+  /* 1,6 s entre deux arrivées : assez pour qu'on voie la ligne se poser, assez
+     peu pour que la boîte soit pleine avant qu'on ait fini de lire le titre. */
+  animation-delay:calc(.3s + var(--i) * 1.6s);
+}
+.js .ib-row{animation-name:ibRow}
+.js .ib-row::before{animation-name:ibRail}
+.js .ib-flash{animation-name:ibFlash}
+
+@keyframes ibRow{
+  0%{opacity:0;transform:translate3d(0,-9px,0)}
+  3.2%{opacity:1;transform:none}
+  90%{opacity:1;transform:none}
+  96%{opacity:0;transform:translate3d(0,6px,0)}
+  100%{opacity:0;transform:translate3d(0,-9px,0)}
+}
+@keyframes ibRail{
+  0%{transform:scaleY(0);opacity:1}
+  3.6%{transform:scaleY(1);opacity:1}
+  26%{transform:scaleY(1);opacity:1}
+  40%{transform:scaleY(1);opacity:.22}   /* elle refroidit : elle n'est plus la dernière arrivée */
+  90%{transform:scaleY(1);opacity:.22}
+  100%{transform:scaleY(1);opacity:0}
+}
+@keyframes ibFlash{
+  0%{opacity:0}
+  2%{opacity:1}
+  16%{opacity:0}
+  100%{opacity:0}
+}
+
+@media (max-width:1120px){.inbox{max-width:560px}}
+@media (max-width:440px){
+  /* même traitement que `.fiche-hd` : le libellé reste d'un tenant, c'est
+     l'étiquette qui passe à la ligne */
+  .ib-hd{flex-wrap:wrap;row-gap:var(--s2)}
+  .ib-top{flex-wrap:wrap;row-gap:2px}
+  .ib-src{margin-left:0}
+}
+
+/* Mouvement réduit : la boîte est pleine, tout de suite et pour toujours. Le
+   liseré de la première ligne reste allumé — c'est la dernière arrivée — et
+   les autres restent à leur valeur froide. Figée à vide, la boîte ne dirait
+   rien du tout. */
+@media (prefers-reduced-motion:reduce){
+  .js .ib-row{opacity:1;animation:none}
+  .js .ib-row::before,.js .ib-flash{animation:none}
+  .js .ib-flash{opacity:0}
+  .js .ib-row::before{transform:scaleY(1);opacity:.22}
+  .js .ib-row:first-child::before{opacity:1}
+}
