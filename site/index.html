@@ -21,9 +21,9 @@
 <link rel="apple-touch-icon" href="assets/icon-180.png">
 <script>document.documentElement.className+=" js p-home has-intro"</script>
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/geist-latin-19f9c925.woff2" crossorigin>
-<link rel="preload" as="font" type="font/woff2" href="assets/fonts/instrument-serif-latin-5a51946d.woff2" crossorigin>
-<link rel="stylesheet" href="assets/fonts.css?v=20260921a">
-<link rel="stylesheet" href="assets/styles.css?v=20260921a">
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/lora-latin-723cc14f.woff2" crossorigin>
+<link rel="stylesheet" href="assets/fonts.css?v=20260921b">
+<link rel="stylesheet" href="assets/styles.css?v=20260921b">
 </head>
 <body>
 <a class="skip" href="#main">Aller au contenu</a>
@@ -97,16 +97,19 @@
          chacun avec la fiche du prospect écrite dedans. Ce n'est pas une
          métaphore de ce qu'on produit, c'est le livrable.
 
-         Le texte est réel et tenu : les quatre lignes viennent des cibles
-         décrites dans docs/LEADCORE-FONCTIONNEMENT.md, les deux canaux sont
-         ceux du dossier, et le pied rappelle les critères contractuels. Rien
-         n'est inventé pour faire joli — si un chiffre ou un critère bouge dans
-         le dossier, ces quatre lignes bougent avec lui.
+         Le contenu est tenu, pas décoratif. Les profils sont ceux décrits dans
+         docs/LEADCORE-FONCTIONNEMENT.md — PME B2B dont un client vaut au moins
+         7 000 € —, les rangs de touche respectent la cadence du dossier (email
+         4 touches, LinkedIn 3), le format est celui du livrable (30 min, en
+         visio, au pied du panneau) et les trois coches sont les trois critères
+         contractuels. Si un
+         critère bouge dans le dossier, ces quatre fiches bougent avec lui.
+         Aucun nom propre, aucun chiffre d'affaires, aucun score : ce qui n'est
+         pas vérifiable n'est pas écrit.
 
-         Une seule boucle de 19 s, en CSS, sans une ligne de JavaScript :
-         chaque ligne porte la même `animation-duration` et se décale par son
-         `--i`. Une seule horloge, donc rien à resynchroniser. Tout est en
-         `transform` et `opacity` — section 36. -->
+         Une seule boucle de 12 s, en CSS, sans une ligne de JavaScript. La
+         boîte se remplit, se lit, se vide entièrement, puis recommence —
+         section 36. -->
     <figure class="inbox rv">
       <figcaption class="ib-hd">
         <span class="lbl"><i class="dot" aria-hidden="true"></i>Rendez-vous qualifiés</span>
@@ -116,46 +119,66 @@
       <div class="ib-list">
         <article class="ib-row" style="--i:0">
           <span class="ib-flash" aria-hidden="true"></span>
-          <header class="ib-top">
+          <p class="ib-meta">
             <span class="ib-when">Mardi <b>10:00</b></span>
-            <span class="ib-src"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.4 6.6h17.2v10.8H3.4z"/><path d="M3.4 7.4l8.6 5.6 8.6-5.6"/></svg>Email</span>
-          </header>
-          <p class="ib-who">Dirigeant<span> · Bureau d’études thermiques, 25 salariés</span></p>
+            <span class="ib-src"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.4 6.6h17.2v10.8H3.4z"/><path d="M3.4 7.4l8.6 5.6 8.6-5.6"/></svg>Email · 3ᵉ touche</span>
+          </p>
+          <p class="ib-who"><b>Dirigeant</b> · Bureau d’études thermiques<span>, 25 salariés, Lyon</span></p>
           <p class="ib-need"><q>On répond aux appels d’offres, on ne va jamais chercher.</q></p>
+          <p class="ib-ok" aria-label="Trois critères validés : dans votre cible, décisionnaire, besoin formulé">
+            <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.8l4.4 4.4L19 7.6"/></svg>Dans votre cible</span>
+            <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.8l4.4 4.4L19 7.6"/></svg>Décisionnaire</span>
+            <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.8l4.4 4.4L19 7.6"/></svg>Besoin formulé</span>
+          </p>
         </article>
 
         <article class="ib-row" style="--i:1">
           <span class="ib-flash" aria-hidden="true"></span>
-          <header class="ib-top">
+          <p class="ib-meta">
             <span class="ib-when">Mercredi <b>14:30</b></span>
-            <span class="ib-src"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="7" r="2.6"/><circle cx="18" cy="12" r="2.6"/><circle cx="6" cy="17" r="2.6"/><path d="M8.3 8.3l7.4 2.6M8.3 15.7l7.4-2.6"/></svg>LinkedIn</span>
-          </header>
-          <p class="ib-who">Directrice commerciale<span> · Éditeur SaaS B2B, 40 à 80 salariés</span></p>
+            <span class="ib-src"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="7" r="2.6"/><circle cx="18" cy="12" r="2.6"/><circle cx="6" cy="17" r="2.6"/><path d="M8.3 8.3l7.4 2.6M8.3 15.7l7.4-2.6"/></svg>LinkedIn · 2ᵉ message</span>
+          </p>
+          <p class="ib-who"><b>Directrice commerciale</b> · Éditeur SaaS B2B<span>, 60 salariés, Nantes</span></p>
           <p class="ib-need"><q>Deux commerciaux recrutés, pas assez de rendez-vous à leur donner.</q></p>
+          <p class="ib-ok" aria-label="Trois critères validés : dans votre cible, décisionnaire, besoin formulé">
+            <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.8l4.4 4.4L19 7.6"/></svg>Dans votre cible</span>
+            <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.8l4.4 4.4L19 7.6"/></svg>Décisionnaire</span>
+            <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.8l4.4 4.4L19 7.6"/></svg>Besoin formulé</span>
+          </p>
         </article>
 
         <article class="ib-row" style="--i:2">
           <span class="ib-flash" aria-hidden="true"></span>
-          <header class="ib-top">
+          <p class="ib-meta">
             <span class="ib-when">Jeudi <b>09:00</b></span>
-            <span class="ib-src"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.4 6.6h17.2v10.8H3.4z"/><path d="M3.4 7.4l8.6 5.6 8.6-5.6"/></svg>Email</span>
-          </header>
-          <p class="ib-who">Directeur général<span> · ESN, 120 salariés</span></p>
+            <span class="ib-src"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.4 6.6h17.2v10.8H3.4z"/><path d="M3.4 7.4l8.6 5.6 8.6-5.6"/></svg>Email · 4ᵉ touche</span>
+          </p>
+          <p class="ib-who"><b>Directeur général</b> · ESN<span>, 120 salariés, Lille</span></p>
           <p class="ib-need"><q>Notre croissance vient du bouche-à-oreille, elle plafonne.</q></p>
+          <p class="ib-ok" aria-label="Trois critères validés : dans votre cible, décisionnaire, besoin formulé">
+            <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.8l4.4 4.4L19 7.6"/></svg>Dans votre cible</span>
+            <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.8l4.4 4.4L19 7.6"/></svg>Décisionnaire</span>
+            <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.8l4.4 4.4L19 7.6"/></svg>Besoin formulé</span>
+          </p>
         </article>
 
         <article class="ib-row" style="--i:3">
           <span class="ib-flash" aria-hidden="true"></span>
-          <header class="ib-top">
+          <p class="ib-meta">
             <span class="ib-when">Vendredi <b>11:30</b></span>
-            <span class="ib-src"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="7" r="2.6"/><circle cx="18" cy="12" r="2.6"/><circle cx="6" cy="17" r="2.6"/><path d="M8.3 8.3l7.4 2.6M8.3 15.7l7.4-2.6"/></svg>LinkedIn</span>
-          </header>
-          <p class="ib-who">Directeur associé<span> · Cabinet de conseil RH, 12 salariés</span></p>
+            <span class="ib-src"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="7" r="2.6"/><circle cx="18" cy="12" r="2.6"/><circle cx="6" cy="17" r="2.6"/><path d="M8.3 8.3l7.4 2.6M8.3 15.7l7.4-2.6"/></svg>LinkedIn · visite puis message</span>
+          </p>
+          <p class="ib-who"><b>Directeur associé</b> · Cabinet de conseil RH<span>, 12 salariés, Bordeaux</span></p>
           <p class="ib-need"><q>On perd des affaires faute d’être consultés en amont.</q></p>
+          <p class="ib-ok" aria-label="Trois critères validés : dans votre cible, décisionnaire, besoin formulé">
+            <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.8l4.4 4.4L19 7.6"/></svg>Dans votre cible</span>
+            <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.8l4.4 4.4L19 7.6"/></svg>Décisionnaire</span>
+            <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.8l4.4 4.4L19 7.6"/></svg>Besoin formulé</span>
+          </p>
         </article>
       </div>
 
-      <div class="ib-ft">Chacun a passé les trois filtres&nbsp;: <b>votre cible, un décisionnaire, un besoin formulé</b>. Il part dans l’agenda de votre commercial avec ce contexte.</div>
+      <div class="ib-ft">Chacun dure <b>30 minutes, en visio</b>, et part dans l’agenda de votre commercial avec ce contexte. Vous ne payez que ceux qui ont lieu.</div>
     </figure>
   </div>
 </section>
@@ -414,8 +437,8 @@
   </div>
 </footer>
 
-<script src="assets/config.js?v=20260921a"></script>
-<script src="assets/main.js?v=20260921a"></script>
+<script src="assets/config.js?v=20260921b"></script>
+<script src="assets/main.js?v=20260921b"></script>
 <script src="assets/rdv.js?v=20260920a"></script>
 </body>
 </html>

@@ -10,9 +10,9 @@
 
    Typographie : Geist en variable pour toute la structure — la hiérarchie se
    fait à la graisse et à l'approche, pas en empilant des familles. Geist Mono
-   pour les libellés techniques et les chiffres. Instrument Serif en italique
-   uniquement sur les mots mis en exergue dans les titres : c'est le seul
-   endroit où une seconde voix se justifie.
+   pour les libellés techniques et les chiffres. Lora en italique uniquement
+   sur les mots mis en exergue dans les titres et sur les phrases citées d'un
+   prospect : c'est le seul endroit où une seconde voix se justifie.
 
    Mouvement : transform, opacity et clip-path uniquement, donc composité par
    le GPU. Aucune bibliothèque. Le défilement est natif, jamais détourné. Tout
@@ -58,7 +58,7 @@
      en lisibilité ce qu'il gagne en caractère. */
   --label:"Geist","Helvetica Neue",Arial,sans-serif;
   --mono:"Geist Mono",ui-monospace,SFMono-Regular,Consolas,monospace;
-  --serif:"Instrument Serif",Iowan Old Style,Georgia,serif;
+  --serif:"Lora",Iowan Old Style,Georgia,serif;
 
   /* ---- rythme ---- */
   /* Gouttières et largeur de contenu. Sur un écran de 1440, la marge passe de
@@ -220,7 +220,11 @@ h4{font-weight:600;font-size:var(--t3);line-height:1.3;letter-spacing:-.015em}
    et l'accueil n'en garde qu'un : « closent. », dans le titre. */
 .ex{
   font-family:var(--serif);font-style:italic;font-weight:400;
-  font-size:1.08em;letter-spacing:-.01em;
+  /* Instrument Serif avait une petite hauteur d'x : il fallait la remonter de
+     8 % pour qu'elle pèse autant que le Geist d'à côté. Lora est une fonte de
+     labeur, sa hauteur d'x est normale — et elle est 30 % plus large. Le
+     rehaussement n'a plus lieu d'être. */
+  font-size:1em;letter-spacing:-.008em;
   color:var(--accent-hi);
   padding-right:.06em; /* l'italique déborde à droite */
 }
@@ -565,7 +569,15 @@ section[id],main>span[id]{scroll-margin-top:calc(var(--header-h) + 20px)}
    par signe — « Vos commerciaux » porte deux m et fait 8,225 em, là où une
    chaîne de même longueur en lettres étroites en fait 7,75. À 74 px elle
    occupe 609 px pour une colonne qui en fait 637. */
+/* La deuxième ligne du titre est en italique, et l'italique de Lora est 30 %
+   plus large que celle d'Instrument Serif : à taille égale, « Exclusifs. Payés
+   à l'unité. » faisait 874 px pour une colonne de 706, et se faisait rogner par
+   le masque — les lignes sont en `nowrap`, une ligne trop longue est coupée,
+   jamais renvoyée. À 0,84 em elle mesure 680 px, soit neuf pixels de plus que
+   la première ligne : les deux lignes tombent au même endroit à droite, ce qui
+   vaut mieux que ce qu'on avait. Vérifié de 340 à 1 920 px. */
 .hero h1{font-size:var(--td1);line-height:.98}
+.hero h1 .ex{font-size:.84em}
 .hero h1 .ln{display:block;overflow:hidden;padding-bottom:.17em;margin-bottom:-.17em}
 /* nowrap : une ligne trop longue serait coupée par le masque, jamais renvoyée */
 .hero h1 .ln>span{display:block;white-space:nowrap}
@@ -3211,41 +3223,56 @@ body::before{
    Ce n'est pas une illustration de ce qu'on produit, c'est le livrable. D'où
    deux règles sur le contenu :
 
-   · Le texte est réel et tenu. Les quatre lignes reprennent des cibles
-     décrites dans `docs/LEADCORE-FONCTIONNEMENT.md`, les deux canaux sont ceux
-     du dossier, et le pied rappelle les trois critères contractuels. Si un
-     critère bouge dans le dossier, ces quatre lignes bougent avec lui.
+   · Il est tenu. Les profils sont ceux du dossier — PME B2B dont un client
+     vaut au moins 7 000 € —, les rangs de touche respectent la cadence décrite
+     (email 4 touches, LinkedIn 3), le format est celui du livrable, et les
+     trois coches sont les trois critères contractuels. Aucun nom propre, aucun
+     chiffre d'affaires, aucun score : ce qui n'est pas vérifiable n'est pas
+     écrit. C'est ce qui avait coulé le premier panneau, étiqueté « Exemple ».
    · Le panneau n'est pas `aria-hidden`. Tout ce qu'il montre est du texte, et
-     ce texte est le meilleur résumé du produit qui existe sur la page — il
-     serait absurde de le cacher à un lecteur d'écran.
+     ce texte est le meilleur résumé du produit qui existe sur la page.
 
-   Une seule boucle de 19 s, en CSS, sans une ligne de JavaScript : chaque
-   ligne porte la même `animation-duration` et décale sa fenêtre par son `--i`.
-   Une seule horloge, donc rien à resynchroniser.
+   ── LA BOUCLE ──────────────────────────────────────────────────────────────
+   Un cycle de 12 s, en CSS, sans une ligne de JavaScript.
 
-      0,3 s · 1,9 s · 3,5 s · 5,1 s   les quatre lignes tombent
-      jusqu'à 17,4 s                  la boîte reste pleine, et se lit
-      puis                            elle se vide et recommence
+      ligne 1   entre à 0.30 s   sort à 9.60 s
+      ligne 2   entre à 0.90 s   sort à 9.80 s
+      ligne 3   entre à 1.50 s   sort à 10.00 s
+      ligne 4   entre à 2.10 s   sort à 10.20 s
+      vide     de 10.50 s à 12.00 s
 
-   La boîte tient **onze secondes pleine sur dix-neuf**, soit 58 % du cycle :
-   c'est le seul réglage qui compte. Le panneau d'accroche d'un accueil doit
-   être lisible quand on arrive dessus, pas seulement quand on attend.
+   **La boîte se vide entièrement avant de se remplir.** C'est le point qui a
+   demandé de tout réécrire. Tant que les quatre lignes partageaient les mêmes
+   images-clés et se décalaient par `animation-delay`, leur sortie se décalait
+   du même pas que leur entrée : la première ligne revenait avant que la
+   quatrième soit partie, et la boîte n'était jamais vide. Les entrées sont
+   espacées de 0,6 s, les sorties de 0,2 s seulement — deux cadences
+   différentes, donc quatre jeux d'images-clés écrits en dur. Un pourcentage de
+   `@keyframes` n'accepte pas de variable : c'est le seul endroit de la feuille
+   où l'on répète, et c'est pour ça. Les valeurs ci-dessus sont la source.
 
-   Tout est en `transform` et `opacity`. Les hauteurs sont réservées dès le
-   départ : une ligne qui apparaîtrait en poussant les autres vers le bas
-   ferait une mise en page par image, et ferait sauter le pied du panneau
-   quatre fois par cycle. Elles se révèlent donc en place.
+   Le liseré et le voile d'arrivée, eux, n'ont qu'un seul jeu chacun et se
+   décalent par `animation-delay` : ils ne font rien à la sortie, et l'opacité
+   de la ligne qui les porte les emmène avec elle.
+
+   ── LE RESTE ───────────────────────────────────────────────────────────────
+   Les hauteurs sont réservées dès le départ : une ligne qui apparaîtrait en
+   poussant les autres ferait une mise en page par image, et le pied du panneau
+   sauterait quatre fois par cycle. Elles se révèlent en place, en `transform`
+   et `opacity`. Le voile d'arrivée est un aplat à opacité nulle qu'on monte
+   puis qu'on éteint — la couleur est fixe, donc le compositeur suffit ; animer
+   le fond lui-même repeindrait la ligne à chaque image.
    ═══════════════════════════════════════════════════════════════════════════ */
 
 .inbox{
-  --cyc:19s;
+  --cyc:12s;
   border:1px solid var(--rule);border-radius:var(--radius);overflow:hidden;
   background:linear-gradient(168deg,var(--surface-3),var(--surface) 64%);
   box-shadow:0 40px 90px -50px rgba(0,0,0,.9);
 }
 
 .ib-hd{
-  display:flex;align-items:center;gap:var(--s2);padding:14px 18px;
+  display:flex;align-items:center;gap:var(--s2);padding:13px 18px;
   border-bottom:1px solid var(--rule-soft);background:rgba(var(--bg-rgb),.45);
   font-family:var(--label);font-size:var(--t1);font-weight:600;
   letter-spacing:.11em;text-transform:uppercase;
@@ -3256,31 +3283,31 @@ body::before{
   padding:3px 8px;font-weight:600;letter-spacing:.1em;white-space:nowrap;
 }
 
-/* ---- les lignes ---- */
+/* ---- une fiche ---- */
 .ib-row{
-  position:relative;padding:13px clamp(16px,2vw,20px) 14px;
+  position:relative;padding:11px clamp(15px,1.9vw,19px) 12px;
   border-top:1px solid var(--rule-soft);
 }
 .ib-row:first-child{border-top:0}
 
-/* Le liseré gauche, qui s'écrit de haut en bas quand la ligne arrive. C'est le
+/* Le liseré gauche, qui s'écrit de haut en bas quand la fiche arrive. C'est le
    seul geste directionnel du panneau, et il dit « ceci vient d'entrer ». */
 .ib-row::before{
   content:"";position:absolute;left:0;top:0;bottom:0;width:2px;
   background:var(--accent);transform:scaleY(0);transform-origin:top;
 }
-/* Le voile d'arrivée. Un aplat émeraude à opacité nulle, monté puis éteint :
-   la couleur est fixe, c'est l'opacité qui bouge, donc le compositeur suffit.
-   Animer le fond lui-même repeindrait la ligne à chaque image. */
 .ib-flash{
   position:absolute;inset:0;pointer-events:none;opacity:0;
-  background:linear-gradient(90deg,rgba(var(--accent-rgb),.16),transparent 62%);
+  background:linear-gradient(90deg,rgba(var(--accent-rgb),.17),transparent 62%);
 }
 
-.ib-top{display:flex;align-items:baseline;gap:var(--s3);margin-bottom:5px}
-.ib-when{
+/* ligne 1 : quand, et par où il est arrivé. La durée n'y est pas : elle est
+   la même pour les quatre, donc elle est écrite une fois, au pied. Quatre fois
+   « 30 min, en visio » prenait 90 px de haut pour ne rien dire de plus. */
+.ib-meta{
+  margin:0 0 5px;display:flex;align-items:baseline;gap:3px 10px;
   font-family:var(--label);font-size:var(--t1);font-weight:600;
-  letter-spacing:.09em;text-transform:uppercase;color:var(--fg-dim);
+  letter-spacing:.07em;text-transform:uppercase;color:var(--fg-dim);
 }
 .ib-when b{
   font-size:var(--t3);font-weight:700;letter-spacing:-.02em;text-transform:none;
@@ -3288,60 +3315,100 @@ body::before{
 }
 .ib-src{
   margin-left:auto;display:inline-flex;align-items:center;gap:6px;white-space:nowrap;
-  font-family:var(--label);font-size:var(--t1);font-weight:600;
-  letter-spacing:.06em;color:var(--fg-dim);
+  letter-spacing:.05em;
 }
 .ib-src .ico{
   width:13px;height:13px;flex:none;color:var(--accent);
   stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;
 }
 
-.ib-who{margin:0;font-size:var(--t3);font-weight:600;letter-spacing:-.012em;line-height:1.35}
-.ib-who span{font-weight:400;color:var(--fg-dim)}
-.ib-need{margin:5px 0 0;font-size:var(--t2);line-height:1.45;color:var(--fg-soft)}
-.ib-need q{font-family:var(--serif);font-style:italic;font-size:var(--t4);color:var(--fg)}
+/* ligne 2 : qui, et où il travaille */
+.ib-who{margin:0;font-size:var(--t3);line-height:1.35;letter-spacing:-.012em;color:var(--fg-soft)}
+.ib-who b{font-weight:600;color:var(--fg)}
+.ib-who span{color:var(--fg-dim)}
+
+/* ligne 3 : ce qu'il a écrit, dans ses mots */
+/* La citation était au pas au-dessus du corps (--t4). Lora tient très bien à
+   16 px, et le pas supérieur coûtait une deuxième ligne sur les quatre fiches,
+   soit 112 px de panneau pour aucune lisibilité gagnée. */
+.ib-need{margin:5px 0 0}
+.ib-need q{
+  font-family:var(--serif);font-style:italic;font-size:var(--t3);
+  line-height:1.45;color:var(--fg);
+}
+
+/* ligne 4 : les trois critères contractuels, cochés */
+.ib-ok{
+  margin:8px 0 0;display:flex;flex-wrap:wrap;gap:4px 12px;
+  font-family:var(--label);font-size:var(--t1);font-weight:600;
+  letter-spacing:.05em;color:var(--fg-dim);
+}
+.ib-ok span{display:inline-flex;align-items:center;gap:4px;white-space:nowrap}
+.ib-ok svg{
+  width:11px;height:11px;flex:none;color:var(--accent);
+  stroke:currentColor;fill:none;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;
+}
 
 .ib-ft{
-  padding:14px clamp(16px,2vw,20px);border-top:1px solid var(--rule-soft);
+  padding:13px clamp(15px,1.9vw,19px);border-top:1px solid var(--rule-soft);
   font-size:var(--t2);line-height:1.5;color:var(--fg-dim);
 }
 .ib-ft b{color:var(--fg-soft);font-weight:600}
 
 /* ---- la boucle ---- */
-.js .ib-row{opacity:0}
-.js .ib-row,
+.js .ib-row{
+  opacity:0;
+  animation:var(--cyc) var(--ease-out) infinite;
+}
+.js .ib-row:nth-child(1){animation-name:ibRow0}
+.js .ib-row:nth-child(2){animation-name:ibRow1}
+.js .ib-row:nth-child(3){animation-name:ibRow2}
+.js .ib-row:nth-child(4){animation-name:ibRow3}
+
+/* Le liseré et le voile ne servent qu'à l'arrivée : un seul jeu d'images-clés
+   pour les quatre, décalé par `--i`. L'opacité de la fiche les emmène à la
+   sortie, donc ils n'ont rien à y faire. */
 .js .ib-row::before,
 .js .ib-flash{
   animation-duration:var(--cyc);
-  animation-timing-function:var(--ease-out);
   animation-iteration-count:infinite;
-  /* 1,6 s entre deux arrivées : assez pour qu'on voie la ligne se poser, assez
-     peu pour que la boîte soit pleine avant qu'on ait fini de lire le titre. */
-  animation-delay:calc(.3s + var(--i) * 1.6s);
+  animation-delay:calc(0.3s + var(--i) * 0.6s);
 }
-.js .ib-row{animation-name:ibRow}
-.js .ib-row::before{animation-name:ibRail}
-.js .ib-flash{animation-name:ibFlash}
+.js .ib-row::before{animation-name:ibRail;animation-timing-function:var(--ease-out)}
+.js .ib-flash{animation-name:ibFlash;animation-timing-function:linear}
 
-@keyframes ibRow{
-  0%{opacity:0;transform:translate3d(0,-9px,0)}
-  3.2%{opacity:1;transform:none}
-  90%{opacity:1;transform:none}
-  96%{opacity:0;transform:translate3d(0,6px,0)}
-  100%{opacity:0;transform:translate3d(0,-9px,0)}
+@keyframes ibRow0{
+  0%,2.5%{opacity:0;transform:translate3d(0,-10px,0)}
+  5.33%,80.0%{opacity:1;transform:none}
+  82.5%,100%{opacity:0;transform:translate3d(0,8px,0)}
 }
+@keyframes ibRow1{
+  0%,7.5%{opacity:0;transform:translate3d(0,-10px,0)}
+  10.33%,81.67%{opacity:1;transform:none}
+  84.17%,100%{opacity:0;transform:translate3d(0,8px,0)}
+}
+@keyframes ibRow2{
+  0%,12.5%{opacity:0;transform:translate3d(0,-10px,0)}
+  15.33%,83.33%{opacity:1;transform:none}
+  85.83%,100%{opacity:0;transform:translate3d(0,8px,0)}
+}
+@keyframes ibRow3{
+  0%,17.5%{opacity:0;transform:translate3d(0,-10px,0)}
+  20.33%,85.0%{opacity:1;transform:none}
+  87.5%,100%{opacity:0;transform:translate3d(0,8px,0)}
+}
+
 @keyframes ibRail{
   0%{transform:scaleY(0);opacity:1}
-  3.6%{transform:scaleY(1);opacity:1}
-  26%{transform:scaleY(1);opacity:1}
-  40%{transform:scaleY(1);opacity:.22}   /* elle refroidit : elle n'est plus la dernière arrivée */
-  90%{transform:scaleY(1);opacity:.22}
-  100%{transform:scaleY(1);opacity:0}
+  2.9%{transform:scaleY(1);opacity:1}
+  30%{transform:scaleY(1);opacity:1}
+  40%{transform:scaleY(1);opacity:.22}   /* elle refroidit : plus la dernière arrivée */
+  100%{transform:scaleY(1);opacity:.22}
 }
 @keyframes ibFlash{
   0%{opacity:0}
-  2%{opacity:1}
-  16%{opacity:0}
+  1.6%{opacity:1}
+  11%{opacity:0}
   100%{opacity:0}
 }
 
@@ -3350,14 +3417,13 @@ body::before{
   /* même traitement que `.fiche-hd` : le libellé reste d'un tenant, c'est
      l'étiquette qui passe à la ligne */
   .ib-hd{flex-wrap:wrap;row-gap:var(--s2)}
-  .ib-top{flex-wrap:wrap;row-gap:2px}
   .ib-src{margin-left:0}
+  .ib-ok{gap:4px 10px;font-size:11px;letter-spacing:.03em}
 }
 
 /* Mouvement réduit : la boîte est pleine, tout de suite et pour toujours. Le
-   liseré de la première ligne reste allumé — c'est la dernière arrivée — et
-   les autres restent à leur valeur froide. Figée à vide, la boîte ne dirait
-   rien du tout. */
+   liseré de la première fiche reste allumé — c'est la dernière arrivée — et les
+   autres restent à leur valeur froide. Figée à vide, la boîte ne dirait rien. */
 @media (prefers-reduced-motion:reduce){
   .js .ib-row{opacity:1;animation:none}
   .js .ib-row::before,.js .ib-flash{animation:none}

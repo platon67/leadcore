@@ -217,30 +217,60 @@ toute la page Tarifs lui est consacrée.
 
 ### La boucle
 
-Une seule boucle de 19 s, **en CSS, sans une ligne de JavaScript**. Chaque ligne
-porte la même `animation-duration` et décale sa fenêtre par son `--i` : une
-seule horloge, donc rien à resynchroniser.
+Un cycle de **12 s**, en CSS, sans une ligne de JavaScript.
 
 | Moment | Ce qui se passe |
 |---|---|
-| 0,3 · 1,9 · 3,5 · 5,1 s | les quatre lignes tombent, une toutes les 1,6 s |
+| 0,30 · 0,90 · 1,50 · 2,10 s | les quatre fiches tombent, une toutes les 0,6 s |
 | à chaque arrivée | le liseré gauche s'écrit de haut en bas, un voile émeraude passe et s'éteint |
-| 4 s après | le liseré refroidit : cette ligne n'est plus la dernière arrivée |
-| jusqu'à 17,4 s | la boîte reste pleine, et se lit |
+| 4 s après | le liseré refroidit : cette fiche n'est plus la dernière arrivée |
+| 2,4 → 9,6 s | la boîte est pleine, et se lit — 7,2 s |
+| 9,60 · 9,80 · 10,00 · 10,20 s | elle se vide, de haut en bas, quatre fois plus vite qu'elle ne s'est remplie |
+| 10,5 → 12,0 s | **vide** |
 
-La boîte tient **onze secondes pleine sur dix-neuf, soit 58 % du cycle**. C'est
-le seul réglage qui compte : le panneau d'accroche d'un accueil doit être
-lisible quand on arrive dessus, pas seulement quand on a attendu. C'est la même
-leçon que l'agenda d'avant, dont le dossier n'arrivait qu'à 7,4 s sur 13.
+**La boîte se vide entièrement avant de se remplir**, et c'est le point qui a
+demandé de tout réécrire. Tant que les quatre fiches partageaient les mêmes
+images-clés et se décalaient par `animation-delay`, leur sortie se décalait du
+même pas que leur entrée : la première revenait avant que la quatrième soit
+partie, et la boîte n'était jamais vide. Les entrées sont espacées de 0,6 s, les
+sorties de 0,2 s — deux cadences différentes, donc quatre jeux d'images-clés
+écrits en dur. Un pourcentage de `@keyframes` n'accepte pas de variable : c'est
+le seul endroit de la feuille où l'on se répète, et les valeurs sont calculées
+en tête de section, qui fait foi.
 
-**Les hauteurs sont réservées dès le départ.** Une ligne qui apparaîtrait en
+Le liseré et le voile, eux, n'ont qu'un seul jeu chacun et se décalent par
+`animation-delay` : ils ne font rien à la sortie, et l'opacité de la fiche qui
+les porte les emmène avec elle.
+
+**Les hauteurs sont réservées dès le départ.** Une fiche qui apparaîtrait en
 poussant les autres vers le bas ferait une mise en page par image, et ferait
 sauter le pied du panneau quatre fois par cycle. Elles se révèlent en place :
 tout est en `transform` et `opacity`.
 
 **Le voile d'arrivée est un aplat à opacité nulle**, monté puis éteint. La
 couleur est fixe, c'est l'opacité qui bouge, donc le compositeur suffit — animer
-le fond lui-même repeindrait la ligne à chaque image.
+le fond lui-même repeindrait la fiche à chaque image.
+
+### Ce que porte une fiche, et ce qu'elle ne porte pas
+
+Quatre lignes : le créneau et le canal avec son rang de touche ; le titre du
+contact, son entreprise, sa taille et sa ville ; sa phrase, citée ; les trois
+critères contractuels, cochés.
+
+Ce qui n'y est **pas** : aucun nom propre, aucun chiffre d'affaires, aucun
+score de qualification. Ce qui n'est pas vérifiable n'est pas écrit — c'est
+exactement ce qui avait coulé le tout premier panneau du héros, une trajectoire
+chiffrée étiquetée « Exemple ». Une fiche qui montre le *format* du livrable
+informe ; une fiche qui invente des performances ment.
+
+La durée est écrite **une fois**, au pied. Elle est la même pour les quatre, et
+quatre fois « 30 min, en visio » prenait 90 px de haut pour ne rien dire de
+plus. La citation est au corps du texte et non au pas au-dessus : Lora tient
+très bien à 16 px, et le pas supérieur coûtait une deuxième ligne sur chacune
+des quatre fiches.
+
+Panneau : **729 px** à 1 440, ce qui laisse le bouton de prise de rendez-vous à
+650 px du haut — au-dessus de la ligne de flottaison d'un portable.
 
 ### Ce qui a été essayé avant, et pourquoi c'est parti
 
@@ -593,11 +623,31 @@ petit corps il existe `--accent-lo` (`#14A071`), à 5,6:1.
 **Typographie.** Geist en variable porte toute la structure : un seul fichier
 pour les graisses 400 à 800, la hiérarchie se fait à la graisse et à l'approche
 plutôt qu'en empilant des familles. Geist Mono pour les libellés techniques et
-les chiffres. Instrument Serif en italique **uniquement** sur les mots mis en
-exergue dans les titres (`<span class="ex">`) : c'est le seul contraste de
-famille du site, et il perd son effet dès qu'on s'en sert ailleurs. Une page en
-français ne télécharge que les trois fichiers `latin`, soit 73 Ko, contre 94 Ko
-avant la refonte.
+les chiffres. **Lora** en italique **uniquement** sur les mots mis en exergue
+dans les titres (`<span class="ex">`) et sur les phrases citées d'un prospect :
+c'est le seul contraste de famille du site, et il perd son effet dès qu'on s'en
+sert ailleurs. Une page en français ne télécharge que les trois fichiers
+`latin`, soit 75 Ko.
+
+**Lora a remplacé Instrument Serif**, qui tenait la même place. Instrument
+Serif est une fonte d'affichage : forte modulation, contrepoinçons étroits,
+approches serrées. À 52 px sur un titre elle est superbe ; à 19 px sur une
+phrase entière — ce que la boîte de réception du héros lui demandait — elle se
+lit mal et fatigue. Lora est une fonte de labeur dont l'italique descend de la
+calligraphie au pinceau : le caractère écrit à la main reste, la lisibilité
+vient avec.
+
+Deux réglages ont suivi la substitution, et aucun des deux n'était facultatif :
+
+- `.ex` portait `font-size:1.08em`, parce qu'Instrument Serif avait une petite
+  hauteur d'x et pesait moins que le Geist d'à côté. La hauteur d'x de Lora est
+  normale : le rehaussement est retiré.
+- **L'italique de Lora est 30 % plus large.** Sur le titre de l'accueil, dont
+  les lignes sont en `nowrap` derrière un masque, « Exclusifs. Payés à l'unité. »
+  passait de 671 à 874 px pour une colonne de 706 : elle se faisait couper.
+  `.hero h1 .ex` descend donc à `.84em`, ce qui la ramène à 683 px — neuf de
+  plus que la première ligne. Les deux lignes tombent maintenant au même endroit
+  à droite, ce qui vaut mieux que ce qu'on avait. Vérifié de 340 à 1 920 px.
 
 **Ponctuation haute.** Le français demande une espace insécable devant `:`, `;`,
 `!`, `?` et à l'intérieur des guillemets. Sans elle, « ce qu'ils sont devenus :
@@ -703,7 +753,7 @@ site/
     ├── fonts.css           @font-face, sous-ensembles latin et latin-ext
     ├── config.js           ← le seul fichier à modifier au quotidien
     ├── main.js             en-tête, apparitions, compteurs, calendrier
-    ├── fonts/              Geist, Geist Mono, Instrument Serif (OFL 1.1)
+    ├── fonts/              Geist, Geist Mono (Vercel), Lora (Cyreal) — OFL 1.1
     ├── img/                les quatre photographies traitées + leur README
     ├── og-leadcore.png     image de partage, 1200 × 630
     ├── icon-180.png        icône d'écran d'accueil

@@ -1,5 +1,5 @@
 /* Leadcore — fontes auto-hébergées, sous-ensembles latin et latin-ext.
-   Geist et Geist Mono (Vercel) et Instrument Serif : SIL Open Font License 1.1.
+   Geist et Geist Mono (Vercel) et Lora (Cyreal) : SIL Open Font License 1.1.
 
    Auto-hébergées pour qu'aucune requête ne parte vers un serveur tiers depuis le
    navigateur du visiteur. Geist et Geist Mono sont des fontes variables : un seul
@@ -48,23 +48,30 @@
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
-/* Instrument Serif italique — latin-ext — 12,1 Ko
+/* Lora italique — latin-ext — 12,5 Ko
    Une seule graisse, un seul style : l'italique sert aux mots mis en exergue
-   dans les titres, nulle part ailleurs. */
+   dans les titres et aux phrases citées d'un prospect, nulle part ailleurs.
+
+   Elle remplace Instrument Serif, qui tenait la même place. Instrument Serif
+   est une fonte d'affichage : forte modulation, contrepoinçons étroits,
+   approches serrées. À 52 px sur un titre elle est superbe ; à 19 px sur une
+   phrase entière, elle se lit mal et fatigue. Lora est une fonte de labeur
+   dont l'italique descend de la calligraphie au pinceau : le caractère écrit
+   à la main reste, la lisibilité vient avec. */
 @font-face {
-  font-family: 'Instrument Serif';
+  font-family: 'Lora';
   font-style: italic;
   font-weight: 400;
   font-display: swap;
-  src: url(fonts/instrument-serif-latin-ext-d0014821.woff2) format('woff2');
+  src: url(fonts/lora-latin-ext-3bb65e23.woff2) format('woff2');
   unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
-/* Instrument Serif italique — latin — 21,6 Ko */
+/* Lora italique — latin — 22,8 Ko */
 @font-face {
-  font-family: 'Instrument Serif';
+  font-family: 'Lora';
   font-style: italic;
   font-weight: 400;
   font-display: swap;
-  src: url(fonts/instrument-serif-latin-5a51946d.woff2) format('woff2');
+  src: url(fonts/lora-latin-723cc14f.woff2) format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
