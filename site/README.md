@@ -19,7 +19,7 @@ pages et la prise de rendez-vous, plus les deux pages légales.
 
 | Page | Ce qu'elle porte | Composition | Hauteur |
 |---|---|---|---|
-| `index.html` | héros et agenda animé, le prix, les quatre gains, le défilé, le fondateur, trois cartes vers le détail | l'agenda qui se remplit + défilé illustré | 5 920 px |
+| `index.html` | héros et machine en 3D, le prix, les quatre gains, le défilé, le fondateur, trois cartes vers le détail | la machine qui trie et forge + défilé illustré | 6 340 px |
 | `methode.html` | schéma des deux canaux, entonnoir chiffré, six filtres, la fiche livrée, ce qui porte votre nom | schéma animé + énoncé tenu + colonne de filtrage | 8 240 px |
 | `collaboration.html` | la frise des quatre semaines, le détail semaine par semaine, la balance des charges, la facture, la sortie | frise horizontale animée + balance | 7 765 px |
 | `tarifs.html` | les trois montants, le chiffre à retenir, l'addition d'un trimestre, face à un recrutement, à qui ça convient | trois cartes + grand livre + comparaison | 7 190 px |
@@ -59,6 +59,11 @@ méthode 3, collaboration 1, tarifs 0.
 **La bande défilante a été supprimée.** Motif générique et daté, illisible en
 mouvement, qui répétait des chiffres présents deux écrans plus bas et tournait
 en boucle en permanence.
+
+**La seule exception à tout ce qui précède est le panneau du héros**, qui tourne
+en continu dans un canevas. Elle est assumée et bornée : c'est le seul canevas
+du site, il ne tourne que lorsqu'il est à l'écran et que l'onglet est au
+premier plan, et il se dégrade tout seul s'il coûte trop cher. Voir plus bas.
 
 ## Le bouton de prise de rendez-vous
 
@@ -180,46 +185,148 @@ engageants du site. Ils sont devenus des apartés : un filet, un intitulé qui
 nomme le propos, et le texte une taille au-dessus du corps. Le jeton
 `--amber` ne sert plus qu'aux blocs à faire des pages légales.
 
-## Le panneau du héros : l'agenda qui se remplit
+## Le panneau du héros : la machine
 
-La place la plus visible du site a porté trois choses. Une trajectoire chiffrée
-étiquetée « Exemple » — donc inventée. Puis la grille tarifaire. Elle porte
-maintenant le livrable lui-même : **un rendez-vous qui entre dans un agenda,
-avec le dossier du prospect attaché**.
+La place la plus visible du site a porté quatre choses. Une trajectoire
+chiffrée étiquetée « Exemple » — donc inventée. Puis la grille tarifaire. Puis
+un agenda qui se remplissait, en CSS pur. Elle porte maintenant **le mécanisme
+lui-même, en volume et sans un mot** : le marché tombe en poussière, la trémie
+en retient l'essentiel sur ses parois, le peu qui passe est forgé au cœur de la
+machine, et la pièce descend s'empiler sur le socle du client.
 
 Le prix n'a pas disparu de l'accueil : il est dans la carte « 03 · Combien »,
 et toute la page Tarifs lui est consacrée.
 
-Une seule boucle de 11 s, partagée par tous les éléments : chacun porte la même
-`animation-duration` et découpe sa fenêtre en pourcentages. Pas de JS, pas de
-bibliothèque, une seule horloge, donc rien à resynchroniser.
+### Un rendu 3D logiciel, dans un canevas 2D
 
-| Fenêtre | Ce qui se passe |
+`assets/forge.js`. Pas de bibliothèque, pas de WebGL, pas d'étape de
+compilation — la même règle que le reste du site.
+
+La scène fait cent quatre-vingts faces et trois cents grains : deux ordres de
+grandeur sous ce qui justifierait WebGL, et quatre cents kilo-octets sous ce
+que coûterait une bibliothèque 3D. Écrire la projection, le tri et l'éclairage
+à la main coûte un fichier, et rend en échange le seul contrôle qui compte
+ici : celui de la matière. Un moteur généraliste apporte ses matériaux par
+défaut, et ses matériaux par défaut sont exactement l'aspect plastique qu'on
+veut éviter.
+
+Par image : les sommets passent en repère caméra puis en perspective ; les
+faces sont éliminées au signe de leur normale, éclairées, et **tout** — faces,
+poussière, refus, pièces, lingots — entre dans une seule liste triée en
+profondeur. C'est le poste le plus cher du rendu, et c'est ce qui permet à un
+grain de passer derrière la trémie au lieu de flotter dessus.
+
+### Ce qui fait que ça n'a pas l'air bon marché
+
+Quatre règles, tenues partout.
+
+| Règle | Pourquoi |
 |---|---|
-| 0 → 5 % | l'agenda respire, six créneaux déjà pris |
-| 5 → 15 % | une réponse entre par la gauche et rejoint le centre |
-| 15 → 27 % | les trois conditions s'allument l'une après l'autre |
-| 27 → 34 % | la puce tombe dans le créneau libre du mercredi |
-| 34 → 40 % | le créneau devient un rendez-vous |
-| 38 → 90 % | le dossier se remplit champ par champ, et tient |
-| 90 → 97 % | le rendez-vous rejoint les autres : il est à vous |
+| le métal est **neutre et sombre** — face la plus éclairée, 18 % de blanc, et grise | un objet 3D qui brille est un objet en plastique ; un objet en métal dans une pièce noire est presque noir, et ce sont ses arêtes qui le dessinent |
+| **une seule lumière colorée**, et elle est dans la machine, en 1/d² | l'émeraude ne vient jamais d'un dégradé posé sur une surface : ce qui est près du foyer est vert, ce qui est loin ne l'est pas. C'est ce qui donne le volume |
+| chaque face porte un **liseré** tiré de son propre aplat, multiplié | sans lui, un rendu à faces plates s'affaisse en taches ; avec lui, il est usiné — et une arête reste sombre dans l'ombre, donc ce n'est pas un fil de fer |
+| rien n'est arrondi, rien ne rebondit : prismes à huit pans, et **neuf degrés d'oscillation sur vingt-six secondes** | le mouvement dit « machine en marche », pas « animation » |
 
-Deux corrections, toutes deux trouvées au rendu :
+Les pièces ont une épaisseur : la trémie est un double cône fermé par un jonc,
+le corps a sa gorge et sa bride, la collerette est alésée, le socle est lamé.
+Une paroi sans épaisseur n'attrape jamais la lumière sur sa tranche.
 
-**Le dossier arrivait à 7,4 s.** La première minuterie tenait sur 13 s.
-Personne n'attend sept secondes pour comprendre le panneau d'accroche d'un
-accueil. Cycle ramené à 11 s et dossier avancé à 4,2 s, où il tient jusqu'à
-9,9 s — la moitié du cycle.
+### Le tri n'est réglé nulle part
 
-**Le bas du panneau était un vide de 200 px** pendant la première moitié de la
-boucle, parce que la fiche entière apparaissait d'un coup. Les intitulés
-restent maintenant visibles du début à la fin, et seules les valeurs arrivent :
-un formulaire vide dit déjà « voilà les champs que vous recevez », là où un
-vide ne dit rien.
+Ce que le panneau a à dire n'est pas « ça bouge », c'est la disproportion. Un
+grain tombe ; s'il entre dans la gueule et atteint la gorge, il est forgé ;
+sinon il touche la paroi, l'allume à l'endroit exact du contact, et disparaît.
 
-Tout est en `transform` et `opacity` : **60 i/s à CPU ÷4**. En mouvement
-réduit, la boucle s'arrête sur son état final — l'agenda rempli, le dossier
-ouvert — parce que figée au départ elle ne dirait rien.
+Le rapport ne vient d'aucune constante : c'est le **carré du rapport des
+rayons**, gorge sur gueule, soit 0,40 sur 1,16 — **12 % de ce qui entre**. Le
+grésillement continu sur la paroi de la trémie est donc un compteur juste : il
+compte de vrais grains.
+
+### Quatre bogues, et ce qu'ils ont appris
+
+**L'élimination des faces arrière au signe de l'aire projetée.** Elle suppose
+que toutes les couronnes soient écrites dans le même sens. Elles ne l'étaient
+pas, et la collerette et le socle rendaient un pan sur deux. Chaque face porte
+maintenant une **intention** — « celle-ci regarde dehors », « celle-là regarde
+le haut » — à laquelle sa normale est recalée à la construction. Une intention
+explicite ne peut pas se tromper de signe.
+
+**Le tangage, écrit à l'envers.** Un point haut s'éloignait de l'œil au lieu de
+s'en rapprocher : la caméra passait sous la scène et regardait vers le haut. À
+17° le défaut ne se lit que comme « on ne voit pas dans la trémie ». Corrigé de
+travers ensuite, c'est l'axe de profondeur qui s'inversait, et la machine se
+rendait vue de l'arrière. Les deux fois, l'image restait vraisemblable — d'où
+la vérification à la main plutôt qu'à l'œil : **un point haut doit avoir un
+`vz` plus petit, un point proche aussi.**
+
+**Le cadrage, déduit en supposant tous les points à la distance de la caméra.**
+Le bord avant du socle est à 6,4 et non 7,6 : il était grossi de 21 % et
+sortait du cadre par le bas. On projette maintenant réellement tous les
+sommets, aux deux extrêmes de l'oscillation, et on prend l'enveloppe. Changer
+une cote de la machine recadre la scène toute seule.
+
+**Le foyer, invisible sous un corps cylindrique.** Vu de 27° au-dessus, le bord
+avant d'un corps de 0,92 de rayon passe plus bas à l'écran que ce qui est logé
+dessous. On peut abaisser la caméra, mais alors on ne voit plus dans la trémie,
+et la machine ne montre plus ce qu'elle attrape. Le corps est donc devenu
+**conique** : la vue est dégagée, et une machine qui s'affine sous sa gueule se
+lit mieux qu'un cylindre posé sur un pied.
+
+### Le coût, et ce qu'il devient sur une machine lente
+
+Le coût n'est pas dans le calcul, il est dans le nombre de pixels peints.
+Mesuré à CPU ÷ 4, avant réglage : **63 ms par image en densité 2, 31 ms en
+densité 1**. C'est la densité de pixels qui décide, et rien d'autre.
+
+D'où deux décisions. La densité est plafonnée à **1,5** : au-delà on paie le
+double pour des arêtes d'un pixel sur un objet sombre, ce qui ne se voit pas.
+Et la scène **se dégrade d'elle-même** — si la moyenne glissante sur
+quarante-cinq images passe 26 ms, elle descend d'un cran, jusqu'à deux : moins
+de grains, lueurs plus petites, densité plus basse. Elle ne remonte jamais. Une
+qualité qui oscille se remarque ; une qualité basse ne se remarque pas.
+
+| | CPU ÷ 1 | CPU ÷ 4 | CPU ÷ 6 |
+|---|---|---|---|
+| 1 440 × 900, densité 2 | 60 i/s | **60 i/s** | 30 i/s |
+| 390 × 844, densité 3 | — | **60 i/s** | — |
+
+### Aucun texte, aucun cadre
+
+Le panneau est décoratif de bout en bout : il ne porte aucun libellé, donc rien
+à restituer à un lecteur d'écran, d'où `aria-hidden`. Ce qu'il illustre est
+écrit à côté, dans le titre et le chapeau.
+
+Il n'a pas non plus de cadre. Le panneau précédent était une carte — bordure,
+dégradé, en-tête, pied. Une machine dans une boîte est une vignette ; posée sur
+le noir de la page, elle est dans la même pièce que le titre.
+
+**Sans JavaScript**, le canevas reste vide et la scène est masquée
+(`html:not(.js) .forge`) plutôt que de laisser un trou de 700 px : la page
+garde son titre, son chapeau et ses deux boutons, c'est-à-dire tout ce qu'elle
+a à dire. **En mouvement réduit**, la scène est avancée à vide jusqu'à un état
+qui dit quelque chose — la trémie pleine, une pièce en chemin, des lingots
+posés — rendue une seule fois, et aucune boucle n'est ouverte. Une machine à
+l'arrêt reste une machine.
+
+### Le fond du héros
+
+Trois halos radiaux flottaient derrière le titre, plus un trait qui balayait la
+page au chargement. Ils ne disaient rien : trois taches vertes floues sur du
+noir sont la signature d'un fond posé parce qu'un héros « doit » en avoir un.
+
+Le fond dit maintenant la même chose que le reste du site — une salle de
+mesure. Trois couches, toutes statiques, toutes peintes une fois : une réglure
+horizontale au pas de 74 px masquée en radial autour de la machine et éteinte
+sous le titre ; une braise émeraude derrière la machine, à 5,5 % au plus fort ;
+une extinction vers le bas qui rend le sol au noir avant la section des prix.
+Le héros ne repeint plus après la première image.
+
+**Le titre a perdu un cran.** Il prenait `--td1`, jusqu'à 74 px. Deux lignes à
+74 px sur la moitié gauche laissaient la machine à l'étroit, et l'accroche n'a
+pas besoin de cette taille pour être la première chose lue : elle est seule en
+haut à gauche, sur du noir. À 54 px elle garde son rang et rend 27 % de sa
+hauteur au mécanisme. Les colonnes sont passées de 1,18 / 0,82 à 1,02 / 0,98,
+soit 112 px de plus pour la scène.
 
 ## Quatre schémas à la place de la prose
 
@@ -260,7 +367,7 @@ produit. Chaque cadre désamorce au passage une objection, sans jamais la nommer
 | Page · cadre | Ce qu'il vend | L'objection qu'il tue |
 |---|---|---|
 | Accueil · héros | leurs commerciaux closent au lieu de prospecter | — |
-| Accueil · l'agenda animé | un RDV qui entre dans la semaine, avec le dossier du prospect | « qu'est-ce que je reçois, concrètement » |
+| Accueil · la machine | on trie le marché en gros, et ce qui en sort est rare | « vous envoyez des mails en masse à tout le monde » |
 | Accueil · le seuil | le modèle tient à partir de 7 000 € de valeur client | « ils prennent tout le monde » |
 | Accueil · ce que vous y gagnez | agenda prévisible, risque borné, zéro embauche, réponse datée | « un commercial me coûterait moins cher » |
 | Accueil · les trois questions | comment, ce que ça prend, combien — avec les montants | « je n'ai pas le temps de lire trois pages » |
@@ -650,6 +757,7 @@ site/
     ├── fonts.css           @font-face, sous-ensembles latin et latin-ext
     ├── config.js           ← le seul fichier à modifier au quotidien
     ├── main.js             en-tête, apparitions, compteurs, calendrier
+    ├── forge.js            la machine du héros : rendu 3D logiciel, accueil seul
     ├── fonts/              Geist, Geist Mono, Instrument Serif (OFL 1.1)
     ├── img/                les quatre photographies traitées + leur README
     ├── og-leadcore.png     image de partage, 1200 × 630

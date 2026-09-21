@@ -185,7 +185,7 @@ body::after{
 
 img{max-width:100%;height:auto;display:block}
 a{color:inherit}
-/* `.fiche` et `.stats` sont des <figure>, et un figure porte 1em 40px de marge
+/* `.fiche` et `.forge` sont des <figure>, et un figure porte 1em 40px de marge
    par défaut : sans ce rappel le bloc perd 80 px de largeur, ce qui ne se voit
    qu'au moment où sa colonne devient étroite. */
 figure,figcaption,blockquote{margin:0}
@@ -509,29 +509,52 @@ section[id],main>span[id]{scroll-margin-top:calc(var(--header-h) + 20px)}
 
 .hero{
   position:relative;isolation:isolate;overflow:clip;
-  padding:calc(var(--header-h) + clamp(40px,5.2vw,66px)) 0 clamp(40px,5vw,58px);
-}
-.hero-bg{position:absolute;inset:0;z-index:-1;pointer-events:none;overflow:clip}
-
-.hero-bg .glow{
-  position:absolute;border-radius:50%;filter:blur(10px);
-  transform:translate3d(0,0,0);
-}
-.hero-bg .g1{inset:-24% 30% auto -14%;height:680px;
-  background:radial-gradient(closest-side,rgba(var(--accent-rgb),.2),transparent 72%)}
-.hero-bg .g2{inset:14% -18% auto auto;width:720px;height:620px;
-  background:radial-gradient(closest-side,rgba(var(--accent-rgb),.1),transparent 70%)}
-.hero-bg .g3{inset:auto -6% -34% 24%;width:760px;height:460px;
-  background:radial-gradient(closest-side,rgba(var(--accent-hi-rgb),.07),transparent 70%)}
-
-/* trait qui balaie le héros une fois, au chargement */
-.hero-bg .scan{
-  position:absolute;left:0;right:0;top:0;height:2px;opacity:0;
-  background:linear-gradient(90deg,transparent,rgba(var(--accent-hi-rgb),.55) 22%,rgba(var(--accent-hi-rgb),.8) 50%,rgba(var(--accent-hi-rgb),.55) 78%,transparent);
-  box-shadow:0 0 22px 3px rgba(var(--accent-rgb),.35);
+  padding:calc(var(--header-h) + clamp(34px,4.4vw,54px)) 0 clamp(40px,5vw,58px);
 }
 
-.hero-grid{display:grid;grid-template-columns:1.18fr .82fr;gap:var(--s6);align-items:center}
+/* ---- le fond du héros ----
+   Trois halos radiaux flottaient ici, plus un trait qui balayait la page au
+   chargement. Ils ne disaient rien : trois taches vertes floues sur du noir
+   sont la signature d'un fond posé parce qu'un héros « doit » en avoir un.
+
+   Le fond dit maintenant la même chose que le reste du site — une salle de
+   mesure. Trois couches, toutes statiques, toutes peintes une fois :
+
+     1. une réglure horizontale au pas de 78 px, à 1,6 % de blanc. Pas un
+        quadrillage : des lignes de niveau, comme une échelle sur laquelle on
+        relève une valeur. Elle est masquée en radial autour de la chaîne et
+        s'éteint complètement sous le titre, où elle passerait derrière le
+        texte sans rien y ajouter.
+     2. une braise émeraude derrière la machine, à 8 % au plus fort. C'est la
+        seule chaleur de la page, et elle est là où la page travaille.
+     3. une extinction vers le bas, qui rend le sol au noir avant la section
+        des prix : sans elle la réglure se coupe net sur le filet de section.
+
+   Aucune des trois n'est animée, donc le héros ne repeint plus après la
+   première image. `background-attachment` reste par défaut : un fond fixe
+   forcerait un repaint à chaque pixel de défilement. */
+.hero::before{
+  content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:
+    radial-gradient(54% 42% at 74% 52%,rgba(var(--accent-rgb),.055),transparent 70%),
+    radial-gradient(70% 56% at 78% 58%,rgba(var(--accent-hi-rgb),.022),transparent 74%);
+}
+.hero::after{
+  content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:repeating-linear-gradient(
+    180deg,
+    rgba(var(--fg-rgb),.03) 0 1px,
+    transparent 1px 74px);
+  -webkit-mask-image:radial-gradient(62% 52% at 76% 50%,#000 12%,transparent 78%);
+  mask-image:radial-gradient(62% 52% at 76% 50%,#000 12%,transparent 78%);
+}
+
+/* La colonne du titre cède de la place à la chaîne : elle portait 1,18 part
+   contre 0,82, soit 683 px contre 474 à 1 440. Le mécanisme a six stations
+   empilées — il lui faut de la hauteur, donc de la largeur, puisque son
+   rapport est verrouillé. À 1,02 contre 0,98 les deux colonnes font 610 et
+   586, et la scène gagne 112 px de large, donc 142 px de haut. */
+.hero-grid{display:grid;grid-template-columns:1.02fr .98fr;gap:var(--s6);align-items:center}
 /* Sans min-width:0, la ligne de titre en nowrap impose sa largeur maximale à sa
    piste et écrase la fiche : les proportions en fr ne sont plus respectées. */
 .hero-grid>*{min-width:0}
@@ -542,12 +565,17 @@ section[id],main>span[id]{scroll-margin-top:calc(var(--header-h) + 20px)}
    par signe — « Vos commerciaux » porte deux m et fait 8,225 em, là où une
    chaîne de même longueur en lettres étroites en fait 7,75. À 74 px elle
    occupe 609 px pour une colonne qui en fait 637. */
-.hero h1{font-size:var(--td1);line-height:.98}
+/* Le titre ne prend plus --td1 (jusqu'à 74 px). Deux lignes à 74 px sur la
+   moitié gauche laissaient la chaîne à l'étroit, et l'accroche n'a pas besoin
+   de cette taille pour être la première chose lue : elle est seule en haut à
+   gauche, sur du noir, au-dessus d'un chapeau et de deux boutons. À 54 px elle
+   garde son rang et rend 27 % de sa hauteur au mécanisme. */
+.hero h1{font-size:clamp(31px,4.1vw,54px);line-height:1.0}
 .hero h1 .ln{display:block;overflow:hidden;padding-bottom:.17em;margin-bottom:-.17em}
 /* nowrap : une ligne trop longue serait coupée par le masque, jamais renvoyée */
 .hero h1 .ln>span{display:block;white-space:nowrap}
-.hero .lede{max-width:46ch;margin-top:26px}
-.hero .cta{display:flex;flex-wrap:wrap;gap:var(--s3);margin-top:36px}
+.hero .lede{max-width:44ch;margin-top:22px}
+.hero .cta{display:flex;flex-wrap:wrap;gap:var(--s3);margin-top:32px}
 
 /* ---- fiche de rendez-vous : le livrable, montré ---- */
 
@@ -1002,30 +1030,23 @@ ul.crosses li::before{background:none;border:1.5px solid var(--fg-dim);border-ra
 /* ---- entrée du héros : chaque ligne du titre monte derrière son masque ---- */
 .js .hero h1 .ln>span{opacity:0;transform:translate3d(0,1.1em,0)}
 .js .hero .lede,.js .hero .cta{opacity:0;transform:translate3d(0,14px,0)}
-.js .hero .fiche{opacity:0;transform:translate3d(0,26px,0) scale(.985)}
+.js .hero .fiche,.js .hero .forge{opacity:0;transform:translate3d(0,26px,0) scale(.985)}
 
 .js .hero.boot h1 .ln>span,
 .js .hero.boot .lede,
 .js .hero.boot .cta,
-.js .hero.boot .fiche{
+.js .hero.boot .fiche,
+.js .hero.boot .forge{
   animation:rise .9s var(--ease-out) forwards;
 }
 .js .hero.boot h1 .ln:nth-child(1)>span{animation-delay:.06s}
 .js .hero.boot h1 .ln:nth-child(2)>span{animation-delay:.17s}
 .js .hero.boot .lede{animation-delay:.3s}
 .js .hero.boot .cta{animation-delay:.38s}
-.js .hero.boot .fiche{animation-delay:.24s;animation-duration:1.1s}
+.js .hero.boot .fiche,
+.js .hero.boot .forge{animation-delay:.24s;animation-duration:1.1s}
 
 @keyframes rise{to{opacity:1;transform:none}}
-
-/* le balayage : une seule passe, puis l'élément ne repeint plus */
-.js .hero.boot .scan{animation:scan 1.15s var(--ease-io) .08s}
-@keyframes scan{
-  0%{opacity:0;transform:translate3d(0,0,0)}
-  12%{opacity:1}
-  85%{opacity:.5}
-  100%{opacity:0;transform:translate3d(0,86vh,0)}
-}
 
 /* ---- le point vivant de l'en-tête de fiche ---- */
 .dot::after{animation:ping 2.6s var(--ease-out) infinite}
@@ -1099,11 +1120,10 @@ ul.crosses li::before{background:none;border:1.5px solid var(--fg-dim);border-ra
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   .js .rv,.js .hero h1 .ln>span,.js .hero .lede,.js .hero .cta,
-  .js .hero .fiche{opacity:1;transform:none;transition:none;animation:none}
+  .js .hero .fiche,.js .hero .forge{opacity:1;transform:none;transition:none;animation:none}
   .js .rv .eyebrow::before{transform:none;transition:none}
-  .dot::after,.infra .rail .pkt,.hero .scan{animation:none!important}
+  .dot::after,.infra .rail .pkt{animation:none!important}
   .aur i,.cta-rdv::before{animation:none!important}
-  .hero .scan{display:none}
   .infra .rail .pkt{opacity:0}
   .lvl .bar,.pipe-fill,.cond::before{transform:none;transition:none}
   .btn,.card::before,.card::after,.checks li,.checks li .bx,.checks li .bx svg{transition:none}
@@ -1117,8 +1137,16 @@ ul.crosses li::before{background:none;border:1.5px solid var(--fg-dim);border-ra
 @media (max-width:1120px){
   .hero-grid{grid-template-columns:1fr;gap:var(--s6)}
   .hero-copy{max-width:none}
-  .hero h1{font-size:var(--td1)}
   .hero .lede{max-width:56ch}
+  /* En colonne, plus rien n'est à côté du titre : il peut reprendre sa taille
+     d'origine, et le fond se recentre sur la chaîne, qui est passée dessous. */
+  .hero h1{font-size:var(--td1)}
+  .hero::before{background:
+    radial-gradient(76% 30% at 34% 74%,rgba(var(--accent-rgb),.085),transparent 70%),
+    radial-gradient(86% 38% at 38% 78%,rgba(var(--accent-hi-rgb),.035),transparent 74%)}
+  .hero::after{
+    -webkit-mask-image:radial-gradient(70% 34% at 36% 72%,#000 12%,transparent 78%);
+    mask-image:radial-gradient(70% 34% at 36% 72%,#000 12%,transparent 78%)}
   .fiche{max-width:560px}
   .conds{grid-template-columns:repeat(2,1fr)}
   .keys{grid-template-columns:repeat(2,1fr)}
@@ -1411,7 +1439,7 @@ body::before{
 .sec.plate+.sec:not(.plate):not(.raise),
 .sec.raise+.sec:not(.plate):not(.raise){border-top:1px solid var(--rule-soft)}
 
-.hero-bg,.book::after{display:none}
+.book::after{display:none}
 
 /* ═══════════════════════════════════════════════════════════════════════════
    25. EN-TÊTE DES PAGES INTÉRIEURES
@@ -1477,44 +1505,6 @@ body::before{
 }
 .crumb:hover{color:var(--accent)}
 .crumb svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-
-/* ═══════════════════════════════════════════════════════════════════════════
-   26. LA COQUE DU PANNEAU DU HÉROS
-   ───────────────────────────────────────────────────────────────────────────
-   Cadre, dégradé, ombre et en-tête du panneau posé à droite du titre d'accueil.
-   Son contenu est en section 36 : elle a porté une trajectoire chiffrée, elle
-   porte maintenant le prix. La coque est restée parce qu'elle marche ; c'est le
-   contenu qui avait un problème.
-   ═══════════════════════════════════════════════════════════════════════════ */
-
-.stats{
-  border:1px solid var(--rule);border-radius:var(--radius);overflow:hidden;
-  background:linear-gradient(168deg,var(--surface-3),var(--surface) 64%);
-  box-shadow:0 40px 90px -50px rgba(0,0,0,.9);
-}
-.stats-hd{
-  display:flex;align-items:center;gap:var(--s2);padding:14px 18px;
-  border-bottom:1px solid var(--rule-soft);background:rgba(var(--bg-rgb),.45);
-  font-family:var(--label);font-size:var(--t1);font-weight:600;letter-spacing:.11em;text-transform:uppercase;
-}
-.stats-hd .lbl{color:var(--accent);white-space:nowrap}
-.stats-hd .tag{
-  margin-left:auto;color:var(--fg-dim);border:1px solid var(--rule);border-radius:var(--radius-xs);
-  padding:3px 8px;font-size:var(--t1);font-weight:600;letter-spacing:.1em;white-space:nowrap;
-}
-
-.stats-ft{
-  padding:14px clamp(20px,2.6vw,28px);border-top:1px solid var(--rule-soft);
-  font-size:var(--t2);line-height:1.5;color:var(--fg-dim);
-}
-.stats-ft b{color:var(--fg-soft);font-weight:600}
-
-@media (max-width:1120px){.stats{max-width:560px}}
-@media (max-width:440px){
-  /* même traitement que .fiche-hd : le libellé reste d'un tenant, c'est
-     l'étiquette qui passe à la ligne. */
-  .stats-hd{flex-wrap:wrap;row-gap:var(--s2)}
-}
 
 /* ═══════════════════════════════════════════════════════════════════════════
    27. CARTES D'ORIENTATION
@@ -3214,217 +3204,56 @@ body::before{
   .rdv-r,.rdv-r .k::after,.rdv-prog-b{transition:none}
 }
 
-
 /* ═══════════════════════════════════════════════════════════════════════════
-   36. L'AGENDA QUI SE REMPLIT (héros de l'accueil)
+   36. LA MACHINE (héros de l'accueil)
    ───────────────────────────────────────────────────────────────────────────
-   La place la plus visible du site. Elle a porté une trajectoire chiffrée
-   étiquetée « Exemple », puis la grille tarifaire. Elle porte maintenant le
-   livrable lui-même : un rendez-vous qui arrive dans un agenda, avec le
-   dossier du prospect attaché. Le prix reste sur la page, dans la carte
-   « 03 · Combien » et sur toute la page Tarifs.
+   La place la plus visible du site a porté une trajectoire chiffrée inventée,
+   puis la grille tarifaire, puis un agenda qui se remplissait. Elle porte
+   maintenant le mécanisme lui-même, en volume et sans un mot : le marché tombe
+   en poussière, la trémie en retient l'essentiel sur ses parois, le peu qui
+   passe est forgé au cœur de la machine, et la pièce descend s'empiler sur le
+   socle du client.
 
-   Une seule boucle, de 13 s, partagée par tous les éléments : chacun porte la
-   même `animation-duration` et découpe sa fenêtre en pourcentages du cycle.
-   Pas de JS, pas de bibliothèque, et une seule horloge — donc rien à
-   resynchroniser.
+   Côté feuille de style il n'y a presque rien à dire, et c'est voulu : la
+   scène est un canevas, et tout ce qui s'y peint est dans `forge.js`. Ce bloc
+   ne fait que deux choses — verrouiller le rapport de la scène, et lui donner
+   sa largeur.
 
-      0 →  5 %   l'agenda respire, six créneaux déjà pris
-      5 → 15 %   une réponse entre par la gauche et rejoint le centre
-     15 → 27 %   les trois conditions s'allument l'une après l'autre
-     27 → 34 %   la puce tombe dans le créneau libre du mercredi
-     34 → 40 %   le créneau devient un rendez-vous
-     38 → 90 %   le dossier se remplit champ par champ, et tient
-     90 → 97 %   le rendez-vous rejoint les autres : il est à vous
-     97 → 100 %  reprise
+   Le rapport est verrouillé parce que le cadrage du rendu s'en déduit :
+   `forge.js` projette réellement tous les sommets de la machine, aux deux
+   extrêmes de son oscillation, et en tire la focale qui lui donne 68 % de la
+   hauteur. Une hauteur qui dépendrait du contenu ferait respirer la
+   perspective à chaque recalcul de mise en page.
 
-   Première minuterie, sur 13 s : le dossier n'arrivait qu'à 7,4 s. C'est le
-   panneau d'accroche de l'accueil — personne n'attend sept secondes pour
-   comprendre ce qu'on lui montre. Il arrive maintenant à 4,2 s et tient
-   jusqu'à 9,9 s, soit la moitié du cycle.
+   Aucun cadre, aucun fond, aucun filet. Le panneau précédent était une carte —
+   bordure, dégradé, en-tête, pied. Une machine dans une boîte est une vignette ;
+   posée sur le noir de la page, elle est dans la même pièce que le titre. */
 
-   Tout est en `transform` et `opacity` : rien ne remet en page, rien ne
-   repeint hors du compositeur. En mouvement réduit, la boucle s'arrête sur
-   l'état final — l'agenda rempli et le dossier ouvert, qui est ce que le
-   panneau a à dire. */
-.agenda{position:relative;display:grid;--cyc:11s}
+/* Sans JavaScript, le canevas reste vide et la scène laisserait un trou de
+   700 px dans le héros. Elle disparaît. Le panneau est décoratif : la page
+   garde son titre, son chapeau et ses deux boutons, c'est-à-dire tout ce
+   qu'elle a à dire. La classe `.js` est posée par le script en ligne du
+   <head>, donc la règle s'applique avant la première image. */
+html:not(.js) .forge{display:none}
 
-/* ---- la piste d'arrivée ---- */
-.ag-piste{
-  position:relative;display:flex;align-items:center;justify-content:center;
-  height:46px;padding:0 clamp(14px,1.8vw,18px);
-  border-bottom:1px solid var(--rule-soft);
-}
-/* le rail sur lequel la réponse glisse */
-.ag-piste::before{
-  content:"";position:absolute;left:clamp(14px,1.8vw,18px);right:clamp(14px,1.8vw,18px);
-  top:50%;border-top:1px dashed var(--rule);
-}
-.ag-puce{
-  position:relative;display:flex;align-items:center;gap:7px;
-  padding:5px 10px;border-radius:var(--radius-pill);
-  border:1px solid var(--rule);background:var(--surface-3);
-  font-size:var(--t1);color:var(--fg-soft);white-space:nowrap;
-  animation:agPuce var(--cyc) linear infinite;
-}
-.ag-puce .ico{width:13px;height:13px;flex:none;color:var(--accent);
-  fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
-@keyframes agPuce{
-  0%,4%      {transform:translate3d(-340%,0,0);opacity:0}
-  5%         {opacity:1}
-  15%,26%    {transform:translate3d(0,0,0);opacity:1}
-  /* elle tombe dans le créneau : la descente et l'effacement se croisent avec
-     l'apparition du rendez-vous, c'est ce croisement qui fait l'accroche */
-  34%,100%   {transform:translate3d(0,78px,0) scale(.72);opacity:0}
+.forge{position:relative}
+
+.forge-stage{position:relative;width:100%;aspect-ratio:1/1.2}
+.forge-c{
+  position:absolute;inset:0;width:100%;height:100%;
+  pointer-events:none;
+  /* Le canevas déborde volontairement de sa boîte : la poussière du marché
+     monte au-delà du cadrage utile, et un grain coupé net sur un bord droit
+     trahirait la boîte. Il n'y a rien à écrêter — le fond est transparent. */
 }
 
-/* ---- les trois conditions ---- */
-.ag-cond{
-  display:flex;flex-wrap:wrap;gap:6px;justify-content:center;
-  padding:10px clamp(14px,1.8vw,18px);border-bottom:1px solid var(--rule-soft);
-}
-.ag-cond span{
-  display:flex;align-items:center;gap:5px;
-  font-family:var(--label);font-size:var(--t1);font-weight:600;letter-spacing:.08em;
-  text-transform:uppercase;color:var(--fg-dim);
-  animation:agCond var(--cyc) var(--ease-out) infinite;
-  animation-delay:calc(var(--i) * .55s);
-}
-.ag-cond span{position:relative}
-.ag-cond span::before{
-  content:"";width:13px;height:13px;flex:none;border-radius:50%;
-  border:1px solid var(--rule);
-}
-@keyframes agCond{
-  0%,14%   {color:var(--fg-dim)}
-  19%,88%  {color:var(--accent)}
-  96%,100% {color:var(--fg-dim)}
-}
-/* la pastille se remplit : un `scale`, donc composité */
-.ag-cond i{
-  position:absolute;left:0;top:50%;margin-top:-6.5px;
-  width:13px;height:13px;border-radius:50%;
-  background:var(--accent);transform:scale(0);
-  animation:agPast var(--cyc) var(--spring) infinite;
-  animation-delay:calc(var(--i) * .55s);
-}
-@keyframes agPast{
-  0%,14%   {transform:scale(0)}
-  19%,88%  {transform:scale(1)}
-  96%,100% {transform:scale(0)}
+@media (max-width:1120px){
+  /* En colonne, la scène n'a plus de raison de faire la largeur du texte :
+     au-delà de 520 px elle grandit sans rien montrer de plus, et sa hauteur
+     suit. Elle se pose à gauche, à sa taille. */
+  .forge{max-width:520px}
 }
 
-/* ---- la semaine ---- */
-.ag-cal{padding:clamp(12px,1.6vw,16px) clamp(14px,1.8vw,18px)}
-.ag-jours{
-  display:grid;grid-template-columns:repeat(5,1fr);gap:5px;margin-bottom:7px;
-  font-family:var(--label);font-size:var(--t1);font-weight:600;letter-spacing:.09em;
-  text-transform:uppercase;color:var(--fg-dim);text-align:center;
-}
-.ag-jours b{font-weight:600;color:var(--fg-soft)}
-.ag-grid{
-  position:relative;display:grid;grid-template-columns:repeat(5,1fr);
-  grid-template-rows:repeat(7,15px);gap:5px;
-}
-/* la trame horaire, en fond */
-.ag-grid::before{
-  content:"";position:absolute;inset:0;border-radius:var(--radius-xs);
-  background:repeating-linear-gradient(180deg,
-    rgba(var(--fg-rgb),.035) 0 15px,transparent 15px 20px);
-}
-.ag-ev{
-  position:relative;grid-column:var(--c);grid-row:var(--r) / span var(--n);
-  border-radius:var(--radius-xs);background:rgba(var(--fg-rgb),.1);
-}
-/* le créneau visé : vide, il respire doucement jusqu'à ce qu'il se remplisse */
-.ag-cible{
-  background:none;border:1px dashed rgba(var(--accent-rgb),.45);
-  animation:agCible var(--cyc) var(--ease-io) infinite;
-}
-@keyframes agCible{
-  0%,26%   {opacity:.45}
-  15%,22%  {opacity:.9}
-  34%,100% {opacity:0}
-}
-/* le rendez-vous qui s'installe */
-.ag-neuf{
-  background:linear-gradient(140deg,var(--accent-hi),var(--accent));
-  transform:scaleY(0);transform-origin:top;
-  animation:agNeuf var(--cyc) var(--spring) infinite;
-}
-@keyframes agNeuf{
-  0%,33%    {transform:scaleY(0);opacity:0}
-  40%,89%   {transform:scaleY(1);opacity:1}
-  /* il rejoint les autres : il devient un créneau comme un autre */
-  94%,97%   {transform:scaleY(1);opacity:.42}
-  100%      {transform:scaleY(1);opacity:0}
-}
-
-/* ---- le dossier ---- */
-.ag-fiche{
-  padding:clamp(13px,1.7vw,17px) clamp(14px,1.8vw,18px);
-  border-top:1px solid var(--rule-soft);display:grid;gap:8px;
-}
-/* Les intitulés restent, les valeurs arrivent. Première version : la fiche
-   entière apparaissait, donc pendant la moitié du cycle le bas du panneau
-   était un vide de 200 px. Un formulaire vide dit déjà quelque chose — voilà
-   les champs que vous recevez — là où un vide ne dit rien. */
-.ag-quand,.ag-l>span{
-  transform:translate3d(0,7px,0);opacity:0;
-  animation:agLigne var(--cyc) var(--ease-out) infinite;
-  animation-delay:calc(var(--i) * .14s);
-}
-@keyframes agLigne{
-  0%,38%   {transform:translate3d(0,7px,0);opacity:0}
-  44%,90%  {transform:none;opacity:1}
-  97%,100% {transform:translate3d(0,7px,0);opacity:0}
-}
-/* le trait d'attente sous un champ encore vide : il s'efface quand la valeur
-   se pose, donc les deux ne sont jamais visibles ensemble */
-.ag-l{position:relative}
-.ag-l::after{
-  content:"";position:absolute;left:calc(7.5ch + var(--s3));right:22%;top:9px;
-  border-top:1px dashed var(--rule);
-  animation:agAttente var(--cyc) var(--ease-out) infinite;
-  animation-delay:calc(var(--i) * .14s);
-}
-@keyframes agAttente{
-  0%,38%   {opacity:1}
-  44%,96%  {opacity:0}
-  100%     {opacity:1}
-}
-.ag-quand{
-  display:flex;align-items:baseline;gap:var(--s2);flex-wrap:wrap;
-  font-weight:700;font-size:var(--t4);letter-spacing:-.02em;color:var(--accent-hi);
-}
-.ag-quand em{font-style:normal;font-size:var(--t2);font-weight:600;color:var(--fg-dim)}
-.ag-l{display:grid;grid-template-columns:minmax(0,7.5ch) minmax(0,1fr);gap:var(--s3);align-items:start}
-.ag-l>b{
-  font-family:var(--label);font-size:var(--t1);font-weight:600;letter-spacing:.1em;
-  text-transform:uppercase;color:var(--fg-dim);padding-top:2px;opacity:.75;
-}
-.ag-l>span{font-size:var(--t2);line-height:1.45;color:var(--fg-soft);min-width:0}
-.ag-l q{color:var(--fg);font-style:italic}
-.ag-l .ico{width:13px;height:13px;color:var(--accent);vertical-align:-2px;margin-right:5px;
-  fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
-
-@media (max-width:440px){
-  .ag-cond span{font-size:10px;letter-spacing:.05em}
-  .ag-l{grid-template-columns:1fr;gap:2px}
-}
-
-/* Mouvement réduit : la boucle s'arrête sur son état final. Le panneau doit
-   dire « un rendez-vous est arrivé, voilà son dossier » ; figé au début il ne
-   dirait rien du tout. */
-@media (prefers-reduced-motion:reduce){
-  .ag-puce,.ag-cond span,.ag-cond i,.ag-cible,.ag-neuf,
-  .ag-quand,.ag-l>span,.ag-l::after{animation:none!important}
-  .ag-l::after{opacity:0}
-  /* la piste n'a plus de trajet à montrer : un rail vide ne dit rien */
-  .ag-piste{display:none}
-  .ag-cible{opacity:0}
-  .ag-cond span{color:var(--accent)}
-  .ag-cond i{transform:scale(1)}
-  .ag-neuf{transform:none;opacity:1}
-  .ag-quand,.ag-l>span{transform:none;opacity:1}
-}
+/* Mouvement réduit : `forge.js` avance la scène à vide jusqu'à un état qui dit
+   quelque chose — la trémie pleine, une pièce en chemin, des lingots posés —
+   rend une seule image, et n'ouvre jamais de boucle. Rien à couper ici. */
