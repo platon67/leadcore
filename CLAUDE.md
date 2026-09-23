@@ -34,6 +34,15 @@ The September 2026 revision of the offer and what it changes in the process is
 in [`docs/MAJ-OFFRE-2026-09.md`](docs/MAJ-OFFRE-2026-09.md), including the
 subjects still open: niche, GDPR, sales-rep compensation and a second channel.
 
+[`docs/os/`](docs/os/README.md) is the Outbound & Delivery OS (September
+2026): research with sources, both engines in implementable detail, the tool
+stack, 30 n8n workflows (LC-001 to LC-030), a Postgres schema
+(`docs/os/schema.sql`), unit economics, failure modes, compliance with the
+points still awaiting legal review, SOPs, roadmap and a self-audit. Its
+figures come from `tools/simulateur_os.py` (Python 3, no dependencies); rerun
+it rather than editing numbers by hand. The OS proposes but does not change
+the price grid, the 8–12 meeting promise or the qualified-meeting definition.
+
 Business documents, SOPs and client-facing material are written in French.
 
 ## Conventions
