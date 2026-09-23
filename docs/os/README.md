@@ -47,6 +47,11 @@ python3 tools/simulateur_os.py --objectif 20           # volumes pour 20 RDV hon
 python3 tools/simulateur_os.py --set positive_rate=0.01 --section client
 ```
 
+Version à lire d'un bloc : [`Leadcore-OS.pdf`](Leadcore-OS.pdf), générée à
+partir de ces fichiers par `python3 tools/manuel_pdf.py` (dépendances :
+`pip install markdown pymupdf`, Playwright en npm global). Le Markdown reste
+la source ; après une modification, régénérer le PDF.
+
 ## Ordre de lecture
 
 - **Direction** : README → 11-AUDIT-V2 → 06-ECONOMIE → 08-CONFORMITE §H12 → 10-ROADMAP.
