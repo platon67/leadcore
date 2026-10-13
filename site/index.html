@@ -21,222 +21,294 @@
 <link rel="apple-touch-icon" href="assets/icon-180.png">
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/switzer-300-c345686e.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/switzer-400-ddd95955.woff2" crossorigin>
-<link rel="stylesheet" href="assets/brand.css?v=20261013">
-<link rel="stylesheet" href="assets/site.css?v=20261013">
+<link rel="stylesheet" href="assets/brand.css?v=20261013f">
+<link rel="stylesheet" href="assets/site.css?v=20261013f">
 <script>document.documentElement.classList.add("js")</script>
 </head>
-<body>
+<body class="p-index">
 <a class="skip" href="#main">Aller au contenu</a>
 
 <header class="hdr" id="hdr">
   <div class="wrap">
-    <a class="hdr-logo" href="./" aria-label="Leadcore, accueil"><svg viewBox="0 0 1020.88 217.2" aria-hidden="true"><use href="assets/sprite.svg#lockup"/></svg></a>
+    <a class="hdr-logo" href="./" aria-label="Leadcore, accueil"><svg viewBox="0 0 1020.88 217.2" aria-hidden="true"><use href="assets/sprite.svg?v=20261013f#lockup"/></svg></a>
     <nav class="hdr-nav xs" aria-label="Navigation principale">
       <a href="methode.html">Méthode</a><a href="collaboration.html">Collaboration</a><a href="tarifs.html">Tarifs</a>
     </nav>
-    <a class="btn or sm" href="rendez-vous.html"><span class="t">Prendre rendez-vous</span><span class="c" aria-hidden="true"><svg class="ar"><use href="assets/sprite.svg#ar"/></svg><svg class="ar"><use href="assets/sprite.svg#ar"/></svg></span></a>
+    <a class="btn or sm" href="rendez-vous.html"><span class="t">Prendre rendez-vous</span><span class="c" aria-hidden="true"><svg class="ar"><use href="assets/sprite.svg?v=20261013f#ar"/></svg><svg class="ar"><use href="assets/sprite.svg?v=20261013f#ar"/></svg></span></a>
   </div>
 </header>
 
 <main id="main">
 
 <!-- ══════ HÉROS ══════ -->
-<section class="hero" aria-labelledby="t-hero">
-  <div class="hero-field" aria-hidden="true"><canvas id="field"></canvas></div>
-  <div class="wrap hero-in">
-    <p class="xs dim hero-kicker load" style="--d:0">Prospection B2B par email et LinkedIn</p>
-    <h1 id="t-hero" class="hero-t">
-      <span class="ln"><span class="load" style="--d:1">Huit à douze rendez-vous</span></span>
-      <span class="ln"><span class="load" style="--d:2">qualifiés par mois.</span></span>
-      <span class="ln dim"><span class="load" style="--d:3">Payés s'ils ont lieu.</span></span>
-    </h1>
-    <div class="hero-row">
-      <p class="lede dim load" style="--d:5">Nous construisons la base, nous écrivons aux prospects, nous lisons leurs réponses. Votre commercial reçoit un décideur de votre cible, avec un besoin formulé, à l'heure prévue.</p>
-      <div class="hero-cta load" style="--d:6">
-        <a class="btn or" href="rendez-vous.html"><span class="t">Prendre rendez-vous</span><span class="c" aria-hidden="true"><svg class="ar"><use href="assets/sprite.svg#ar"/></svg><svg class="ar"><use href="assets/sprite.svg#ar"/></svg></span></a>
-        <a class="lien" href="#transmutation">Voir comment <svg class="ar"><use href="assets/sprite.svg#ar"/></svg></a>
-      </div>
-      <div class="hero-cap xs load" style="--d:7" aria-hidden="true">
-        <span class="dim">Exemple de rendez-vous qualifié</span>
-        <b id="capA">Mardi 10:00 — email, 3ᵉ touche</b>
-        <span id="capB">Dirigeant, bureau d'études thermiques, 25 salariés, Lyon</span>
+<section class="h3ro" aria-labelledby="t-hero">
+  <div class="wrap h3ro-g">
+    <div class="h3ro-in">
+      <p class="pill load" style="--d:0"><svg class="pic" aria-hidden="true"><use href="assets/sprite.svg?v=20261013f#i-cal"/></svg>8 à 12 rendez-vous qualifiés par mois</p>
+      <h1 id="t-hero" class="h3ro-t">
+        <span class="ln"><span class="load" style="--d:1">Votre croissance ne dépend plus</span></span>
+        <span class="ln dim"><span class="load" style="--d:2">du bouche-à-oreille.</span></span>
+      </h1>
+      <p class="h3ro-s load" style="--d:4">On contacte les décideurs de votre cible, on lit leurs réponses et on pose les rendez-vous dans l'agenda de vos commerciaux. Vous payez ceux qui ont lieu.</p>
+      <div class="h3ro-cta load" style="--d:5">
+        <a class="btn or" href="rendez-vous.html"><span class="t">Prendre rendez-vous</span><span class="c" aria-hidden="true"><svg class="ar"><use href="assets/sprite.svg?v=20261013f#ar"/></svg><svg class="ar"><use href="assets/sprite.svg?v=20261013f#ar"/></svg></span></a>
+        <a class="btn ghost" href="#comment"><span class="t">Voir comment ça marche</span></a>
       </div>
     </div>
-    <dl class="faits xs load" style="--d:8">
-      <div><dt class="dim">Pour qui</dt><dd>Un client vaut au moins 7&nbsp;000&nbsp;€</dd></div>
-      <div><dt class="dim">Engagement maximum</dt><dd>2&nbsp;700&nbsp;€ le premier trimestre</dd></div>
-      <div><dt class="dim">Canaux</dt><dd>Email et LinkedIn, en parallèle</dd></div>
-      <div><dt class="dim">Ce qui vous reste</dt><dd>Base, domaines et comptes à votre nom</dd></div>
-    </dl>
-  </div>
-</section>
 
-<!-- ══════ TRANSMUTATION : séquence épinglée ══════ -->
-<section class="tm" id="transmutation" aria-labelledby="t-tm">
-  <div class="tm-stage">
-    <canvas class="tm-canvas" id="tmCanvas" aria-hidden="true"></canvas>
-    <div class="wrap tm-in">
-      <h2 id="t-tm" class="xs dim tm-kicker">Chaque mois, pour chaque client</h2>
-      <div class="tm-steps">
-        <article class="tm-step" data-step="0">
-          <p class="tm-n num">1&nbsp;900</p>
-          <h3 class="tm-h">contacts dans votre cible.</h3>
-          <p class="tm-p dim">Une base construite ligne à ligne, vos exclusions retirées, chaque adresse vérifiée. Jamais achetée au kilo&#8239;: une liste achetée brûle vos domaines en trois semaines.</p>
-        </article>
-        <article class="tm-step" data-step="1">
-          <p class="tm-n num">120</p>
-          <h3 class="tm-h">réponses, lues par un humain.</h3>
-          <p class="tm-p dim">Email et LinkedIn partent en parallèle sur les mêmes prospects. Un dirigeant qui ne lit pas ses emails répond souvent sur LinkedIn. Aucune réponse ne vous parvient sans avoir été lue.</p>
-        </article>
-        <article class="tm-step" data-step="2">
-          <p class="tm-n num or-t">12</p>
-          <h3 class="tm-h">rendez-vous honorés.</h3>
-          <p class="tm-p dim">Les seuls que vous payez. Dans votre cible, un décisionnaire, un besoin formulé, présent à l'heure. Les quatre, ou la ligne ne s'écrit pas.</p>
-        </article>
+    <figure class="beam load" style="--d:3" id="beam" aria-label="Schéma animé : les réponses de vos prospects arrivent chez Leadcore, qui ne transmet que les rendez-vous qualifiés à l'agenda de vos commerciaux.">
+      <svg class="beam-svg" aria-hidden="true"></svg>
+      <ul class="bm-pros" aria-hidden="true"><li><span class="av">ES</span><span class="who"><b>Directeur général</b>ESN · Lille</span></li><li><span class="av">SA</span><span class="who"><b>Directrice commerciale</b>Éditeur SaaS · Nantes</span></li><li><span class="av">BE</span><span class="who"><b>Dirigeant</b>Bureau d'études · Lyon</span></li><li><span class="av">RH</span><span class="who"><b>Associé</b>Conseil RH · Bordeaux</span></li><li><span class="av">IN</span><span class="who"><b>Directeur des opérations</b>Industriel · Rennes</span></li></ul>
+      <div class="bm-coeur" aria-hidden="true">
+        <div class="bm-orb o1"><span><svg class="pic" aria-hidden="true"><use href="assets/sprite.svg?v=20261013f#i-mail"/></svg></span><span><svg class="pic" aria-hidden="true"><use href="assets/sprite.svg?v=20261013f#i-reseau"/></svg></span></div>
+        <div class="bm-orb o2"><span><svg class="pic" aria-hidden="true"><use href="assets/sprite.svg?v=20261013f#i-filtre"/></svg></span><span><svg class="pic" aria-hidden="true"><use href="assets/sprite.svg?v=20261013f#i-bulle"/></svg></span><span><svg class="pic" aria-hidden="true"><use href="assets/sprite.svg?v=20261013f#i-rep"/></svg></span></div>
+        <div class="bm-noyau"><svg viewBox="0 0 231 217.2"><use href="assets/sprite.svg?v=20261013f#mark"/></svg></div>
       </div>
-      <ol class="tm-prog xs" aria-hidden="true"><li>Contacts</li><li>Réponses</li><li>Rendez-vous</li></ol>
-    </div>
+      <div class="bm-agenda" aria-hidden="true">
+        <p class="bm-ah"><svg class="pic" aria-hidden="true"><use href="assets/sprite.svg?v=20261013f#i-cal"/></svg><span>Agenda commercial</span><b class="num" id="bmN">4</b></p>
+        <div class="bm-j"><span>Lun</span><span>Mar</span><span>Mer</span><span>Jeu</span><span>Ven</span></div>
+        <div class="bm-g" id="bmG"><i></i><i class="on">SA</i><i></i><i></i><i></i><i></i><i class="on">BE</i><i></i><i class="on">RH</i><i></i><i></i><i></i><i class="on">ES</i><i></i><i></i></div>
+        <p class="bm-tag" id="bmT">Jeu. 15:00 · conseil RH, Bordeaux</p>
+      </div>
+      <figcaption>Exemple · une semaine de campagne</figcaption>
+    </figure>
   </div>
-</section>
-
-<!-- ══════ LE LIVRABLE ══════ -->
-<section class="ch clair" id="livrable" aria-labelledby="t-liv">
-  <div class="wrap">
-    <div class="ix xs"><span>Ce que vous recevez</span></div>
-    <div class="bd">
-      <h2 id="t-liv" class="h-sec rise">Ce que votre commercial ouvre le matin.</h2>
-      <div class="liv">
-        <article class="fiche rise" id="fiche" aria-label="Exemple de fiche de rendez-vous qualifié">
-          <header class="fiche-h xs"><span>Rendez-vous qualifié</span><span class="dim">Exemple</span></header>
-          <dl class="fiche-dl xs">
-            <div><dt class="dim">Entreprise</dt><dd>Éditeur de logiciels, 40 salariés, Île-de-France</dd></div>
-            <div><dt class="dim">Interlocutrice</dt><dd>Directrice des opérations</dd></div>
-            <div><dt class="dim">Origine</dt><dd>Réponse LinkedIn, 2ᵉ touche</dd></div>
-            <div><dt class="dim">Créneau</dt><dd class="num">Jeudi 10:00, 30 min, visio</dd></div>
-          </dl>
-          <blockquote class="fiche-q voix">«&#8239;On a arrêté notre prospection interne en janvier. Personne pour traiter les réponses.&#8239;»</blockquote>
-          <ul class="fiche-ok xs">
-            <li><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.5 6.2 12 13.5 4" pathLength="1"/></svg>Dans la cible définie avec vous</li>
-            <li><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.5 6.2 12 13.5 4" pathLength="1"/></svg>Décisionnaire sur le sujet</li>
-            <li><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.5 6.2 12 13.5 4" pathLength="1"/></svg>Besoin exprimé, échéance au quatrième trimestre</li>
-            <li><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.5 6.2 12 13.5 4" pathLength="1"/></svg>Présente au rendez-vous</li>
-          </ul>
-          <footer class="fiche-f"><span class="xs dim">Montant facturé</span><b class="num">200&nbsp;€</b></footer>
-        </article>
-        <div class="semaine rise">
-          <p class="xs dim semaine-h">Une semaine, exemple de format</p>
-          <ol class="reg xs" id="reg">
-            <li><span class="num">Mar. 10:00</span><span><b>Dirigeant</b>Bureau d'études thermiques, 25 sal., Lyon</span><q class="voix">On répond aux appels d'offres, on ne va jamais chercher.</q></li>
-            <li><span class="num">Mer. 14:30</span><span><b>Directrice commerciale</b>Éditeur SaaS B2B, 60 sal., Nantes</span><q class="voix">Deux commerciaux recrutés, pas assez de rendez-vous à leur donner.</q></li>
-            <li><span class="num">Jeu. 09:00</span><span><b>Directeur général</b>ESN, 120 sal., Lille</span><q class="voix">Notre croissance vient du bouche-à-oreille, elle plafonne.</q></li>
-            <li><span class="num">Ven. 11:30</span><span><b>Directeur associé</b>Cabinet de conseil RH, 12 sal., Bordeaux</span><q class="voix">On perd des affaires faute d'être consultés en amont.</q></li>
+  <div class="wrap scene load" style="--d:6">
+    <div class="halo" aria-hidden="true"></div>
+    <figure class="app" id="app" aria-label="Exemple d'interface : la liste des rendez-vous qualifiés de la semaine et la fiche de l'un d'eux.">
+      <div class="app-bar" aria-hidden="true"><i></i><i></i><i></i><span>leadcore · espace client</span></div>
+      <div class="app-in">
+        <nav class="app-nav" aria-hidden="true">
+          <p class="app-logo"><svg viewBox="0 0 231 217.2"><use href="assets/sprite.svg?v=20261013f#mark"/></svg>Votre espace</p>
+          <a class="on">Rendez-vous <b id="appN">4</b></a>
+          <a>Réponses <b>37</b></a>
+          <a>Campagnes <b>2</b></a>
+          <a>Compte rendu</a>
+          <p class="app-sem">Semaine 42<span>Exemple</span></p>
+        </nav>
+        <div class="app-main">
+          <div class="app-h"><b>Rendez-vous qualifiés</b><span class="chip">Cette semaine</span><span class="chip">Tous les canaux</span></div>
+          <ol class="app-l" id="appL">
+            <li class="sel" data-t="Bureau d'études thermiques" data-m="Dirigeant · 25 salariés · Lyon&lt;br&gt;Mardi 10:00 · 30 min · visio" data-q="On répond aux appels d'offres, on ne va jamais chercher."><span class="av">BE</span><span class="who"><b>Dirigeant</b>Bureau d'études thermiques · 25 sal. · Lyon</span><q>On répond aux appels d'offres, on ne va jamais chercher.</q><span class="when">Mar. 10:00</span><span class="st ok">Confirmé</span></li>
+            <li data-t="Éditeur SaaS B2B" data-m="Directrice commerciale · 60 salariés · Nantes&lt;br&gt;Mercredi 14:30 · 30 min · visio" data-q="Deux commerciaux recrutés, pas assez de rendez-vous à leur donner."><span class="av">SA</span><span class="who"><b>Directrice commerciale</b>Éditeur SaaS B2B · 60 sal. · Nantes</span><q>Deux commerciaux recrutés, pas assez de rendez-vous.</q><span class="when">Mer. 14:30</span><span class="st ok">Confirmé</span></li>
+            <li data-t="ESN" data-m="Directeur général · 120 salariés · Lille&lt;br&gt;Jeudi 09:00 · 30 min · visio" data-q="Notre croissance vient du bouche-à-oreille, elle plafonne."><span class="av">ES</span><span class="who"><b>Directeur général</b>ESN · 120 sal. · Lille</span><q>Notre croissance vient du bouche-à-oreille, elle plafonne.</q><span class="when">Jeu. 09:00</span><span class="st">À confirmer</span></li>
+            <li data-t="Cabinet de conseil RH" data-m="Directeur associé · 12 salariés · Bordeaux&lt;br&gt;Vendredi 11:30 · 30 min · visio" data-q="On perd des affaires faute d'être consultés en amont."><span class="av">RH</span><span class="who"><b>Directeur associé</b>Cabinet de conseil RH · 12 sal. · Bordeaux</span><q>On perd des affaires faute d'être consultés en amont.</q><span class="when">Ven. 11:30</span><span class="st">À confirmer</span></li>
           </ol>
-          <p class="xs dim">Chaque rendez-vous dure trente minutes et part dans l'agenda de votre commercial avec ce contexte.</p>
+        </div>
+        <aside class="app-fiche">
+          <p class="af-k">Fiche du rendez-vous</p>
+          <p class="af-t">Bureau d'études thermiques</p>
+          <p class="af-m">Dirigeant · 25 salariés · Lyon<br>Mardi 10:00 · 30 min · visio</p>
+          <blockquote>«&#8239;On répond aux appels d'offres, on ne va jamais chercher.&#8239;»</blockquote>
+          <ul class="af-ok">
+            <li>Dans votre cible</li><li>Décisionnaire</li><li>Besoin formulé</li><li class="att">Présent au rendez-vous</li>
+          </ul>
+          <p class="af-p"><span>Facturé s'il vient</span><b>200&nbsp;€</b></p>
+        </aside>
+      </div>
+      <div class="toast" id="toast" aria-hidden="true"><i></i><span><b>Nouveau rendez-vous qualifié</b><span id="toastT">Mardi 10:00 · bureau d'études, Lyon</span></span></div>
+    </figure>
+  </div>
+
+  <div class="wrap">
+    <div class="chiffres" id="chiffres">
+      <article class="cf cf-cal">
+        <p class="cf-k"><svg class="pic"><use href="assets/sprite.svg?v=20261013f#i-cal"/></svg>Rendez-vous par mois</p>
+        <p class="cf-n num"><span class="cnt" data-to="8">8</span> à <span class="cnt" data-to="12">12</span></p>
+        <div class="cf-g cal" aria-hidden="true"><i></i><i class="o"></i><i></i><i class="o"></i><i></i><i class="o"></i><i></i><i class="o"></i><i class="o"></i><i></i><i></i><i class="o"></i><i class="o"></i><i></i><i class="o"></i><i class="o"></i><i></i><i class="o"></i><i class="o"></i><i class="o"></i></div>
+        <p class="cf-s">Posés dans l'agenda de vos commerciaux.</p>
+      </article>
+      <article class="cf">
+        <p class="cf-k"><svg class="pic"><use href="assets/sprite.svg?v=20261013f#i-euro"/></svg>Par rendez-vous honoré</p>
+        <p class="cf-n num"><span class="cnt" data-to="200">200</span>&nbsp;€</p>
+        <ul class="cf-g recu" aria-hidden="true">
+          <li><span>Mar. 10:00 · présent</span><b>+200&nbsp;€</b></li>
+          <li class="nul"><span>Mer. 14:30 · absent</span><b>0&nbsp;€</b></li>
+          <li><span>Jeu. 09:00 · présent</span><b>+200&nbsp;€</b></li>
+        </ul>
+        <p class="cf-s">Le prospect ne vient pas : vous ne payez rien.</p>
+      </article>
+      <article class="cf">
+        <p class="cf-k"><svg class="pic"><use href="assets/sprite.svg?v=20261013f#i-temps"/></svg>Premiers rendez-vous</p>
+        <p class="cf-n num">Semaine&nbsp;<span class="cnt" data-to="4">4</span></p>
+        <ol class="cf-g sem" aria-hidden="true"><li>Domaines</li><li>Comptes</li><li>Base</li><li class="o">RDV</li></ol>
+        <p class="cf-s">Trois semaines pour monter domaines, comptes et base.</p>
+      </article>
+      <article class="cf">
+        <p class="cf-k"><svg class="pic"><use href="assets/sprite.svg?v=20261013f#i-plafond"/></svg>Engagement maximum</p>
+        <p class="cf-n num"><span class="cnt" data-to="2700">2&nbsp;700</span>&nbsp;€</p>
+        <div class="cf-g pile" aria-hidden="true"><i style="--w:1200"></i><i style="--w:500"></i><i style="--w:500"></i><i style="--w:500"></i></div>
+        <p class="cf-s">1&nbsp;200&nbsp;€ de démarrage et trois mois à 500&nbsp;€, hors rendez-vous.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ LE PROBLÈME ══════ -->
+<section class="sec clair" id="probleme" aria-labelledby="t-pb">
+  <div class="wrap">
+    <header class="sec-h rise">
+      <p class="pill"><svg class="pic" aria-hidden="true"><use href="assets/sprite.svg?v=20261013f#i-baisse"/></svg>Le problème</p>
+      <h2 id="t-pb" class="sec-t">Votre pipeline suit votre réseau. <span class="dim">Un bon mois, puis deux mois creux.</span></h2>
+    </header>
+    <div class="maux">
+      <article class="mal rise" id="mal1">
+        <div class="mal-v" aria-hidden="true">
+          <div class="barres6"><i style="--v:.9"></i><i style="--v:.2"></i><i style="--v:.3"></i><i style="--v:1"></i><i style="--v:.12"></i><i style="--v:.4"></i></div>
+          <div class="mois"><span>Jan.</span><span>Fév.</span><span>Mars</span><span>Avr.</span><span>Mai</span><span>Juin</span></div>
+        </div>
+        <h3>Un chiffre en dents de scie</h3>
+        <p>Les affaires arrivent quand le réseau recommande. Vous ne savez pas ce que donnera le trimestre.</p>
+      </article>
+      <article class="mal rise" id="mal2">
+        <div class="mal-v" aria-hidden="true">
+          <div class="semaine5">
+            <span class="pr">Prospection</span><span class="pr">Prospection</span><span class="pr">Relances</span><span class="pr">Prospection</span><span class="pr">Prospection</span>
+            <span class="pr">Fichiers</span><span class="rv">1 rendez-vous</span><span class="pr">Relances</span><span class="pr">LinkedIn</span><span class="pr">Prospection</span>
+          </div>
+        </div>
+        <h3>Des commerciaux qui cherchent au lieu de vendre</h3>
+        <p>Ils passent leurs matinées à trouver des contacts. Il leur reste peu de temps pour les rendez-vous.</p>
+      </article>
+      <article class="mal rise" id="mal3">
+        <div class="mal-v" aria-hidden="true">
+          <svg class="courbe" viewBox="0 0 300 110" preserveAspectRatio="none"><path pathLength="1" d="M0 100 C40 98 60 80 90 62 S150 30 180 26 S205 24 212 30 L222 96 L300 100"/><line x1="216" y1="8" x2="216" y2="104"/></svg>
+          <p class="courbe-l"><span>Recrutement</span><span>Départ du SDR, mois 6</span></p>
+        </div>
+        <h3>Un SDR qui n'a pas tenu</h3>
+        <p>Trois mois de formation, un pipeline qui monte, puis il part. La base part avec lui.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ COMMENT ══════ -->
+<section class="cmt" id="comment" aria-labelledby="t-cmt">
+  <div class="cmt-stage">
+    <div class="wrap cmt-in">
+      <div class="cmt-g">
+        <p class="pill"><svg class="pic" aria-hidden="true"><use href="assets/sprite.svg?v=20261013f#i-etapes"/></svg>Comment ça marche</p>
+        <h2 id="t-cmt" class="sec-t">Chaque mois, on fait le travail de prospection <span class="dim">à la place de vos commerciaux.</span></h2>
+        <ol class="cmt-steps" id="cmtSteps">
+          <li data-i="0"><span class="num">1&nbsp;900</span><b>décideurs contactés</b><p>Une base construite pour vous, par email et LinkedIn, depuis nos domaines.</p></li>
+          <li data-i="1"><span class="num">120</span><b>réponses lues par un humain</b><p>On écarte les curieux et les demandes de plaquette.</p></li>
+          <li data-i="2"><span class="num or-t">12</span><b>rendez-vous dans l'agenda</b><p>Avec le contexte. Vous payez ceux qui ont lieu.</p></li>
+        </ol>
+      </div>
+      <div class="cmt-d" aria-hidden="true">
+        <div class="ecran" data-i="0">
+          <p class="ec-h"><b>Base · bureaux d'études, 10 à 50 salariés</b><span class="num" id="cBase">1&nbsp;900 contacts</span></p>
+          <ul class="ec-base">
+            <li><span>Thermibat Ingénierie</span><span>Dirigeant</span><span class="v">Vérifié</span></li>
+            <li><span>Structura Conseil</span><span>Directeur technique</span><span class="v">Vérifié</span></li>
+            <li><span>Hélios Études</span><span>Gérante</span><span class="v">Vérifié</span></li>
+            <li class="x"><span>Votre client actuel</span><span>Exclu</span><span class="v">Retiré</span></li>
+            <li><span>Arcane Fluides</span><span>Dirigeant</span><span class="v">Vérifié</span></li>
+            <li><span>Novaclim Bureau</span><span>Directeur général</span><span class="v">Vérifié</span></li>
+          </ul>
+        </div>
+        <div class="ecran" data-i="1">
+          <p class="ec-h"><b>Réponses à trier</b><span class="num">120 ce mois</span></p>
+          <ul class="ec-rep">
+            <li class="q"><span class="tag">Qualifiée</span><q>Rappelez-moi jeudi, on cherche justement pour le T1.</q><span class="src">LinkedIn</span></li>
+            <li class="n"><span class="tag">Écartée</span><q>Envoyez-moi une plaquette.</q><span class="src">Email</span></li>
+            <li class="q"><span class="tag">Qualifiée</span><q>On a perdu deux appels d'offres ce trimestre. Parlons-en.</q><span class="src">Email</span></li>
+            <li class="n"><span class="tag">Écartée</span><q>Je suis stagiaire, je transmets.</q><span class="src">Email</span></li>
+          </ul>
+        </div>
+        <div class="ecran" data-i="2">
+          <p class="ec-h"><b>Agenda de votre commerciale</b><span class="num">Semaine 42</span></p>
+          <div class="ec-ag">
+            <div class="ec-j"><span>Lun.</span><span>Mar.</span><span>Mer.</span><span>Jeu.</span><span>Ven.</span></div>
+            <div class="ec-g">
+              <i class="ev occ" style="--j:0;--h:0;--l:1">Point d'équipe</i>
+              <i class="ev occ" style="--j:2;--h:5;--l:2">Démo client</i>
+              <i class="ev rdv" style="--j:1;--h:1;--l:2"><b>10:00</b>Bureau d'études</i>
+              <i class="ev rdv" style="--j:2;--h:2;--l:2"><b>11:00</b>ESN, 120 sal.</i>
+              <i class="ev rdv" style="--j:3;--h:5;--l:2"><b>14:00</b>Éditeur SaaS</i>
+              <i class="ev rdv" style="--j:4;--h:3;--l:2"><b>13:30</b>Cabinet RH</i>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
+<!-- ══════ LE RÉSULTAT ══════ -->
+<section class="sec clair" id="resultat" aria-labelledby="t-res">
+  <div class="wrap">
+    <header class="sec-h rise">
+      <p class="pill"><svg class="pic" aria-hidden="true"><use href="assets/sprite.svg?v=20261013f#i-cal"/></svg>Ce que vous recevez</p>
+      <h2 id="t-res" class="sec-t">Un décideur, un besoin, un créneau. <span class="dim">Votre commercial n'a plus qu'à vendre.</span></h2>
+    </header>
+    <div class="res">
+      <figure class="res-ph rise">
+        <img src="assets/img/appel-1600.jpg" srcset="assets/img/appel-800.jpg 800w, assets/img/appel-1600.jpg 1600w" sizes="(max-width:900px) 100vw, 60vw" width="1600" height="1067" loading="lazy" alt="Un commercial en visio avec une prospecte, depuis son bureau.">
+        <div class="res-carte">
+          <p class="af-k">Mardi 10:00 · RDV qualifié</p>
+          <p class="af-t">Dirigeant, bureau d'études</p>
+          <p class="af-m">25 salariés · Lyon · réponse LinkedIn</p>
+          <p class="af-p"><span>Présent</span><b>200&nbsp;€</b></p>
+        </div>
+      </figure>
+      <div class="res-c rise">
+        <h3>On ne facture un rendez-vous que s'il remplit quatre conditions.</h3>
+        <ol class="conds">
+          <li><b>Dans votre cible</b><span>Le marché, la taille et le besoin définis avec vous.</span></li>
+          <li><b>Un décideur</b><span>Il décide, ou pèse sur la décision.</span></li>
+          <li><b>Un besoin formulé</b><span>Il a dit ce qui le bloque, et quand il veut le régler.</span></li>
+          <li><b>Présent</b><span>S'il ne vient pas, on replanifie une fois, sans facturer.</span></li>
+        </ol>
+        <a class="lien" href="methode.html">Comment on les trouve <svg class="ar" aria-hidden="true"><use href="assets/sprite.svg?v=20261013f#ar"/></svg></a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ══════ PRIX ══════ -->
-<section class="ch" id="prix" aria-labelledby="t-prix">
+<section class="sec" id="prix" aria-labelledby="t-prix">
   <div class="wrap">
-    <div class="ix xs"><span>Ce que ça coûte</span></div>
-    <div class="bd">
-      <h2 id="t-prix" class="h-sec rise">Trois montants. Aucun autre.</h2>
-      <ol class="prix">
-        <li class="rise"><span class="xs dim">Une fois, au démarrage</span><b class="num"><span class="cnt" data-to="1200">1&nbsp;200</span>&nbsp;€</b><p class="dim">Domaines, boîtes d'envoi, comptes LinkedIn, base et séquences. Tout est acheté à votre nom et vous reste.</p></li>
-        <li class="rise"><span class="xs dim">Chaque mois</span><b class="num"><span class="cnt" data-to="500">500</span>&nbsp;€</b><p class="dim">Comptes maintenus, base renouvelée, segments arbitrés chaque semaine, compte rendu mensuel.</p></li>
-        <li class="rise"><span class="xs dim">Par rendez-vous honoré</span><b class="num or-t"><span class="cnt" data-to="200">200</span>&nbsp;€</b><p class="dim">Seulement s'il remplit les quatre conditions de votre contrat. Un prospect absent est reprogrammé une fois, et facturé seulement s'il vient.</p></li>
-      </ol>
-      <div class="prix-pied rise">
-        <p class="lede">Sur un trimestre sans un seul rendez-vous, vous payez <b class="num">2&nbsp;700&nbsp;€</b>. C'est votre engagement maximum, connu à la signature.</p>
-        <a class="lien" href="tarifs.html">L'addition d'un trimestre, ligne par ligne <svg class="ar"><use href="assets/sprite.svg#ar"/></svg></a>
-      </div>
+    <header class="sec-h rise">
+      <p class="pill"><svg class="pic" aria-hidden="true"><use href="assets/sprite.svg?v=20261013f#i-euro"/></svg>Le prix</p>
+      <h2 id="t-prix" class="sec-t">Un fixe modeste. <span class="dim">Le reste, seulement si le prospect vient.</span></h2>
+    </header>
+    <div class="tarifs3">
+      <article class="tf rise"><p class="tf-k">Au démarrage</p><p class="tf-p num"><span class="cnt" data-to="1200">1&nbsp;200</span>&nbsp;€</p><p>Domaines, comptes LinkedIn, base et messages. Tout est acheté à votre nom.</p></article>
+      <article class="tf rise"><p class="tf-k">Chaque mois</p><p class="tf-p num"><span class="cnt" data-to="500">500</span>&nbsp;€</p><p>On fait tourner les deux canaux et on vous envoie un compte rendu.</p></article>
+      <article class="tf tf-or rise"><p class="tf-k">Par rendez-vous honoré</p><p class="tf-p num"><span class="cnt" data-to="200">200</span>&nbsp;€</p><p>Rien si le prospect ne vient pas. Rien s'il sort de votre cible.</p></article>
     </div>
+    <p class="tf-pied rise">Sans un seul rendez-vous, votre premier trimestre coûte 2&nbsp;700&nbsp;€ au maximum. <a class="lien" href="tarifs.html">Le calcul face à un recrutement <svg class="ar" aria-hidden="true"><use href="assets/sprite.svg?v=20261013f#ar"/></svg></a></p>
   </div>
 </section>
 
-<!-- ══════ CE QU'ON OPÈRE ══════ -->
-<section class="ch clair" id="operations" aria-labelledby="t-op">
-  <div class="wrap">
-    <div class="ix xs"><span>Ce qu'on opère</span></div>
-    <div class="bd">
-      <h2 id="t-op" class="h-sec rise">Quatre choses qui tournent pendant que vous vendez.</h2>
-      <div class="ops">
-        <article class="rise">
-          <svg class="pict" viewBox="0 0 48 48" aria-hidden="true"><path pathLength="1" d="M6 10h36M6 19h36M6 28h36M6 37h22"/></svg>
-          <h3>La base</h3>
-          <p class="dim">Construite ligne par ligne dans votre cible, vos exclusions retirées, chaque adresse vérifiée.</p>
-        </article>
-        <article class="rise">
-          <svg class="pict" viewBox="0 0 48 48" aria-hidden="true"><path pathLength="1" d="M6 12h36v24H6zM6 12l18 13 18-13"/></svg>
-          <h3>L'infrastructure</h3>
-          <p class="dim">Dix boîtes d'envoi sur des domaines achetés pour vous, des comptes LinkedIn dédiés, la réputation surveillée chaque jour.</p>
-        </article>
-        <article class="rise">
-          <svg class="pict" viewBox="0 0 48 48" aria-hidden="true"><path pathLength="1" d="M4 16h26M4 32h26M30 16c8 0 8 16 14 8M30 32c8 0 8-16 14-8"/></svg>
-          <h3>Les deux canaux</h3>
-          <p class="dim">Email et LinkedIn sur les mêmes contacts, en parallèle. Si un domaine tombe, la production ralentit au lieu de s'arrêter.</p>
-        </article>
-        <article class="rise">
-          <svg class="pict" viewBox="0 0 48 48" aria-hidden="true"><path pathLength="1" d="M6 10h36v32H6zM6 18h36M16 5v9M32 5v9"/><circle class="o" pathLength="1" cx="24" cy="30" r="5"/></svg>
-          <h3>L'agenda</h3>
-          <p class="dim">Chaque réponse est lue avant d'arriver chez vous. Vous ne payez que les rendez-vous qui ont lieu.</p>
-        </article>
-      </div>
-      <a class="lien rise" href="methode.html">Le schéma complet et les six filtres <svg class="ar"><use href="assets/sprite.svg#ar"/></svg></a>
-    </div>
-  </div>
-</section>
-
-<!-- ══════ CE QUE VOUS Y GAGNEZ ══════ -->
-<section class="ch" id="gains" aria-labelledby="t-gains">
-  <div class="wrap">
-    <div class="ix xs"><span>Face à un recrutement</span></div>
-    <div class="bd">
-      <h2 id="t-gains" class="h-sec rise">Ce qu'un commercial de plus ne vous donne pas.</h2>
-      <dl class="gains">
-        <div class="rise"><dt class="xs dim">Un agenda prévisible</dt><dd><b class="num">8 à 12</b><span class="dim">rendez-vous par mois. Vous planifiez sur un volume connu, pas sur l'espoir qu'un prospect rappelle.</span></dd></div>
-        <div class="rise"><dt class="xs dim">Un risque borné</dt><dd><b class="num">500&nbsp;€</b><span class="dim">d'engagement fixe par mois. Le reste dépend de rendez-vous qui ont réellement eu lieu.</span></dd></div>
-        <div class="rise"><dt class="xs dim">Aucune embauche</dt><dd><b class="num">0</b><span class="dim">personne à recruter, former, équiper, encadrer, ni à remplacer six mois plus tard.</span></dd></div>
-        <div class="rise"><dt class="xs dim">Une réponse datée</dt><dd><b class="num">90&nbsp;jours</b><span class="dim">Au bout du trimestre, vous savez. La base et les domaines vous restent.</span></dd></div>
-      </dl>
-      <div class="temps rise">
-        <p class="lede">Ce que la prestation vous prend&#8239;: trois heures et demie le premier mois, puis trente minutes par semaine.</p>
-        <a class="lien" href="collaboration.html">Les quatre premières semaines <svg class="ar"><use href="assets/sprite.svg#ar"/></svg></a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════ FONDATEUR ══════ -->
-<section class="ch clair" id="equipe" aria-labelledby="t-eq">
-  <div class="wrap">
-    <div class="ix xs"><span>Qui vous parle</span></div>
-    <div class="bd">
-      <div class="fond">
-        <!-- Portrait du fondateur : déposer assets/portrait.jpg (carré, 1 200 px, noir et blanc) puis décommenter.
-        <img class="fond-img" src="assets/portrait.jpg" width="1200" height="1200" alt="Platon Bournassenko"> -->
-        <h2 id="t-eq" class="h-sec rise">Platon Bournassenko</h2>
-        <p class="xs dim rise">Fondateur</p>
-      </div>
-      <p class="lecture" id="lecture">Je cadre la cible avec vous, j'écris les séquences, et je vous appelle quand un segment cesse de répondre. Quatre à six campagnes par opérateur&#8239;: votre interlocuteur ne changera pas.</p>
+<!-- ══════ QUESTIONS ══════ -->
+<section class="sec clair" id="questions" aria-labelledby="t-q">
+  <div class="wrap faq-w">
+    <header class="sec-h rise">
+      <p class="pill"><svg class="pic" aria-hidden="true"><use href="assets/sprite.svg?v=20261013f#i-question"/></svg>Questions</p>
+      <h2 id="t-q" class="sec-t">Ce qu'on nous demande au premier appel.</h2>
+    </header>
+    <div class="faq rise">
+      <details><summary>Et si personne ne répond&#8239;?</summary><p>Vous payez le départ et le fixe&#8239;: 2&nbsp;700&nbsp;€ sur trois mois, au maximum. Vous gardez la base, les domaines et les messages.</p></details>
+      <details><summary>Mon domaine risque quelque chose&#8239;?</summary><p>Non. On écrit depuis des domaines achetés pour vous. Votre adresse principale ne sert jamais à prospecter.</p></details>
+      <details><summary>Combien de mon temps&#8239;?</summary><p>Deux heures la première semaine, une relecture de trente minutes la troisième, puis trente minutes par semaine.</p></details>
+      <details><summary>Quand arrivent les premiers rendez-vous&#8239;?</summary><p>En semaine 4. Les trois premières servent à monter les domaines, les comptes et la base.</p></details>
+      <details><summary>Qui décide qu'un rendez-vous est qualifié&#8239;?</summary><p>Vous. On écrit la définition ensemble, avec vos mots, et elle part dans le contrat.</p></details>
     </div>
   </div>
 </section>
 
 <!-- ══════ APPEL FINAL ══════ -->
-<section class="fin" aria-labelledby="t-fin">
-  <div class="wrap">
-    <p class="xs dim rise">Le seuil</p>
-    <h2 id="t-fin" class="fin-t rise">Trente minutes pour faire le calcul.</h2>
-    <p class="lede dim rise">Le modèle tient à partir de 7&nbsp;000&nbsp;€ de valeur client&#8239;: c'est là que deux affaires signées couvrent le trimestre entier. On vérifie ce calcul avec vos chiffres pendant l'appel, avant que vous engagiez quoi que ce soit.</p>
-    <a class="fin-btn rise" href="rendez-vous.html">
-      <span>Prendre rendez-vous</span>
-      <span class="fin-meta xs">Visio, 30 min</span>
-      <svg class="ar" aria-hidden="true"><use href="assets/sprite.svg#ar"/></svg>
-    </a>
+<section class="final" aria-labelledby="t-fin">
+  <div class="halo halo-b" aria-hidden="true"></div>
+  <div class="wrap final-in">
+    <h2 id="t-fin" class="final-t rise">Trente minutes pour savoir si ça marche chez vous.</h2>
+    <p class="h3ro-s rise">On regarde votre valeur client et la capacité de vos commerciaux. Vous repartez avec un volume chiffré.</p>
+    <div class="h3ro-cta rise">
+      <a class="btn or" href="rendez-vous.html"><span class="t">Prendre rendez-vous</span><span class="c" aria-hidden="true"><svg class="ar"><use href="assets/sprite.svg?v=20261013f#ar"/></svg><svg class="ar"><use href="assets/sprite.svg?v=20261013f#ar"/></svg></span></a>
+    </div>
+    <p class="qui rise"><span class="av">PB</span><span><b>Platon Bournassenko</b>Fondateur. Votre seul interlocuteur, du cadrage au dernier rendez-vous.</span></p>
   </div>
 </section>
 </main>
@@ -248,12 +320,12 @@
       <nav aria-label="Pied de page"><a href="methode.html">Méthode</a><a href="collaboration.html">Collaboration</a><a href="tarifs.html">Tarifs</a><a href="rendez-vous.html">Prendre un créneau</a></nav>
       <nav aria-label="Informations légales"><a href="mentions-legales.html">Mentions légales</a><a href="confidentialite.html">Confidentialité</a><a data-email href="mailto:platon.leadcore@gmail.com">platon.leadcore@gmail.com</a></nav>
     </div>
-    <svg class="ftr-logo" viewBox="0 0 1020.88 217.2" role="img" aria-label="Leadcore"><use href="assets/sprite.svg#lockup"/></svg>
+    <svg class="ftr-logo" viewBox="0 0 1020.88 217.2" role="img" aria-label="Leadcore"><use href="assets/sprite.svg?v=20261013f#lockup"/></svg>
     <p class="xs dim ftr-c">© 2026 Leadcore</p>
   </div>
 </footer>
 
-<script src="assets/config.js?v=20261013"></script>
-<script src="assets/site.js?v=20261013" defer></script>
+<script src="assets/config.js?v=20261013f"></script>
+<script src="assets/site.js?v=20261013f" defer></script>
 </body>
 </html>

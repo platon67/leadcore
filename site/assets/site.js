@@ -13,6 +13,7 @@
   const once = (el, fn, threshold = .35) => el && new IntersectionObserver(([e], o) => { if (e.isIntersecting) { fn(); o.disconnect(); } }, { threshold }).observe(el);
   const hex = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16));
   const mix = (a, b, t) => `rgb(${a.map((v, i) => Math.round(v + (b[i] - v) * t)).join(',')})`;
+  const fmt = v => String(Math.floor(v)).replace(/\B(?=(\d{3})+(?!\d))/g, '\u00a0');
   const fit = canvas => {
     const r = canvas.getBoundingClientRect(), d = Math.min(devicePixelRatio || 1, 2), ctx = canvas.getContext('2d');
     canvas.width = r.width * d; canvas.height = r.height * d; ctx.setTransform(d, 0, 0, d, 0, 0);
@@ -32,123 +33,123 @@
   document.body.prepend(sentinelle);
   new IntersectionObserver(([e]) => hdr.classList.toggle('plein', !e.isIntersecting)).observe(sentinelle);
 
-  /* ---------- Héros : la transmutation en boucle ----------
-     ponytail: Canvas 2D, ~600 points ; WebGL seulement au-delà de ~5 000. */
-  const field = $('#field');
-  const exemples = [
-    ['Mardi 10:00 — email, 3ᵉ touche', "Dirigeant, bureau d'études thermiques, 25 salariés, Lyon"],
-    ['Mercredi 14:30 — LinkedIn, 2ᵉ message', 'Directrice commerciale, éditeur SaaS B2B, 60 salariés, Nantes'],
-    ['Jeudi 09:00 — email, 4ᵉ touche', 'Directeur général, ESN, 120 salariés, Lille'],
-    ['Vendredi 11:30 — LinkedIn, visite puis message', 'Directeur associé, cabinet de conseil RH, 12 salariés, Bordeaux']
-  ];
-  if (field) {
-    let g, pts = [], cible, t0 = 0, raf = 0, vis = false, trouve = false, n = 0;
-    const capA = $('#capA'), capB = $('#capB'), GAP = 22;
-    const choisir = () => {
-      const pool = pts.filter(p => p.x > g.W * .3 && p.x < g.W * .9 && p.y > g.H * .14 && p.y < g.H * .62);
-      cible = pool[Math.floor(Math.random() * pool.length)] || pts[0];
-    };
-    const taille = () => {
-      g = fit(field); pts = [];
-      for (let y = GAP / 2; y < g.H; y += GAP) for (let x = GAP / 2; x < g.W; x += GAP) pts.push({ x, y, ph: Math.random() * 6.283 });
-      choisir();
-    };
-    const image = now => {
-      const { ctx, W, H } = g, t = (now - t0) / 1000, f = cl((t - 1.6) / .7);
-      ctx.clearRect(0, 0, W, H);
-      for (const p of pts) {
-        if (p === cible) continue;
-        const d = Math.hypot(p.x - cible.x, p.y - cible.y);
-        const onde = f > 0 ? Math.max(0, 1 - Math.abs(d - f * 260) / 34) * (1 - f) : 0;
-        const fr = Math.max(0, Math.sin(p.ph + t * 2.4)) ** 14 * (1 - f * .9);
-        ctx.fillStyle = fr > .4 || onde > .3 ? C.lit : C.dust;
-        ctx.fillRect(p.x - 1, p.y - 1, 2, 2);
+  /* ---------- Héros : la liste des rendez-vous se remplit, un par un ---------- */
+  const appL = $('#appL');
+  if (appL && !still) {
+    const rows = [...appL.children], toast = $('#toast'), toastT = $('#toastT'), appN = $('#appN');
+    const textes = ['Mardi 10:00 · bureau d\u2019études, Lyon', 'Mercredi 14:30 · éditeur SaaS, Nantes', 'Jeudi 09:00 · ESN, Lille', 'Vendredi 11:30 · cabinet RH, Bordeaux'];
+    let k = 0, timer = 0, vis = false;
+    // le plus récent s'insère en haut : on les fait arriver du dernier au premier
+    const vider = () => { rows.forEach(r => r.remove()); k = 0; appN.textContent = '0'; };
+    const pas = () => {
+      if (!vis) return;
+      if (k < rows.length) {
+        const i = rows.length - 1 - k, r = rows[i];
+        rows.forEach(x => x.classList.remove('sel'));
+        r.classList.add('sel', 'neuf'); appL.prepend(r);
+        r.addEventListener('animationend', () => r.classList.remove('neuf'), { once: true });
+        toastT.textContent = textes[i]; appN.textContent = ++k;
+        $('.af-t').textContent = r.dataset.t; $('.af-m').innerHTML = r.dataset.m; $('.app-fiche blockquote').textContent = '\u00ab\u202f' + r.dataset.q + '\u202f\u00bb';
+        $('.app-fiche').animate([{ opacity: .3 }, { opacity: 1 }], { duration: 500, easing: 'cubic-bezier(.2,0,0,1)' });
+        toast.classList.remove('on'); void toast.offsetWidth; toast.classList.add('on');
+        timer = setTimeout(pas, 1100);
+      } else {
+        toast.classList.remove('on');
+        timer = setTimeout(() => { vider(); timer = setTimeout(pas, 350); }, 2600);
       }
-      ctx.fillStyle = f ? C.or : C.dust;
-      ctx.beginPath(); ctx.arc(cible.x, cible.y, f ? 1 + 3.5 * ease(f) : 1, 0, 6.283); ctx.fill();
-      const ring = cl((t - 1.85) / 1.1);
-      if (ring > 0 && ring < 1) { // l'anneau s'ouvre une fois, ouvert en bas comme celui du logo
-        ctx.strokeStyle = C.hi; ctx.globalAlpha = (1 - ring) * .9; ctx.lineWidth = 1;
-        ctx.beginPath(); ctx.arc(cible.x, cible.y, 8 + 36 * ease(ring), 2.25, 7.17); ctx.stroke(); ctx.globalAlpha = 1;
-      }
-      if (f >= 1 && !trouve) {
-        trouve = true;
-        if (n++ > 0) { // le premier exemple est déjà dans le HTML
-          const [a, b] = exemples[(n - 1) % exemples.length];
-          capA.textContent = a; capB.textContent = b;
-          [capA, capB].forEach((el, i) => el.animate([{ opacity: 0, transform: 'translateY(8px)' }, { opacity: 1, transform: 'none' }], { duration: 640, delay: i * 80, easing: 'cubic-bezier(.32,.72,0,1)', fill: 'backwards' }));
-        }
-      }
-      if (t > 7.2) { choisir(); t0 = now; trouve = false; }
-      if (vis && !still) raf = requestAnimationFrame(image);
     };
-    const jouer = () => { cancelAnimationFrame(raf); t0 = performance.now() - (still ? 4000 : 0); raf = requestAnimationFrame(image); };
-    new ResizeObserver(() => { taille(); jouer(); }).observe(field);
-    new IntersectionObserver(([e]) => { vis = e.isIntersecting; vis ? jouer() : cancelAnimationFrame(raf); }).observe(field);
+    // la liste reste pleine tant que la boucle n'a pas démarré : jamais d'écran vide
+    let parti = false;
+    new IntersectionObserver(([e]) => {
+      vis = e.isIntersecting; clearTimeout(timer);
+      if (vis) timer = setTimeout(() => { if (!parti) { parti = true; vider(); } pas(); }, parti ? 300 : 700);
+    }).observe(appL.closest('.app'));
   }
 
-  /* ---------- Transmutation épinglée : 1 900 → 120 → 12 ----------
-     La progression vient de la position de la section, lue une fois par
-     image tant qu'elle est à l'écran ; on ne redessine que si elle a bougé. */
-  const tm = $('#transmutation'), tc = $('#tmCanvas');
-  if (tm && tc && !still && getComputedStyle(tc).display !== 'none') {
-    const N = 1900, REP = 120, RDV = 12;
-    const rang = [...Array(N).keys()].sort(() => Math.random() - .5);
-    const etapes = [...tm.querySelectorAll('.tm-step')], prog = [...tm.querySelectorAll('.tm-prog li')];
-    const LIT = hex(C.lit), DUST = hex(C.dust), OR = hex(C.or);
-    let g, pts = [], vis = false, raf = 0, avant = -1, cur = -1;
-    const taille = () => {
-      g = fit(tc);
-      const etroit = g.W < 700;
-      const x0 = etroit ? g.W * .06 : g.W * .44, x1 = g.W * .95, y0 = g.H * (etroit ? .16 : .15), y1 = g.H * (etroit ? .96 : .85);
-      const aw = x1 - x0, ah = y1 - y0, pas = Math.sqrt(aw * ah / N);
-      const cols = Math.max(1, Math.floor(aw / pas)), rows = Math.ceil(N / cols), gx = aw / cols, gy = ah / rows;
-      pts = rang.map((r, i) => ({ x: x0 + (i % cols + .5) * gx, y: y0 + (Math.floor(i / cols) + .5) * gy, r }));
-      avant = -1;
+
+  /* ---------- Héros : les faisceaux ----------
+     Une réponse part d'un prospect et file vers Leadcore (gris). Environ deux
+     sur cinq sont qualifiées : la carte vire à l'or, un faisceau d'or part vers
+     l'agenda et un créneau se remplit. Agenda plein : il se vide et recommence. */
+  const beam = $('#beam');
+  if (beam && !still) {
+    const NS = 'http://www.w3.org/2000/svg', svg = $('.beam-svg', beam), noyau = $('.bm-noyau', beam), ag = $('.bm-agenda', beam);
+    const pros = [...beam.querySelectorAll('.bm-pros li')], cells = [...$('#bmG').children], N = $('#bmN'), T = $('#bmT');
+    const ordre = [6, 1, 12, 8, 3, 10, 14, 0, 5, 11, 2, 9, 13, 4, 7];
+    const JOURS = ['Lun.', 'Mar.', 'Mer.', 'Jeu.', 'Ven.'], HEURES = ['09:00', '11:30', '15:00'];
+    const VIVIER = [['IN', 'Directeur des opérations', 'Industriel · Rennes'], ['AG', 'Fondatrice', 'Agence web · Paris'], ['LO', 'Directeur commercial', 'Logistique · Lyon'], ['CA', 'Associé', "Cabinet d'avocats · Nice"], ['FO', 'Directrice', 'Organisme de formation · Lille'], ['IM', 'Gérant', 'Promoteur · Toulouse'], ['SE', 'Directeur général', 'Sécurité privée · Marseille'], ['ED', 'CEO', 'Éditeur SaaS · Grenoble'], ['CO', 'Dirigeant', 'Conseil IT · Strasbourg'], ['TR', 'Directrice', 'Transport · Nantes']];
+    let rails = [], sortie = '', rempli = 4, v = 0, vis = false, timer = 0;
+    const occupe = new Set();
+    const tracer = () => {
+      const b = beam.getBoundingClientRect(), c = noyau.getBoundingClientRect(), g = ag.getBoundingClientRect();
+      const cx = c.left - b.left, cy = c.top + c.height / 2 - b.top;
+      const courbe = (x1, y1, x2, y2) => `M${x1} ${y1}C${(x1 + x2) / 2} ${y1} ${(x1 + x2) / 2} ${y2} ${x2} ${y2}`;
+      rails = pros.map(li => { const r = li.getBoundingClientRect(); return courbe(r.right - b.left, r.top + r.height / 2 - b.top, cx, cy); });
+      sortie = courbe(cx + c.width, cy, g.left - b.left, g.top + g.height / 2 - b.top);
+      svg.innerHTML = [...rails, sortie].map(d => `<path class="bm-rail" d="${d}"/>`).join('');
     };
-    const dessiner = p => {
-      const { ctx, W, H } = g;
-      const a = ss(.2, .36, p), b = ss(.56, .72, p), ring = cl((p - .72) / .14);
-      ctx.clearRect(0, 0, W, H);
-      for (const q of pts) {
-        if (q.r < RDV) continue;
-        const t = q.r >= REP ? a : b;          // ce qui ne répond pas s'éteint, puis ce qui ne devient pas un RDV
-        const s = q.r >= REP ? 1.1 : 1.1 + .5 * a * (1 - b);
-        ctx.fillStyle = mix(LIT, DUST, .15 + .85 * t);
-        ctx.fillRect(q.x - s, q.y - s, s * 2, s * 2);
-      }
-      for (const q of pts) {
-        if (q.r >= RDV) continue;
-        ctx.fillStyle = mix(LIT, OR, b);
-        ctx.beginPath(); ctx.arc(q.x, q.y, 1.4 + .5 * a + 2.6 * ease(b), 0, 6.283); ctx.fill();
-        if (ring > 0 && ring < 1) {
-          ctx.strokeStyle = C.hi; ctx.globalAlpha = 1 - ring; ctx.lineWidth = 1;
-          ctx.beginPath(); ctx.arc(q.x, q.y, 6 + 18 * ease(ring), 2.25, 7.17); ctx.stroke(); ctx.globalAlpha = 1;
-        }
-      }
+    const tir = (d, cls, ms) => {
+      const p = document.createElementNS(NS, 'path');
+      p.setAttribute('d', d); p.setAttribute('pathLength', '1'); p.setAttribute('class', 'bm-trait ' + cls); svg.append(p);
+      return p.animate([{ strokeDashoffset: .22 }, { strokeDashoffset: -1 }], { duration: ms, easing: 'cubic-bezier(.5,0,.25,1)' }).finished.then(() => p.remove());
     };
-    const etape = p => {
-      const i = p < .44 ? 0 : p < .78 ? 1 : 2;
-      if (i === cur) return;
-      cur = i;
-      etapes.forEach((e, k) => { e.classList.toggle('on', k === i); e.classList.toggle('passe', k < i); e.setAttribute('aria-hidden', k !== i); });
-      prog.forEach((l, k) => { l.classList.toggle('on', k === i); l.classList.toggle('fait', k <= i); });
+    const renouveler = li => {
+      const [i, r, c] = VIVIER[v++ % VIVIER.length];
+      li.querySelector('.av').textContent = i; li.querySelector('.who').innerHTML = `<b>${r}</b>${c}`;
+      li.classList.remove('chg'); void li.offsetWidth; li.classList.add('chg');
+    };
+    const poser = li => {
+      if (rempli >= cells.length) return;
+      const n = ordre[rempli++], cell = cells[n];
+      cell.textContent = li.querySelector('.av').textContent; cell.classList.add('on', 'neuf');
+      N.textContent = rempli;
+      T.textContent = `${JOURS[n % 5]} ${HEURES[Math.floor(n / 5)]} · ${li.querySelector('.who').lastChild.textContent.replace(' · ', ', ')}`;
+      T.classList.remove('chg'); void T.offsetWidth; T.classList.add('chg');
+      if (rempli === cells.length) setTimeout(() => { cells.forEach(x => { x.className = ''; x.textContent = ''; }); rempli = 0; N.textContent = 0; }, 2200);
+    };
+    const reponse = async () => {
+      const libres = pros.map((_, i) => i).filter(i => !occupe.has(i));
+      if (!libres.length) return;
+      const i = libres[Math.floor(Math.random() * libres.length)], li = pros[i];
+      occupe.add(i); li.classList.add('lit');
+      await tir(rails[i], 'gris', 1200);
+      li.classList.remove('lit');
+      noyau.classList.remove('pouls'); void noyau.offsetWidth; noyau.classList.add('pouls');
+      const ok = Math.random() < .42;
+      li.classList.add(ok ? 'ok' : 'non');
+      if (ok) { await tir(sortie, 'or', 900); poser(li); } else await new Promise(r => setTimeout(r, 700));
+      await new Promise(r => setTimeout(r, 500));
+      li.classList.remove('ok', 'non'); renouveler(li); occupe.delete(i);
+    };
+    const boucle = () => { if (!vis) return; reponse(); timer = setTimeout(boucle, 750); };
+    new ResizeObserver(tracer).observe(beam);
+    document.fonts && document.fonts.ready.then(tracer);
+    new IntersectionObserver(([e]) => { vis = e.isIntersecting; clearTimeout(timer); if (vis) timer = setTimeout(boucle, 600); }).observe(beam);
+  }
+
+  /* ---------- Comment ça marche : l'écran suit la position dans la section ---------- */
+  const cmt = $('#comment');
+  if (cmt && !still) {
+    const ecrans = [...cmt.querySelectorAll('.ecran')], etapes = [...cmt.querySelectorAll('.cmt-steps li')];
+    let cur = -1, raf = 0, vis = false;
+    const montrer = i => {
+      if (i === cur) return; cur = i;
+      ecrans.forEach((e, k) => { e.classList.toggle('on', k === i); e.classList.toggle('passe', k < i); });
+      etapes.forEach((e, k) => e.classList.toggle('on', k === i));
     };
     const tick = () => {
-      const r = tm.getBoundingClientRect();
-      const p = cl(-r.top / (r.height - innerHeight));
-      if (Math.abs(p - avant) > .0004) { dessiner(p); etape(p); avant = p; }
+      if (innerWidth <= 900) return; // sous 900 px les trois écrans s'empilent, rien à piloter
+      const r = cmt.getBoundingClientRect(), p = cl(-r.top / (r.height - innerHeight));
+      montrer(p < .34 ? 0 : p < .67 ? 1 : 2);
       if (vis) raf = requestAnimationFrame(tick);
     };
-    taille(); etape(0);
-    new ResizeObserver(taille).observe(tc);
-    new IntersectionObserver(([e]) => { vis = e.isIntersecting; cancelAnimationFrame(raf); if (vis) raf = requestAnimationFrame(tick); }).observe(tm);
+    montrer(0);
+    new IntersectionObserver(([e]) => { vis = e.isIntersecting; cancelAnimationFrame(raf); if (vis) raf = requestAnimationFrame(tick); }).observe(cmt);
   }
 
   if (still) return;
 
   /* ---------- Montants : ils montent puis se figent ---------- */
-  const fmt = v => String(v).replace(/\B(?=(\d{3})+(?!\d))/g, '\u00a0');
   document.querySelectorAll('.cnt').forEach(el => once(el, () => {
     const t0 = performance.now(), fin = +el.dataset.to;
     const pas = now => {
@@ -178,7 +179,8 @@
 
   /* ---------- Pages intérieures : entrées déclenchées une fois ---------- */
   document.querySelectorAll('.deux .pastilles i').forEach((el, i) => el.style.setProperty('--i', i));
-  ['rien', 'semaines', 'gantt', 'conditions', 'deux', 'barres', 'phases'].forEach(id => {
+  document.querySelectorAll('#chiffres .cf-g').forEach(g => [...g.children].forEach((el, i) => el.style.setProperty('--i', el.classList.contains('o') || !g.classList.contains('cal') ? i : 0)));
+  ['chiffres', 'rien', 'semaines', 'gantt', 'conditions', 'deux', 'barres', 'phases', 'mal1', 'mal2', 'mal3'].forEach(id => {
     const el = document.getElementById(id);
     once(el, () => el.classList.add('go'), .35);
   });

@@ -9,6 +9,49 @@ Fichiers : [`tokens.css`](tokens.css) (les valeurs), [`brandkit.html`](brandkit.
 [`logo-mark.svg`](logo-mark.svg) (la marque, en `currentColor`), [`fonts/`](fonts/)
 (Switzer et Zodiak, auto-hébergées).
 
+## Révision 3 (13 octobre 2026) : ce qui change après l'audit du site
+
+Le site construit sur la révision 2 a été jugé trop sobre et peu engageant.
+L'audit a relevé six causes ; la charte s'assouplit sur les points suivants,
+le reste (logo, couleurs, Switzer, Zodiak, rôle de l'or) ne bouge pas.
+
+- **Graisse** : titres et chiffres en Switzer **500**, plus en 300. Le 300 gris
+  sur fond nuit paraissait délavé.
+- **Texte courant** à 17 px, petit texte à 13,5 px, `--cendre` éclairci à
+  `#A0A5AB` (7,6:1 sur nuit).
+- **Rayons** : 8 px (contrôles), 14 px (cartes), 22 px (panneaux, photos),
+  pastilles rondes. L'angle droit partout rendait le site froid.
+- **Surfaces** : les blocs vivent dans des cartes éclairées, plus sur des
+  filets seuls. Un halo d'or diffus derrière l'interface du héros et l'appel
+  final.
+- **Mise en page** : sections centrées, titre en deux tons (blanc, puis gris),
+  pastille au-dessus. Plus de colonne de gauche vide.
+- **Visuels** : des interfaces réalistes et lisibles (liste de rendez-vous,
+  base, réponses, agenda) remplacent les motifs abstraits. Une photo couleur.
+
+## Révision 3b (13 octobre 2026) : héros, pictogrammes, surtitres
+
+- **Héros de l'accueil** : texte calé à gauche (pastille, titre, chapeau, deux
+  boutons dessous), schéma animé à droite. Le centrage intégral est abandonné.
+- **Schéma animé du héros**, trois motifs : des faisceaux (prospects → noyau
+  Leadcore, gris ; noyau → agenda, or), deux orbites lentes portant des
+  pictogrammes autour du logo, et un reflet doré qui fait le tour de la carte
+  agenda. Environ deux réponses sur cinq ressortent en or et remplissent un
+  créneau. Fond : grille de points masquée en radial. Toujours étiqueté
+  « Exemple ».
+- **Interface d'exemple** sous le héros : cadence accélérée (un rendez-vous
+  toutes les 1,1 s, entrée en 0,6 s).
+- **Chiffres clés** : quatre cartes, chacune avec compteur et micro-animation
+  qui illustre le chiffre (mois de 20 jours qui s'allume, reçu présent/absent,
+  frise de quatre semaines, pile 1 200 + 3 × 500).
+- **Pictogrammes** : jeu maison au trait (grille 24, trait 1,4, bouts ronds,
+  `currentColor`), dans `site/assets/sprite.svg`, préfixe `i-`. Or sur nuit,
+  or foncé sur calque. Un pictogramme accompagne un libellé, jamais seul,
+  jamais décoratif.
+- **Surtitres** : la pastille bordée avec point est retirée. Un surtitre =
+  pictogramme or + libellé en 500, entre deux filets dorés de 32 px qui
+  s'effacent (filet de droite seul quand le texte est calé à gauche).
+
 ---
 
 ## 1. L'idée : du plomb à l'or

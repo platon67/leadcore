@@ -22,6 +22,11 @@ Le logo et les pictogrammes vivent une seule fois dans `assets/sprite.svg`
 `assets/rdv.js`, inchangé : sa présentation est dans `site.css`, section
 « le calendrier maison ».
 
+Photos (`assets/img/`, licence Unsplash : usage commercial libre, sans
+attribution obligatoire) : `nuit` et `tel` et `equipe` de Vitaly Gariev,
+`appel` de LinkedIn Sales Solutions. Elles passent en noir et blanc par CSS,
+sauf `appel` (l'« après »), restée en couleur à dessein.
+
 `styles.css`, `fonts.css`, `main.js` et les fontes Geist et Lora ne sont plus
 chargés par aucune page. Les sections suivantes décrivent l'identité de
 septembre et restent comme historique.
