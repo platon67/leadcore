@@ -12,6 +12,20 @@ et de [`docs/MAJ-OFFRE-2026-09.md`](../docs/MAJ-OFFRE-2026-09.md). Les couleurs
 sont celles du deck (`deck/index.html`), aux valeurs exactes ; les fontes et le
 mouvement sont propres au site.
 
+## Révision 2 de la marque (octobre 2026)
+
+Les sept pages sont refaites sur la charte de `brand/`. Elles chargent toutes
+`assets/brand.css` (copie de `brand/tokens.css`, fontes Switzer et Zodiak
+empreintées dans `assets/fonts/`), `assets/site.css` et `assets/site.js`.
+Le logo et les pictogrammes vivent une seule fois dans `assets/sprite.svg`
+(`<use href="assets/sprite.svg#lockup">`). `rendez-vous.html` charge en plus
+`assets/rdv.js`, inchangé : sa présentation est dans `site.css`, section
+« le calendrier maison ».
+
+`styles.css`, `fonts.css`, `main.js` et les fontes Geist et Lora ne sont plus
+chargés par aucune page. Les sections suivantes décrivent l'identité de
+septembre et restent comme historique.
+
 ## Les quatre pages
 
 Le site tenait sur une page unique de 11 600 px. Il est désormais en quatre

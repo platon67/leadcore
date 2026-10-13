@@ -1,0 +1,77 @@
+/* Leadcore — jetons de marque, révision 2b (octobre 2026).
+   BRANDKIT.md explique chaque valeur. */
+
+@font-face { font-family: "Switzer"; src: url("fonts/switzer-300.woff2") format("woff2"); font-weight: 300; font-display: swap; }
+@font-face { font-family: "Switzer"; src: url("fonts/switzer-400.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Switzer"; src: url("fonts/switzer-500.woff2") format("woff2"); font-weight: 500; font-display: swap; }
+@font-face { font-family: "Zodiak";  src: url("fonts/zodiak-400i.woff2") format("woff2"); font-weight: 400; font-style: italic; font-display: swap; }
+
+:root {
+  color-scheme: dark;
+
+  /* ---- couleur : le plomb, et l'or ---- */
+  --nuit:        #0B0C0D;  /* sol sombre : héros, pied de page */
+  --surface:     #141618;  /* plan posé sur la nuit */
+  --trait:       #25282B;  /* filet 1 px sur sombre */
+  --cendre:      #8E9398;  /* texte secondaire sur sombre, 6,3:1 */
+  --calque:      #ECECEA;  /* sol clair ; texte principal sur sombre, 16,6:1 */
+  --blanc:       #FFFFFF;
+  --trait-clair: #CDCFCF;  /* filet 1 px sur clair */
+  --ardoise:     #575C61;  /* texte secondaire sur clair, 5,7:1 */
+  --encre:       #121416;  /* texte principal sur clair, 15,6:1 */
+
+  --or:          #C7A462;  /* Or. Réservé : bouton de RDV, RDV qualifié, focus */
+  --or-hi:       #D9BC82;  /* survol du bouton ; or écrit en petit sur la nuit, 10,7:1 */
+  --or-fonce:    #7A5A22;  /* or écrit sur le calque, 5,4:1 */
+  --or-lavis:    #EFE6D3;  /* fond d'une ligne retenue sur clair */
+
+  /* transmutation : contacts → réponses → conversations → RDV */
+  --flux-1: #33373B;
+  --flux-2: #575C61;
+  --flux-3: #8C8573;
+  --flux-4: #C7A462;
+
+  /* états d'un rendez-vous, ternes à dessein */
+  --etat-reporte: #8E9398;
+  --etat-perdu:   #9C4A3E;
+
+  /* ---- typographie ---- */
+  --f-sans: "Switzer", "Helvetica Neue", Arial, sans-serif;
+  --f-voix: "Zodiak", "Iowan Old Style", Georgia, serif; /* italique, verbatims seulement */
+
+  --t-d0:  clamp(56px, 11vw, 176px); /* une fois par support */
+  --t-d1:  clamp(44px, 7vw, 112px);
+  --t-d2:  clamp(36px, 4.6vw, 72px);
+  --t-h1:  clamp(28px, 3vw, 44px);
+  --t-h2:  clamp(22px, 2vw, 28px);
+  --t-l:   19px;   /* chapeau */
+  --t-m:   16px;   /* texte courant */
+  --t-s:   14px;   /* légende */
+  --t-xs:  12.5px; /* petit texte, libellés : 500, +0,01 em, jamais en capitales */
+
+  --track-d: -0.045em;
+  --track-h: -0.02em;
+  --track-xs: 0.01em;
+
+  /* ---- espace : base 4, grille de 12 colonnes ---- */
+  --e1: 4px;  --e2: 8px;  --e3: 12px; --e4: 16px; --e5: 24px;
+  --e6: 32px; --e7: 48px; --e8: 72px; --e9: 120px; --e10: 176px;
+  --gouttiere: clamp(20px, 4vw, 56px);
+  --colonne-gap: clamp(16px, 2vw, 30px);
+  --maxw: 1520px;
+
+  /* ---- forme ---- */
+  --rayon: 0; /* partout ; le seul rond est le point d'or et l'anneau du logo */
+
+  /* ---- mouvement ---- */
+  --d-instant: 140ms;
+  --d-court:   320ms;
+  --d-moyen:   640ms;
+  --d-long:    1100ms;
+  --ease-net:  cubic-bezier(.2, 0, 0, 1);     /* entrées, déplacements */
+  --ease-pose: cubic-bezier(.32, .72, 0, 1);  /* ce qui s'arrête : chiffres, or */
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root { --d-instant: 0ms; --d-court: 0ms; --d-moyen: 0ms; --d-long: 0ms; }
+}

@@ -1,0 +1,618 @@
+<meta charset="utf-8">
+<title>Leadcore Brand Kit</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="stylesheet" href="tokens.css">
+<style>
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;background:var(--nuit)}
+body{margin:0;background:var(--nuit);color:var(--calque);font:400 var(--t-m)/1.55 var(--f-sans);-webkit-font-smoothing:antialiased;font-kerning:normal}
+::selection{background:var(--or);color:var(--nuit)}
+:focus-visible{outline:1.5px solid var(--or);outline-offset:4px}
+a{color:inherit}
+img,svg{max-width:100%}
+.wrap{max-width:var(--maxw);margin:0 auto;padding-inline:var(--gouttiere)}
+.clair{background:var(--calque);color:var(--encre)}
+.dim{color:var(--cendre)} .clair .dim{color:var(--ardoise)}
+.xs{font-size:var(--t-xs);font-weight:500;letter-spacing:var(--track-xs);line-height:1.4}
+.num{font-variant-numeric:tabular-nums}
+.voix{font-family:var(--f-voix);font-style:italic;font-weight:400}
+.ar{width:1em;height:1em;flex:none;fill:none;stroke:currentColor;stroke-width:1.4;stroke-linecap:square}
+
+/* ---------- barre ---------- */
+.bar{position:fixed;inset:0 0 auto;z-index:20;padding-top:env(safe-area-inset-top,0px);color:var(--calque);mix-blend-mode:difference}
+.bar .wrap{display:flex;align-items:center;justify-content:space-between;height:72px;gap:var(--e5)}
+.bar .logo{height:19px;width:auto;display:block}
+.bar nav{display:flex;gap:var(--e5)}
+.bar nav a{text-decoration:none;opacity:.62;transition:opacity var(--d-instant) var(--ease-net)}
+.bar nav a:hover{opacity:1}
+@media (max-width:900px){.bar nav{display:none}}
+
+/* ---------- héros ---------- */
+.hero{min-height:min(100dvh,1000px);display:grid;grid-template-rows:1fr auto;padding-top:120px;position:relative;overflow:hidden}
+.hero>.wrap{position:relative;z-index:1;display:grid;grid-template-rows:1fr auto;width:100%}
+.hero .grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:var(--colonne-gap);align-items:end;align-self:end}
+.hero h1{grid-column:1/-1;font-weight:300;font-size:var(--t-d0);letter-spacing:var(--track-d);line-height:.92;margin:0;position:relative;z-index:1}
+.hero h1 em{font-style:normal;color:var(--or)}
+.hero .champ{position:absolute;inset:72px 0 140px 42%;z-index:0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 22%);mask-image:linear-gradient(90deg,transparent,#000 22%)}
+.hero canvas{position:absolute;inset:0;width:100%;height:100%}
+.hero .intro{grid-column:1/span 5;display:flex;flex-direction:column;gap:var(--e6);margin-top:var(--e7)}
+.hero .intro p{font-size:var(--t-l);line-height:1.5;margin:0;max-width:42ch}
+.hero .cap{grid-column:9/-1;align-self:end;display:flex;flex-direction:column;gap:2px;padding-top:var(--e3);border-top:1px solid var(--trait)}
+.hero .cap b{font-weight:500;color:var(--or-hi)}
+.hero .meta{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--colonne-gap);margin-top:var(--e9);padding-block:var(--e4) var(--e6);border-top:1px solid var(--trait)}
+.hero .meta div{display:flex;flex-direction:column;gap:2px}
+@media (max-width:900px){.hero .champ{inset:72px 0 auto 0;height:44%}.hero .intro,.hero .cap{grid-column:1/-1}.hero .meta{grid-template-columns:minmax(0,1fr) minmax(0,1fr);row-gap:var(--e5)}}
+
+/* ---------- chapitres ---------- */
+.ch{padding-block:var(--e9) var(--e10)}
+.ch>.wrap{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:var(--colonne-gap)}
+.ix{grid-column:1/span 3;align-self:start;position:sticky;top:104px;display:flex;gap:var(--e3);padding-top:var(--e3);border-top:1px solid currentColor}
+.ix .num{opacity:.5}
+.bd{grid-column:4/-1;display:flex;flex-direction:column;gap:var(--e8);min-width:0}
+.ch h2{font-weight:300;font-size:var(--t-d1);letter-spacing:var(--track-d);line-height:.98;margin:0;text-wrap:balance;max-width:14ch}
+.lede{font-size:var(--t-l);line-height:1.5;max-width:52ch;margin:0}
+.pair{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:var(--colonne-gap)}
+@media (max-width:900px){.ix{grid-column:1/-1;position:static}.bd{grid-column:1/-1}.pair{grid-template-columns:1fr}}
+
+/* ---------- 01 idée ---------- */
+.axiome{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--trait)}
+.axiome div{padding:var(--e5) var(--e5) 0 0;display:flex;flex-direction:column;gap:var(--e3)}
+.axiome div+div{padding-left:var(--e5);border-left:1px solid var(--trait)}
+.axiome b{font-weight:300;font-size:var(--t-d2);letter-spacing:var(--track-d);line-height:1}
+.axiome b.or{color:var(--or)}
+@media (max-width:700px){.axiome{grid-template-columns:1fr}.axiome div+div{border-left:0;padding-left:0;border-top:1px solid var(--trait);margin-top:var(--e5)}}
+.parente{width:100%;border-collapse:collapse}
+.parente th{text-align:left;font-weight:500;padding:0 0 var(--e3);border-bottom:1px solid currentColor;width:50%}
+.parente td{padding:14px var(--e5) 14px 0;border-bottom:1px solid var(--trait);vertical-align:top}
+.parente td+td{padding-left:var(--e5)}
+.parente td:first-child{color:var(--cendre)}
+@media (max-width:640px){.parente,.parente tbody,.parente tr,.parente td{display:block}.parente thead{display:none}.parente td{border:0;padding:4px 0}.parente tr{border-bottom:1px solid var(--trait);padding:var(--e3) 0}.parente td+td{padding-left:0}.parente td:first-child::before{content:"Palantir — "}}
+
+/* ---------- 02 logo ---------- */
+.planche{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--trait-clair);border:1px solid var(--trait-clair)}
+.planche>div{min-height:clamp(300px,32vw,480px);display:grid;place-items:center;position:relative;padding:var(--e7)}
+.planche>div>span{position:absolute;left:var(--e4);top:var(--e3)}
+.planche .n{background:var(--nuit);color:var(--calque)}
+.planche .c{background:var(--calque);color:var(--encre)}
+.planche .b{background:var(--blanc);color:var(--encre)}
+.planche .lock{width:78%;height:auto}
+.planche .mk{width:34%;height:auto}
+.planche .big{grid-column:1/-1;padding:var(--e8) var(--e5)}
+.constr{width:min(100%,560px);height:auto;overflow:visible}
+.constr .g{fill:none;stroke:var(--or-fonce);stroke-width:1;vector-effect:non-scaling-stroke}
+.constr .g.d{stroke-dasharray:3 4}
+.constr text{font:500 7px var(--f-sans);fill:var(--or-fonce);letter-spacing:.02em}
+.constr.go .g{stroke-dasharray:1;stroke-dashoffset:1;animation:draw var(--d-long) var(--ease-net) forwards}
+.constr.go .g:nth-of-type(2n){animation-delay:.12s}.constr.go .g:nth-of-type(3n){animation-delay:.24s}
+.constr.go text{animation:fade var(--d-moyen) var(--ease-net) .9s both}
+@keyframes draw{to{stroke-dashoffset:0}} @keyframes fade{from{opacity:0}}
+.mesures{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--encre)}
+.mesures div{padding:var(--e4) var(--e4) 0 0;display:flex;flex-direction:column;gap:2px}
+.mesures div+div{padding-left:var(--e4);border-left:1px solid var(--trait-clair)}
+.mesures b{font-weight:300;font-size:var(--t-h1);letter-spacing:var(--track-h);line-height:1.1}
+@media (max-width:700px){.planche{grid-template-columns:1fr}.mesures{grid-template-columns:minmax(0,1fr) minmax(0,1fr);row-gap:var(--e5)}.mesures div:nth-child(3){border-left:0;padding-left:0}}
+
+/* ---------- 03 couleur ---------- */
+.part{display:flex;height:clamp(260px,34vw,420px);gap:0;border:1px solid var(--trait)}
+.part div{display:flex;flex-direction:column;justify-content:space-between;padding:var(--e4);min-width:0;overflow:hidden}
+.part span{display:block}
+.part .p1{flex:52;background:var(--nuit)}
+.part .p2{flex:26;background:var(--calque);color:var(--encre)}
+.part .p3{flex:10;background:var(--ardoise)}
+.part .p4{flex:8;background:var(--surface)}
+.part .p5{flex:4;background:var(--or);color:var(--nuit);padding-inline:var(--e2)}
+.part .p5 span{writing-mode:vertical-rl;transform:rotate(180deg)}
+@media (max-width:640px){.part{flex-direction:column;height:auto}.part div{min-height:72px}.part .p5 span{writing-mode:initial;transform:none}}
+.nuancier{width:100%;border-collapse:collapse}
+.nuancier td,.nuancier th{padding:14px var(--e4) 14px 0;border-bottom:1px solid var(--trait);text-align:left;vertical-align:middle}
+.nuancier th{font-weight:500;border-bottom-color:var(--calque)}
+.nuancier i{display:block;width:44px;height:44px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}
+.nuancier .or td:nth-child(2){color:var(--or-hi)}
+@media (max-width:760px){.nuancier .hide{display:none}}
+.trans{display:flex;flex-direction:column}
+.trans .row{display:grid;grid-template-columns:9em 1fr 5em;gap:var(--e4);align-items:center;padding:var(--e3) 0;border-top:1px solid var(--trait)}
+.trans .row:last-child{border-bottom:1px solid var(--trait)}
+.trans .bar2{height:36px;position:relative}
+.trans .bar2 i{position:absolute;inset:0;transform-origin:left;transform:scaleX(var(--k))}
+.trans .row:last-child .bar2 i{min-width:3px}
+.trans b{font-weight:300;font-size:var(--t-h1);text-align:right;letter-spacing:var(--track-h)}
+.trans .row:last-child b{color:var(--or)}
+@supports (animation-timeline:view()){
+  .trans .bar2 i{animation:grow linear both;animation-timeline:view();animation-range:entry 30% cover 45%}
+  @keyframes grow{from{transform:scaleX(0)}}
+}
+
+/* ---------- 04 typographie ---------- */
+.aa{display:grid;grid-template-columns:auto 1fr;gap:var(--e7);align-items:end;border-bottom:1px solid var(--encre);padding-bottom:var(--e5)}
+.aa .g{font-weight:300;font-size:clamp(160px,24vw,360px);line-height:.78;letter-spacing:-.06em}
+.aa .set{font-size:clamp(20px,2.2vw,30px);line-height:1.35;letter-spacing:-.01em;word-break:break-all}
+@media (max-width:760px){.aa{grid-template-columns:1fr}}
+.graisses{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--encre)}
+.graisses div{padding:var(--e4) var(--e4) 0 0;display:flex;flex-direction:column;gap:var(--e3)}
+.graisses div+div{padding-left:var(--e4);border-left:1px solid var(--trait-clair)}
+.graisses b{font-size:var(--t-d2);letter-spacing:var(--track-h);line-height:1}
+@media (max-width:700px){.graisses{grid-template-columns:1fr}.graisses div+div{border-left:0;padding-left:0;border-top:1px solid var(--trait-clair);margin-top:var(--e4)}}
+.echelle>div{display:grid;grid-template-columns:10em 1fr;gap:var(--e5);align-items:baseline;padding:var(--e4) 0;border-bottom:1px solid var(--trait-clair);min-width:0}
+.echelle p{margin:0;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+@media (max-width:640px){.echelle>div{grid-template-columns:1fr;gap:var(--e1)}.echelle p{white-space:normal}}
+.petit{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:1px;background:var(--trait-clair);border:1px solid var(--trait-clair)}
+.petit>div{background:var(--blanc);padding:var(--e5);display:flex;flex-direction:column;gap:var(--e3)}
+.petit .tag{display:flex;justify-content:space-between;gap:var(--e3);padding:10px 0;border-top:1px solid var(--trait-clair)}
+@media (max-width:640px){.petit{grid-template-columns:1fr}}
+.citation{margin:0;font-size:clamp(30px,3.6vw,52px);line-height:1.18;letter-spacing:-.01em;max-width:24ch;text-wrap:balance}
+.citation+p{margin:var(--e4) 0 0}
+
+/* ---------- boutons ---------- */
+.btn{--h:52px;display:inline-flex;align-items:stretch;height:var(--h);border:1px solid currentColor;color:inherit;text-decoration:none;font-weight:500;font-size:15px;cursor:pointer;background:transparent;transition:background var(--d-instant) var(--ease-net),transform var(--d-instant) var(--ease-net)}
+.btn .t{display:flex;align-items:center;padding:0 22px}
+.btn .c{width:var(--h);display:grid;place-items:center;border-left:1px solid currentColor;overflow:hidden;position:relative}
+.btn .c .ar{grid-area:1/1;transition:transform var(--d-court) var(--ease-pose)}
+.btn .c .ar+.ar{transform:translateX(calc(var(--h) * -1))}
+.btn:hover .c .ar:first-child{transform:translateX(var(--h))}
+.btn:hover .c .ar+.ar{transform:none}
+.btn:active{transform:scale(.985)}
+.btn.or{background:var(--or);border-color:var(--or);color:var(--nuit)}
+.btn.or .c{border-left-color:rgba(11,12,13,.22)}
+.btn.or:hover{background:var(--or-hi);border-color:var(--or-hi)}
+.btn.ghost:hover{background:color-mix(in srgb,currentColor 7%,transparent)}
+.lien{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font-weight:500;padding-bottom:4px;background:linear-gradient(currentColor,currentColor) 0 100%/100% 1px no-repeat;transition:background-size var(--d-court) var(--ease-pose)}
+.lien:hover{background-size:0 1px;background-position:100% 100%}
+.lien .ar{transition:transform var(--d-court) var(--ease-pose)}
+.lien:hover .ar{transform:translateX(4px)}
+
+/* ---------- 05 composants ---------- */
+.demo{display:flex;flex-wrap:wrap;gap:var(--e4);align-items:center}
+.inset{background:var(--nuit);color:var(--calque);padding:var(--e7) var(--e6)}
+.champs{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:var(--e6)}
+@media (max-width:640px){.champs{grid-template-columns:1fr}}
+.f{display:flex;flex-direction:column;gap:6px}
+.f label{color:var(--ardoise)}
+.f input{font:300 clamp(22px,2.2vw,30px)/1.2 var(--f-sans);letter-spacing:-.01em;color:var(--encre);background:transparent;border:0;border-bottom:1px solid var(--encre);border-radius:0;padding:10px 0 12px;outline:none;width:100%;transition:border-color var(--d-instant)}
+.f input:focus{border-bottom-color:var(--or-fonce);box-shadow:0 1px 0 var(--or-fonce)}
+.f input::placeholder{color:#9EA2A5}
+.reg .r{display:grid;grid-template-columns:7em 1.1fr 1.7fr 8em;gap:var(--e5);padding:var(--e5) var(--e4);margin:0 calc(var(--e4) * -1);border-bottom:1px solid var(--trait-clair);align-items:baseline}
+.reg .r.hd{padding-block:0 var(--e3);border-bottom-color:var(--encre);color:var(--ardoise)}
+.reg .who b{display:block;font-weight:500}
+.reg .voix{font-size:clamp(18px,1.6vw,22px);line-height:1.3}
+.reg .st{display:inline-flex;align-items:center;gap:8px}
+.reg .st::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor;flex:none}
+.st.ok{color:var(--or-fonce)}.st.rep{color:var(--ardoise)}.st.perdu{color:var(--etat-perdu)}
+.reg .r.sel{background:var(--or-lavis)}
+@media (max-width:760px){.reg .r{grid-template-columns:1fr auto;gap:var(--e2) var(--e4)}.reg .r.hd{display:none}.reg .who,.reg .voix{grid-column:1/-1}.reg .who{order:2}.reg .voix{order:3}}
+
+/* ---------- 06 mouvement ---------- */
+.mv{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--trait);border:1px solid var(--trait)}
+.mv>div{background:var(--nuit);padding:var(--e5);display:flex;flex-direction:column;gap:var(--e4);min-height:380px}
+.mv .st{flex:1;display:grid;place-items:center;position:relative;min-height:200px}
+.mv .ft{display:flex;justify-content:space-between;align-items:end;gap:var(--e4)}
+.mv .ft p{margin:0;max-width:40ch}
+.rejouer{font:500 var(--t-xs)/1 var(--f-sans);background:none;border:1px solid var(--trait);color:var(--calque);height:44px;padding:0 16px;cursor:pointer;flex:none;transition:border-color var(--d-instant)}
+.rejouer:hover{border-color:var(--cendre)}
+@media (max-width:760px){.mv{grid-template-columns:1fr}}
+.count{font-weight:300;font-size:clamp(110px,15vw,220px);letter-spacing:-.06em;line-height:.85;display:flex;align-items:baseline;gap:.08em}
+.count small{font-size:var(--t-xs);font-weight:500;letter-spacing:var(--track-xs);color:var(--or-hi)}
+.trace *{fill:none;stroke:var(--calque);stroke-width:1;vector-effect:non-scaling-stroke}
+.trace .o{stroke:var(--or)}
+.trace.go [pathLength]{stroke-dasharray:1;stroke-dashoffset:1;animation:draw var(--d-long) var(--ease-net) forwards}
+.trace.go .o{animation-delay:.9s}
+.mini{width:100%;display:flex;flex-direction:column}
+.mini div{display:grid;grid-template-columns:6.5em 1fr auto;gap:var(--e3);padding:12px 0;border-top:1px solid var(--trait)}
+.mini .h{color:var(--cendre)}
+.mini .ok{color:var(--or-hi)}
+
+/* lecture : le paragraphe s'allume mot à mot avec le défilement (CSS natif) */
+.lecture{margin:0;font-weight:300;font-size:clamp(32px,4.2vw,64px);line-height:1.08;letter-spacing:var(--track-h);max-width:21ch}
+.lecture .or{color:var(--or)}
+@supports (animation-timeline:view()){
+  .lecture span[style]{animation:lit linear both;animation-timeline:view();animation-range:cover calc(12% + var(--i) * 1.3%) cover calc(16% + var(--i) * 1.3%)}
+  @keyframes lit{from{opacity:.16}}
+}
+
+/* ---------- 07 voix ---------- */
+.voixtab{width:100%;border-collapse:collapse}
+.voixtab th{text-align:left;font-weight:500;padding-bottom:var(--e3);border-bottom:1px solid var(--encre);width:50%}
+.voixtab td{padding:var(--e4) var(--e5) var(--e4) 0;border-bottom:1px solid var(--trait-clair);font-size:var(--t-l);line-height:1.4;vertical-align:top}
+.voixtab td+td{color:var(--ardoise);text-decoration:line-through;text-decoration-thickness:1px;text-decoration-color:var(--trait-clair)}
+
+/* entrées : un fondu montant, piloté par la position, jamais garé invisible */
+@supports (animation-timeline:view()){
+  .rise{animation:rise linear both;animation-timeline:view();animation-range:entry 0% entry 55%}
+  @keyframes rise{from{opacity:0;transform:translateY(28px)}}
+}
+
+footer{padding-block:var(--e9) var(--e6)}
+footer .logo{width:100%;height:auto;display:block}
+footer .row{display:flex;justify-content:space-between;flex-wrap:wrap;gap:var(--e4);margin-top:var(--e6);padding-top:var(--e4);border-top:1px solid var(--trait)}
+
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="mark" viewBox="-115.5 -115.5 231 217.2"><path d="M-83.07 80.24A115.5 115.5 0 1 1 83.07 80.24L60.3 51.96A79.6 79.6 0 1 0 -60.3 51.96Z"/><path d="M0 0L81.86 101.7L39.43 101.7L0 52.71L-39.43 101.7L-81.86 101.7Z"/></symbol>
+  <symbol id="lockup" viewBox="-115.5 -115.5 1020.88 217.2"><path d="M-83.07 80.24A115.5 115.5 0 1 1 83.07 80.24L60.3 51.96A79.6 79.6 0 1 0 -60.3 51.96Z"/><path d="M0 0L81.86 101.7L39.43 101.7L0 52.71L-39.43 101.7L-81.86 101.7Z"/><path d="M168.99210000000002 47.49999999999999V-47.49999999999999H191.03003471865227V29.543084760459564H238.58350549998454V47.49999999999999ZM252.42210000000003 47.49999999999999V-47.49999999999999H324.1568674274566V-29.81220386485399H274.24473943513675V29.812203864853977H326.0030436065777V47.49999999999999ZM272.646544117556 7.827195658232945V-9.26622898021121H318.42880078350004V7.827195658232945ZM331.2171 47.49999999999999 373.56457607692545 -47.49999999999999H395.3053250472268L437.73469158898763 47.49999999999999H414.77482351429194L379.9269812362578 -36.31263277693474H388.64573413954355L353.7978918615094 47.49999999999999ZM352.47770047691307 27.175895760428595 358.2457341395435 10.491923446161465H407.18672388900933L413.03664801647517 27.175895760428595ZM441.5301 47.49999999999999V-47.49999999999999H484.66645765383544Q500.2174672230653 -47.49999999999999 512.0094220247128 -41.609307159889745Q523.8013768263603 -35.7186143197795 530.4233101824038 -25.091954801647518Q537.0452435384473 -14.465295283515538 537.0452435384473 0.0Q537.0452435384473 14.41147146263664 530.4233101824038 25.06504289120807Q523.8013768263603 35.7186143197795 512.0094220247128 41.609307159889745Q500.2174672230653 47.49999999999999 484.66645765383544 47.49999999999999ZM463.56803471865226 29.48926093958068H483.6368766560342Q493.1249762813168 29.48926093958068 500.0977426868168 25.887058700566715Q507.0705090923168 22.28485646155275 510.94413990275933 15.639651915394378Q514.8177707132019 8.994447369236006 514.8177707132019 0.0Q514.8177707132019 -9.1301616549503 510.94413990275933 -15.707509058251528Q507.0705090923168 -22.284856461552756 500.0977426868168 -25.88705870056672Q493.1249762813168 -29.48926093958068 483.6368766560342 -29.48926093958068H463.56803471865226ZM589.3926430615342 49.098195317580746Q578.3202049208758 49.098195317580746 568.9032501192282 45.50176674615217Q559.4862953175807 41.9053381747236 552.5660214796692 35.2962834071413Q545.6457476417577 28.687228639559006 541.7919238208788 19.71720719395497Q537.9381 10.74718574835093 537.9381 0.0Q537.9381 -10.747185748350937 541.7919238208788 -19.71720719395497Q545.6457476417577 -28.687228639559002 552.6069667120869 -35.29628340714131Q559.5681857824161 -41.90533817472362 568.9851405840636 -45.501766746152185Q578.4020953857112 -49.09819531758075 589.4745335263696 -49.09819531758075Q601.8152956582329 -49.09819531758075 611.8266219565824 -44.82665951813199Q621.8379482549317 -40.55512371868323 628.5675292527329 -32.30923786813664L614.4878855439596 -19.254556223096223Q609.6256189681335 -24.79308476045957 603.6355381406584 -27.629051438481305Q597.6454573131832 -30.46501811650304 590.5298717010932 -30.46501811650304Q583.8706338329565 -30.46501811650304 578.3251768944906 -28.263213434083802Q572.7797199560248 -26.061408751664565 568.715396305472 -21.998239834628855Q564.6510726549193 -17.935070917593144 562.4083227400823 -12.336944891765512Q560.1655728252454 -6.73881886593788 560.1655728252454 0.0Q560.1655728252454 6.738818865937873 562.4083227400823 12.336944891765503Q564.6510726549193 17.935070917593134 568.715396305472 21.99823983462884Q572.7797199560248 26.061408751664544 578.3251768944906 28.263213434083795Q583.8706338329565 30.465018116503042 590.5298717010932 30.465018116503042Q597.6454573131832 30.465018116503042 603.6355381406584 27.629051438481305Q609.6256189681335 24.793084760459564 614.4878855439596 19.17266575826081L628.5675292527329 32.22734740330122Q621.8379482549317 40.41940943296893 611.8266219565824 44.75880237527484Q601.8152956582329 49.098195317580746 589.3926430615342 49.098195317580746ZM681.725160238663 49.098195317580746Q670.5079106696396 49.098195317580746 660.9783720469068 45.433909603295035Q651.4488334241739 41.76962388900932 644.4607024434052 35.13365721098758Q637.4725714626366 28.497690532965837 633.5918357313183 19.5492781031771Q629.7111 10.600865673388363 629.7111 -0.02537408698576371Q629.7111 -10.651613847359883 633.5920139558907 -19.563118514260243Q637.4729279117815 -28.474623181160602 644.4712965604349 -35.13393994444041Q651.4696652090881 -41.79325670772021 660.9670916460309 -45.44572601265048Q670.4645180829738 -49.09819531758075 681.6804335604347 -49.09819531758075Q692.9424098076863 -49.09819531758075 702.3932803095289 -45.460290424181615Q711.8441508113715 -41.822385530782476 718.825099777812 -35.189449588389245Q725.8060487442526 -28.556513645996013 729.6869627001433 -19.616748740250493Q733.5678766560342 -10.676983834504973 733.5678766560342 -0.01718504050222691Q733.5678766560342 10.642613753500527 729.6871409247158 19.611097375650886Q725.8064051933975 28.57958099780124 718.8252780023845 35.20098326429185Q711.8441508113715 41.82238553078246 702.3932803095289 45.46029042418161Q692.9424098076863 49.098195317580746 681.725160238663 49.098195317580746ZM681.6780235386043 30.465018116503042Q688.0424856802205 30.465018116503042 693.4313823828907 28.251016981874265Q698.820279085561 26.03701584724549 702.8375915433379 21.97201006044105Q706.8549040011148 17.907004273636613 709.0976539159518 12.325101830465053Q711.3404038307888 6.743199387293494 711.3404038307888 -0.024721649761630715Q711.3404038307888 -6.792642686816762 709.106855091776 -12.34279090213968Q706.8733063527632 -17.892939117462596 702.8520748756538 -21.962483660337377Q698.8308433985444 -26.032028203212157 693.4390745612128 -28.248523159857598Q688.0473057238812 -30.46501811650304 681.6828435822651 -30.46501811650304Q675.3183814406491 -30.46501811650304 669.905186818117 -28.24586717798565Q664.4919921955851 -26.026716239468264 660.4566522488785 -21.95233780958656Q656.421312302172 -17.877959379704855 654.1799425637087 -12.321383688251839Q651.9385728252454 -6.764807996798822 651.9385728252454 -0.027027887408735296Q651.9385728252454 6.710752221981352 654.176168794743 12.292654665152911Q656.4137647642407 17.87455710832447 660.442297127715 21.967982929994506Q664.4708294911894 26.061408751664544 669.8921954440889 28.263213434083795Q675.3135613969882 30.465018116503042 681.6780235386043 30.465018116503042ZM743.7321 47.49999999999999V-47.49999999999999H784.2618195813073Q804.1464484252577 -47.49999999999999 815.1369961010807 -38.31468327088043Q826.1275437769037 -29.129366541760866 826.1275437769037 -13.06356647363043Q826.1275437769037 -2.480161654950301 821.1213032609705 5.1725074324115035Q816.1150627450372 12.825176519773308 806.8618888730605 16.90948367966306Q797.6087150010837 20.993790839552812 784.8000577900962 20.993790839552812H755.9421198197639L765.7700347186521 11.43268557802483V47.49999999999999ZM804.1995661670434 47.49999999999999 780.3653662351738 12.974747607692542H803.893848629649L827.9175866681118 47.49999999999999ZM765.7700347186521 13.81479049890062 755.9421198197639 3.4697756340776067H783.6651386175714Q793.7545381406583 3.4697756340776067 798.8273045461583 -0.9080765538385336Q803.9000709516582 -5.285928741754674 803.9000709516582 -13.06356647363043Q803.9000709516582 -20.923094670341577 798.8273045461583 -25.26000162584001Q793.7545381406583 -29.596908581338447 783.6651386175714 -29.596908581338447H755.9421198197639L765.7700347186521 -40.02381391099687ZM831.7971 47.49999999999999V-47.49999999999999H903.5318674274565V-29.81220386485399H853.6197394351367V29.812203864853977H905.3780436065776V47.49999999999999ZM852.0215441175559 7.827195658232945V-9.26622898021121H897.8038007835V7.827195658232945Z"/></symbol>
+  <symbol id="ar" viewBox="0 0 16 16"><path d="M2 8h11.5M9 3.5 13.5 8 9 12.5"/></symbol>
+</svg>
+
+<header class="bar">
+  <div class="wrap">
+    <svg class="logo" viewBox="0 0 1020.88 217.2" role="img" aria-label="Leadcore"><use href="#lockup" fill="currentColor"/></svg>
+    <nav class="xs" aria-label="Chapitres"><a href="#idee">Idée</a><a href="#logo">Logo</a><a href="#couleur">Couleur</a><a href="#type">Typographie</a><a href="#composants">Composants</a><a href="#mouvement">Mouvement</a><a href="#voix">Voix</a></nav>
+    <span class="xs">Révision 2 — oct. 2026</span>
+  </div>
+</header>
+
+<main>
+<section class="hero" aria-labelledby="t-hero">
+  <div class="champ" aria-hidden="true"><canvas id="field"></canvas></div>
+  <div class="wrap">
+    <div class="grid">
+      <h1 id="t-hero">Du plomb<br>à l'<em>or</em>.</h1>
+      <div class="intro">
+        <p class="dim">Mille neuf cents contacts par mois. Douze rendez-vous. L'identité de Leadcore tient dans cet écart&#8239;: un champ couleur de plomb, et une seule matière précieuse, réservée à ce qui a de la valeur.</p>
+        <div class="demo"><a class="btn or" href="#couleur"><span class="t">Prendre rendez-vous</span><span class="c"><svg class="ar"><use href="#ar"/></svg><svg class="ar"><use href="#ar"/></svg></span></a></div>
+      </div>
+      <div class="cap xs" aria-live="polite"><b id="capA">RDV qualifié — mardi 14:30</b><span class="dim" id="capB">Dirigeant, bureau d'études, 25 salariés</span></div>
+    </div>
+    <div class="meta xs">
+      <div><span class="dim">Charte</span><span>Leadcore, révision 2</span></div>
+      <div><span class="dim">Logo</span><span>Redessiné en géométrie exacte</span></div>
+      <div><span class="dim">Caractères</span><span>Switzer, Zodiak italique</span></div>
+      <div><span class="dim">Couleur</span><span>Plomb et or #C7A462</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="ch" id="idee" aria-labelledby="t-idee">
+  <div class="wrap">
+    <div class="ix xs"><span class="num">01</span><span>Idée</span></div>
+    <div class="bd">
+      <h2 id="t-idee" class="rise">Changer du plomb en or.</h2>
+      <p class="lede dim rise">En anglais, <i>lead</i> désigne aussi le plomb. Le métier de Leadcore est une transmutation&#8239;: des contacts bruts, en masse, deviennent quelques rendez-vous qui valent de l'argent. La charte le montre littéralement. Tout est plomb, sauf ce qui a été transformé.</p>
+      <div class="axiome rise">
+        <div><b class="num">1&#8239;900</b><span class="xs dim">contacts touchés chaque mois, par client</span></div>
+        <div><b class="num">120</b><span class="xs dim">réponses</span></div>
+        <div><b class="num or">12</b><span class="xs dim">rendez-vous qualifiés. La seule chose en or.</span></div>
+      </div>
+      <div class="rise">
+        <p class="lede" style="margin-bottom:var(--e6)">Une parenté assumée avec Palantir, à moitié.</p>
+        <table class="parente xs">
+          <thead><tr><th>Repris de Palantir</th><th>Propre à Leadcore</th></tr></thead>
+          <tbody>
+            <tr><td>Base monochrome, sans teinte décorative</td><td>Une matière unique, l'or, au sens fixé</td></tr>
+            <tr><td>Une grotesque suisse, affichage en graisse légère</td><td>Une italique à empattements pour la parole des prospects</td></tr>
+            <tr><td>Angles droits sur les boutons et les champs</td><td>Angles droits partout&#8239;; seuls l'anneau et le point d'or sont ronds</td></tr>
+            <tr><td>Filets de 1&#8239;px plutôt qu'ombres et cartes</td><td>Le registre&#8239;: les rendez-vous tenus comme une main courante</td></tr>
+            <tr><td>Sections alternées nuit et clair</td><td>Gris chauds de plomb, pas de noir pur ni de blanc froid</td></tr>
+            <tr><td>Texte d'affichage révélé à la lecture</td><td>Mouvement de transmutation&#8239;: un point parmi cent devient or</td></tr>
+            <tr><td>Vues filaires techniques</td><td>Le logo montré dans sa construction</td></tr>
+            <tr><td>Titres déclaratifs, sans adjectif</td><td>Vouvoiement, première personne, chiffres du contrat</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ch clair" id="logo" aria-labelledby="t-logo">
+  <div class="wrap">
+    <div class="ix xs"><span class="num">02</span><span>Logo</span></div>
+    <div class="bd">
+      <h2 id="t-logo" class="rise">Le même logo, enfin net.</h2>
+      <p class="lede dim rise">Le fichier d'origine était un scan, étiré de 7&#8239;% à l'export. La marque est redessinée à partir de ses mesures&#8239;: un vrai cercle, un chevron à 51,2°, et le mot en Montserrat Bold, sa police d'origine, lettre à lettre à sa position. 304 octets pour la marque.</p>
+      <div class="planche rise">
+        <div class="n big"><span class="xs dim">Verrou, sur nuit</span><svg class="lock" viewBox="0 0 1020.88 217.2" role="img" aria-label="Logo Leadcore clair sur fond nuit"><use href="#lockup" fill="currentColor"/></svg></div>
+        <div class="b"><span class="xs dim">Construction</span>
+          <svg class="constr" id="constr" viewBox="-150 -140 300 268" aria-hidden="true">
+            <use href="#mark" x="-115.5" y="-115.5" width="231" height="217.2" fill="var(--encre)"/>
+            <circle class="g d" r="115.5" pathLength="1"/>
+            <circle class="g d" r="79.6" pathLength="1"/>
+            <path class="g" d="M-8 0H8M0-8V8" pathLength="1"/>
+            <path class="g" d="M48.3 -60 L-112.7 140" pathLength="1"/>
+            <path class="g d" d="M29.8 -60 L-131.2 140" pathLength="1"/>
+            <path class="g" d="M-145 101.7H145" pathLength="1"/>
+            <path class="g" d="M-58 101.7 A24 24 0 0 0 -66.3 82.5" pathLength="1"/>
+            <text x="-52" y="94">51,2°</text>
+            <text x="64" y="-96">R 115,5</text>
+            <text x="22" y="-64">r 79,6</text>
+            <text x="-140" y="48">jour 14,4</text>
+            <text x="6" y="-6">centre = sommet</text>
+          </svg>
+        </div>
+        <div class="c"><span class="xs dim">Marque seule, sur calque</span><svg class="mk" viewBox="0 0 231 217.2" role="img" aria-label="Marque Leadcore"><use href="#mark" fill="currentColor"/></svg></div>
+      </div>
+      <div class="mesures xs rise">
+        <div><span class="dim">Marque seule</span><b class="num">20&#8239;px</b><span class="dim">taille minimale</span></div>
+        <div><span class="dim">Verrou</span><b class="num">96&#8239;px</b><span class="dim">de large au minimum</span></div>
+        <div><span class="dim">Protection</span><b>1 anneau</b><span class="dim">son épaisseur, sur les quatre côtés</span></div>
+        <div><span class="dim">Couleurs</span><b>2</b><span class="dim">calque sur nuit, encre sur calque</span></div>
+      </div>
+      <p class="xs dim rise" style="margin:0">Jamais en or&#8239;: l'or désigne un rendez-vous, pas la marque. Jamais déformé, contouré, ombré ou dégradé.</p>
+    </div>
+  </div>
+</section>
+
+<section class="ch" id="couleur" aria-labelledby="t-couleur">
+  <div class="wrap">
+    <div class="ix xs"><span class="num">03</span><span>Couleur</span></div>
+    <div class="bd">
+      <h2 id="t-couleur" class="rise">Quatre-vingt-seize parts de plomb, quatre d'or.</h2>
+      <p class="lede dim rise">Des gris de plomb, légèrement froids, et un or mat, éteint, sans reflet. La proportion fait la règle&#8239;: l'or ne couvre jamais plus que le bouton qui prend un rendez-vous et la donnée d'un rendez-vous qualifié.</p>
+      <div class="part xs rise" role="img" aria-label="Proportions d'usage : nuit 52 %, calque 26 %, ardoise 10 %, surface 8 %, or 4 %">
+        <div class="p1"><span>Nuit</span><span class="num dim">52&#8239;%</span></div>
+        <div class="p2"><span>Calque</span><span class="num">26&#8239;%</span></div>
+        <div class="p3"><span>Ardoise</span><span class="num">10&#8239;%</span></div>
+        <div class="p4"><span>Surface</span><span class="num">8&#8239;%</span></div>
+        <div class="p5"><span>Or 4&#8239;%</span></div>
+      </div>
+      <table class="nuancier xs rise">
+        <thead><tr><th style="width:68px"></th><th>Nom</th><th>Hex</th><th class="hide">Rôle</th><th>Contraste</th></tr></thead>
+        <tbody>
+          <tr class="or"><td><i style="background:var(--or)"></i></td><td>Or</td><td class="num">#C7A462</td><td class="hide">Bouton de RDV, RDV qualifié, focus</td><td class="num">nuit dessus 8,3:1</td></tr>
+          <tr><td><i style="background:var(--or-hi)"></i></td><td>Or clair</td><td class="num">#D9BC82</td><td class="hide">Survol, or écrit en petit sur nuit</td><td class="num">10,7:1</td></tr>
+          <tr><td><i style="background:var(--or-fonce)"></i></td><td>Or sombre</td><td class="num">#7A5A22</td><td class="hide">Or écrit sur calque</td><td class="num">5,4:1</td></tr>
+          <tr><td><i style="background:var(--nuit)"></i></td><td>Nuit</td><td class="num">#0B0C0D</td><td class="hide">Sol sombre</td><td>—</td></tr>
+          <tr><td><i style="background:var(--surface)"></i></td><td>Surface</td><td class="num">#141618</td><td class="hide">Plan posé sur la nuit</td><td>—</td></tr>
+          <tr><td><i style="background:var(--cendre)"></i></td><td>Cendre</td><td class="num">#8E9398</td><td class="hide">Texte secondaire sur nuit</td><td class="num">6,3:1</td></tr>
+          <tr><td><i style="background:var(--calque)"></i></td><td>Calque</td><td class="num">#ECECEA</td><td class="hide">Sol clair, texte sur nuit</td><td class="num">16,6:1</td></tr>
+          <tr><td><i style="background:var(--ardoise)"></i></td><td>Ardoise</td><td class="num">#575C61</td><td class="hide">Texte secondaire sur calque</td><td class="num">5,7:1</td></tr>
+          <tr><td><i style="background:var(--encre)"></i></td><td>Encre</td><td class="num">#121416</td><td class="hide">Texte principal sur calque</td><td class="num">15,6:1</td></tr>
+        </tbody>
+      </table>
+      <div class="pair rise">
+        <div style="display:flex;flex-direction:column;gap:var(--e4)">
+          <p class="lede">La transmutation, pour tout graphique.</p>
+          <p class="xs dim" style="margin:0;max-width:40ch">Une rampe qui passe du plomb à l'or à mesure que le volume baisse. Volumes mensuels du modèle de production, par client.</p>
+        </div>
+        <div class="trans xs">
+          <div class="row"><span>Contacts</span><div class="bar2"><i style="background:var(--flux-1);--k:1"></i></div><b class="num">1&#8239;900</b></div>
+          <div class="row"><span>Réponses</span><div class="bar2"><i style="background:var(--flux-3);--k:.063"></i></div><b class="num">120</b></div>
+          <div class="row"><span>Rendez-vous</span><div class="bar2"><i style="background:var(--flux-4);--k:.0063"></i></div><b class="num">12</b></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ch clair" id="type" aria-labelledby="t-type">
+  <div class="wrap">
+    <div class="ix xs"><span class="num">04</span><span>Typographie</span></div>
+    <div class="bd">
+      <h2 id="t-type" class="rise">Une suisse, une italique.</h2>
+      <p class="lede dim rise">Switzer remplace Alliance, la fonte de Palantir&#8239;: une néo-grotesque suisse, tracée pour rester nette en très petit corps, aux chiffres tabulaires par défaut. Zodiak italique ne sert qu'à une chose, citer un prospect. Licence ITF Free Font, usage commercial libre.</p>
+      <div class="aa rise"><span class="g">Aa</span><span class="set dim">ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz àâçéèêëîïôœùûü 0123456789 €&#8239;%&#8239;«&#8239;»</span></div>
+      <div class="graisses xs rise">
+        <div><b style="font-weight:300">Léger 300</b><span class="dim">Affichage, à partir de 28&#8239;px.</span></div>
+        <div><b style="font-weight:400">Normal 400</b><span class="dim">Texte courant et chapeaux.</span></div>
+        <div><b style="font-weight:500">Moyen 500</b><span class="dim">Petit texte et accent. Jamais de gras.</span></div>
+      </div>
+      <div class="echelle rise">
+        <div><span class="xs dim">Affichage — 176 / 300</span><p style="font-weight:300;font-size:var(--t-d1);letter-spacing:var(--track-d);line-height:1.05">Douze rendez-vous</p></div>
+        <div><span class="xs dim">Titre — 72 / 300</span><p style="font-weight:300;font-size:var(--t-d2);letter-spacing:var(--track-d);line-height:1.1">Vous payez ceux qui ont lieu</p></div>
+        <div><span class="xs dim">Intertitre — 44 / 300</span><p style="font-weight:300;font-size:var(--t-h1);letter-spacing:var(--track-h)">Le suivi à trente jours est contractuel</p></div>
+        <div><span class="xs dim">Chapeau — 19 / 400</span><p style="font-size:var(--t-l)">Un décideur, un besoin formulé, présent à l'heure.</p></div>
+        <div><span class="xs dim">Texte — 16 / 400</span><p>Un prospect absent est reprogrammé une fois, et facturé seulement s'il vient.</p></div>
+        <div><span class="xs dim">Petit — 12,5 / 500</span><p class="xs">Rendez-vous honoré — suivi J+30</p></div>
+      </div>
+      <div class="petit xs rise">
+        <div><span class="dim">Le petit texte</span>
+          <div class="tag"><span>Méthode</span><span class="dim num">6 filtres</span></div>
+          <div class="tag"><span>Prochain créneau</span><span class="dim num">mardi 14:30</span></div>
+          <div class="tag"><span>Engagement</span><span class="dim num">3 mois</span></div>
+        </div>
+        <div><span class="dim">Règles</span>
+          <div class="tag"><span>Casse</span><span class="dim">phrase, jamais capitales</span></div>
+          <div class="tag"><span>Graisse</span><span class="dim">500, approche +0,01&#8239;em</span></div>
+          <div class="tag"><span>Chasse fixe</span><span class="dim">aucune, les chiffres suffisent</span></div>
+        </div>
+      </div>
+      <div class="rise">
+        <p class="citation voix">«&#8239;On répond aux appels d'offres, on ne va jamais chercher.&#8239;»</p>
+        <p class="xs dim">Zodiak italique 400. Les mots d'un prospect, cités, rien d'autre.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ch" id="composants" aria-labelledby="t-comp">
+  <div class="wrap">
+    <div class="ix xs"><span class="num">05</span><span>Composants</span></div>
+    <div class="bd">
+      <h2 id="t-comp" class="rise">Des filets, pas des cartes.</h2>
+      <p class="lede dim rise">Angles droits, aucune ombre, aucun flou. Ce qui sépare deux objets est un trait de 1&#8239;px. Un seul bouton en or par écran.</p>
+      <div class="demo rise">
+        <a class="btn or" href="#composants"><span class="t">Prendre rendez-vous</span><span class="c"><svg class="ar"><use href="#ar"/></svg><svg class="ar"><use href="#ar"/></svg></span></a>
+        <a class="btn ghost" href="#composants"><span class="t">Voir les tarifs</span><span class="c"><svg class="ar"><use href="#ar"/></svg><svg class="ar"><use href="#ar"/></svg></span></a>
+        <a class="lien" href="#composants">La méthode <svg class="ar"><use href="#ar"/></svg></a>
+      </div>
+      <div class="clair rise" style="padding:var(--e7) var(--e6)">
+        <div class="champs">
+          <div class="f"><label class="xs" for="f-mail">Email professionnel</label><input id="f-mail" type="email" placeholder="prenom@entreprise.fr" autocomplete="off"></div>
+          <div class="f"><label class="xs" for="f-val">Valeur d'un client</label><input id="f-val" type="text" value="12 000 €"></div>
+        </div>
+      </div>
+      <div class="clair rise" style="padding:var(--e6) var(--e6) var(--e4)">
+        <div class="reg xs">
+          <div class="r hd"><span>Quand</span><span>Qui</span><span>Ce qu'il a dit</span><span>Statut — exemple</span></div>
+          <div class="r sel"><span class="num">Mar. 14:30</span><span class="who"><b>Dirigeant</b><span class="dim">Bureau d'études thermiques, 25 sal., Lyon</span></span><span class="voix">«&#8239;On répond aux appels d'offres, on ne va jamais chercher.&#8239;»</span><span class="st ok">Honoré</span></div>
+          <div class="r"><span class="num">Mer. 10:00</span><span class="who"><b>Directrice commerciale</b><span class="dim">Éditeur SaaS B2B, 60 sal., Nantes</span></span><span class="voix">«&#8239;Deux commerciaux recrutés, pas assez de rendez-vous à leur donner.&#8239;»</span><span class="st rep">Reprogrammé</span></div>
+          <div class="r"><span class="num">Jeu. 16:15</span><span class="who"><b>Gérant</b><span class="dim">Intégrateur industriel, 40 sal., Lille</span></span><span class="voix">«&#8239;Nos meilleurs clients viennent tous du bouche-à-oreille.&#8239;»</span><span class="st perdu">Perdu à J+30</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ch" id="mouvement" aria-labelledby="t-mv" style="padding-top:0">
+  <div class="wrap">
+    <div class="ix xs"><span class="num">06</span><span>Mouvement</span></div>
+    <div class="bd">
+      <h2 id="t-mv" class="rise">Lent, puis précis.</h2>
+      <p class="lede dim rise">Les choses entrent lentement et s'arrêtent net, sur une courbe à forte décélération. Seuls la transformation et l'opacité bougent. Sous mouvement réduit, tout s'affiche dans son état final.</p>
+      <div class="mv xs rise">
+        <div><span>Transmutation — signature</span>
+          <div class="st"><canvas id="acq" style="position:absolute;inset:0;width:100%;height:100%" aria-hidden="true"></canvas></div>
+          <div class="ft"><p class="dim">Une poussière de plomb qui frémit. Un point se change en or, son anneau s'ouvre une fois, ouvert en bas comme celui du logo.</p><button class="rejouer" data-play="acq">Rejouer</button></div>
+        </div>
+        <div><span>Décompte</span>
+          <div class="st"><div class="count num"><span id="cnt">12</span><small>rendez-vous par mois</small></div></div>
+          <div class="ft"><p class="dim">1 100&#8239;ms, décélération forte. Chiffres tabulaires&#8239;: la largeur ne bouge pas.</p><button class="rejouer" data-play="cnt">Rejouer</button></div>
+        </div>
+        <div><span>Tracé — repris de Palantir</span>
+          <div class="st">
+            <svg class="trace" id="trace" viewBox="0 0 420 160" width="100%" style="max-width:440px" aria-hidden="true">
+              <rect x="10" y="40" width="110" height="76" pathLength="1"/>
+              <path d="M10 40 65 82 120 40" pathLength="1"/>
+              <path d="M144 78H262M255 72l7 6-7 6" pathLength="1"/>
+              <rect x="290" y="30" width="120" height="100" pathLength="1"/>
+              <path d="M290 54H410M320 22V38M380 22V38" pathLength="1"/>
+              <circle class="o" cx="350" cy="92" r="13" pathLength="1"/>
+            </svg>
+          </div>
+          <div class="ft"><p class="dim">L'enveloppe devient un créneau. Filet de 1&#8239;px, dessiné une fois.</p><button class="rejouer" data-play="trace">Rejouer</button></div>
+        </div>
+        <div><span>Registre</span>
+          <div class="st"><div class="mini" id="mini"></div></div>
+          <div class="ft"><p class="dim">Chaque ligne monte de 12&#8239;px, 640&#8239;ms, à 140&#8239;ms d'intervalle.</p><button class="rejouer" data-play="mini">Rejouer</button></div>
+        </div>
+      </div>
+      <p class="lecture" id="lecture">Sur cent soixante personnes contactées, une seule arrive dans votre agenda. C'est <span class="or">elle</span> que nous vous facturons.</p>
+    </div>
+  </div>
+</section>
+
+<section class="ch clair" id="voix" aria-labelledby="t-voix">
+  <div class="wrap">
+    <div class="ix xs"><span class="num">07</span><span>Voix</span></div>
+    <div class="bd">
+      <h2 id="t-voix" class="rise">Des chiffres, pas d'adjectifs.</h2>
+      <p class="lede dim rise">Sobre comme Palantir, à hauteur de dirigeant de PME. Vouvoiement. Les chiffres du contrat, jamais d'autres.</p>
+      <table class="voixtab rise">
+        <thead><tr><th class="xs">On écrit</th><th class="xs">On n'écrit pas</th></tr></thead>
+        <tbody>
+          <tr><td>Douze rendez-vous par mois. Vous payez ceux qui ont lieu.</td><td>Boostez votre croissance avec une solution performante.</td></tr>
+          <tr><td>Un prospect absent est reprogrammé une fois.</td><td>Satisfaction garantie, zéro risque&#8239;!</td></tr>
+          <tr><td>Je lis chaque réponse avant de vous la transmettre.</td><td>Notre IA révolutionnaire qualifie vos leads.</td></tr>
+          <tr><td>Votre cible, un décideur, un besoin formulé.</td><td>Des leads ultra-qualifiés clé en main.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <svg class="logo" viewBox="0 0 1020.88 217.2" aria-hidden="true"><use href="#lockup" fill="currentColor"/></svg>
+    <div class="row xs dim"><span>Charte Leadcore, révision 2 — octobre 2026</span><span>brand/BRANDKIT.md · brand/tokens.css</span></div>
+  </div>
+</footer>
+
+<script>
+(() => {
+  const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+  const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const C = { dust: css('--trait'), lit: css('--cendre'), or: css('--or'), hi: css('--or-hi') };
+  const ease = t => 1 - Math.pow(1 - t, 4);
+  const cl = v => Math.min(Math.max(v, 0), 1);
+
+  /* Transmutation : une poussière de plomb ; un point devient or.
+     ponytail: Canvas 2D, un rAF tant que la trame est visible ; WebGL au-delà de ~5 000 points. */
+  function field(canvas, { gap = 22, loop = false, onFound } = {}) {
+    const ctx = canvas.getContext('2d');
+    let W = 0, H = 0, pts = [], target, t0 = 0, raf = 0, vis = false, done = false;
+    const pick = () => {
+      const pool = pts.filter(p => p.x > W * .2 && p.x < W * .85 && p.y > H * .12 && p.y < H * .7);
+      target = pool[Math.floor(Math.random() * pool.length)] || pts[0];
+    };
+    const size = () => {
+      const r = canvas.getBoundingClientRect(), d = devicePixelRatio || 1;
+      W = r.width; H = r.height; canvas.width = W * d; canvas.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+      pts = [];
+      for (let y = gap / 2; y < H; y += gap) for (let x = gap / 2; x < W; x += gap) pts.push({ x, y, n: Math.random() * 6.283 });
+      pick();
+    };
+    const frame = now => {
+      if (!target) return;
+      const t = (now - t0) / 1000, f = cl((t - 1.5) / .7);
+      ctx.clearRect(0, 0, W, H);
+      for (const p of pts) {
+        if (p === target) continue;
+        const d = Math.hypot(p.x - target.x, p.y - target.y);
+        const wave = f > 0 ? Math.max(0, 1 - Math.abs(d - f * 220) / 30) * (1 - f) : 0; // l'onde qui part du point
+        const flick = Math.max(0, Math.sin(p.n + t * 2.6)) ** 14 * (1 - f * .9);
+        ctx.fillStyle = flick > .4 || wave > .3 ? C.lit : C.dust;
+        ctx.beginPath(); ctx.arc(p.x, p.y, 1, 0, 6.283); ctx.fill();
+      }
+      ctx.fillStyle = f ? C.or : C.dust;
+      ctx.beginPath(); ctx.arc(target.x, target.y, f ? 1 + 3.5 * ease(f) : 1, 0, 6.283); ctx.fill();
+      const ring = cl((t - 1.75) / 1.1);
+      if (ring > 0 && ring < 1) { // l'anneau, ouvert en bas comme celui du logo
+        ctx.strokeStyle = C.hi; ctx.globalAlpha = (1 - ring) * .9; ctx.lineWidth = 1;
+        ctx.beginPath(); ctx.arc(target.x, target.y, 8 + 34 * ease(ring), 2.25, 2.25 + 4.92); ctx.stroke(); ctx.globalAlpha = 1;
+      }
+      if (f >= 1 && !done) { done = true; onFound && onFound(); }
+      if (loop && t > 7) { pick(); t0 = now; done = false; }
+      if (vis && (loop || t < 3.2)) raf = requestAnimationFrame(frame);
+    };
+    const play = () => { cancelAnimationFrame(raf); done = false; t0 = performance.now() - (still ? 4000 : 0); raf = requestAnimationFrame(frame); };
+    new ResizeObserver(() => { size(); play(); }).observe(canvas);
+    new IntersectionObserver(([e]) => { vis = e.isIntersecting; vis ? play() : cancelAnimationFrame(raf); }).observe(canvas);
+    return { play: () => { pick(); play(); } };
+  }
+
+  const who = [
+    ['RDV qualifié — mardi 14:30', "Dirigeant, bureau d'études, 25 salariés"],
+    ['RDV qualifié — mercredi 10:00', 'Directrice commerciale, éditeur SaaS, 60 salariés'],
+    ['RDV qualifié — jeudi 16:15', 'Gérant, intégrateur industriel, 40 salariés']
+  ];
+  let wi = 0;
+  const capA = document.getElementById('capA'), capB = document.getElementById('capB');
+  field(document.getElementById('field'), {
+    gap: 22, loop: !still,
+    onFound: () => {
+      const [a, b] = who[wi++ % who.length];
+      capA.textContent = a; capB.textContent = b;
+      if (!still) [capA, capB].forEach((el, i) => el.animate([{ opacity: 0, transform: 'translateY(8px)' }, { opacity: 1, transform: 'none' }], { duration: 640, delay: i * 80, easing: 'cubic-bezier(.32,.72,0,1)', fill: 'backwards' }));
+    }
+  });
+  const acq = field(document.getElementById('acq'), { gap: 20 });
+
+  const cnt = document.getElementById('cnt');
+  const count = () => {
+    if (still) return;
+    const t0 = performance.now();
+    const step = now => { const k = cl((now - t0) / 1100); cnt.textContent = String(Math.round(12 * ease(k))).padStart(2, '0'); if (k < 1) requestAnimationFrame(step); };
+    requestAnimationFrame(step);
+  };
+  const replayClass = el => { el.classList.remove('go'); void el.getBoundingClientRect(); el.classList.add('go'); };
+  const trace = document.getElementById('trace'), constr = document.getElementById('constr');
+
+  const mini = document.getElementById('mini');
+  const rows = [['Lun. 09:12', 'Envoi, séquence 2', '—'], ['Lun. 15:40', '« Rappelez-moi jeudi »', '—'], ['Jeu. 11:00', 'Appel, besoin formulé', '—'], ['Mar. 14:30', 'Dirigeant, bureau d’études', 'RDV']];
+  const fill = () => mini.replaceChildren(...rows.map(([h, w, s], i) => {
+    const d = document.createElement('div');
+    d.innerHTML = `<span class="h num">${h}</span><span>${w}</span><span class="${s === 'RDV' ? 'ok' : 'h'}">${s}</span>`;
+    if (!still) d.animate([{ opacity: 0, transform: 'translateY(12px)' }, { opacity: 1, transform: 'none' }], { duration: 640, delay: i * 140, easing: 'cubic-bezier(.32,.72,0,1)', fill: 'backwards' });
+    return d;
+  }));
+  fill();
+
+  const plays = { acq: () => acq.play(), cnt: count, trace: () => replayClass(trace), mini: fill };
+  document.querySelectorAll('[data-play]').forEach(b => b.addEventListener('click', () => plays[b.dataset.play]()));
+  const once = (el, fn) => new IntersectionObserver(([e], o) => { if (e.isIntersecting) { fn(); o.disconnect(); } }, { threshold: .45 }).observe(el);
+  if (!still) { once(cnt, count); once(trace, () => replayClass(trace)); once(mini, fill); once(constr, () => replayClass(constr)); }
+
+  /* Lecture : chaque mot reçoit son rang ; la feuille de style fait le reste (animation-timeline) */
+  const lec = document.getElementById('lecture'); let i = 0;
+  const split = node => [...node.childNodes].forEach(n => {
+    if (n.nodeType !== 3) return split(n);
+    const frag = document.createDocumentFragment();
+    n.textContent.split(/(\s+)/).forEach(w => {
+      if (!w.trim()) return frag.append(w);
+      const s = document.createElement('span'); s.textContent = w; s.style.setProperty('--i', i++); frag.append(s);
+    });
+    n.replaceWith(frag);
+  });
+  split(lec);
+})();
+</script>

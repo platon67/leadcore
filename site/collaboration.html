@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Travailler ensemble — Leadcore</title>
 <meta name="description" content="Les trente premiers jours semaine par semaine, le partage exact du travail, ce qui déclenche la facture, et ce que vous emportez si vous partez.">
 <link rel="canonical" href="https://leadcore.fr/collaboration.html">
@@ -16,373 +16,225 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="#0C1413">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23050908'/%3E%3Cpath d='M10 8v13h9' stroke='%2319C78B' stroke-width='3.2' fill='none' stroke-linecap='square'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#0B0C0D">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-150 -142 300 300'%3E%3Crect x='-150' y='-142' width='300' height='300' fill='%230B0C0D'/%3E%3Cg fill='%23ECECEA'%3E%3Cpath d='M-83.07 80.24A115.5 115.5 0 1 1 83.07 80.24L60.3 51.96A79.6 79.6 0 1 0 -60.3 51.96Z'/%3E%3Cpath d='M0 0L81.86 101.7L39.43 101.7L0 52.71L-39.43 101.7L-81.86 101.7Z'/%3E%3C/g%3E%3C/svg%3E">
 <link rel="apple-touch-icon" href="assets/icon-180.png">
-<script>document.documentElement.className+=" js p-collab "</script>
-<link rel="preload" as="font" type="font/woff2" href="assets/fonts/geist-latin-19f9c925.woff2" crossorigin>
-<link rel="preload" as="font" type="font/woff2" href="assets/fonts/lora-latin-723cc14f.woff2" crossorigin>
-<link rel="stylesheet" href="assets/fonts.css?v=20260921b">
-<link rel="stylesheet" href="assets/styles.css?v=20260921b">
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/switzer-300-c345686e.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/switzer-400-ddd95955.woff2" crossorigin>
+<link rel="stylesheet" href="assets/brand.css?v=20261013">
+<link rel="stylesheet" href="assets/site.css?v=20261013">
+<script>document.documentElement.classList.add("js")</script>
 </head>
-<body>
+<body class="p-collaboration">
 <a class="skip" href="#main">Aller au contenu</a>
 
-
-<header class="hdr">
+<header class="hdr" id="hdr">
   <div class="wrap">
-    <a class="mark" href="index.html" aria-label="Leadcore, accueil"><img src="assets/leadcore-logo.png" alt="Leadcore" width="126" height="25"></a>
-    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav" aria-label="Ouvrir le menu">
-      <svg class="m" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
-      <svg class="x" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
-    </button>
-    <nav class="nav" id="nav" aria-label="Navigation principale">
-      <a href="methode.html">Méthode</a>
-      <a href="collaboration.html" aria-current="page">Collaboration</a>
-      <a href="tarifs.html">Tarifs</a>
-      <span class="cta-rdv sm"><a class="btn btn-pri btn-sm" href="rendez-vous.html"><span class="aur" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span><svg class="visio" viewBox="0 0 24 24" aria-hidden="true"><rect x="2.6" y="6.6" width="12.9" height="10.8" rx="2.6"/><path d="M15.5 10.7l5.4-3v8.6l-5.4-3z"/></svg>Prendre RDV</a></span>
-    </nav>
+    <a class="hdr-logo" href="./" aria-label="Leadcore, accueil"><svg viewBox="0 0 1020.88 217.2" aria-hidden="true"><use href="assets/sprite.svg#lockup"/></svg></a>
+    <nav class="hdr-nav xs" aria-label="Navigation principale"><a href="methode.html">Méthode</a><a href="collaboration.html" aria-current="page">Collaboration</a><a href="tarifs.html">Tarifs</a></nav>
+    <a class="btn or sm" href="rendez-vous.html"><span class="t">Prendre rendez-vous</span><span class="c" aria-hidden="true"><svg class="ar"><use href="assets/sprite.svg#ar"/></svg><svg class="ar"><use href="assets/sprite.svg#ar"/></svg></span></a>
   </div>
-  <span class="prog" aria-hidden="true"></span>
 </header>
+
 <main id="main">
-<span id="top"></span>
-
-<section class="phead">
-  <svg class="phead-mark" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5.4h18M3 10.6h13M3 15.8h18M3 21h8"/><circle cx="20" cy="10.6" r="1.6"/><circle cx="14" cy="21" r="1.6"/></svg>
+<section class="tete" aria-labelledby="t-page">
   <div class="wrap">
-    <a class="crumb" href="index.html">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>Accueil
-    </a>
-    <p class="eyebrow">La collaboration</p>
-    <h1>Ce qui se passe si on signe.</h1>
-    <p class="lede">Le déroulé complet, du premier jour à la sortie. Y compris ce qu’on vous facture, ce qu’on ne vous facture pas, et ce que vous gardez si vous arrêtez.</p>
-    <nav class="pnav" aria-label="Les trois pages de détail">
-      <a href="methode.html"><b>01</b>Comment on trouve vos leads</a>
-      <a href="collaboration.html" aria-current="page"><b>02</b>Ce qui se passe si on signe</a>
-      <a href="tarifs.html"><b>03</b>Ce que ça coûte, et à qui</a>
-    </nav>
+    <a class="retour xs load" style="--d:0" href="./"><svg class="ar" aria-hidden="true"><use href="assets/sprite.svg#ag"/></svg>Accueil</a>
+    <h1 id="t-page" class="tete-t">
+      <span class="ln"><span class="load" style="--d:1">Ce qui se passe</span></span>
+      <span class="ln dim"><span class="load" style="--d:2">si on signe.</span></span>
+    </h1>
+    <div class="tete-row">
+      <p class="lede dim load" style="--d:4">Le déroulé complet, du premier jour à la sortie. Y compris ce qu'on vous facture, ce qu'on ne vous facture pas, et ce que vous gardez si vous arrêtez.</p>
+      <nav class="parcours xs load" style="--d:5" aria-label="Le détail, en trois pages"><ol><li><a href="methode.html"><span class="num">01</span>Comment on trouve vos leads</a></li><li><a href="collaboration.html" aria-current="page"><span class="num">02</span>Ce qui se passe si on signe</a></li><li><a href="tarifs.html"><span class="num">03</span>Ce que ça coûte, et à qui</a></li></ol></nav>
+    </div>
   </div>
 </section>
 
-<!-- ══════════════════════════ LE RÉSUMÉ · plaque encastrée ══════════════════════════
-     Le premier mois sur une seule ligne horizontale. L'axe se remplit au
-     défilement et les quatre arrêts se lèvent l'un après l'autre&nbsp;: on voit le
-     mois entier avant d'en lire une phrase. -->
-<section class="sec plate tldr" id="resume">
+<section class="ch" id="resume" aria-labelledby="t-resume">
   <div class="wrap">
-    <div class="sec-head rv">
-      <p class="eyebrow">En quinze secondes</p>
-      <h2>Quatre semaines, trois heures et demie de votre temps.</h2>
+    <div class="ix xs"><span>En quinze secondes</span></div>
+    <div class="bd">
+      <h2 id="t-resume" class="h-sec rise">Quatre semaines, trois heures et demie de votre temps.</h2>
+      <ol class="semaines rise" id="semaines">
+        <li><span class="xs dim num">Semaine 1</span><h3>Cadrage</h3><p class="dim">On écrit ensemble la définition du rendez-vous qualifié. C'est elle qui décidera de chaque facture.</p><b class="xs">2 h de votre temps</b></li>
+        <li><span class="xs dim num">Semaine 2</span><h3>Infrastructure</h3><p class="dim">Domaines, DNS, boîtes, comptes LinkedIn, montée en chauffe. Premières listes construites et vérifiées.</p><b class="xs">Rien de votre côté</b></li>
+        <li><span class="xs dim num">Semaine 3</span><h3>Lancement</h3><p class="dim">Vous relisez les séquences email et LinkedIn, puis l'envoi démarre à volume réduit.</p><b class="xs">30 min de relecture</b></li>
+        <li><span class="xs dim num">Semaine 4</span><h3>Premiers créneaux</h3><p class="dim">Le volume monte, les réponses sont qualifiées, les créneaux partent dans les agendas.</p><b class="xs">30 min par semaine</b></li>
+      </ol>
+      <p class="lede dim rise">Ensuite le rythme ne change plus&#8239;: trente minutes par semaine, un compte rendu par mois, votre retour à J+30 sur chaque rendez-vous. Rien d'autre ne remonte chez vous.</p>
+      <a class="lien rise" href="rendez-vous.html">Demander quand on pourrait démarrer <svg class="ar" aria-hidden="true"><use href="assets/sprite.svg#ar"/></svg></a>
     </div>
-
-    <div class="schema">
-      <div class="railh">
-        <span class="railh-fill" aria-hidden="true"></span>
-        <span class="railh-rail" aria-hidden="true"><span class="railh-head"></span></span>
-        <div class="railh-row">
-          <div class="stop">
-            <span class="ring" aria-hidden="true"></span>
-            <span class="ghostwrap" aria-hidden="true"><span class="ghost">1</span></span>
-            <span class="w"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.4 3.4H7a2 2 0 00-2 2v13.2a2 2 0 002 2h10a2 2 0 002-2V9l-5.6-5.6z"/><path d="M13.4 3.4V9H19M8.6 13.4h6.8M8.6 16.8h4.4"/></svg>Semaine 1</span>
-            <h3>Cadrage</h3>
-            <p>On écrit ensemble la définition du rendez-vous qualifié. C’est elle qui décidera de chaque facture.</p>
-            <span class="you">2 h de votre temps</span>
-          </div>
-          <div class="stop">
-            <span class="ring" aria-hidden="true"></span>
-            <span class="ghostwrap" aria-hidden="true"><span class="ghost">2</span></span>
-            <span class="w"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7.4 2.9v5.2c0 4.4-3 8.2-7.4 9.7-4.4-1.5-7.4-5.3-7.4-9.7V5.9L12 3z"/><path d="M9 12.2l2.1 2.1 4.2-4.2"/></svg>Semaine 2</span>
-            <h3>Infrastructure</h3>
-            <p>Domaines, DNS, boîtes, comptes LinkedIn, montée en chauffe. Premières listes construites et vérifiées.</p>
-            <span class="you">Rien de votre côté</span>
-          </div>
-          <div class="stop">
-            <span class="ring" aria-hidden="true"></span>
-            <span class="ghostwrap" aria-hidden="true"><span class="ghost">3</span></span>
-            <span class="w"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="2.8"/></svg>Semaine 3</span>
-            <h3>Lancement</h3>
-            <p>Vous relisez les séquences email et LinkedIn, puis l’envoi démarre à volume réduit.</p>
-            <span class="you">30 min de relecture</span>
-          </div>
-          <div class="stop now">
-            <span class="ring" aria-hidden="true"></span>
-            <span class="ghostwrap" aria-hidden="true"><span class="ghost">4</span></span>
-            <span class="w"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.2" y="5" width="17.6" height="15.5" rx="2"/><path d="M3.2 9.8h17.6M8 3.5v3M16 3.5v3M9 14.6l2.2 2.2 4-4"/></svg>Semaine 4</span>
-            <h3>Premiers créneaux</h3>
-            <p>Le volume monte, les réponses sont qualifiées, les créneaux partent dans les agendas.</p>
-            <span class="you">30 min / semaine</span>
-          </div>
-        </div>
-      </div>
-
-      <p class="legende">Ensuite le rythme ne change plus&nbsp;: <b>trente minutes par semaine</b>, un rapport par mois, votre retour à J+30 sur chaque rendez-vous. <b>Rien d’autre ne remonte chez vous</b>.</p>
-    </div>
-    <p class="cta-ctx rv"><span class="cta-rdv sm"><a class="btn btn-pri" href="rendez-vous.html"><span class="aur" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span><svg class="visio" viewBox="0 0 24 24" aria-hidden="true"><rect x="2.6" y="6.6" width="12.9" height="10.8" rx="2.6"/><path d="M15.5 10.7l5.4-3v8.6l-5.4-3z"/></svg>Demander quand on pourrait démarrer<svg class="ar" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></span></p>
   </div>
 </section>
 
-<!-- ══════════════════════════ 01 · LE DÉTAIL DES QUATRE SEMAINES ══════════════════════════
-     Le résumé a donné la forme. Ici on dit ce qui se passe vraiment dans
-     chaque semaine, et surtout ce qu'on attend de vous. -->
-<section class="sec" id="demarrage">
+<section class="ch clair" id="demarrage" aria-labelledby="t-demarrage">
   <div class="wrap">
-    <div class="sec-head rv">
-      <p class="eyebrow">01 · Le détail</p>
-      <h2>Ce qu’il y a derrière chaque semaine.</h2>
-      <p class="lede">La colonne de droite est la seule qui vous concerne. Le reste se passe sans vous.</p>
+    <div class="ix xs"><span>Le détail</span></div>
+    <div class="bd">
+      <h2 id="t-demarrage" class="h-sec rise">Ce qu'il y a derrière chaque semaine.</h2>
+      <p class="lede dim rise">La colonne de droite est la seule qui vous concerne. Le reste se passe sans vous.</p>
+      <div class="detail">
+        <article class="rise"><p class="xs"><span class="num dim">S1</span> Cadrage</p><div><h3>On écrit ensemble ce qu'est un bon rendez-vous</h3><p>Deux heures en visio, en une ou deux fois. On y traite le marché et la taille où vous gagnez déjà, les fonctions qui décident, vos exclusions nominatives, les angles à tester, et la définition contractuelle du rendez-vous qualifié, avec vos mots et vos critères.</p><p class="dim">C'est vous qui la tranchez, et elle ne bouge plus ensuite&#8239;: ni dans un sens, ni dans l'autre, jusqu'au dernier rendez-vous facturé.</p></div><p class="part xs"><span class="dim">Votre part</span>Deux heures</p></article>
+        <article class="rise"><p class="xs"><span class="num dim">S2</span> Infrastructure</p><div><h3>On monte les deux canaux</h3><p>Côté email&#8239;: on achète les domaines, on les authentifie (SPF, DKIM et DMARC prouvent aux messageries qu'un domaine a le droit d'écrire), puis on monte le volume pendant trois semaines pour qu'aucune boîte ne soit signalée. Côté LinkedIn&#8239;: nos comptes chauffent au même rythme.</p><p class="dim">En parallèle, on construit les premières listes et on vérifie chaque adresse. Votre domaine et les profils de vos commerciaux restent hors du circuit.</p></div><p class="part xs"><span class="dim">Votre part</span>Rien</p></article>
+        <article class="rise"><p class="xs"><span class="num dim">S3</span> Lancement</p><div><h3>Vous relisez avant que ça parte en votre nom</h3><p>Vous recevez les quatre emails et les trois touches LinkedIn tels qu'ils partiront. Coupez une phrase, un angle ou un segment entier&#8239;: rien ne part avant votre feu vert.</p><p class="dim">L'envoi démarre ensuite sur un premier segment, à volume réduit, et on regarde ce qui revient avant de monter.</p></div><p class="part xs"><span class="dim">Votre part</span>Une relecture, 30 min</p></article>
+        <article class="rise"><p class="xs"><span class="num dim">S4</span> Premiers créneaux</p><div><h3>Vos commerciaux reprennent la main</h3><p>Le volume monte par paliers. On qualifie les réponses à la main, et les créneaux partent dans les agendas avec leur contexte.</p><p class="dim">À partir d'ici, votre part&#8239;: honorer les rendez-vous, arbitrer sous 48 heures quand on vous le demande, et dire à J+30 ce que chacun est devenu.</p></div><p class="part xs"><span class="dim">Votre part</span>30 min par semaine</p></article>
+      </div>
+      <div class="rise">
+        <h3 class="h-3">Le cinquième mois est préparé dès la semaine 1.</h3>
+        <p class="dim" style="max-width:60ch;margin-top:var(--e3)">La production consomme 1&nbsp;900 contacts par mois&#8239;: un segment de 7&nbsp;600 à 11&nbsp;400 contacts porte quatre à six mois d'envois.</p>
+        <div class="gantt xs" id="gantt" role="img" aria-label="Le segment 1 couvre les mois 1 à 6 ; le segment 2 s'ouvre au mois 5, avant la fin du premier.">
+          <div class="g-mois"><span>M1</span><span>M2</span><span>M3</span><span>M4</span><span>M5</span><span>M6</span><span>M7</span><span>M8</span></div>
+          <div class="g-l"><span>Segment 1</span><i style="--a:0;--b:6"></i></div>
+          <div class="g-l"><span>Segment 2</span><i style="--a:4;--b:8"></i></div>
+        </div>
+        <p class="dim" style="max-width:62ch">Le recouvrement est le sujet. Sous deux mois de restant, le segment suivant s'ouvre&#8239;: il est identifié et chiffré dès la semaine 1, pas le jour où il faut l'ouvrir. Sans ce recouvrement, il y aurait un trou, et trois semaines ne suffisent pas à reconstituer un segment.</p>
+      </div>
+      <a class="lien rise" href="rendez-vous.html">Savoir quand on pourrait commencer chez vous <svg class="ar" aria-hidden="true"><use href="assets/sprite.svg#ar"/></svg></a>
     </div>
-
-    <div class="chrono">
-      <div class="chrono-row">
-        <div class="chrono-w"><span class="n">S1</span><span class="u"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.4 3.4H7a2 2 0 00-2 2v13.2a2 2 0 002 2h10a2 2 0 002-2V9l-5.6-5.6z"/><path d="M13.4 3.4V9H19M8.6 13.4h6.8M8.6 16.8h4.4"/></svg>Cadrage</span></div>
-        <div class="chrono-b">
-          <h3>On écrit ensemble ce qu’est un bon rendez-vous</h3>
-          <div class="pad lite">
-            <p>Deux heures en visio, en une ou deux fois. On y traite&nbsp;: le marché et la taille où vous gagnez déjà, les fonctions qui décident, vos exclusions nominatives, les angles à tester, et la <b>définition contractuelle du rendez-vous qualifié</b> — avec vos mots et vos critères.</p>
-            <p>C’est vous qui la tranchez, et elle ne bouge plus ensuite&nbsp;: ni dans un sens, ni dans l’autre, jusqu’au dernier rendez-vous facturé.</p>
-          </div>
-        </div>
-        <div class="chrono-y"><span class="u">Votre part</span><span class="you">Deux heures</span></div>
-      </div>
-
-      <div class="chrono-row">
-        <div class="chrono-w"><span class="n">S2</span><span class="u"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7.4 2.9v5.2c0 4.4-3 8.2-7.4 9.7-4.4-1.5-7.4-5.3-7.4-9.7V5.9L12 3z"/><path d="M9 12.2l2.1 2.1 4.2-4.2"/></svg>Infrastructure</span></div>
-        <div class="chrono-b">
-          <h3>On monte les deux canaux</h3>
-          <div class="pad lite">
-            <p>Côté email&nbsp;: on achète les domaines, on les authentifie — SPF, DKIM et DMARC prouvent aux messageries qu’un domaine a le droit d’écrire — puis on monte le volume pendant trois semaines pour qu’aucune boîte ne soit signalée. Côté LinkedIn&nbsp;: nos comptes chauffent au même rythme.</p>
-            <p>En parallèle, on construit les premières listes et on vérifie chaque adresse. Votre domaine et les profils de vos commerciaux restent hors du circuit.</p>
-          </div>
-        </div>
-        <div class="chrono-y"><span class="u">Votre part</span><span class="you">Rien</span></div>
-      </div>
-
-      <div class="chrono-row">
-        <div class="chrono-w"><span class="n">S3</span><span class="u"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="2.8"/></svg>Lancement</span></div>
-        <div class="chrono-b">
-          <h3>Vous relisez avant que ça parte en votre nom</h3>
-          <div class="pad lite">
-            <p>Vous recevez les quatre emails et les trois touches LinkedIn tels qu’ils partiront. Coupez une phrase, un angle ou un segment entier&nbsp;: <b>rien ne part avant votre feu vert</b>.</p>
-            <p>L’envoi démarre ensuite sur un premier segment, à volume réduit, et on regarde ce qui revient avant de monter.</p>
-          </div>
-        </div>
-        <div class="chrono-y"><span class="u">Votre part</span><span class="you">Une relecture, 30 min</span></div>
-      </div>
-
-      <div class="chrono-row now">
-        <div class="chrono-w"><span class="n">S4</span><span class="u"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.2" y="5" width="17.6" height="15.5" rx="2"/><path d="M3.2 9.8h17.6M8 3.5v3M16 3.5v3M9 14.6l2.2 2.2 4-4"/></svg>Premiers créneaux</span></div>
-        <div class="chrono-b">
-          <h3>Vos commerciaux reprennent la main</h3>
-          <div class="pad lite">
-            <p>Le volume monte par paliers. On qualifie les réponses à la main, et les créneaux partent dans les agendas avec leur contexte.</p>
-            <p>À partir d’ici, votre part&nbsp;: honorer les rendez-vous, arbitrer sous 48 heures quand on vous le demande, et dire à J+30 ce que chacun est devenu.</p>
-          </div>
-        </div>
-        <div class="chrono-y"><span class="u">Votre part</span><span class="you">30 min / semaine</span></div>
-      </div>
-    </div>
-
-    <div class="pad rv" style="margin-top:clamp(22px,2.8vw,34px)">
-      <div class="padhd"><span class="icob"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19.2V13M10.3 19.2V8.6M15.7 19.2v-7.6M21 19.2V5"/></svg></span><h3>Le cinquième mois est préparé dès la semaine&nbsp;1</h3></div>
-      <p>La production consomme <b>1 900 contacts par mois</b>&nbsp;: un segment de 7 600 à 11 400 porte <b>quatre à six mois d’envois</b>.</p>
-
-      <div class="relais rv" style="margin-top:clamp(18px,2.2vw,24px)" role="img" aria-label="Deux segments qui se relaient. Le segment 1 produit pendant cinq mois ; ses deux derniers mois ouvrent la préparation du segment 2, qui prend le relais sans interruption.">
-        <div class="rl-l" aria-hidden="true">
-          <span class="rl-m" style="grid-column:2">M1</span><span class="rl-m" style="grid-column:3">M2</span><span class="rl-m" style="grid-column:4">M3</span><span class="rl-m" style="grid-column:5">M4</span><span class="rl-m" style="grid-column:6">M5</span><span class="rl-m" style="grid-column:7">M6</span><span class="rl-m" style="grid-column:8">M7</span><span class="rl-m" style="grid-column:9">M8</span>
-        </div>
-        <div class="rl-l">
-          <span class="rl-k">Segment 1</span>
-          <span class="rl-b prod" style="--a:1;--b:4;--i:0"></span>
-          <span class="rl-b seuil" style="--a:4;--b:6;--i:1"></span>
-        </div>
-        <div class="rl-l">
-          <span class="rl-k">Segment 2</span>
-          <span class="rl-b prep" style="--a:4;--b:6;--i:2"></span>
-          <span class="rl-b prod" style="--a:6;--b:9;--i:3"></span>
-        </div>
-        <p class="rl-n"><b>Le recouvrement est le sujet.</b> Sous deux mois de restant, le segment suivant s’ouvre&nbsp;: il est identifié et chiffré dès la semaine&nbsp;1, pas le jour où il faut l’ouvrir. Sans ce recouvrement, il y aurait un trou — et trois semaines ne suffisent pas à reconstituer un segment.</p>
-      </div>
-    </div>
-    <p class="cta-ctx rv"><span class="cta-rdv sm"><a class="btn btn-pri" href="rendez-vous.html"><span class="aur" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span><svg class="visio" viewBox="0 0 24 24" aria-hidden="true"><rect x="2.6" y="6.6" width="12.9" height="10.8" rx="2.6"/><path d="M15.5 10.7l5.4-3v8.6l-5.4-3z"/></svg>Savoir quand on pourrait commencer chez vous<svg class="ar" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></span></p>
   </div>
 </section>
 
-<!-- ══════════════════════════ 02 · LA BALANCE · plaque encastrée ══════════════════════════ -->
-<section class="sec plate" id="charge">
+<section class="ch" id="charge" aria-labelledby="t-charge">
   <div class="wrap">
-    <div class="sec-head rv">
-      <p class="eyebrow">02 · Qui porte quoi</p>
-      <h2>Trois lignes de votre côté. <span class="ex">Dix du nôtre.</span></h2>
-      <p class="lede">La crainte la plus courante, c’est de prendre un prestataire et d’hériter d’un projet à piloter. Voilà le partage, en clair.</p>
-    </div>
-
-    <div class="duo">
-      <div class="col a">
-        <div class="who"><span><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.6"/><path d="M12 7v5.4l3.4 2"/></svg>Votre part</span><b>30 min / semaine</b></div>
-        <ul>
-          <li><b>Le point de campagne.</b> Ce qui répond, ce qui ne répond plus, ce qu’on change la semaine suivante.</li>
-          <li><b>Répondre sous 48 heures</b> quand on vous demande un arbitrage. Au-delà, un prospect chaud refroidit.</li>
-          <li><b>Honorer les rendez-vous</b>, et nous dire à J+30 ce qu’ils sont devenus&nbsp;: perdu, en cours, ou signé et pour quel montant.</li>
-        </ul>
-        <p class="note">C’est tout. Il n’y a pas de quatrième ligne.</p>
+    <div class="ix xs"><span>Qui porte quoi</span></div>
+    <div class="bd">
+      <h2 id="t-charge" class="h-sec rise">Trois lignes de votre côté. Dix du nôtre.</h2>
+      <p class="lede dim rise">La crainte la plus courante, c'est de prendre un prestataire et d'hériter d'un projet à piloter. Voilà le partage, en clair.</p>
+      <div class="balance">
+        <div class="rise">
+          <p class="xs bal-h"><span>Votre part</span><span class="dim">30 min par semaine</span></p>
+          <ol class="bal-l">
+            <li>Le point de campagne. Ce qui répond, ce qui ne répond plus, ce qu'on change la semaine suivante.</li>
+            <li>Répondre sous 48 heures quand on vous demande un arbitrage. Au-delà, un prospect chaud refroidit.</li>
+            <li>Honorer les rendez-vous, et nous dire à J+30 ce qu'ils sont devenus&#8239;: perdu, en cours, ou signé et pour quel montant.</li>
+          </ol>
+          <p class="lede">C'est tout. Il n'y a pas de quatrième ligne.</p>
+        </div>
+        <div class="rise">
+          <p class="xs bal-h"><span>La nôtre</span><span class="dim">Le reste</span></p>
+          <ol class="bal-l dim">
+            <li>Acheter, configurer et surveiller les domaines et les boîtes d'envoi.</li>
+            <li>Tenir les comptes LinkedIn dédiés, leur rythme de connexion et leur santé.</li>
+            <li>Construire et renouveler la base chaque mois, vérifier chaque adresse.</li>
+            <li>Écrire les angles des deux canaux, tester, garder ce qui répond, jeter le reste.</li>
+            <li>Lire les cent vingt réponses du mois et écarter ce qui n'est pas qualifié.</li>
+            <li>Croiser les deux canaux pour qu'un prospect qui a répondu ne reçoive plus rien.</li>
+            <li>Obtenir le créneau, le poser dans l'agenda, relancer les absents.</li>
+            <li>Vérifier chaque jour que les messages arrivent en boîte de réception, et couper ce qui se dégrade.</li>
+            <li>Tenir le compte rendu mensuel&#8239;: envois, réponses, rendez-vous pris, honorés, facturés.</li>
+            <li>Refuser une mission de plus quand la file est pleine, pour ne pas dégrader la vôtre.</li>
+          </ol>
+          <p class="xs dim">Aucune de ces lignes ne remonte chez vous, ni en tâche, ni en décision à prendre.</p>
+        </div>
       </div>
-
-      <span class="rail" aria-hidden="true"></span>
-
-      <div class="col b">
-        <div class="who"><span><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19.2V13M10.3 19.2V8.6M15.7 19.2v-7.6M21 19.2V5"/></svg>La nôtre</span><b>Le reste</b></div>
-        <ul>
-          <li>Acheter, configurer et surveiller les domaines et les boîtes d’envoi.</li>
-          <li>Tenir les comptes LinkedIn dédiés, leur rythme de connexion et leur santé.</li>
-          <li>Construire et renouveler la base chaque mois, vérifier chaque adresse.</li>
-          <li>Écrire les angles des deux canaux, tester, garder ce qui répond, jeter le reste.</li>
-          <li>Lire les cent vingt réponses du mois et écarter ce qui n’est pas qualifié.</li>
-          <li>Croiser les deux canaux pour qu’un prospect qui a répondu ne reçoive plus rien.</li>
-          <li>Obtenir le créneau, le poser dans l’agenda, relancer les absents.</li>
-          <li>Vérifier chaque jour que les messages arrivent bien en boîte de réception, et couper ce qui se dégrade.</li>
-          <li>Tenir le rapport mensuel&nbsp;: envois, réponses, rendez-vous pris, honorés, facturés.</li>
-          <li>Refuser une mission de plus quand la file est pleine, pour ne pas dégrader la vôtre.</li>
-        </ul>
-        <p class="note">Aucune de ces lignes ne remonte chez vous, ni en tâche, ni en décision à prendre.</p>
-      </div>
+      <a class="lien rise" href="rendez-vous.html">Vérifier ce que ça prendrait à votre équipe <svg class="ar" aria-hidden="true"><use href="assets/sprite.svg#ar"/></svg></a>
     </div>
-    <p class="cta-ctx rv"><span class="cta-rdv sm"><a class="btn btn-pri" href="rendez-vous.html"><span class="aur" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span><svg class="visio" viewBox="0 0 24 24" aria-hidden="true"><rect x="2.6" y="6.6" width="12.9" height="10.8" rx="2.6"/><path d="M15.5 10.7l5.4-3v8.6l-5.4-3z"/></svg>Vérifier ce que ça prendrait à votre équipe<svg class="ar" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></span></p>
   </div>
 </section>
 
-<!-- ══════════════════════════ 03 · CE QUI DÉCLENCHE LA FACTURE ══════════════════════════ -->
-<section class="sec" id="facturation">
+<section class="ch clair" id="facturation" aria-labelledby="t-fact">
   <div class="wrap">
-    <div class="sec-head rv">
-      <p class="eyebrow">03 · Ce qui déclenche la facture</p>
-      <h2>Quatre conditions. <span class="ex">Les quatre, ou rien.</span></h2>
-      <p class="lede">La définition part dans votre contrat, avec vos mots. On ne la retouche pas pour rattraper un mauvais mois&nbsp;: votre suivi à J+30 le montrerait au trimestre suivant.</p>
-    </div>
-
-    <div class="conds">
-      <div class="cond rv" style="--i:0">
-        <span class="k"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r=".9" fill="currentColor" stroke="none"/></svg>Condition 1</span>
-        <b>Dans votre cible</b>
-        <p>La société correspond au marché, à la taille et au besoin définis avec vous en semaine 1.</p>
-      </div>
-      <div class="cond rv" style="--i:1">
-        <span class="k"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.4 3.4H7a2 2 0 00-2 2v13.2a2 2 0 002 2h10a2 2 0 002-2V9l-5.6-5.6z"/><path d="M13.4 3.4V9H19M8.6 13.4h6.8M8.6 16.8h4.4"/></svg>Condition 2</span>
-        <b>Un besoin exprimé</b>
-        <p>Le prospect a dit ce qui le bloque, et quand il veut le régler. Une demande de documentation n’en est pas un.</p>
-      </div>
-      <div class="cond rv" style="--i:2">
-        <span class="k"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9.2" cy="8.2" r="3.2"/><path d="M3.4 19.4a5.8 5.8 0 0111.6 0"/><path d="M16.4 5.4a3.2 3.2 0 010 5.6M17.6 13.8a5.8 5.8 0 013 5.6"/></svg>Condition 3</span>
-        <b>Le bon interlocuteur</b>
-        <p>La personne décide, ou pèse sur la décision. Pas un stagiaire curieux, pas un concurrent en veille.</p>
-      </div>
-      <div class="cond rv" style="--i:3">
-        <span class="k"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.2" y="5" width="17.6" height="15.5" rx="2"/><path d="M3.2 9.8h17.6M8 3.5v3M16 3.5v3M9 14.6l2.2 2.2 4-4"/></svg>Condition 4</span>
-        <b>Elle est venue</b>
-        <p>Elle était là au rendez-vous. C’est le seul critère qui déclenche la facture des 200 €.</p>
-      </div>
-    </div>
-
-    <div class="bento bento-2" style="margin-top:clamp(20px,2.6vw,30px)">
-      <div class="card rv" style="--i:0">
-        <span class="tag">Ce qu’on ne vous facturera jamais</span>
-        <h3>Les quatre cas qui ne passent pas</h3>
-        <ul class="ticks crosses" style="margin-top:18px">
-          <li>Un contact hors cible, même s’il a répondu avec enthousiasme.</li>
-          <li>Une demande de tarifs ou de plaquette sans intention d’achat.</li>
-          <li>Un interlocuteur sans pouvoir de décision ni influence.</li>
-          <li>Un «&nbsp;rappelez-moi dans six mois&nbsp;» déguisé en rendez-vous.</li>
-        </ul>
-      </div>
-      <div class="card accent rv" style="--i:1">
-        <span class="tag">Une fois les quatre conditions réunies</span>
-        <h3>Ce qui est facturé, cas par cas</h3>
-        <div class="arbre" style="margin-top:18px">
-          <span class="tete">Un créneau est posé</span>
-          <ul>
-            <li><span class="l"><span class="c">Le prospect est là</span><span class="v">200 €</span></span></li>
-            <li><span class="l"><span class="c etape">Le prospect ne vient pas — on replanifie, une fois</span></span>
-              <ul>
-                <li><span class="l"><span class="c">Il vient au second créneau</span><span class="v">200 €</span></span></li>
-                <li><span class="l"><span class="c">Il ne vient pas non plus</span><span class="v nul">0 €</span></span></li>
-              </ul>
-            </li>
-            <li><span class="l"><span class="c">Vous annulez, ou vous n’êtes pas là</span><span class="v moit">100 €</span></span></li>
+    <div class="ix xs"><span>Ce qui déclenche la facture</span></div>
+    <div class="bd">
+      <h2 id="t-fact" class="h-sec rise">Quatre conditions. Les quatre, ou rien.</h2>
+      <p class="lede dim rise">La définition part dans votre contrat, avec vos mots. On ne la retouche pas pour rattraper un mauvais mois&#8239;: votre suivi à J+30 le montrerait au trimestre suivant.</p>
+      <ol class="conditions rise" id="conditions">
+        <li><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.5 6.2 12 13.5 4" pathLength="1"/></svg><span class="xs dim">Condition 1</span><h3>Dans votre cible</h3><p class="dim">La société correspond au marché, à la taille et au besoin définis avec vous en semaine 1.</p></li>
+        <li><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.5 6.2 12 13.5 4" pathLength="1"/></svg><span class="xs dim">Condition 2</span><h3>Un besoin exprimé</h3><p class="dim">Le prospect a dit ce qui le bloque, et quand il veut le régler. Une demande de documentation n'en est pas un.</p></li>
+        <li><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.5 6.2 12 13.5 4" pathLength="1"/></svg><span class="xs dim">Condition 3</span><h3>Le bon interlocuteur</h3><p class="dim">La personne décide, ou pèse sur la décision. Pas un stagiaire curieux, pas un concurrent en veille.</p></li>
+        <li><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.5 6.2 12 13.5 4" pathLength="1"/></svg><span class="xs dim">Condition 4</span><h3>Elle est venue</h3><p class="dim">Elle était là au rendez-vous. C'est le seul critère qui déclenche la facture des 200&nbsp;€.</p></li>
+      </ol>
+      <div class="pair">
+        <div class="rise">
+          <p class="xs dim">Ce qu'on ne vous facturera jamais</p>
+          <h3 class="h-3">Les quatre cas qui ne passent pas.</h3>
+          <ul class="refus">
+            <li>Un contact hors cible, même s'il a répondu avec enthousiasme.</li>
+            <li>Une demande de tarifs ou de plaquette sans intention d'achat.</li>
+            <li>Un interlocuteur sans pouvoir de décision ni influence.</li>
+            <li>Un «&#8239;rappelez-moi dans six mois&#8239;» déguisé en rendez-vous.</li>
           </ul>
         </div>
-        <p style="margin-top:18px">Écrit au contrat dans les deux sens, pour qu’aucun des deux n’ait à plaider sa cause en fin de mois.</p>
+        <div class="rise">
+          <p class="xs dim">Une fois les quatre conditions réunies</p>
+          <h3 class="h-3">Ce qui est facturé, cas par cas.</h3>
+          <dl class="cas">
+            <div><dt>Le prospect est là</dt><dd class="num or-t">200&nbsp;€</dd></div>
+            <div class="sous"><dt>Le prospect ne vient pas&#8239;: on replanifie, une fois</dt><dd></dd></div>
+            <div class="sous2"><dt>Il vient au second créneau</dt><dd class="num or-t">200&nbsp;€</dd></div>
+            <div class="sous2"><dt>Il ne vient pas non plus</dt><dd class="num">0&nbsp;€</dd></div>
+            <div><dt>Vous annulez, ou vous n'êtes pas là</dt><dd class="num">100&nbsp;€</dd></div>
+          </dl>
+          <p class="xs dim">Écrit au contrat dans les deux sens, pour qu'aucun des deux n'ait à plaider sa cause en fin de mois.</p>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══════════════════════════ 04 · LA SORTIE · pont soulevé ══════════════════════════ -->
-<section class="sec raise" id="sortie">
+<section class="ch" id="sortie" aria-labelledby="t-sortie">
   <div class="wrap">
-    <div class="sec-head rv">
-      <p class="eyebrow">04 · Si ça ne marche pas</p>
-      <h2>Vous partez avec la base et les domaines.</h2>
-      <p class="lede">Trois mois, parce qu’en dessous personne ne peut vous dire si votre marché répond&nbsp;: trois semaines de montée en volume, quatre d’optimisation. Ensuite vous décidez chaque mois.</p>
-    </div>
-
-    <div class="bento bento-2">
-      <div class="card rv" style="--i:0">
-        <div class="padhd"><span class="icob"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 4.5h3.6a2 2 0 012 2v11a2 2 0 01-2 2h-3.6"/><path d="M9.6 8.4L13.2 12l-3.6 3.6M13 12H3.5"/></svg></span><h3>L’actif reste le vôtre</h3></div>
-        <ul class="ticks" style="margin-top:18px">
-          <li><b>La base de contacts</b> construite et vérifiée pendant la mission, exportée au format de votre choix.</li>
-          <li><b>Les domaines d’envoi</b>, achetés pour vous et transférés sur votre compte.</li>
-          <li><b>Les séquences</b> des deux canaux, avec les angles qui ont marché et ceux qui n’ont rien donné.</li>
-          <li><b>L’historique</b> des rendez-vous, leur canal d’origine et leur statut à J+30.</li>
-        </ul>
-        <p style="margin-top:18px">C’est fixé au contrat avant le démarrage, pas négocié au moment du départ.</p>
-      </div>
-      <div class="card accent rv" style="--i:1">
-        <span class="tag">Pourquoi on l’écrit</span>
-        <h3>Vous retenir par la base serait un modèle</h3>
-        <p>Ce n’est pas le nôtre. L’essentiel de notre rémunération vient des rendez-vous honorés&nbsp;: on vous garde en livrant, ou on ne vous garde pas.</p>
-        <p>Vous nous arrêtez par un email, avec un préavis d’un mois pour laisser les campagnes en cours se terminer proprement.</p>
+    <div class="ix xs"><span>Si ça ne marche pas</span></div>
+    <div class="bd">
+      <h2 id="t-sortie" class="h-sec rise">Vous partez avec la base et les domaines.</h2>
+      <p class="lede dim rise">Trois mois, parce qu'en dessous personne ne peut vous dire si votre marché répond&#8239;: trois semaines de montée en volume, quatre d'optimisation. Ensuite vous décidez chaque mois.</p>
+      <div class="pair">
+        <div class="rise">
+          <h3 class="h-3">L'actif reste le vôtre.</h3>
+          <ul class="coches">
+            <li>La base de contacts construite et vérifiée pendant la mission, exportée au format de votre choix.</li>
+            <li>Les domaines d'envoi, achetés pour vous et transférés sur votre compte.</li>
+            <li>Les séquences des deux canaux, avec les angles qui ont marché et ceux qui n'ont rien donné.</li>
+            <li>L'historique des rendez-vous, leur canal d'origine et leur statut à J+30.</li>
+          </ul>
+          <p class="xs dim">C'est fixé au contrat avant le démarrage, pas négocié au moment du départ.</p>
+        </div>
+        <div class="rise">
+          <p class="xs dim">Pourquoi on l'écrit</p>
+          <h3 class="h-3">Vous retenir par la base serait un modèle. Ce n'est pas le nôtre.</h3>
+          <div class="prose">
+            <p>L'essentiel de notre rémunération vient des rendez-vous honorés&#8239;: on vous garde en livrant, ou on ne vous garde pas.</p>
+            <p class="dim">Vous nous arrêtez par un email, avec un préavis d'un mois pour laisser les campagnes en cours se terminer proprement.</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="sec" style="padding-top:0;border-top:0">
+<nav class="suite" aria-label="Pages voisines">
   <div class="wrap">
-    <nav class="pager rv" aria-label="Pages voisines">
-    <div><a href="methode.html"><span class="k">Précédent</span><b>Comment on trouve vos leads</b></a></div>
-    <div class="next"><a href="tarifs.html"><span class="k">Suivant</span><b>Ce que ça coûte</b></a></div>
-    </nav>
+    <a class="suite-p" href="methode.html"><span class="xs dim">Précédent</span><span>Comment on trouve vos leads</span></a>
+    <a class="suite-n" href="tarifs.html"><span class="xs dim">Suivant</span><span>Ce que ça coûte, et à qui</span></a>
+  </div>
+</nav>
+<section class="fin" aria-labelledby="t-fin">
+  <div class="wrap">
+    <h2 id="t-fin" class="fin-t rise">Savoir quand on pourrait démarrer.</h2>
+    <p class="lede dim rise">Trente minutes en visio. Vous repartez avec une réponse&#8239;: oui, non, ou pas maintenant.</p>
+    <a class="fin-btn rise" href="rendez-vous.html">
+      <span>Prendre rendez-vous</span>
+      <span class="fin-meta xs">Visio, 30 min</span>
+      <svg class="ar" aria-hidden="true"><use href="assets/sprite.svg#ar"/></svg>
+    </a>
   </div>
 </section>
 </main>
 
 <footer class="ftr">
   <div class="wrap">
-    <div class="ftr-top">
-      <div>
-        <img src="assets/leadcore-logo.png" alt="Leadcore" width="118" height="23">
-        <p>Des rendez-vous qualifiés dans l’agenda de vos commerciaux. Pour les entreprises B2B dont un client vaut au moins 7 000 €.</p>
-      </div>
-      <nav class="ftr-links" aria-label="Pied de page">
-        <a href="index.html">Accueil</a>
-        <a href="methode.html">Comment on trouve vos leads</a>
-        <a href="collaboration.html">Travailler ensemble</a>
-        <a href="tarifs.html">Tarifs</a>
-        <a href="index.html#rendez-vous">Prendre un créneau</a>
-        <a href="mentions-legales.html">Mentions légales</a>
-        <a href="confidentialite.html">Confidentialité</a>
-      </nav>
+    <div class="ftr-grid xs">
+      <p class="dim">Des rendez-vous qualifiés dans l'agenda de vos commerciaux. Pour les entreprises B2B dont un client vaut au moins 7&nbsp;000&nbsp;€.</p>
+      <nav aria-label="Pied de page"><a href="methode.html">Méthode</a><a href="collaboration.html">Collaboration</a><a href="tarifs.html">Tarifs</a><a href="rendez-vous.html">Prendre un créneau</a></nav>
+      <nav aria-label="Informations légales"><a href="mentions-legales.html">Mentions légales</a><a href="confidentialite.html">Confidentialité</a><a data-email href="mailto:platon.leadcore@gmail.com">platon.leadcore@gmail.com</a></nav>
     </div>
-    <div class="ftr-word" aria-hidden="true">Leadcore</div>
-    <div class="ftr-bot">
-      <span>© 2026 Leadcore</span>
-      <a href="mailto:platon.leadcore@gmail.com" data-contact-email data-contact-email-text>platon.leadcore@gmail.com</a>
-    </div>
+    <svg class="ftr-logo" viewBox="0 0 1020.88 217.2" role="img" aria-label="Leadcore"><use href="assets/sprite.svg#lockup"/></svg>
+    <p class="xs dim ftr-c">© 2026 Leadcore</p>
   </div>
 </footer>
 
-<script src="assets/config.js?v=20260921b"></script>
-<script src="assets/main.js?v=20260921b"></script>
-<script src="assets/rdv.js?v=20260920a"></script>
+<script src="assets/config.js?v=20261013"></script>
+<script src="assets/site.js?v=20261013" defer></script>
 </body>
 </html>

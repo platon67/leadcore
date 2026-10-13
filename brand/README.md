@@ -45,7 +45,8 @@ ffmpeg -framerate 60 -i film/f%04d.png \
 
 ### Le logo en vectoriel
 
-La marque et le mot ont été vectorisés depuis `deck/assets/leadcore-logo.png`
-avec potrace, puis vérifiés par superposition pixel avec l'original. Les tracés
-sont inlinés dans `site/index.html` (≈ 7,8 Ko, ~2,5 Ko une fois compressés) :
-pas de requête supplémentaire, et une marque qui reste nette à toute taille.
+`logo-mark.svg` et `logo-lockup.svg` sont redessinés en géométrie exacte
+(octobre 2026) : anneau circulaire, chevron à 51,2° dont le sommet est au
+centre de l'anneau, mot en Montserrat Bold placé lettre à lettre. Mesures et
+méthode dans `BRANDKIT.md`, section 3. Ils remplacent les tracés potrace de
+septembre, toujours inlinés dans `site/index.html` jusqu'à la refonte du site.

@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Tarifs — Leadcore</title>
 <meta name="description" content="1 200 € de setup, 500 € par mois, 200 € par rendez-vous honoré. Le détail d’un trimestre, la comparaison avec un recrutement, et les quatre conditions pour qu’on démarre.">
 <link rel="canonical" href="https://leadcore.fr/tarifs.html">
@@ -16,319 +16,189 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="#0C1413">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23050908'/%3E%3Cpath d='M10 8v13h9' stroke='%2319C78B' stroke-width='3.2' fill='none' stroke-linecap='square'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#0B0C0D">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-150 -142 300 300'%3E%3Crect x='-150' y='-142' width='300' height='300' fill='%230B0C0D'/%3E%3Cg fill='%23ECECEA'%3E%3Cpath d='M-83.07 80.24A115.5 115.5 0 1 1 83.07 80.24L60.3 51.96A79.6 79.6 0 1 0 -60.3 51.96Z'/%3E%3Cpath d='M0 0L81.86 101.7L39.43 101.7L0 52.71L-39.43 101.7L-81.86 101.7Z'/%3E%3C/g%3E%3C/svg%3E">
 <link rel="apple-touch-icon" href="assets/icon-180.png">
-<script>document.documentElement.className+=" js p-tarifs "</script>
-<link rel="preload" as="font" type="font/woff2" href="assets/fonts/geist-latin-19f9c925.woff2" crossorigin>
-<link rel="preload" as="font" type="font/woff2" href="assets/fonts/lora-latin-723cc14f.woff2" crossorigin>
-<link rel="stylesheet" href="assets/fonts.css?v=20260921b">
-<link rel="stylesheet" href="assets/styles.css?v=20260921b">
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/switzer-300-c345686e.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/switzer-400-ddd95955.woff2" crossorigin>
+<link rel="stylesheet" href="assets/brand.css?v=20261013">
+<link rel="stylesheet" href="assets/site.css?v=20261013">
+<script>document.documentElement.classList.add("js")</script>
 </head>
-<body>
+<body class="p-tarifs">
 <a class="skip" href="#main">Aller au contenu</a>
 
-
-<header class="hdr">
+<header class="hdr" id="hdr">
   <div class="wrap">
-    <a class="mark" href="index.html" aria-label="Leadcore, accueil"><img src="assets/leadcore-logo.png" alt="Leadcore" width="126" height="25"></a>
-    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav" aria-label="Ouvrir le menu">
-      <svg class="m" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
-      <svg class="x" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
-    </button>
-    <nav class="nav" id="nav" aria-label="Navigation principale">
-      <a href="methode.html">Méthode</a>
-      <a href="collaboration.html">Collaboration</a>
-      <a href="tarifs.html" aria-current="page">Tarifs</a>
-      <span class="cta-rdv sm"><a class="btn btn-pri btn-sm" href="rendez-vous.html"><span class="aur" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span><svg class="visio" viewBox="0 0 24 24" aria-hidden="true"><rect x="2.6" y="6.6" width="12.9" height="10.8" rx="2.6"/><path d="M15.5 10.7l5.4-3v8.6l-5.4-3z"/></svg>Prendre RDV</a></span>
-    </nav>
+    <a class="hdr-logo" href="./" aria-label="Leadcore, accueil"><svg viewBox="0 0 1020.88 217.2" aria-hidden="true"><use href="assets/sprite.svg#lockup"/></svg></a>
+    <nav class="hdr-nav xs" aria-label="Navigation principale"><a href="methode.html">Méthode</a><a href="collaboration.html">Collaboration</a><a href="tarifs.html" aria-current="page">Tarifs</a></nav>
+    <a class="btn or sm" href="rendez-vous.html"><span class="t">Prendre rendez-vous</span><span class="c" aria-hidden="true"><svg class="ar"><use href="assets/sprite.svg#ar"/></svg><svg class="ar"><use href="assets/sprite.svg#ar"/></svg></span></a>
   </div>
-  <span class="prog" aria-hidden="true"></span>
 </header>
+
 <main id="main">
-<span id="top"></span>
-
-<section class="phead">
-  <svg class="phead-mark" viewBox="0 0 24 24" aria-hidden="true"><path d="M5.4 2.8h9.2L19.6 8v13.2H5.4z"/><path d="M14.2 2.8V8h5.2M8.6 12.6h6.8M8.6 16.4h4.2"/></svg>
+<section class="tete" aria-labelledby="t-page">
   <div class="wrap">
-    <a class="crumb" href="index.html">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>Accueil
+    <a class="retour xs load" style="--d:0" href="./"><svg class="ar" aria-hidden="true"><use href="assets/sprite.svg#ag"/></svg>Accueil</a>
+    <h1 id="t-page" class="tete-t">
+      <span class="ln"><span class="load" style="--d:1">1&nbsp;200&nbsp;€, 500&nbsp;€ par mois,</span></span>
+      <span class="ln dim"><span class="load" style="--d:2">200&nbsp;€ par rendez-vous.</span></span>
+    </h1>
+    <div class="tete-row">
+      <p class="lede dim load" style="--d:4">Les trois lignes, ce que ça fait sur un trimestre, la comparaison avec un recrutement, et les conditions dans lesquelles ça fonctionne.</p>
+      <nav class="parcours xs load" style="--d:5" aria-label="Le détail, en trois pages"><ol><li><a href="methode.html"><span class="num">01</span>Comment on trouve vos leads</a></li><li><a href="collaboration.html"><span class="num">02</span>Ce qui se passe si on signe</a></li><li><a href="tarifs.html" aria-current="page"><span class="num">03</span>Ce que ça coûte, et à qui</a></li></ol></nav>
+    </div>
+  </div>
+</section>
+
+<section class="ch" id="lignes" aria-labelledby="t-lignes">
+  <div class="wrap">
+    <div class="ix xs"><span>Les trois lignes</span></div>
+    <div class="bd">
+      <h2 id="t-lignes" class="h-sec rise">Tout est là. Il n'y a rien en bas de page.</h2>
+      <ol class="prix prix-l">
+        <li class="rise"><span class="xs dim">Une fois, au démarrage</span><b class="num"><span class="cnt" data-to="1200">1&nbsp;200</span>&nbsp;€</b><h3>Setup</h3><p class="dim">Domaines, DNS, boîtes d'envoi, comptes LinkedIn, montée en chauffe des boîtes, définition de la cible, construction de la base et rédaction des séquences. Facturé avant que la première campagne parte.</p><p class="xs">Les domaines, la base et les séquences sont achetés à votre nom et vous restent, que la collaboration dure trois mois ou trois ans.</p></li>
+        <li class="rise"><span class="xs dim">Chaque mois</span><b class="num"><span class="cnt" data-to="500">500</span>&nbsp;€</b><h3>Infrastructure et pilotage</h3><p class="dim">Domaines, boîtes et comptes LinkedIn maintenus, données et enrichissement, renouvellement de la base, arbitrage hebdomadaire des segments, compte rendu mensuel.</p></li>
+        <li class="rise"><span class="xs dim">Par rendez-vous honoré</span><b class="num or-t"><span class="cnt" data-to="200">200</span>&nbsp;€</b><h3>Rendez-vous qualifiés</h3><p class="dim">Dans votre cible, décisionnaire, besoin exprimé, et présent au rendez-vous. Les quatre, ou la ligne ne s'écrit pas. On replanifie un absent une fois, et on ne le facture que s'il vient.</p></li>
+      </ol>
+      <div class="deux rise" id="deux">
+        <div class="deux-t">
+          <p class="deux-n num">2 <span class="dim">sur 30</span></p>
+          <p class="lede">C'est le nombre de rendez-vous qu'il faut signer sur un trimestre pour avoir remboursé Leadcore. Soit un taux de signature de 7&nbsp;%, sur des prospects qualifiés, décisionnaires, et présents en face de vous.</p>
+          <p class="dim">La plupart des équipes commerciales font mieux que 7&nbsp;% sur ce type de rendez-vous. Et au-dessus de 8&nbsp;700&nbsp;€ de valeur client, un seul signé suffit.</p>
+        </div>
+        <div class="deux-v">
+          <div class="pastilles" aria-hidden="true"><i class="p-or"></i><i class="p-or"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          <dl class="xs">
+            <div><dt><i class="p-or"></i>2 rendez-vous signés</dt><dd class="dim">remboursent les 8&nbsp;700&nbsp;€ du trimestre, setup compris.</dd></div>
+            <div><dt><i></i>28 rendez-vous qualifiés</dt><dd class="dim">qui restent, et tout ce que vous y signez est pour vous.</dd></div>
+          </dl>
+        </div>
+      </div>
+      <a class="lien rise" href="rendez-vous.html">Refaire l'addition avec votre ticket moyen <svg class="ar" aria-hidden="true"><use href="assets/sprite.svg#ar"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<section class="ch clair" id="addition" aria-labelledby="t-add">
+  <div class="wrap">
+    <div class="ix xs"><span>L'addition</span></div>
+    <div class="bd">
+      <h2 id="t-add" class="h-sec rise">Ce que ça fait sur un trimestre.</h2>
+      <p class="lede dim rise">Hypothèse basse&#8239;: dix rendez-vous honorés par mois. Pas de palier caché, pas de pourcentage sur votre chiffre d'affaires, pas de frais de sortie.</p>
+      <dl class="addition rise" id="addition-l">
+        <div><dt><b>Setup, une seule fois</b><span class="dim">Les deux canaux montés, la base construite, les séquences écrites.</span></dt><dd><b class="num">1&nbsp;200&nbsp;€</b><span class="xs dim">au démarrage</span></dd></div>
+        <div><dt><b>Infrastructure et pilotage</b><span class="dim">Trois mois à 500&nbsp;€.</span></dt><dd><b class="num">1&nbsp;500&nbsp;€</b><span class="xs dim num">500&nbsp;€ × 3 mois</span></dd></div>
+        <div><dt><b>Rendez-vous honorés</b><span class="dim">Trente sur le trimestre à l'hypothèse basse. Cette ligne est la seule qui bouge, et elle ne bouge que si on livre.</span></dt><dd><b class="num or-t">6&nbsp;000&nbsp;€</b><span class="xs dim num">200&nbsp;€ × 30 RDV</span></dd></div>
+        <div class="total"><dt><b>Dépense totale sur le trimestre</b><span class="dim">Setup compris. C'est le montant de l'hypothèse, pas un plafond contractuel&#8239;: plus de rendez-vous honorés, plus de variable, et plus de pipeline.</span></dt><dd><b class="num"><span class="cnt" data-to="8700">8&nbsp;700</span>&nbsp;€</b><span class="xs dim">trois mois</span></dd></div>
+      </dl>
+      <a class="lien rise" href="rendez-vous.html">Faire l'addition avec vos chiffres <svg class="ar" aria-hidden="true"><use href="assets/sprite.svg#ar"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<section class="ch" id="comparaison" aria-labelledby="t-comp">
+  <div class="wrap">
+    <div class="ix xs"><span>Face à un recrutement</span></div>
+    <div class="bd">
+      <h2 id="t-comp" class="h-sec rise">Le même trimestre, avec un commercial junior.</h2>
+      <p class="lede dim rise">La comparaison honnête, à l'échelle. Un SDR junior coûte environ 32&nbsp;000&nbsp;€ brut annuels, soit 3&nbsp;700&nbsp;€ par mois chargés, et il ne produit rien avant d'être formé.</p>
+      <div class="barres rise" id="barres">
+        <div class="barre"><p class="barre-h"><span>Recruter un SDR junior</span><b class="num">11&nbsp;100&nbsp;€</b></p><div class="barre-t"><i class="b-fixe" style="--k:1"></i></div><p class="xs dim">Dus quoi qu'il arrive&#8239;: trois mois de salaire chargé, hors recrutement, licences et base.</p></div>
+        <div class="barre"><p class="barre-h"><span>Le même trimestre avec Leadcore</span><b class="num">8&nbsp;700&nbsp;€</b></p><div class="barre-t"><i class="b-fixe" style="--k:.2432"></i><i class="b-var" style="--k:.5405;--o:.2432"></i></div><p class="xs dim"><span class="leg leg-f"></span>2&nbsp;700&nbsp;€ d'engagement, setup et infrastructure. <span class="leg leg-v"></span>6&nbsp;000&nbsp;€ qui ne courent que si les rendez-vous ont lieu.</p></div>
+      </div>
+      <blockquote class="aparte rise"><p class="xs dim">Sur le recrutement</p><p class="lede">Un bon commercial signe mieux que nous. C'est exactement pour ça qu'on ne fait pas son métier&#8239;: on lui remplit l'agenda, et il passe ses journées devant des prospects au lieu d'en chercher.</p></blockquote>
+    </div>
+  </div>
+</section>
+
+<section class="ch clair" id="fit" aria-labelledby="t-fit">
+  <div class="wrap">
+    <div class="ix xs"><span>Pour qui, et pour qui pas</span></div>
+    <div class="bd">
+      <h2 id="t-fit" class="h-sec rise">Ça marche très bien dans cinq cas. Moins bien dans quatre autres.</h2>
+      <p class="lede dim rise">Le modèle repose sur une valeur client d'au moins 7&nbsp;000&nbsp;€. On regarde ce critère avec vos chiffres pendant l'appel, avant que vous engagiez quoi que ce soit.</p>
+      <div class="pair">
+        <div class="rise">
+          <p class="xs dim">Là où ça marche</p>
+          <h3 class="h-3">Offres B2B à forte valeur.</h3>
+          <ul class="coches">
+            <li>SaaS B2B en vente accompagnée, avec démonstration et cycle de décision.</li>
+            <li>Agences marketing, création et acquisition haut de gamme.</li>
+            <li>Cabinets de conseil et d'expertise, transformation, accompagnement.</li>
+            <li>Prestataires IT et projets techniques longs.</li>
+            <li>Services premium à vente consultative, ticket d'au moins 7&nbsp;000&nbsp;€ ou récurrent équivalent.</li>
+          </ul>
+        </div>
+        <div class="rise">
+          <p class="xs dim">Là où ce n'est pas le bon moment</p>
+          <h3 class="h-3">Quatre situations à régler d'abord.</h3>
+          <ul class="refus">
+            <li><b>Valeur client sous 7&nbsp;000&nbsp;€.</b> Le coût d'acquisition mange la marge&#8239;: à ce niveau, le calcul ne tombe pas en votre faveur.</li>
+            <li><b>Vente impulsive ou B2C.</b> Un achat qui se décide en dix minutes ne laisse pas à une séquence le temps de tourner.</li>
+            <li><b>Agenda commercial déjà plein.</b> Un rendez-vous se traite dans les 48 heures, sinon l'intérêt retombe. Si vos commerciaux en absorbent quatre ou cinq par mois, on cale le volume sur ce chiffre.</li>
+            <li><b>Offre encore en mouvement.</b> Un angle de message se construit sur une promesse précise&#8239;: tant qu'elle bouge, les séquences bougent avec elle.</li>
+          </ul>
+        </div>
+      </div>
+      <a class="lien rise" href="rendez-vous.html">Voir ce que ça donnerait dans votre cas <svg class="ar" aria-hidden="true"><use href="assets/sprite.svg#ar"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<section class="ch" id="engagement" aria-labelledby="t-eng">
+  <div class="wrap">
+    <div class="ix xs"><span>La durée</span></div>
+    <div class="bd">
+      <h2 id="t-eng" class="h-sec rise">Trois mois, puis vous décidez chaque mois.</h2>
+      <p class="lede dim rise">Trois mois, parce que c'est le temps qu'il faut pour que les chiffres veuillent dire quelque chose. Vous vendre du mensuel, ce serait vous facturer le démarrage sans la suite.</p>
+      <ol class="phases rise" id="phases" aria-label="Le premier trimestre en trois phases">
+        <li style="--w:3"><b class="num">3 semaines</b><span>Montée en volume</span><p class="xs dim">Les boîtes montent par paliers. Forcer les ferait signaler.</p></li>
+        <li style="--w:4"><b class="num">4 semaines</b><span>Optimisation</span><p class="xs dim">Deux angles par segment, on garde celui qui répond.</p></li>
+        <li style="--w:6"><b>Le reste du trimestre</b><span>Plein régime</span><p class="xs dim">Le volume est stable, et les chiffres deviennent lisibles.</p></li>
+      </ol>
+      <dl class="termes rise">
+        <div><dt><b>Durée initiale</b><span class="dim">Les trois phases ci-dessus, sans raccourci possible.</span></dt><dd class="num">3 mois</dd></div>
+        <div><dt><b>Ensuite</b><span class="dim">Mensuel, sans tacite reconduction annuelle. Un email suffit à arrêter.</span></dt><dd class="num">1 mois <span class="xs dim">de préavis</span></dd></div>
+        <div><dt><b>Frais de sortie</b><span class="dim">Aucun. La base, les domaines et les séquences partent avec vous.</span></dt><dd class="num">0&nbsp;€</dd></div>
+        <div><dt><b>Après les premiers cas clients</b><span class="dim">Les tarifs monteront pour les nouveaux clients&#8239;: 1&nbsp;500&nbsp;€ de setup, 1&nbsp;500&nbsp;€ par mois, 150&nbsp;€ par rendez-vous. Votre grille reste celle de votre contrat.</span></dt><dd>Gelée</dd></div>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<nav class="suite" aria-label="Pages voisines">
+  <div class="wrap">
+    <a class="suite-p" href="collaboration.html"><span class="xs dim">Précédent</span><span>Ce qui se passe si on signe</span></a>
+    <a class="suite-n" href="./"><span class="xs dim">Suivant</span><span>Retour à l'accueil</span></a>
+  </div>
+</nav>
+<section class="fin" aria-labelledby="t-fin">
+  <div class="wrap">
+    <h2 id="t-fin" class="fin-t rise">Refaire l'addition avec vos chiffres.</h2>
+    <p class="lede dim rise">Le modèle tient à partir de 7&nbsp;000&nbsp;€ de valeur client. On vérifie ce calcul avec vos chiffres pendant l'appel, avant que vous engagiez quoi que ce soit.</p>
+    <a class="fin-btn rise" href="rendez-vous.html">
+      <span>Prendre rendez-vous</span>
+      <span class="fin-meta xs">Visio, 30 min</span>
+      <svg class="ar" aria-hidden="true"><use href="assets/sprite.svg#ar"/></svg>
     </a>
-    <p class="eyebrow">Les tarifs</p>
-    <h1>1 200 €, 500 € par mois, 200 € par rendez-vous.</h1>
-    <p class="lede">Les trois lignes, ce que ça fait sur un trimestre, la comparaison avec un recrutement, et les conditions dans lesquelles ça fonctionne.</p>
-    <nav class="pnav" aria-label="Les trois pages de détail">
-      <a href="methode.html"><b>01</b>Comment on trouve vos leads</a>
-      <a href="collaboration.html"><b>02</b>Ce qui se passe si on signe</a>
-      <a href="tarifs.html" aria-current="page"><b>03</b>Ce que ça coûte, et à qui</a>
-    </nav>
-  </div>
-</section>
-
-<!-- ══════════════════════════ LES TROIS LIGNES · plaque encastrée ══════════════════════════
-     C'est la première chose qu'on cherche sur une page de tarifs. Elle ne se
-     mérite pas&nbsp;: trois montants, une phrase chacun, avant tout le reste. -->
-<section class="sec plate tldr" id="lignes">
-  <div class="wrap">
-    <div class="sec-head rv">
-      <p class="eyebrow">Les trois lignes</p>
-      <h2>Tout est là. <span class="ex">Il n’y a rien en bas de page.</span></h2>
-    </div>
-
-    <div class="schema">
-      <div class="price3">
-        <div class="pcell pad">
-          <span class="k"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.4 3.4H7a2 2 0 00-2 2v13.2a2 2 0 002 2h10a2 2 0 002-2V9l-5.6-5.6z"/><path d="M13.4 3.4V9H19M8.6 13.4h6.8M8.6 16.8h4.4"/></svg>Une fois, au démarrage</span>
-          <span class="amt">1 200 <small>€</small></span>
-          <h3>Setup</h3>
-          <p>Domaines, DNS, boîtes d’envoi, comptes LinkedIn, montée en chauffe des boîtes, définition de la cible, construction de la base et rédaction des séquences. Facturé avant que la première campagne parte.</p>
-          <p style="margin-top:12px"><b>Ce que ça vous laisse&nbsp;:</b> les domaines, la base et les séquences sont achetés à votre nom et vous restent, que la collaboration dure trois mois ou trois ans.</p>
-        </div>
-        <div class="pcell pad">
-          <span class="k"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19.2V13M10.3 19.2V8.6M15.7 19.2v-7.6M21 19.2V5"/></svg>Chaque mois</span>
-          <span class="amt">500 <small>€ / mois</small></span>
-          <h3>Infrastructure et pilotage</h3>
-          <p>Domaines, boîtes et comptes LinkedIn maintenus, données et enrichissement, renouvellement de la base, arbitrage hebdomadaire des segments, reporting mensuel.</p>
-        </div>
-        <div class="pcell pad perf">
-          <span class="k"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.2" y="5" width="17.6" height="15.5" rx="2"/><path d="M3.2 9.8h17.6M8 3.5v3M16 3.5v3M9 14.6l2.2 2.2 4-4"/></svg>À la performance</span>
-          <span class="amt">200 <small>€ / RDV honoré</small></span>
-          <h3>Rendez-vous qualifiés</h3>
-          <p>Dans votre cible, décisionnaire, besoin exprimé, <b>et présent au rendez-vous</b>. Les quatre, ou la ligne ne s’écrit pas. On replanifie un absent une fois, et on ne le facture que s’il vient.</p>
-        </div>
-      </div>
-
-      <div class="pad hot ratio rv" style="margin-top:clamp(16px,2vw,24px)">
-        <div class="keynum" style="align-items:start">
-          <div class="big">2 <small>sur 30</small></div>
-          <div>
-            <p class="say">C’est le nombre de rendez-vous qu’il faut <b>signer</b> sur un trimestre pour avoir remboursé Leadcore. Soit un <b>taux de signature de 7 %</b> — sur des prospects qualifiés, décisionnaires, et présents en face de vous.</p>
-            <p class="fine">La plupart des équipes commerciales font mieux que 7 % sur ce type de rendez-vous. Et au-dessus de 8 700 € de valeur client, un seul signé suffit.</p>
-          </div>
-        </div>
-
-        <div class="ratio-grid" role="img" aria-label="Trente rendez-vous honorés sur le trimestre, dont deux suffisent à rembourser la prestation"><i class="on" style="--d:0"></i><i class="on" style="--d:1"></i><i style="--d:2"></i><i style="--d:3"></i><i style="--d:4"></i><i style="--d:5"></i><i style="--d:6"></i><i style="--d:7"></i><i style="--d:8"></i><i style="--d:9"></i><i style="--d:10"></i><i style="--d:11"></i><i style="--d:12"></i><i style="--d:13"></i><i style="--d:14"></i><i style="--d:15"></i><i style="--d:16"></i><i style="--d:17"></i><i style="--d:18"></i><i style="--d:19"></i><i style="--d:20"></i><i style="--d:21"></i><i style="--d:22"></i><i style="--d:23"></i><i style="--d:24"></i><i style="--d:25"></i><i style="--d:26"></i><i style="--d:27"></i><i style="--d:28"></i><i style="--d:29"></i></div>
-
-        <div class="ratio-key">
-          <div>
-            <span class="sw on" aria-hidden="true"></span>
-            <div><b>2 rendez-vous signés</b><span>remboursent les 8 700 € du trimestre, setup compris.</span></div>
-          </div>
-          <div>
-            <span class="sw" aria-hidden="true"></span>
-            <div><b>28 rendez-vous qualifiés</b><span>qui restent, et tout ce que vous y signez est pour vous.</span></div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <p class="cta-ctx rv"><span class="cta-rdv sm"><a class="btn btn-pri" href="rendez-vous.html"><span class="aur" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span><svg class="visio" viewBox="0 0 24 24" aria-hidden="true"><rect x="2.6" y="6.6" width="12.9" height="10.8" rx="2.6"/><path d="M15.5 10.7l5.4-3v8.6l-5.4-3z"/></svg>Refaire l’addition avec votre ticket moyen<svg class="ar" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></span></p>
-  </div>
-</section>
-
-<!-- ══════════════════════════ 01 · L'ADDITION ══════════════════════════ -->
-<section class="sec" id="addition">
-  <div class="wrap">
-    <div class="sec-head rv">
-      <p class="eyebrow">01 · L’addition</p>
-      <h2>Ce que ça fait sur un trimestre.</h2>
-      <p class="lede">Hypothèse basse&nbsp;: dix rendez-vous honorés par mois. Pas de palier caché, pas de pourcentage sur votre chiffre d’affaires, pas de frais de sortie.</p>
-    </div>
-
-    <div class="ledger">
-      <div class="led">
-        <div class="t">Setup, une seule fois
-          <span class="d">Les deux canaux montés, la base construite, les séquences écrites.</span>
-        </div>
-        <div class="f">1 200 €<small>au démarrage</small></div>
-      </div>
-      <div class="led">
-        <div class="t">Infrastructure et pilotage
-          <span class="d">Trois mois à 500 €.</span>
-        </div>
-        <div class="f">1 500 €<small>500 € × 3 mois</small></div>
-      </div>
-      <div class="led hot">
-        <div class="t">Rendez-vous honorés
-          <span class="d">Trente sur le trimestre à l’hypothèse basse. Cette ligne est la seule qui bouge, et elle ne bouge que si on livre.</span>
-        </div>
-        <div class="f">6 000 €<small>200 € × 30 RDV</small></div>
-      </div>
-      <div class="led total">
-        <div class="t">Dépense totale sur le trimestre
-          <span class="d">Setup compris. C’est le montant de l’hypothèse, pas un plafond contractuel&nbsp;: plus de rendez-vous honorés, plus de variable — et plus de pipeline.</span>
-        </div>
-        <div class="f">8 700 €<small>trois mois</small></div>
-      </div>
-    </div>
-    <p class="cta-ctx rv"><span class="cta-rdv sm"><a class="btn btn-pri" href="rendez-vous.html"><span class="aur" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span><svg class="visio" viewBox="0 0 24 24" aria-hidden="true"><rect x="2.6" y="6.6" width="12.9" height="10.8" rx="2.6"/><path d="M15.5 10.7l5.4-3v8.6l-5.4-3z"/></svg>Faire l’addition avec vos chiffres<svg class="ar" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></span></p>
-  </div>
-</section>
-
-<!-- ══════════════════════════ 02 · FACE À UN RECRUTEMENT · plaque encastrée ══════════════════════════ -->
-<section class="sec plate" id="comparaison">
-  <div class="wrap">
-    <div class="sec-head rv">
-      <p class="eyebrow">02 · Face à un recrutement</p>
-      <h2>Le même trimestre, avec un commercial junior.</h2>
-      <p class="lede">La comparaison honnête, à l’échelle. Un SDR junior coûte environ 32 000 € brut annuels, soit 3 700 € par mois chargés — et il ne produit rien avant d’être formé.</p>
-    </div>
-
-    <div class="vs">
-      <div class="r them" style="--i:0">
-        <div class="hd"><b>Recruter un SDR junior</b><span class="a">11 100 €</span></div>
-        <div class="t"><i style="--p:1;--j:0"></i></div>
-        <p class="seg"><span><span class="sw" aria-hidden="true"></span><b>11 100 €</b>&nbsp;dus quoi qu’il arrive — trois mois de salaire chargé, hors recrutement, licences et base.</span></p>
-      </div>
-
-      <div class="r us" style="--i:1">
-        <div class="hd"><b>Le même trimestre avec Leadcore</b><span class="a">8 700 €</span></div>
-        <div class="t"><i class="fix" style="--p:.2432;--o:0;--j:0"></i><i class="var" style="--p:.5405;--o:.2432;--j:1"></i></div>
-        <p class="seg">
-          <span><span class="sw fix" aria-hidden="true"></span><b>2 700 €</b>&nbsp;d’engagement, setup et infrastructure.</span>
-          <span><span class="sw var" aria-hidden="true"></span><b>6 000 €</b>&nbsp;qui ne courent que si les rendez-vous ont lieu.</span>
-        </p>
-      </div>
-    </div>
-
-    <div class="banner rv">
-      <span class="k">Sur le recrutement</span>
-      <span>Un bon commercial <b>signe mieux que nous</b>. C’est exactement pour ça qu’on ne fait pas son métier&nbsp;: on lui remplit l’agenda, et il passe ses journées devant des prospects au lieu d’en chercher.</span>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════════════════ 03 · POUR QUI, ET POUR QUI PAS · pont soulevé ══════════════════════════ -->
-<section class="sec raise" id="fit">
-  <div class="wrap">
-    <div class="sec-head rv">
-      <p class="eyebrow">03 · Pour qui, et pour qui pas</p>
-      <h2>Ça marche très bien dans cinq cas. <span class="ex">Moins bien dans quatre autres.</span></h2>
-      <p class="lede">Le modèle repose sur une valeur client d’au moins 7 000 €. On regarde ce critère avec vos chiffres pendant l’appel, avant que vous engagiez quoi que ce soit.</p>
-    </div>
-
-    <div class="bento bento-2">
-      <div class="card accent rv" style="--i:0">
-        <span class="tag">Là où ça marche</span>
-        <h3>Offres B2B à forte valeur</h3>
-        <ul class="ticks" style="margin-top:18px">
-          <li><b>SaaS B2B</b> en vente accompagnée, avec démonstration et cycle de décision.</li>
-          <li><b>Agences</b> marketing, création et acquisition haut de gamme.</li>
-          <li><b>Cabinets de conseil</b> et d’expertise, transformation, accompagnement.</li>
-          <li><b>Prestataires IT</b> et projets techniques longs.</li>
-          <li><b>Services premium</b> à vente consultative, ticket d’au moins 7 000 € ou récurrent équivalent.</li>
-        </ul>
-      </div>
-      <div class="card rv" style="--i:1">
-        <span class="tag">Là où ce n’est pas le bon moment</span>
-        <h3>Quatre situations à régler d’abord</h3>
-        <ul class="ticks crosses" style="margin-top:18px">
-          <li><b>Valeur client sous 7 000 €.</b> Le coût d’acquisition mange la marge&nbsp;: à ce niveau, le calcul ne tombe pas en votre faveur.</li>
-          <li><b>Vente impulsive ou B2C.</b> Un achat qui se décide en dix minutes ne laisse pas à une séquence le temps de tourner.</li>
-          <li><b>Agenda commercial déjà plein.</b> Un rendez-vous se traite dans les 48 heures, sinon l’intérêt retombe. Si vos commerciaux en absorbent quatre ou cinq par mois, on cale le volume sur ce chiffre.</li>
-          <li><b>Offre encore en mouvement.</b> Un angle de message se construit sur une promesse précise&nbsp;: tant qu’elle bouge, les séquences bougent avec elle.</li>
-        </ul>
-      </div>
-    </div>
-    <p class="cta-ctx rv"><span class="cta-rdv sm"><a class="btn btn-pri" href="rendez-vous.html"><span class="aur" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span><svg class="visio" viewBox="0 0 24 24" aria-hidden="true"><rect x="2.6" y="6.6" width="12.9" height="10.8" rx="2.6"/><path d="M15.5 10.7l5.4-3v8.6l-5.4-3z"/></svg>Voir ce que ça donnerait dans votre cas<svg class="ar" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></span></p>
-  </div>
-</section>
-
-<!-- ══════════════════════════ 04 · LA DURÉE ══════════════════════════ -->
-<section class="sec" id="engagement">
-  <div class="wrap">
-    <div class="sec-head rv">
-      <p class="eyebrow">04 · La durée</p>
-      <h2>Trois mois, puis vous décidez chaque mois.</h2>
-      <p class="lede">Trois mois, parce que c’est le temps qu’il faut pour que <b>les chiffres veuillent dire quelque chose</b>. Vous vendre du mensuel, ce serait vous facturer le démarrage sans la suite.</p>
-    </div>
-
-    <div class="phases rv" role="img" aria-label="Le trimestre en trois phases : trois semaines de montée en volume, quatre semaines d’optimisation, puis le reste du trimestre à plein régime.">
-      <div class="ph" style="--i:0;--o:.18;--part:.23">
-        <span class="d">3 semaines</span>
-        <span class="b" aria-hidden="true"></span>
-        <span class="t">Montée en volume</span>
-        <span class="s">Les boîtes montent par paliers. Forcer les ferait signaler.</span>
-      </div>
-      <div class="ph" style="--i:1;--o:.42;--part:.31">
-        <span class="d">4 semaines</span>
-        <span class="b" aria-hidden="true"></span>
-        <span class="t">Optimisation</span>
-        <span class="s">Deux angles par segment, on garde celui qui répond.</span>
-      </div>
-      <div class="ph" style="--i:2;--o:.88;--part:.46">
-        <span class="d">Le reste du trimestre</span>
-        <span class="b" aria-hidden="true"></span>
-        <span class="t">Plein régime</span>
-        <span class="s">Le volume est stable, et les chiffres deviennent lisibles.</span>
-      </div>
-    </div>
-
-    <div class="ledger" style="margin-top:clamp(26px,3.2vw,38px)">
-      <div class="led">
-        <div class="t">Durée initiale
-          <span class="d">Les trois phases ci-dessus, sans raccourci possible.</span>
-        </div>
-        <div class="f">3 mois</div>
-      </div>
-      <div class="led">
-        <div class="t">Ensuite
-          <span class="d">Mensuel, sans tacite reconduction annuelle. Un email suffit à arrêter.</span>
-        </div>
-        <div class="f">1 mois<small>de préavis</small></div>
-      </div>
-      <div class="led">
-        <div class="t">Frais de sortie
-          <span class="d">Aucun. La base, les domaines et les séquences partent avec vous.</span>
-        </div>
-        <div class="f">0 €</div>
-      </div>
-      <div class="led">
-        <div class="t">Après les premiers cas clients
-          <span class="d">Les tarifs monteront pour les nouveaux clients&nbsp;: 1 500 € de setup, 1 500 € par mois, 150 € par rendez-vous. Votre grille reste celle de votre contrat.</span>
-        </div>
-        <div class="f">Votre grille<small>est gelée</small></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="sec" style="padding-top:0;border-top:0">
-  <div class="wrap">
-    <nav class="pager rv" aria-label="Pages voisines">
-    <div><a href="collaboration.html"><span class="k">Précédent</span><b>Ce qui se passe si on signe</b></a></div>
-    <div class="next"><a href="index.html"><span class="k">Suivant</span><b>Retour à l’accueil</b></a></div>
-    </nav>
   </div>
 </section>
 </main>
 
 <footer class="ftr">
   <div class="wrap">
-    <div class="ftr-top">
-      <div>
-        <img src="assets/leadcore-logo.png" alt="Leadcore" width="118" height="23">
-        <p>Des rendez-vous qualifiés dans l’agenda de vos commerciaux. Pour les entreprises B2B dont un client vaut au moins 7 000 €.</p>
-      </div>
-      <nav class="ftr-links" aria-label="Pied de page">
-        <a href="index.html">Accueil</a>
-        <a href="methode.html">Comment on trouve vos leads</a>
-        <a href="collaboration.html">Travailler ensemble</a>
-        <a href="tarifs.html">Tarifs</a>
-        <a href="index.html#rendez-vous">Prendre un créneau</a>
-        <a href="mentions-legales.html">Mentions légales</a>
-        <a href="confidentialite.html">Confidentialité</a>
-      </nav>
+    <div class="ftr-grid xs">
+      <p class="dim">Des rendez-vous qualifiés dans l'agenda de vos commerciaux. Pour les entreprises B2B dont un client vaut au moins 7&nbsp;000&nbsp;€.</p>
+      <nav aria-label="Pied de page"><a href="methode.html">Méthode</a><a href="collaboration.html">Collaboration</a><a href="tarifs.html">Tarifs</a><a href="rendez-vous.html">Prendre un créneau</a></nav>
+      <nav aria-label="Informations légales"><a href="mentions-legales.html">Mentions légales</a><a href="confidentialite.html">Confidentialité</a><a data-email href="mailto:platon.leadcore@gmail.com">platon.leadcore@gmail.com</a></nav>
     </div>
-    <div class="ftr-word" aria-hidden="true">Leadcore</div>
-    <div class="ftr-bot">
-      <span>© 2026 Leadcore</span>
-      <a href="mailto:platon.leadcore@gmail.com" data-contact-email data-contact-email-text>platon.leadcore@gmail.com</a>
-    </div>
+    <svg class="ftr-logo" viewBox="0 0 1020.88 217.2" role="img" aria-label="Leadcore"><use href="assets/sprite.svg#lockup"/></svg>
+    <p class="xs dim ftr-c">© 2026 Leadcore</p>
   </div>
 </footer>
 
-<script src="assets/config.js?v=20260921b"></script>
-<script src="assets/main.js?v=20260921b"></script>
-<script src="assets/rdv.js?v=20260920a"></script>
+<script src="assets/config.js?v=20261013"></script>
+<script src="assets/site.js?v=20261013" defer></script>
 </body>
 </html>
