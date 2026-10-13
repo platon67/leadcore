@@ -225,18 +225,68 @@ footer .logo{width:100%;height:auto;display:block}
 footer .row{display:flex;justify-content:space-between;flex-wrap:wrap;gap:var(--e4);margin-top:var(--e6);padding-top:var(--e4);border-top:1px solid var(--trait)}
 
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+
+/* ---------- révision 3b ---------- */
+.r3 .pic{width:22px;height:22px;flex:none;fill:none;stroke:currentColor;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
+.sur{display:inline-flex;align-items:center;gap:10px;font-size:14px;font-weight:500;color:var(--calque)}
+.sur .pic{width:18px;height:18px;color:var(--or)}
+.sur::before,.sur::after{content:"";width:32px;height:1px;background:linear-gradient(90deg,transparent,rgba(199,164,98,.7))}
+.sur::after{transform:scaleX(-1)}
+.sur.g::before{display:none}
+.r3-rang{display:flex;flex-wrap:wrap;gap:var(--e6);align-items:center;margin-top:var(--e5)}
+.pics{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:8px;margin:var(--e6) 0 0;padding:0;list-style:none}
+.pics li{display:flex;flex-direction:column;align-items:center;gap:10px;padding:18px 8px;border-radius:14px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);color:var(--or)}
+.pics code{font-size:11.5px;color:var(--cendre)}
+.r3-cf{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:var(--e6)}
+.cf{display:flex;flex-direction:column;gap:14px;padding:24px;border-radius:22px;background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.01));border:1px solid rgba(255,255,255,.07)}
+.cf-k{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--cendre);margin:0}
+.cf-k .pic{color:var(--or-hi)}
+.cf-n{font-weight:500;font-size:52px;letter-spacing:-.045em;line-height:1;margin:0}
+.cal5{display:grid;grid-template-columns:repeat(5,1fr);gap:5px}
+.cal5 i{height:12px;border-radius:3px;background:rgba(255,255,255,.06)}
+.cal5 i.o{background:var(--or);box-shadow:0 0 12px -2px rgba(199,164,98,.6)}
+.r3-l{margin:var(--e6) 0 0;padding:0;list-style:none;display:grid;gap:12px;max-width:72ch}
+.r3-l li{display:flex;gap:12px;align-items:flex-start;color:var(--cendre)}
+.r3-l li .pic{color:var(--or);margin-top:2px}
+.r3-l b{color:var(--calque);font-weight:500}
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <symbol id="mark" viewBox="-115.5 -115.5 231 217.2"><path d="M-83.07 80.24A115.5 115.5 0 1 1 83.07 80.24L60.3 51.96A79.6 79.6 0 1 0 -60.3 51.96Z"/><path d="M0 0L81.86 101.7L39.43 101.7L0 52.71L-39.43 101.7L-81.86 101.7Z"/></symbol>
   <symbol id="lockup" viewBox="-115.5 -115.5 1020.88 217.2"><path d="M-83.07 80.24A115.5 115.5 0 1 1 83.07 80.24L60.3 51.96A79.6 79.6 0 1 0 -60.3 51.96Z"/><path d="M0 0L81.86 101.7L39.43 101.7L0 52.71L-39.43 101.7L-81.86 101.7Z"/><path d="M168.99210000000002 47.49999999999999V-47.49999999999999H191.03003471865227V29.543084760459564H238.58350549998454V47.49999999999999ZM252.42210000000003 47.49999999999999V-47.49999999999999H324.1568674274566V-29.81220386485399H274.24473943513675V29.812203864853977H326.0030436065777V47.49999999999999ZM272.646544117556 7.827195658232945V-9.26622898021121H318.42880078350004V7.827195658232945ZM331.2171 47.49999999999999 373.56457607692545 -47.49999999999999H395.3053250472268L437.73469158898763 47.49999999999999H414.77482351429194L379.9269812362578 -36.31263277693474H388.64573413954355L353.7978918615094 47.49999999999999ZM352.47770047691307 27.175895760428595 358.2457341395435 10.491923446161465H407.18672388900933L413.03664801647517 27.175895760428595ZM441.5301 47.49999999999999V-47.49999999999999H484.66645765383544Q500.2174672230653 -47.49999999999999 512.0094220247128 -41.609307159889745Q523.8013768263603 -35.7186143197795 530.4233101824038 -25.091954801647518Q537.0452435384473 -14.465295283515538 537.0452435384473 0.0Q537.0452435384473 14.41147146263664 530.4233101824038 25.06504289120807Q523.8013768263603 35.7186143197795 512.0094220247128 41.609307159889745Q500.2174672230653 47.49999999999999 484.66645765383544 47.49999999999999ZM463.56803471865226 29.48926093958068H483.6368766560342Q493.1249762813168 29.48926093958068 500.0977426868168 25.887058700566715Q507.0705090923168 22.28485646155275 510.94413990275933 15.639651915394378Q514.8177707132019 8.994447369236006 514.8177707132019 0.0Q514.8177707132019 -9.1301616549503 510.94413990275933 -15.707509058251528Q507.0705090923168 -22.284856461552756 500.0977426868168 -25.88705870056672Q493.1249762813168 -29.48926093958068 483.6368766560342 -29.48926093958068H463.56803471865226ZM589.3926430615342 49.098195317580746Q578.3202049208758 49.098195317580746 568.9032501192282 45.50176674615217Q559.4862953175807 41.9053381747236 552.5660214796692 35.2962834071413Q545.6457476417577 28.687228639559006 541.7919238208788 19.71720719395497Q537.9381 10.74718574835093 537.9381 0.0Q537.9381 -10.747185748350937 541.7919238208788 -19.71720719395497Q545.6457476417577 -28.687228639559002 552.6069667120869 -35.29628340714131Q559.5681857824161 -41.90533817472362 568.9851405840636 -45.501766746152185Q578.4020953857112 -49.09819531758075 589.4745335263696 -49.09819531758075Q601.8152956582329 -49.09819531758075 611.8266219565824 -44.82665951813199Q621.8379482549317 -40.55512371868323 628.5675292527329 -32.30923786813664L614.4878855439596 -19.254556223096223Q609.6256189681335 -24.79308476045957 603.6355381406584 -27.629051438481305Q597.6454573131832 -30.46501811650304 590.5298717010932 -30.46501811650304Q583.8706338329565 -30.46501811650304 578.3251768944906 -28.263213434083802Q572.7797199560248 -26.061408751664565 568.715396305472 -21.998239834628855Q564.6510726549193 -17.935070917593144 562.4083227400823 -12.336944891765512Q560.1655728252454 -6.73881886593788 560.1655728252454 0.0Q560.1655728252454 6.738818865937873 562.4083227400823 12.336944891765503Q564.6510726549193 17.935070917593134 568.715396305472 21.99823983462884Q572.7797199560248 26.061408751664544 578.3251768944906 28.263213434083795Q583.8706338329565 30.465018116503042 590.5298717010932 30.465018116503042Q597.6454573131832 30.465018116503042 603.6355381406584 27.629051438481305Q609.6256189681335 24.793084760459564 614.4878855439596 19.17266575826081L628.5675292527329 32.22734740330122Q621.8379482549317 40.41940943296893 611.8266219565824 44.75880237527484Q601.8152956582329 49.098195317580746 589.3926430615342 49.098195317580746ZM681.725160238663 49.098195317580746Q670.5079106696396 49.098195317580746 660.9783720469068 45.433909603295035Q651.4488334241739 41.76962388900932 644.4607024434052 35.13365721098758Q637.4725714626366 28.497690532965837 633.5918357313183 19.5492781031771Q629.7111 10.600865673388363 629.7111 -0.02537408698576371Q629.7111 -10.651613847359883 633.5920139558907 -19.563118514260243Q637.4729279117815 -28.474623181160602 644.4712965604349 -35.13393994444041Q651.4696652090881 -41.79325670772021 660.9670916460309 -45.44572601265048Q670.4645180829738 -49.09819531758075 681.6804335604347 -49.09819531758075Q692.9424098076863 -49.09819531758075 702.3932803095289 -45.460290424181615Q711.8441508113715 -41.822385530782476 718.825099777812 -35.189449588389245Q725.8060487442526 -28.556513645996013 729.6869627001433 -19.616748740250493Q733.5678766560342 -10.676983834504973 733.5678766560342 -0.01718504050222691Q733.5678766560342 10.642613753500527 729.6871409247158 19.611097375650886Q725.8064051933975 28.57958099780124 718.8252780023845 35.20098326429185Q711.8441508113715 41.82238553078246 702.3932803095289 45.46029042418161Q692.9424098076863 49.098195317580746 681.725160238663 49.098195317580746ZM681.6780235386043 30.465018116503042Q688.0424856802205 30.465018116503042 693.4313823828907 28.251016981874265Q698.820279085561 26.03701584724549 702.8375915433379 21.97201006044105Q706.8549040011148 17.907004273636613 709.0976539159518 12.325101830465053Q711.3404038307888 6.743199387293494 711.3404038307888 -0.024721649761630715Q711.3404038307888 -6.792642686816762 709.106855091776 -12.34279090213968Q706.8733063527632 -17.892939117462596 702.8520748756538 -21.962483660337377Q698.8308433985444 -26.032028203212157 693.4390745612128 -28.248523159857598Q688.0473057238812 -30.46501811650304 681.6828435822651 -30.46501811650304Q675.3183814406491 -30.46501811650304 669.905186818117 -28.24586717798565Q664.4919921955851 -26.026716239468264 660.4566522488785 -21.95233780958656Q656.421312302172 -17.877959379704855 654.1799425637087 -12.321383688251839Q651.9385728252454 -6.764807996798822 651.9385728252454 -0.027027887408735296Q651.9385728252454 6.710752221981352 654.176168794743 12.292654665152911Q656.4137647642407 17.87455710832447 660.442297127715 21.967982929994506Q664.4708294911894 26.061408751664544 669.8921954440889 28.263213434083795Q675.3135613969882 30.465018116503042 681.6780235386043 30.465018116503042ZM743.7321 47.49999999999999V-47.49999999999999H784.2618195813073Q804.1464484252577 -47.49999999999999 815.1369961010807 -38.31468327088043Q826.1275437769037 -29.129366541760866 826.1275437769037 -13.06356647363043Q826.1275437769037 -2.480161654950301 821.1213032609705 5.1725074324115035Q816.1150627450372 12.825176519773308 806.8618888730605 16.90948367966306Q797.6087150010837 20.993790839552812 784.8000577900962 20.993790839552812H755.9421198197639L765.7700347186521 11.43268557802483V47.49999999999999ZM804.1995661670434 47.49999999999999 780.3653662351738 12.974747607692542H803.893848629649L827.9175866681118 47.49999999999999ZM765.7700347186521 13.81479049890062 755.9421198197639 3.4697756340776067H783.6651386175714Q793.7545381406583 3.4697756340776067 798.8273045461583 -0.9080765538385336Q803.9000709516582 -5.285928741754674 803.9000709516582 -13.06356647363043Q803.9000709516582 -20.923094670341577 798.8273045461583 -25.26000162584001Q793.7545381406583 -29.596908581338447 783.6651386175714 -29.596908581338447H755.9421198197639L765.7700347186521 -40.02381391099687ZM831.7971 47.49999999999999V-47.49999999999999H903.5318674274565V-29.81220386485399H853.6197394351367V29.812203864853977H905.3780436065776V47.49999999999999ZM852.0215441175559 7.827195658232945V-9.26622898021121H897.8038007835V7.827195658232945Z"/></symbol>
+  <symbol id="i-envoi" viewBox="0 0 24 24"><path d="M3.5 11.2 20.5 4l-6.8 16.5-3-6.6-7.2-2.7Z"/><path d="m10.7 13.9 4.6-4.6"/></symbol>
+  <symbol id="i-rep" viewBox="0 0 24 24"><path d="M9.5 6 4 11.5 9.5 17"/><path d="M4 11.5h9.5a6.5 6.5 0 0 1 6.5 6.5v1"/></symbol>
+  <symbol id="i-bulle" viewBox="0 0 24 24"><path d="M4 5.5h16v10.5H10l-4.5 3.5V16H4Z"/><path d="M8 9.5h8M8 12.5h5"/></symbol>
+  <symbol id="i-cal" viewBox="0 0 24 24"><path d="M4 6h16v14H4Z"/><path d="M4 10.5h16M8.5 3.5V8M15.5 3.5V8"/><path d="m9 15.2 2 2 4-4.2"/></symbol>
+  <symbol id="i-euro" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M15.2 8.6a4.2 4.2 0 1 0 0 6.8M7.5 11h5.5M7.5 13.3h5"/></symbol>
+  <symbol id="i-temps" viewBox="0 0 24 24"><circle cx="12" cy="13" r="7.5"/><path d="M12 9v4.3l2.8 1.8M9.5 3h5"/></symbol>
+  <symbol id="i-plafond" viewBox="0 0 24 24"><path d="M12 3.5 19.5 6v5.6c0 4.4-3.1 7.6-7.5 9-4.4-1.4-7.5-4.6-7.5-9V6Z"/><path d="M8.5 12.2h7"/></symbol>
+  <symbol id="i-baisse" viewBox="0 0 24 24"><path d="M3.5 6.5 9.5 12.5l3.5-3.5 7.5 7.5"/><path d="M20.5 11.5v5h-5"/></symbol>
+  <symbol id="i-etapes" viewBox="0 0 24 24"><circle cx="5.5" cy="12" r="2"/><circle cx="18.5" cy="12" r="2"/><path d="M7.5 12h9"/><path d="M12 7.5V5M12 19v-2.5"/></symbol>
+  <symbol id="i-question" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M9.6 9.6a2.5 2.5 0 1 1 3.4 2.3c-.7.3-1 .8-1 1.5v.6"/><path d="M12 16.6v.4"/></symbol>
+  <symbol id="i-loupe" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6"/><path d="m15 15 5 5"/></symbol>
+  <symbol id="i-cle" viewBox="0 0 24 24"><circle cx="8" cy="15.5" r="4"/><path d="m11 12.5 8.5-8.5M16.5 7l2.5 2.5M14.5 9l2 2"/></symbol>
+  <symbol id="i-duo" viewBox="0 0 24 24"><circle cx="8.5" cy="8.5" r="3"/><circle cx="16.5" cy="9.5" r="2.5"/><path d="M3 19c.6-3.2 2.8-5 5.5-5s4.9 1.8 5.5 5M14.5 14.2c.6-.2 1.3-.3 2-.3 2.3 0 4 1.5 4.5 4.6"/></symbol>
+  <symbol id="i-facture" viewBox="0 0 24 24"><path d="M6 3.5h12v17l-2-1.4-2 1.4-2-1.4-2 1.4-2-1.4-2 1.4Z"/><path d="M9 8.5h6M9 12h6M9 15.5h3.5"/></symbol>
+  <symbol id="i-sortie" viewBox="0 0 24 24"><path d="M13.5 4H5v16h8.5"/><path d="M10 12h10.5M17 8.5l3.5 3.5-3.5 3.5"/></symbol>
+  <symbol id="i-liste" viewBox="0 0 24 24"><path d="M9 6.5h11M9 12h11M9 17.5h11"/><circle cx="4.8" cy="6.5" r=".9"/><circle cx="4.8" cy="12" r=".9"/><circle cx="4.8" cy="17.5" r=".9"/></symbol>
+  <symbol id="i-somme" viewBox="0 0 24 24"><path d="M4 4.5h16v15H4Z"/><path d="M8 9.5h3M9.5 8v3M13.5 9.5h3M8 15h3M13.5 14h3M13.5 16h3"/></symbol>
+  <symbol id="i-personne" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c.8-3.8 3.6-6 7-6s6.2 2.2 7 6"/></symbol>
+  <symbol id="i-cible" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r=".8"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><path d="M3.5 6h17v12h-17Z"/><path d="m3.5 6.5 8.5 6.5 8.5-6.5"/></symbol>
+  <symbol id="i-reseau" viewBox="0 0 24 24"><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="m8.2 10.9 7.6-3.8M8.2 13.1l7.6 3.8"/></symbol>
+  <symbol id="i-filtre" viewBox="0 0 24 24"><path d="M4 5h16l-6 7.5V19l-4-2v-4.5Z"/></symbol>
+  <symbol id="i-outil" viewBox="0 0 24 24"><path d="M14.5 4.5a4.5 4.5 0 0 0-4.3 5.9L4 16.6 7.4 20l6.2-6.2a4.5 4.5 0 0 0 5.9-4.3l-2.6 2.6-3-.7-.7-3Z"/></symbol>
+  <symbol id="i-cycle" viewBox="0 0 24 24"><path d="M19.5 12a7.5 7.5 0 0 1-13 5.1M4.5 12a7.5 7.5 0 0 1 13-5.1"/><path d="M17.8 3.5v3.6h-3.6M6.2 20.5v-3.6h3.6"/></symbol>
+  <symbol id="i-alerte" viewBox="0 0 24 24"><path d="M12 4 21 19.5H3Z"/><path d="M12 10v4.5M12 16.8v.4"/></symbol>
+  <symbol id="i-signe" viewBox="0 0 24 24"><path d="M4 17.5c2-.2 3.5-3 4.5-6s1.2-5 0-5-2 3 .2 7 4.3 4.5 5.6 2.4.6-3 1.7-2.2 1 2.8 2.5 2.8 2.5-1.7 2.5-1.7"/><path d="M4 20.5h16"/></symbol>
   <symbol id="ar" viewBox="0 0 16 16"><path d="M2 8h11.5M9 3.5 13.5 8 9 12.5"/></symbol>
 </svg>
 
 <header class="bar">
   <div class="wrap">
     <svg class="logo" viewBox="0 0 1020.88 217.2" role="img" aria-label="Leadcore"><use href="#lockup" fill="currentColor"/></svg>
-    <nav class="xs" aria-label="Chapitres"><a href="#idee">Idée</a><a href="#logo">Logo</a><a href="#couleur">Couleur</a><a href="#type">Typographie</a><a href="#composants">Composants</a><a href="#mouvement">Mouvement</a><a href="#voix">Voix</a></nav>
+    <nav class="xs" aria-label="Chapitres"><a href="#idee">Idée</a><a href="#logo">Logo</a><a href="#couleur">Couleur</a><a href="#type">Typographie</a><a href="#composants">Composants</a><a href="#revision">Révision 3b</a><a href="#mouvement">Mouvement</a><a href="#voix">Voix</a></nav>
     <span class="xs">Révision 2 — oct. 2026</span>
   </div>
 </header>
@@ -480,9 +530,42 @@ footer .row{display:flex;justify-content:space-between;flex-wrap:wrap;gap:var(--
   </div>
 </section>
 
+<section class="ch r3" id="revision" aria-labelledby="t-r3">
+  <div class="wrap">
+    <div class="ix xs"><span class="num">07</span><span>Révision 3b</span></div>
+    <div class="bd">
+      <h2 id="t-r3" class="rise">Ce que le site a changé.</h2>
+      <p class="lede dim rise">Octobre 2026. Ces règles l'emportent sur les sections 05 et 06 : graisse 500, rayons 8/14/22, cartes éclairées, héros calé à gauche, pictogrammes au trait.</p>
+
+      <p class="xs dim" style="margin-top:var(--e7)">Surtitre : la pastille bordée avec point est retirée</p>
+      <div class="r3-rang rise">
+        <span class="sur"><svg class="pic"><use href="#i-loupe"/></svg>Le détail</span>
+        <span class="sur"><svg class="pic"><use href="#i-euro"/></svg>Le prix</span>
+        <span class="sur g"><svg class="pic"><use href="#i-cal"/></svg>8 à 12 rendez-vous qualifiés par mois</span>
+      </div>
+
+      <p class="xs dim" style="margin-top:var(--e7)">Pictogrammes : grille 24, trait 1,4, bouts ronds, couleur du texte. Or sur nuit, or foncé sur calque. Toujours avec un libellé.</p>
+      <ul class="pics rise"><li><svg class="pic"><use href="#i-envoi"/></svg><code>i-envoi</code></li><li><svg class="pic"><use href="#i-rep"/></svg><code>i-rep</code></li><li><svg class="pic"><use href="#i-bulle"/></svg><code>i-bulle</code></li><li><svg class="pic"><use href="#i-cal"/></svg><code>i-cal</code></li><li><svg class="pic"><use href="#i-euro"/></svg><code>i-euro</code></li><li><svg class="pic"><use href="#i-temps"/></svg><code>i-temps</code></li><li><svg class="pic"><use href="#i-plafond"/></svg><code>i-plafond</code></li><li><svg class="pic"><use href="#i-baisse"/></svg><code>i-baisse</code></li><li><svg class="pic"><use href="#i-etapes"/></svg><code>i-etapes</code></li><li><svg class="pic"><use href="#i-question"/></svg><code>i-question</code></li><li><svg class="pic"><use href="#i-loupe"/></svg><code>i-loupe</code></li><li><svg class="pic"><use href="#i-cle"/></svg><code>i-cle</code></li><li><svg class="pic"><use href="#i-duo"/></svg><code>i-duo</code></li><li><svg class="pic"><use href="#i-facture"/></svg><code>i-facture</code></li><li><svg class="pic"><use href="#i-sortie"/></svg><code>i-sortie</code></li><li><svg class="pic"><use href="#i-liste"/></svg><code>i-liste</code></li><li><svg class="pic"><use href="#i-somme"/></svg><code>i-somme</code></li><li><svg class="pic"><use href="#i-personne"/></svg><code>i-personne</code></li><li><svg class="pic"><use href="#i-cible"/></svg><code>i-cible</code></li><li><svg class="pic"><use href="#i-mail"/></svg><code>i-mail</code></li><li><svg class="pic"><use href="#i-reseau"/></svg><code>i-reseau</code></li><li><svg class="pic"><use href="#i-filtre"/></svg><code>i-filtre</code></li><li><svg class="pic"><use href="#i-outil"/></svg><code>i-outil</code></li><li><svg class="pic"><use href="#i-cycle"/></svg><code>i-cycle</code></li><li><svg class="pic"><use href="#i-alerte"/></svg><code>i-alerte</code></li><li><svg class="pic"><use href="#i-signe"/></svg><code>i-signe</code></li></ul>
+
+      <p class="xs dim" style="margin-top:var(--e7)">Chiffre clé : carte, compteur, micro-animation qui montre le chiffre</p>
+      <div class="r3-cf rise">
+        <article class="cf"><p class="cf-k"><svg class="pic"><use href="#i-cal"/></svg>Rendez-vous par mois</p><p class="cf-n num">8 à 12</p><div class="cal5"><i></i><i class="o"></i><i></i><i class="o"></i><i></i><i class="o"></i><i></i><i class="o"></i><i class="o"></i><i></i><i></i><i class="o"></i><i class="o"></i><i></i><i class="o"></i><i class="o"></i><i></i><i class="o"></i><i class="o"></i><i class="o"></i></div></article>
+        <article class="cf"><p class="cf-k"><svg class="pic"><use href="#i-plafond"/></svg>Engagement maximum</p><p class="cf-n num">2&nbsp;700&nbsp;€</p><p class="dim" style="margin:0;font-size:13.5px">1 200 € de démarrage et trois mois à 500 €.</p></article>
+      </div>
+
+      <ul class="r3-l rise">
+        <li><svg class="pic"><use href="#i-etapes"/></svg><span><b>Héros.</b> Texte à gauche, boutons dessous ; à droite, le schéma animé. Plus de bloc centré.</span></li>
+        <li><svg class="pic"><use href="#i-reseau"/></svg><span><b>Schéma du héros.</b> Faisceaux gris des prospects vers le noyau Leadcore, faisceau d'or vers l'agenda ; deux orbites lentes autour du logo ; reflet doré qui fait le tour de l'agenda. Environ deux réponses sur cinq sortent en or. Toujours étiqueté « Exemple ». Visible sur l’accueil du site.</span></li>
+        <li><svg class="pic"><use href="#i-temps"/></svg><span><b>Cadence.</b> L'interface d'exemple reçoit un rendez-vous toutes les 1,1 s, entrée en 0,6 s. Orbites 14 et 22 s, reflet 5 s.</span></li>
+        <li><svg class="pic"><use href="#i-alerte"/></svg><span><b>Sobriété.</b> Un pictogramme par libellé au plus, jamais décoratif, jamais en remplissage.</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
 <section class="ch clair" id="voix" aria-labelledby="t-voix">
   <div class="wrap">
-    <div class="ix xs"><span class="num">07</span><span>Voix</span></div>
+    <div class="ix xs"><span class="num">08</span><span>Voix</span></div>
     <div class="bd">
       <h2 id="t-voix" class="rise">Des chiffres, pas d'adjectifs.</h2>
       <p class="lede dim rise">Sobre comme Palantir, à hauteur de dirigeant de PME. Vouvoiement. Les chiffres du contrat, jamais d'autres.</p>
